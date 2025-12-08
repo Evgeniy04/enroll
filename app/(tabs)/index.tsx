@@ -2,6 +2,7 @@ import 'dayjs/locale/ru';
 import React, { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { Calendar, EventRenderer } from "react-native-big-calendar";
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 
 export default function Tab() {
@@ -79,7 +80,7 @@ export default function Tab() {
   ]);
 
   const renderEvent: EventRenderer = (event, touchableOpacityProps) => (
-    <TouchableOpacity {...touchableOpacityProps}>
+    <TouchableOpacity {...touchableOpacityProps} key={touchableOpacityProps.key}>
       <View style={{ flex: 1, justifyContent: "center" }}>
         <Text style={{ fontSize: 12, color: "#fff" }}>
           {event.title}
@@ -89,29 +90,29 @@ export default function Tab() {
   );
 
   return (
-    <View style={{ flex: 1 }}>
-      <Calendar
-        locale="ru"
-        mode="3days"
-        events={events}
-        height={700}
-        hourRowHeight={60}
-        eventCellStyle={(event) => ({
-          backgroundColor: event.start <= new Date() && event.end >= new Date() ? '#06cdecff' : event.color,
-          marginTop: 0,
-          marginLeft: 0,
-          marginRight: 0,
-          borderTopWidth: 1,
-          borderColor: "#000",
-        })}
-        renderEvent={renderEvent}
-        onPressEvent={(e) => {
-          console.log("Нажали на событие:", e);
-        }}
-        onPressCell={(date) => {
-          console.log("Свободное время:", date);
-        }}
-      />
-    </View>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+        <Calendar
+          locale="ru"
+          mode="3days"
+          events={events}
+          height={700}
+          hourRowHeight={60}
+          eventCellStyle={(event) => ({
+            backgroundColor: event.start <= new Date() && event.end >= new Date() ? '#06cdecff' : event.color,
+            marginTop: 0,
+            marginLeft: 0,
+            marginRight: 0,
+            borderTopWidth: 1,
+            borderColor: "#000",
+          })}
+          renderEvent={renderEvent}
+          onPressEvent={(e) => {
+            console.log("Нажали на событие:", e);
+          }}
+          onPressCell={(date) => {
+            console.log("Свободное время:", date);
+          }}
+        />
+    </GestureHandlerRootView>
   );
 }
