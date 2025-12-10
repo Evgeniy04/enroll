@@ -100,7 +100,7 @@ export default function Tab() {
   } as const
 
   const renderEvent: EventRenderer = (event, touchableOpacityProps) => (
-    <TouchableOpacity {...touchableOpacityProps} key={touchableOpacityProps.key} className='border-t border-black'>
+    <TouchableOpacity {...touchableOpacityProps} key={touchableOpacityProps.key}>
       <View className='flex-1 justify-center'>
         <Text className='text-xs color-white'>
           {event.title}
