@@ -1,3 +1,6 @@
+import useScreenHeight from '@/hooks/useScreenHeight';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import { useHeaderHeight } from '@react-navigation/elements';
 import 'dayjs/locale/ru';
 import React, { useState } from "react";
 import { Text, TouchableOpacity, useColorScheme, View } from "react-native";
@@ -6,6 +9,13 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export default function Tab() {
   const colorScheme = useColorScheme() ?? 'light';
+  const screenHeight = useScreenHeight();
+
+  const calendarHeight =        // Подсчет высоты календаря
+    screenHeight                // Высота всего экрана
+    - useBottomTabBarHeight()   // Высота панели вкладок
+    - useHeaderHeight()         // Высота заголовка экрана
+    + 46;                       // Константа для корректировки высоты календаря
 
   const [events] = useState([
     {
@@ -111,29 +121,28 @@ export default function Tab() {
 
   return (
     <GestureHandlerRootView className='flex-1'>
-        <Calendar
-          locale="ru"
-          theme={themes[colorScheme]}
-          mode="3days"
-          events={events}
-          height={700}
-          hourRowHeight={60}
-          eventCellStyle={(event) => ({
-            backgroundColor: event.start <= new Date() && event.end >= new Date() ? '#06cdecff' : event.color,
-            marginTop: 0,
-            marginLeft: 0,
-            marginRight: 0,
-            borderTopWidth: 1,
-            borderColor: "#000",
-          })}
-          renderEvent={renderEvent}
-          onPressEvent={(e) => {
-            console.log("Нажали на событие:", e);
-          }}
-          onPressCell={(date) => {
-            console.log("Свободное время:", date);
-          }}
-        />
+      <Calendar
+        locale="ru"
+        theme={themes[colorScheme]}
+        mode="3days"
+        events={events}
+        height={calendarHeight}
+        eventCellStyle={(event) => ({
+          backgroundColor: event.start <= new Date() && event.end >= new Date() ? '#06cdecff' : event.color,
+          marginTop: 0,
+          marginLeft: 0,
+          marginRight: 0,
+          borderTopWidth: 1,
+          borderColor: "#000",
+        })}
+        renderEvent={renderEvent}
+        onPressEvent={(e) => {
+          console.log("Нажали на событие:", e);
+        }}
+        onPressCell={(date) => {
+          console.log("Свободное время:", date);
+        }}
+      />
     </GestureHandlerRootView>
   );
 }
