@@ -1,14 +1,14 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { useTheme } from '@react-navigation/native';
 import { Tabs } from 'expo-router';
-import { useColorScheme } from 'react-native';
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme() ?? 'light';
+  const { colors } = useTheme();
 
   return (
     <Tabs screenOptions={{
         sceneStyle: {
-          backgroundColor: colorScheme === 'light' ? "#ffffff" : "#000000",
+          backgroundColor: colors.card,
         },
       }}
     >
