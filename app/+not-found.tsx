@@ -1,15 +1,9 @@
 import { buttonTextVariants, buttonVariants } from '@/components/ui/button';
+import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
-import EvilIcons from '@expo/vector-icons/EvilIcons';
 import { Link, Stack } from 'expo-router';
-import { cssInterop } from "nativewind";
+import { Search } from 'lucide-react-native';
 import { View } from 'react-native';
-
-cssInterop(EvilIcons, {
-  className: {
-    target: "style",
-  },
-});
 
 export default function NotFoundScreen() {
   return (
@@ -18,7 +12,7 @@ export default function NotFoundScreen() {
 
       <View className='flex-1 items-center'>
         <View className='h-2/3 justify-center items-center'>
-          <EvilIcons name="search" size={256} className="text-black dark:text-white" />
+          <Icon as={Search} className="stroke-1 size-64" />
           <Text variant='h3'>Ошибка 404!</Text>
           <Text variant='blockquote'>Кажется, вы&nbsp;заблудились.</Text>
         </View>
