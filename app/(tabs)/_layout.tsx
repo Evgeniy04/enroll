@@ -52,7 +52,7 @@ function ThemeToggle() {
 
   const handleSchemeChange = (value?: string) => {
     if (value !== 'light' && value !== 'dark' && value !== 'system') return;
-    
+
     const config: Record<ColorScheme, AlertProps> = {
       light: {
         title: 'Включили солнышко! ☀️',
@@ -77,7 +77,7 @@ function ThemeToggle() {
   };
 
   return (
-    <ToggleGroup value={colorScheme} onValueChange={handleSchemeChange} variant='outline' type='single'>
+    <ToggleGroup value={colorScheme} onValueChange={handleSchemeChange} variant='outline' type='single' className='mr-2'>
       <ToggleGroupItem isFirst value='system' aria-label='Toggle system'>
         <ToggleGroupIcon as={Smartphone} />
       </ToggleGroupItem>
