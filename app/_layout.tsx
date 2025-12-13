@@ -1,3 +1,4 @@
+import { BaseToast, ToastProps } from '@/components/ui/base-toast';
 import { NAV_THEME } from '@/lib/theme';
 import { ThemeProvider } from '@react-navigation/native';
 import { PortalHost } from '@rn-primitives/portal';
@@ -7,12 +8,18 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 import { Platform, useColorScheme } from 'react-native';
+import Toast, { ToastConfig } from 'react-native-toast-message';
 import "../global.css";
 
 export {
   // Перехватывает любые ошибки, выбрасываемые компонентом Layout.
   ErrorBoundary
 } from 'expo-router';
+
+const toastConfig: ToastConfig = {
+  success: (toastProps: ToastProps) => <BaseToast variant='default' toastProps={toastProps}/>,
+  error: (toastProps: ToastProps) => <BaseToast variant='destructive' toastProps={toastProps}/>
+};
 
 export default function Layout() {
   const colorScheme = useColorScheme() ?? 'light';
@@ -22,9 +29,10 @@ export default function Layout() {
   }
 
   return (
-     <ThemeProvider value={NAV_THEME[colorScheme]}>
+    <ThemeProvider value={NAV_THEME[colorScheme]}>
       <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
       <Routes />
+      <Toast config={toastConfig} position='bottom' />
       <PortalHost />
     </ThemeProvider>
   );
