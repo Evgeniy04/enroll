@@ -6,6 +6,7 @@ import { useTheme } from '@react-navigation/native';
 import { Tabs } from 'expo-router';
 import { MoonStarIcon, Smartphone, SunIcon } from 'lucide-react-native';
 import { useColorScheme } from 'nativewind';
+import { Platform } from 'react-native';
 import Toast from 'react-native-toast-message';
 
 export default function TabLayout() {
@@ -17,6 +18,7 @@ export default function TabLayout() {
         sceneStyle: {
           backgroundColor: colors.card,
         },
+        tabBarHideOnKeyboard: true,
       }}
     >
       <Tabs.Screen
@@ -77,7 +79,7 @@ function ThemeToggle() {
   };
 
   return (
-    <ToggleGroup value={colorScheme} onValueChange={handleSchemeChange} variant='outline' type='single' className='mr-2'>
+    <ToggleGroup value={colorScheme} onValueChange={handleSchemeChange} variant='outline' type='single' className={`${Platform.select({android: 'mr-2'})}`} >
       <ToggleGroupItem isFirst value='system' aria-label='Toggle system'>
         <ToggleGroupIcon as={Smartphone} />
       </ToggleGroupItem>

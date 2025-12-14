@@ -1,5 +1,6 @@
 import { BaseToast, ToastProps } from '@/components/ui/base-toast';
 import { NAV_THEME } from '@/lib/theme';
+import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import { ThemeProvider } from '@react-navigation/native';
 import { PortalHost } from '@rn-primitives/portal';
 import * as NavigationBar from 'expo-navigation-bar';
@@ -30,10 +31,14 @@ export default function Layout() {
 
   return (
     <ThemeProvider value={NAV_THEME[colorScheme]}>
-      <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
-      <Routes />
-      <Toast config={toastConfig} position='bottom' />
-      <PortalHost />
+      <ActionSheetProvider>
+        <>
+          <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
+          <Routes />
+          <Toast config={toastConfig} position='bottom' />
+          <PortalHost />
+        </>
+      </ActionSheetProvider>
     </ThemeProvider>
   );
 }
