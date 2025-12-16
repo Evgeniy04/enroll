@@ -1,4 +1,5 @@
 import { BaseToast, ToastProps } from '@/components/ui/base-toast';
+import { initializeApp } from '@/config';
 import { NAV_THEME } from '@/lib/theme';
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import { ThemeProvider } from '@react-navigation/native';
@@ -7,8 +8,9 @@ import * as NavigationBar from 'expo-navigation-bar';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
+import { useColorScheme } from 'nativewind';
 import { useEffect, useState } from 'react';
-import { Platform, useColorScheme } from 'react-native';
+import { Platform } from 'react-native';
 import Toast, { ToastConfig } from 'react-native-toast-message';
 import "../global.css";
 
@@ -23,14 +25,18 @@ const toastConfig: ToastConfig = {
 };
 
 export default function Layout() {
-  const colorScheme = useColorScheme() ?? 'light';
+  const { colorScheme } = useColorScheme();
+
+  useEffect(() => {
+    initializeApp();
+  }, []);
 
   if (Platform.OS === 'android') {
     NavigationBar.setButtonStyleAsync(colorScheme === 'dark' ? 'light' : 'dark');
   }
 
   return (
-    <ThemeProvider value={NAV_THEME[colorScheme]}>
+    <ThemeProvider value={NAV_THEME[colorScheme ?? 'light']}>
       <ActionSheetProvider>
         <>
           <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
