@@ -50,7 +50,7 @@ type ColorScheme = "light" | "dark" | "system";
 
 function ThemeToggle() {
   const { colorScheme, setColorScheme } = useColorScheme();
-  const bottomOffset = useBottomTabBarHeight();
+  const bottomTabBarHeight = useBottomTabBarHeight();
 
   const handleSchemeChange = (value?: string) => {
     if (value !== 'light' && value !== 'dark' && value !== 'system') return;
@@ -74,7 +74,7 @@ function ThemeToggle() {
     Toast.show({
       type: 'success',
       props: config[value],
-      bottomOffset,
+      bottomOffset: bottomTabBarHeight,
     });
   };
 
