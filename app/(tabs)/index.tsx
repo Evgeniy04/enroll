@@ -2,13 +2,14 @@ import useScreenHeight from '@/hooks/useScreenHeight';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useHeaderHeight } from '@react-navigation/elements';
 import 'dayjs/locale/ru';
+import { useColorScheme } from 'nativewind';
 import React, { useState } from "react";
-import { Text, TouchableOpacity, useColorScheme, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { Calendar, EventRenderer, PartialTheme } from "react-native-big-calendar";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export default function Tab() {
-  const colorScheme = useColorScheme() ?? 'light';
+  const { colorScheme } = useColorScheme();
   const screenHeight = useScreenHeight();
 
   const calendarHeight =        // Подсчет высоты календаря
@@ -123,7 +124,7 @@ export default function Tab() {
     <GestureHandlerRootView className='flex-1'>
       <Calendar
         locale="ru"
-        theme={themes[colorScheme]}
+        theme={themes[colorScheme ?? 'light']}
         mode="3days"
         events={events}
         height={calendarHeight}
