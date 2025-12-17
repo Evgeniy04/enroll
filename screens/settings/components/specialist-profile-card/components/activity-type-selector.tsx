@@ -1,0 +1,44 @@
+import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import { useHeaderHeight } from '@react-navigation/elements';
+import { View } from 'react-native';
+import { ActivityTypeSelectorProps } from '../specialist-profile-card.types';
+
+const ACTIVITY_OPTIONS = [
+  { label: 'Мастер производственного обучения', value: 'driving_instructor' },
+  { label: 'Другое', value: 'other' },
+];
+
+export const ActivityTypeSelector = ({ activityType, onActivityTypeChange }: ActivityTypeSelectorProps) => {
+  const headerHeight = useHeaderHeight()
+  const bottomTabBarHeight = useBottomTabBarHeight();
+
+  const selectContentInsets = {
+    top: headerHeight,
+    bottom: bottomTabBarHeight,
+    left: 20,
+    right: 20,
+  };
+
+  return (
+    <View className='gap-1.5'>
+      <Label nativeID='activity'>Вид деятельности</Label>
+      <Select value={activityType} onValueChange={onActivityTypeChange} aria-labelledby='activity'>
+        <SelectTrigger>
+          <SelectValue placeholder='Выберите вид деятельности' />
+        </SelectTrigger>
+        <SelectContent insets={selectContentInsets} className='max-h-80'>
+          <SelectGroup>
+            <SelectLabel>Деятельность</SelectLabel>
+            {ACTIVITY_OPTIONS.map((option) => (
+              <SelectItem key={option.value} label={option.label} value={option.value}>
+                {option.label}
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+    </View>
+  )
+}
