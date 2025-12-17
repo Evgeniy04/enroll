@@ -1,5 +1,4 @@
-import { BaseToast, ToastProps } from '@/components/ui/base-toast';
-import { initializeApp } from '@/config';
+import { initializeApp, toastConfig } from '@/config';
 import { NAV_THEME } from '@/lib/theme';
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import { ThemeProvider } from '@react-navigation/native';
@@ -11,18 +10,13 @@ import { StatusBar } from 'expo-status-bar';
 import { useColorScheme } from 'nativewind';
 import { useEffect, useState } from 'react';
 import { Platform } from 'react-native';
-import Toast, { ToastConfig } from 'react-native-toast-message';
+import Toast from 'react-native-toast-message';
 import "../global.css";
 
 export {
   // Перехватывает любые ошибки, выбрасываемые компонентом Layout.
   ErrorBoundary
 } from 'expo-router';
-
-const toastConfig: ToastConfig = {
-  success: (toastProps: ToastProps) => <BaseToast variant='default' toastProps={toastProps}/>,
-  error: (toastProps: ToastProps) => <BaseToast variant='destructive' toastProps={toastProps}/>
-};
 
 export default function Layout() {
   const { colorScheme } = useColorScheme();
