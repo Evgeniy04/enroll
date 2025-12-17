@@ -8,7 +8,7 @@ import { Text, TouchableOpacity, View } from "react-native";
 import { Calendar, EventRenderer, PartialTheme } from "react-native-big-calendar";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
-export default function Tab() {
+export default function HomeScreen() {
   const { colorScheme } = useColorScheme();
   const screenHeight = useScreenHeight();
 

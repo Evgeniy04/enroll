@@ -1,6 +1,6 @@
 import { Text, View } from 'react-native';
 
-export default function Tab() {
+export default function ContactsScreen() {
   return (
     <View className='flex-1 justify-center items-center'>
       <Text>Tab [Home|Contacts|Settings]</Text>
