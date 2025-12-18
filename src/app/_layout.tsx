@@ -11,7 +11,7 @@ import { useColorScheme } from 'nativewind';
 import { useEffect, useState } from 'react';
 import { Platform } from 'react-native';
 import Toast from 'react-native-toast-message';
-import "../global.css";
+import "../../global.css";
 
 export {
   // Перехватывает любые ошибки, выбрасываемые компонентом Layout.

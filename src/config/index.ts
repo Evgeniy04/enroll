@@ -1,4 +1,4 @@
-import { initializeLocales } from './locales';
+import { initializeLocales } from '@/config/locales';
 
 /**
  * Инициализация всех конфигураций приложения
@@ -8,7 +8,6 @@ export const initializeApp = () => {
   initializeLocales();
 };
 
-export * from './locales';
-export * from './themes';
-export * from './toast';
-
+export * from '@/config/locales';
+export * from '@/config/themes';
+export * from '@/config/toast';

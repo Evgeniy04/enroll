@@ -1,4 +1,4 @@
-import { configureCalendarLocale } from "./calendar.locale";
+import { configureCalendarLocale } from "@/config/locales/calendar.locale";
 
 /**
  * Инициализация всех локализаций приложения
@@ -8,4 +8,4 @@ export const initializeLocales = () => {
   configureCalendarLocale();
 };
 
-export { configureCalendarLocale } from './calendar.locale';
+export { configureCalendarLocale } from '@/config/locales/calendar.locale';

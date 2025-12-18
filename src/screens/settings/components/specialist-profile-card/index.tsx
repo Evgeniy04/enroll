@@ -1,7 +1,19 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { getSpecialistForm } from '../specialist-forms';
-import { ActivityTypeSelector } from './components/activity-type-selector';
-import { ActivityTypeSelectorProps } from './specialist-profile-card.types';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle
+} from '@/components/ui/card';
+import {
+  getSpecialistForm,
+} from '@/screens/settings/components/specialist-forms';
+import {
+  ActivityTypeSelector,
+} from '@/screens/settings/components/specialist-profile-card/components/activity-type-selector';
+import {
+  ActivityTypeSelectorProps,
+} from '@/screens/settings/components/specialist-profile-card/specialist-profile-card.types';
 
 type SpecialistProfileCardProps = ActivityTypeSelectorProps;
 

@@ -1,9 +1,19 @@
 import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import {
+  ActivityTypeSelectorProps,
+} from '@/screens/settings/components/specialist-profile-card/specialist-profile-card.types';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useHeaderHeight } from '@react-navigation/elements';
 import { View } from 'react-native';
-import { ActivityTypeSelectorProps } from '../specialist-profile-card.types';
 
 const ACTIVITY_OPTIONS = [
   { label: 'Мастер производственного обучения', value: 'driving_instructor' },
