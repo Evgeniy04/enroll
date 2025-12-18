@@ -32,7 +32,7 @@ export const DrivingInstructorForm = () => {
             </Button>
           </PopoverTrigger>
 
-          <PopoverContent className="w-80" side="top">
+          <PopoverContent className="w-full" insets={{ left: 20, right: 20 }} side="top">
             <View className="gap-4">
               <View className="gap-2">
                 <Text className="font-medium leading-none">Выберите дату</Text>
