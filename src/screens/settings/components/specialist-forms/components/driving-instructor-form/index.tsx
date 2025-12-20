@@ -4,13 +4,15 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Text } from '@/components/ui/text';
+import { useSelectContentInsets } from '@/hooks/useSelectContentInsets';
 import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import { useState } from 'react';
 import { View } from 'react-native';
 
 export const DrivingInstructorForm = () => {
-  const [date, setDate] = useState<Date>(new Date());
+  const selectContentInsets = useSelectContentInsets();
+  const [ date, setDate ] = useState<Date>(new Date());
 
   return (
     <>
@@ -41,6 +43,7 @@ export const DrivingInstructorForm = () => {
               <DatePicker
                 currentDate={date}
                 setCurrentDate={setDate}
+                selectContentInsets={selectContentInsets}
               />
             </View>
           </PopoverContent>

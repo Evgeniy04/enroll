@@ -8,11 +8,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { useSelectContentInsets } from '@/hooks/useSelectContentInsets';
 import {
   ActivityTypeSelectorProps,
 } from '@/screens/settings/components/specialist-profile-card/specialist-profile-card.types';
-import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
-import { useHeaderHeight } from '@react-navigation/elements';
 import { View } from 'react-native';
 
 const ACTIVITY_OPTIONS = [
@@ -21,15 +20,7 @@ const ACTIVITY_OPTIONS = [
 ];
 
 export const ActivityTypeSelector = ({ activityType, onActivityTypeChange }: ActivityTypeSelectorProps) => {
-  const headerHeight = useHeaderHeight()
-  const bottomTabBarHeight = useBottomTabBarHeight();
-
-  const selectContentInsets = {
-    top: headerHeight,
-    bottom: bottomTabBarHeight,
-    left: 20,
-    right: 20,
-  };
+  const selectContentInsets = useSelectContentInsets();
 
   return (
     <View className='gap-1.5'>
