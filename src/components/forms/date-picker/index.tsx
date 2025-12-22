@@ -1,8 +1,11 @@
 import { CalendarHeader } from '@/components/forms/date-picker/calendar-header';
+import { generateMonthLabels, generateMonthOptions, generateYearOptions } from '@/components/forms/date-picker/calendar-utils';
 import { CALENDAR_CONSTANTS, getCalendarTheme } from '@/config';
 import { SelectContentInsets } from '@/hooks/useSelectContentInsets';
 import { useRootContext as useRootContextPopover } from '@rn-primitives/popover';
+import { format } from 'date-fns';
 import { useColorScheme } from 'nativewind';
+import { useMemo, useState } from 'react';
 import { Calendar, CalendarProps, DateData } from 'react-native-calendars';
 
 type Props = {
@@ -43,6 +46,11 @@ export function DatePicker({
   const { colorScheme } = useColorScheme();
   const { onOpenChange } = useRootContextPopover();
   const calendarTheme = customTheme ?? getCalendarTheme(colorScheme ?? 'light');
+  const [ displayDate, setDisplayDate ] = useState(() => format(currentDate, 'yyyy-MM-dd'));
+
+  const monthLabels = useMemo(() => generateMonthLabels(locale), [locale]);
+  const monthOptions = useMemo(() => generateMonthOptions(monthLabels), [monthLabels]);
+  const yearOptions = useMemo(() => generateYearOptions(startYear, endYear), [startYear, endYear]);
 
   const handleDayPress = (day: DateData) => {
     const selectedDate = new Date(day.dateString);
@@ -55,33 +63,44 @@ export function DatePicker({
     }
   };
 
-  const mergedMarkedDates = {
-    ...markedDates,
-    ...(disabledDates?.reduce(
-      (acc, date) => ({
-        ...acc,
-        [date]: { disabled: true, disableTouchEvent: true },
-      }),
-      {}
-    ) ?? {}),
-  };
+  const mergedMarkedDates = useMemo(() => {
+    const selectedDateString = format(currentDate, 'yyyy-MM-dd');
+    
+    return {
+      ...markedDates,
+      ...(disabledDates?.reduce(
+        (acc, date) => ({
+          ...acc,
+          [date]: { disabled: true, disableTouchEvent: true },
+        }),
+        {}
+      ) ?? {}),
+      [selectedDateString]: {
+        selected: true,
+        ...(markedDates?.[selectedDateString] || {}),
+      },
+    };
+  }, [markedDates, disabledDates, currentDate]);
 
   return (
     <Calendar
-      current={currentDate.toISOString().split('T')[0]}
+      current={displayDate}
       minDate={minDate}
       maxDate={maxDate}
       markedDates={mergedMarkedDates}
       firstDay={firstDay}
       enableSwipeMonths
       onDayPress={handleDayPress}
+      onMonthChange={(date: DateData) => {
+        setDisplayDate(date.dateString);
+      }}
       customHeader={(props: any) => (
         <CalendarHeader
           {...props}
           selectContentInsets={selectContentInsets}
-          locale={locale}
-          startYear={startYear}
-          endYear={endYear}
+          monthLabels={monthLabels}
+          monthOptions={monthOptions}
+          yearOptions={yearOptions}
           monthLabel={monthLabel}
           yearLabel={yearLabel}
         />

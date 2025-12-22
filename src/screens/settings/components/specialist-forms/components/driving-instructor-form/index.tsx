@@ -44,6 +44,10 @@ export const DrivingInstructorForm = () => {
                 currentDate={date}
                 setCurrentDate={setDate}
                 selectContentInsets={selectContentInsets}
+                minDate={new Date(1950, 0, 1).toDateString()}
+                maxDate={new Date().toDateString()}
+                startYear={1950}
+                endYear={new Date().getFullYear()}
               />
             </View>
           </PopoverContent>
