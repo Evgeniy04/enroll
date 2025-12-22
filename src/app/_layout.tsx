@@ -10,6 +10,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useColorScheme } from 'nativewind';
 import { useEffect, useState } from 'react';
 import { Platform } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Toast from 'react-native-toast-message';
 import "../../global.css";
 
@@ -30,16 +31,18 @@ export default function Layout() {
   }
 
   return (
-    <ThemeProvider value={NAV_THEME[colorScheme ?? 'light']}>
-      <ActionSheetProvider>
-        <>
-          <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
-          <Routes />
-          <Toast config={toastConfig} position='bottom' />
-          <PortalHost />
-        </>
-      </ActionSheetProvider>
-    </ThemeProvider>
+    <GestureHandlerRootView className='flex-1'>
+      <ThemeProvider value={NAV_THEME[colorScheme ?? 'light']}>
+        <ActionSheetProvider>
+          <>
+            <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
+            <Routes />
+            <Toast config={toastConfig} position='bottom' />
+            <PortalHost />
+          </>
+        </ActionSheetProvider>
+      </ThemeProvider>
+    </GestureHandlerRootView>
   );
 }
 

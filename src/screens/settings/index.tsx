@@ -2,7 +2,8 @@ import { PersonalInfoForm } from '@/screens/settings/components/personal-info-fo
 import { SpecialistProfileCard } from '@/screens/settings/components/specialist-profile-card';
 import { Option } from '@rn-primitives/select';
 import { useState } from 'react';
-import { KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import { KeyboardAvoidingView, Platform } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export const Settings = () => {
   const [ activityType, setActivityType ] = useState<Option>(undefined);
