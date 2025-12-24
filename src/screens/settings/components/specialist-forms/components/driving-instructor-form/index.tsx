@@ -46,7 +46,7 @@ export const DrivingInstructorForm = () => {
         nativeID="service_address_details"
         label="Дополнительная информация по&nbsp;месту оказания услуги"
         placeholder="Введите доп. информацию"
-        helperText="Например: место встречи у метро, машина с белыми полосами"
+        helperText="Например: место встречи у&nbsp;метро, машина с&nbsp;белыми полосами"
       />
       <Button variant="secondary">
         <Icon as={Plus} className="text-foreground" />
