@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { useSelectContentInsets } from '@/hooks/useSelectContentInsets';
+import { useContentInsets } from '@/hooks/useContentInsets';
 import {
   ActivityTypeSelectorProps,
 } from '@/screens/settings/components/specialist-profile-card/specialist-profile-card.types';
@@ -20,7 +20,7 @@ const ACTIVITY_OPTIONS = [
 ];
 
 export const ActivityTypeSelector = ({ activityType, onActivityTypeChange }: ActivityTypeSelectorProps) => {
-  const selectContentInsets = useSelectContentInsets();
+  const contentInsets = useContentInsets();
 
   return (
     <View className='gap-1.5'>
@@ -29,7 +29,7 @@ export const ActivityTypeSelector = ({ activityType, onActivityTypeChange }: Act
         <SelectTrigger>
           <SelectValue placeholder='Выберите вид деятельности' />
         </SelectTrigger>
-        <SelectContent insets={selectContentInsets} className='max-h-80'>
+        <SelectContent insets={contentInsets} className='max-h-80'>
           <SelectGroup>
             <SelectLabel>Деятельность</SelectLabel>
             {ACTIVITY_OPTIONS.map((option) => (

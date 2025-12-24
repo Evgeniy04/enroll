@@ -1,58 +1,57 @@
-import { DatePicker } from '@/components/forms/date-picker';
 import { TextField } from '@/components/forms/text-field';
 import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
-import { useSelectContentInsets } from '@/hooks/useSelectContentInsets';
-import { format } from 'date-fns';
-import { ru } from 'date-fns/locale';
+import {
+  DrivingDatePicker,
+} from '@/screens/settings/components/specialist-forms/components/driving-instructor-form/driving-date-picker';
+import { Plus } from 'lucide-react-native';
 import { useState } from 'react';
-import { View } from 'react-native';
 
 export const DrivingInstructorForm = () => {
-  const selectContentInsets = useSelectContentInsets();
-  const [ date, setDate ] = useState<Date>(new Date());
+  const [ workStartDate, setWorkStartDate ] = useState<Date>();
+  const [ drivingStartDate, setDrivingStartDate ] = useState<Date>();
 
   return (
     <>
+      <DrivingDatePicker
+        nativeID="work-start-date"
+        label="Дата начала работы"
+        helperText="Дата, с&nbsp;которой вы&nbsp;начали работать в&nbsp;профессии"
+        currentDate={workStartDate}
+        setCurrentDate={setWorkStartDate}
+      />
+      <DrivingDatePicker
+        nativeID="driving-start-date"
+        label="Дата начала водительского стажа"
+        helperText="Дата, с&nbsp;которой вы&nbsp;начали водить транспорт"
+        currentDate={drivingStartDate}
+        setCurrentDate={setDrivingStartDate}
+      />
       <TextField
         nativeID="license_categories"
         label="Категории водительских прав"
-        placeholder='Введите категории через запятую (A, B, C...)'
+        placeholder="Введите категории"
+        helperText="Перечислите категории через запятую без пробелов (A,B,C)"
+        required
       />
-      <View className='gap-1.5'>
-        <Label nativeID='driving-start-year'>Стаж с</Label>
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button variant="outline">
-              <Text className="text-base text-foreground">
-                {date
-                  ? format(date, 'dd MMMM yyyy', { locale: ru })
-                  : 'Выберите дату'}
-              </Text>
-            </Button>
-          </PopoverTrigger>
-
-          <PopoverContent className="w-full" insets={{ left: 20, right: 20 }} side="top">
-            <View className="gap-4">
-              <View className="gap-2">
-                <Text className="font-medium leading-none">Выберите дату</Text>
-                <Text className="text-muted-foreground text-sm">По ней мы посчитаем ваш стаж.</Text>
-              </View>
-              <DatePicker
-                currentDate={date}
-                setCurrentDate={setDate}
-                selectContentInsets={selectContentInsets}
-                minDate={new Date(1950, 0, 1).toDateString()}
-                maxDate={new Date().toDateString()}
-                startYear={1950}
-                endYear={new Date().getFullYear()}
-              />
-            </View>
-          </PopoverContent>
-        </Popover>
-      </View>
+      <TextField
+        nativeID="service_address"
+        label="Адрес оказания услуги"
+        placeholder="Введите адрес"
+        autoComplete="street-address"
+        required
+      />
+      <TextField
+        nativeID="service_address_details"
+        label="Дополнительная информация по&nbsp;месту оказания услуги"
+        placeholder="Введите доп. информацию"
+        helperText="Например: место встречи у метро, машина с белыми полосами"
+      />
+      <Button variant="secondary">
+        <Icon as={Plus} className="text-foreground" />
+        <Text>Добавить транспорт</Text>
+      </Button>
     </>
   );
 };

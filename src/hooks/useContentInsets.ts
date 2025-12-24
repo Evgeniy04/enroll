@@ -1,14 +1,14 @@
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useHeaderHeight } from '@react-navigation/elements';
 
-export type SelectContentInsets = {
+export type ContentInsets = {
   top: number;
   bottom: number;
   left: number;
   right: number;
 };
 
-export const useSelectContentInsets = (): SelectContentInsets => {
+export const useContentInsets = (): ContentInsets => {
   const headerHeight = useHeaderHeight();
   const bottomTabBarHeight = useBottomTabBarHeight();
 

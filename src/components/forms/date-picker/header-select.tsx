@@ -8,7 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { SelectContentInsets } from '@/hooks/useSelectContentInsets';
+import { ContentInsets } from '@/hooks/useContentInsets';
 import { Option } from '@rn-primitives/select';
 import { View } from 'react-native';
 
@@ -23,7 +23,7 @@ type HeaderSelectProps = {
   placeholder: string;
   label: string;
   options: HeaderSelectOption[];
-  insets: SelectContentInsets;
+  contentInsets: ContentInsets;
 };
 
 export function HeaderSelect({
@@ -32,7 +32,7 @@ export function HeaderSelect({
   placeholder,
   label,
   options,
-  insets,
+  contentInsets,
 }: HeaderSelectProps) {
   return (
     <View className="flex-1">
@@ -43,7 +43,7 @@ export function HeaderSelect({
         <SelectTrigger>
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
-        <SelectContent insets={insets} className="max-h-80">
+        <SelectContent insets={contentInsets} className="max-h-80">
           <NativeSelectScrollView>
             <SelectGroup>
               <SelectLabel>{label}</SelectLabel>

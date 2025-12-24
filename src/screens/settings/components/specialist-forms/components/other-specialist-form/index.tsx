@@ -6,13 +6,13 @@ export const OtherSpecialistForm = () => {
       <TextField
         nativeID="specialization"
         label="Специализация"
-        placeholder='Укажите вашу специализацию'
+        placeholder="Укажите вашу специализацию"
       />
 
       <TextField
         nativeID="description"
         label="Описание деятельности"
-        placeholder='Кратко опишите вашу деятельность'
+        placeholder="Кратко опишите вашу деятельность"
         multiline
         numberOfLines={4}
       />
@@ -20,7 +20,7 @@ export const OtherSpecialistForm = () => {
       <TextField
         nativeID="certifications"
         label="Информация о Вас в свободной форме"
-        placeholder='Перечислите необходимую информацию'
+        placeholder="Перечислите необходимую информацию"
       />
     </>
   );

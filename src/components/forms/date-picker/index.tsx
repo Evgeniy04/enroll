@@ -1,17 +1,17 @@
 import { CalendarHeader } from '@/components/forms/date-picker/calendar-header';
 import { generateMonthLabels, generateMonthOptions, generateYearOptions } from '@/components/forms/date-picker/calendar-utils';
 import { CALENDAR_CONSTANTS, getCalendarTheme } from '@/config';
-import { SelectContentInsets } from '@/hooks/useSelectContentInsets';
+import { ContentInsets } from '@/hooks/useContentInsets';
 import { useRootContext as useRootContextPopover } from '@rn-primitives/popover';
 import { format } from 'date-fns';
 import { useColorScheme } from 'nativewind';
 import { useMemo, useState } from 'react';
 import { Calendar, CalendarProps, DateData } from 'react-native-calendars';
 
-type Props = {
-  currentDate: Date;
+type DatePickerProps = {
+  currentDate?: Date;
   setCurrentDate: (date: Date) => void;
-  selectContentInsets: SelectContentInsets;
+  contentInsets: ContentInsets;
   onClose?: () => void;
   minDate?: string;
   maxDate?: string;
@@ -27,9 +27,9 @@ type Props = {
 };
 
 export function DatePicker({
-  currentDate,
+  currentDate = new Date(),
   setCurrentDate,
-  selectContentInsets,
+  contentInsets,
   onClose,
   minDate,
   maxDate,
@@ -42,11 +42,11 @@ export function DatePicker({
   endYear = new Date().getFullYear(),
   monthLabel = 'Месяц',
   yearLabel = 'Год',
-}: Props) {
+}: DatePickerProps) {
   const { colorScheme } = useColorScheme();
   const { onOpenChange } = useRootContextPopover();
-  const calendarTheme = customTheme ?? getCalendarTheme(colorScheme ?? 'light');
   const [ displayDate, setDisplayDate ] = useState(() => format(currentDate, 'yyyy-MM-dd'));
+  const calendarTheme = customTheme ?? getCalendarTheme(colorScheme ?? 'light');
 
   const monthLabels = useMemo(() => generateMonthLabels(locale), [locale]);
   const monthOptions = useMemo(() => generateMonthOptions(monthLabels), [monthLabels]);
@@ -97,7 +97,7 @@ export function DatePicker({
       customHeader={(props: any) => (
         <CalendarHeader
           {...props}
-          selectContentInsets={selectContentInsets}
+          contentInsets={contentInsets}
           monthLabels={monthLabels}
           monthOptions={monthOptions}
           yearOptions={yearOptions}

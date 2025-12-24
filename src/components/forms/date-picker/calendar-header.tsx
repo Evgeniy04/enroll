@@ -1,5 +1,5 @@
 import { HeaderSelect } from '@/components/forms/date-picker/header-select';
-import { SelectContentInsets } from '@/hooks/useSelectContentInsets';
+import { ContentInsets } from '@/hooks/useContentInsets';
 import { Option } from '@rn-primitives/select';
 import { useCallback, useMemo } from 'react';
 import { View } from 'react-native';
@@ -7,7 +7,7 @@ import { View } from 'react-native';
 type CalendarHeaderProps = {
   current: string;
   addMonth: (count: number) => void;
-  selectContentInsets: SelectContentInsets;
+  contentInsets: ContentInsets;
   monthLabels: string[];
   monthOptions: { value: string; label: string }[];
   yearOptions: { value: string; label: string }[];
@@ -18,7 +18,7 @@ type CalendarHeaderProps = {
 export function CalendarHeader({
   current,
   addMonth,
-  selectContentInsets,
+  contentInsets,
   monthLabels,
   monthOptions,
   yearOptions,
@@ -57,7 +57,7 @@ export function CalendarHeader({
         placeholder={monthLabels[month]}
         label={monthLabel}
         options={monthOptions}
-        insets={selectContentInsets}
+        contentInsets={contentInsets}
       />
 
       <HeaderSelect
@@ -66,7 +66,7 @@ export function CalendarHeader({
         placeholder={String(year)}
         label={yearLabel}
         options={yearOptions}
-        insets={selectContentInsets}
+        contentInsets={contentInsets}
       />
     </View>
   );

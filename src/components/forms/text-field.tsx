@@ -1,58 +1,56 @@
+import { FormField, FormFieldProps } from '@/components/forms/form-field';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Text } from '@/components/ui/text';
 import React from 'react';
-import { TextInputProps, View } from 'react-native';
+import { TextInputProps } from 'react-native';
 
-interface TextFieldProps extends TextInputProps {
-  nativeID: string;
-  label: string;
-  error?: string;
-  helperText?: string;
-  required?: boolean;
-  disabled?: boolean;
+const keyboardTypeByType: Record<
+  NonNullable<TextFieldProps['type']>,
+  TextInputProps['keyboardType']
+> = {
+  text: 'default',
+  email: 'email-address',
+  password: 'default',
+  number: 'numeric',
+  tel: 'phone-pad',
+  url: 'url',
+};
+
+interface TextFieldProps extends FormFieldProps, Omit<TextInputProps, 'nativeID'> {
+  type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url';
 }
 
 export function TextField({
+  // FormField
   nativeID,
   label,
   error,
   helperText,
   required = false,
   disabled = false,
+  // CurrentField
+  type = 'text',
   ...inputProps
 }: TextFieldProps) {
   return (
-    <View className="gap-1.5">
-      <Label nativeID={nativeID} className={disabled ? 'opacity-50' : ''}>
-        {label}
-        {required && <Text className="text-destructive"> *</Text>}
-      </Label>
+    <FormField
+      nativeID={nativeID}
+      label={label}
+      error={error}
+      helperText={helperText}
+      required={required}
+      disabled={disabled}
+    >
       <Input
+        nativeID={nativeID}
         aria-labelledby={nativeID}
         aria-invalid={!!error}
         aria-describedby={error ? `${nativeID}-error` : helperText ? `${nativeID}-helper` : undefined}
         editable={!disabled}
+        secureTextEntry={type === 'password'}
+        keyboardType={keyboardTypeByType[type]}
         className={error ? 'border-destructive' : ''}
         {...inputProps}
       />
-      {error && (
-        <Text
-          nativeID={`${nativeID}-error`}
-          className="text-sm text-destructive"
-          role="alert"
-        >
-          {error}
-        </Text>
-      )}
-      {!error && helperText && (
-        <Text
-          nativeID={`${nativeID}-helper`}
-          className="text-sm text-muted-foreground"
-        >
-          {helperText}
-        </Text>
-      )}
-    </View>
+    </FormField>
   );
 }
