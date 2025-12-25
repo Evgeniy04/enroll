@@ -14,9 +14,9 @@ export const Settings = () => {
     <KeyboardAvoidingScreen>
       <PersonalInfoForm />
 
-      <SpecialistProfileCard 
-        activityType={activityType}
-        onActivityTypeChange={setActivityType}
+      <SpecialistProfileCard
+        value={activityType}
+        onValueChange={setActivityType}
       />
 
       <View className='m-5'>
