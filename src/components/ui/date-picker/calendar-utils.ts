@@ -1,6 +1,6 @@
 export const generateMonthLabels = (locale: string) =>
   Array.from({ length: 12 }, (_, month) =>
-    new Date(2025, 11 - month, 1)
+    new Date(2025, month, 1)
       .toLocaleString(locale, { month: 'long' })
       .replace(/^./, (c) => c.toUpperCase())
   );
