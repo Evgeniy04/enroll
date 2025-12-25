@@ -1,11 +1,9 @@
 import { Button } from '@/components/ui/button';
+import { DatePickerField } from '@/components/ui/date-picker-field';
 import { Icon } from '@/components/ui/icon';
 import { Separator } from '@/components/ui/separator';
 import { Text } from '@/components/ui/text';
 import { TextField } from '@/components/ui/text-field';
-import {
-  DrivingDatePicker,
-} from '@/screens/settings/components/specialist-forms/components/driving-instructor-form/driving-date-picker';
 import { router } from 'expo-router';
 import { Plus } from 'lucide-react-native';
 import { useState } from 'react';
@@ -17,19 +15,21 @@ export const DrivingInstructorForm = () => {
   return (
     <>
       <Separator />
-      <DrivingDatePicker
+      <DatePickerField
         nativeID="work-start-date"
         label="Дата начала работы"
         helperText="Дата, с&nbsp;которой вы&nbsp;начали работать в&nbsp;профессии"
         currentDate={workStartDate}
         setCurrentDate={setWorkStartDate}
+        required
       />
-      <DrivingDatePicker
+      <DatePickerField
         nativeID="driving-start-date"
         label="Дата начала водительского стажа"
         helperText="Дата, с&nbsp;которой вы&nbsp;начали водить транспорт"
         currentDate={drivingStartDate}
         setCurrentDate={setDrivingStartDate}
+        required
       />
       <TextField
         nativeID="license_categories"
@@ -50,6 +50,7 @@ export const DrivingInstructorForm = () => {
         label="Дополнительная информация по&nbsp;месту оказания услуги"
         placeholder="Введите доп. информацию"
         helperText="Например: место встречи у&nbsp;метро, машина с&nbsp;белыми полосами"
+        multiline
       />
       <Button onPress={() => router.push('/settings/add-vehicle')} variant="secondary">
         <Icon as={Plus} className="text-foreground" />

@@ -1,5 +1,6 @@
 import { FormField, FormFieldProps } from '@/components/ui/form-field';
 import { Input } from '@/components/ui/input';
+import { cn } from '@/lib/utils';
 import React from 'react';
 import { TextInputProps } from 'react-native';
 
@@ -29,6 +30,7 @@ export function TextField({
   disabled = false,
   // CurrentField
   type = 'text',
+  multiline,
   ...inputProps
 }: TextFieldProps) {
   return (
@@ -48,7 +50,8 @@ export function TextField({
         editable={!disabled}
         secureTextEntry={type === 'password'}
         keyboardType={keyboardTypeByType[type]}
-        className={error ? 'border-destructive' : ''}
+        className={cn(error && 'border-destructive', multiline && 'h-36 align-top')}
+        multiline={multiline}
         {...inputProps}
       />
     </FormField>

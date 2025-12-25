@@ -14,13 +14,13 @@ export const OtherSpecialistForm = () => {
         label="Описание деятельности"
         placeholder="Кратко опишите вашу деятельность"
         multiline
-        numberOfLines={4}
       />
 
       <TextField
         nativeID="certifications"
         label="Информация о Вас в свободной форме"
         placeholder="Перечислите необходимую информацию"
+        multiline
       />
     </>
   );

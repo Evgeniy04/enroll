@@ -3,15 +3,19 @@ import { DatePicker } from '@/components/ui/date-picker';
 import { FormField, FormFieldProps } from '@/components/ui/form-field';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Text } from '@/components/ui/text';
-import { ContentInsets } from '@/hooks/useContentInsets';
+import { ContentInsets, useContentInsets } from '@/hooks/useContentInsets';
+import { format } from 'date-fns';
+import { ru } from 'date-fns/locale';
 import { View } from 'react-native';
+
+const todayDate = new Date();
 
 export interface DatePickerFieldProps extends FormFieldProps {
   currentDate?: Date;
   setCurrentDate: (date: Date) => void;
   placeholder?: string;
   title?: string;
-  contentInsets: ContentInsets;
+  contentInsets?: ContentInsets;
   minDate?: string;
   maxDate?: string;
   startYear?: number;
@@ -31,14 +35,16 @@ export const DatePickerField = ({
   currentDate,
   setCurrentDate,
   title = 'Выберите дату',
-  placeholder = 'Выберите дату',
-  minDate,
-  maxDate,
-  startYear,
-  endYear,
+  placeholder = currentDate ? format(currentDate, 'dd MMMM yyyy', { locale: ru }) : 'Выберите дату',
+  startYear = 1950,
+  endYear = todayDate.getFullYear(),
+  minDate = new Date(startYear, 0, 1).toDateString(),
+  maxDate = todayDate.toDateString(),
   side = 'top',
   contentInsets,
 }: DatePickerFieldProps) => {
+  contentInsets = useContentInsets();
+
   return (
     <FormField
       nativeID={nativeID}
