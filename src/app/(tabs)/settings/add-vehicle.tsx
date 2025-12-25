@@ -1,8 +1,8 @@
 import { useTabsHeader } from '@/hooks/useTabsHeader';
-import { Settings } from '@/screens/settings';
+import { AddVehicle } from '@/screens/settings/add-vehicle';
 
 export default function AddVehicleScreen() {
   useTabsHeader('Ваш транспорт', true);
 
-  return <Settings />
+  return <AddVehicle />
 }

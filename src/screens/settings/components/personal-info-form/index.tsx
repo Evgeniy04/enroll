@@ -1,5 +1,5 @@
-import { AvatarPicker } from '@/components/forms/avatar-picker';
-import { TextField } from '@/components/forms/text-field';
+import { AvatarPicker } from '@/components/ui/avatar-picker';
+import { TextField } from '@/components/ui/text-field';
 import { useState } from 'react';
 import { View } from 'react-native';
 

@@ -1,4 +1,4 @@
-import { DatePickerField } from '@/components/forms/date-picker-field';
+import { DatePickerField } from '@/components/ui/date-picker-field';
 import { useContentInsets } from '@/hooks/useContentInsets';
 import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';

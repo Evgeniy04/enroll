@@ -1,4 +1,4 @@
-import { TextField } from '@/components/forms/text-field';
+import { TextField } from '@/components/ui/text-field';
 
 export const OtherSpecialistForm = () => {
   return (

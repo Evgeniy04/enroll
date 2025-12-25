@@ -1,4 +1,4 @@
-import { FormField, FormFieldProps } from '@/components/forms/form-field';
+import { FormField, FormFieldProps } from '@/components/ui/form-field';
 import { Input } from '@/components/ui/input';
 import React from 'react';
 import { TextInputProps } from 'react-native';

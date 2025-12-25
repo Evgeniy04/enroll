@@ -1,4 +1,4 @@
-import { HeaderSelect } from '@/components/forms/date-picker/header-select';
+import { HeaderSelect } from '@/components/ui/date-picker/header-select';
 import { ContentInsets } from '@/hooks/useContentInsets';
 import { Option } from '@rn-primitives/select';
 import { useCallback, useMemo } from 'react';

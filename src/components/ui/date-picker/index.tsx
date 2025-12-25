@@ -1,5 +1,5 @@
-import { CalendarHeader } from '@/components/forms/date-picker/calendar-header';
-import { generateMonthLabels, generateMonthOptions, generateYearOptions } from '@/components/forms/date-picker/calendar-utils';
+import { CalendarHeader } from '@/components/ui/date-picker/calendar-header';
+import { generateMonthLabels, generateMonthOptions, generateYearOptions } from '@/components/ui/date-picker/calendar-utils';
 import { CALENDAR_CONSTANTS, getCalendarTheme } from '@/config';
 import { ContentInsets } from '@/hooks/useContentInsets';
 import { useRootContext as useRootContextPopover } from '@rn-primitives/popover';
