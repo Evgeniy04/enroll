@@ -1,6 +1,6 @@
 import { Stack } from 'expo-router';
 
-export default function ProfileStack() {
+export default function SettingsStack() {
   return (
     <Stack screenOptions={{ headerShown: false }} >
       <Stack.Screen name="index" />
