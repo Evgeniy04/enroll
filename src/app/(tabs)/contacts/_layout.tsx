@@ -4,7 +4,7 @@ const ContactsStack = () => {
   return (
     <Stack screenOptions={{ headerShown: false }} >
       <Stack.Screen name="index" />
-      <Stack.Screen name="ContactDetails" />
+      <Stack.Screen name="contact-details" />
     </Stack>
   );
 }
