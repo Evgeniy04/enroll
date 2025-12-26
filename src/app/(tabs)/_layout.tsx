@@ -4,7 +4,7 @@ import { useTheme } from '@react-navigation/native';
 import { Tabs } from 'expo-router';
 import { Platform } from 'react-native';
 
-export default function TabLayout() {
+const TabLayout = () => {
   const { colors } = useTheme();
 
   return (
@@ -40,3 +40,5 @@ export default function TabLayout() {
     </Tabs>
   );
 }
+
+export default TabLayout;

@@ -1,5 +1,6 @@
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { CircleAlert, CircleCheck } from "lucide-react-native";
+import { FC } from "react";
 import { View } from "react-native";
 import { ToastConfigParams } from "react-native-toast-message";
 
@@ -15,7 +16,7 @@ type BaseToastProps = {
   toastProps: ToastProps,
 }
 
-function BaseToast({variant, toastProps}: BaseToastProps) {
+const BaseToast: FC<BaseToastProps> = ({variant, toastProps}) => {
   const icon = variant === 'default' ? CircleCheck : CircleAlert;
 
   return <View className="w-full px-4 mb-2">

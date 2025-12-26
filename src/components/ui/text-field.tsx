@@ -1,7 +1,7 @@
 import { FormField, FormFieldProps } from '@/components/ui/form-field';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
-import React from 'react';
+import React, { FC } from 'react';
 import { TextInputProps } from 'react-native';
 
 const keyboardTypeByType: Record<
@@ -20,7 +20,7 @@ interface TextFieldProps extends FormFieldProps, Omit<TextInputProps, 'nativeID'
   type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url';
 }
 
-export function TextField({
+export const TextField: FC<TextFieldProps> = ({
   // FormField
   nativeID,
   label,
@@ -32,7 +32,7 @@ export function TextField({
   type = 'text',
   multiline,
   ...inputProps
-}: TextFieldProps) {
+}) => {
   return (
     <FormField
       nativeID={nativeID}

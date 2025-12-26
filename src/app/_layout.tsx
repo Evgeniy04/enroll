@@ -19,38 +19,11 @@ export {
   ErrorBoundary
 } from 'expo-router';
 
-export default function Layout() {
-  const { colorScheme } = useColorScheme();
-
-  useEffect(() => {
-    initializeApp();
-  }, []);
-
-  if (Platform.OS === 'android') {
-    NavigationBar.setButtonStyleAsync(colorScheme === 'dark' ? 'light' : 'dark');
-  }
-
-  return (
-    <GestureHandlerRootView className='flex-1'>
-      <ThemeProvider value={NAV_THEME[colorScheme ?? 'light']}>
-        <ActionSheetProvider>
-          <>
-            <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
-            <Routes />
-            <Toast config={toastConfig} position='bottom' />
-            <PortalHost />
-          </>
-        </ActionSheetProvider>
-      </ThemeProvider>
-    </GestureHandlerRootView>
-  );
-}
-
 SplashScreen.preventAutoHideAsync();
 
-function Routes() {
-  const [isLoaded] = useState(true);
-  const [isSignedIn] = useState(true);
+const Routes = () => {
+  const [ isLoaded ] = useState(true);
+  const [ isSignedIn ] = useState(true);
 
   useEffect(() => {
     if (isLoaded) {
@@ -78,3 +51,32 @@ function Routes() {
     </Stack>
   );
 }
+
+const Layout = () => {
+  const { colorScheme } = useColorScheme();
+
+  useEffect(() => {
+    initializeApp();
+  }, []);
+
+  if (Platform.OS === 'android') {
+    NavigationBar.setButtonStyleAsync(colorScheme === 'dark' ? 'light' : 'dark');
+  }
+
+  return (
+    <GestureHandlerRootView className='flex-1'>
+      <ThemeProvider value={NAV_THEME[colorScheme ?? 'light']}>
+        <ActionSheetProvider>
+          <>
+            <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
+            <Routes />
+            <Toast config={toastConfig} position='bottom' />
+            <PortalHost />
+          </>
+        </ActionSheetProvider>
+      </ThemeProvider>
+    </GestureHandlerRootView>
+  );
+}
+
+export default Layout;

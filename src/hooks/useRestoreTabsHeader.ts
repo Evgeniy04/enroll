@@ -1,7 +1,7 @@
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { useCallback } from 'react';
 
-export function useRestoreTabsHeader(title: string) {
+export const useRestoreTabsHeader = (title: string) => {
   const navigation = useNavigation();
 
   useFocusEffect(

@@ -1,4 +1,4 @@
-import { ComponentProps, ReactNode } from "react";
+import { ComponentProps, FC, ReactNode } from "react";
 import { KeyboardAvoidingView, Platform } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
@@ -9,10 +9,10 @@ type KeyboardAvoidingScreenProps = Omit<
   children: ReactNode;
 };
 
-export function KeyboardAvoidingScreen({
+export const KeyboardAvoidingScreen: FC<KeyboardAvoidingScreenProps> = ({
   children,
   ...props
-}: KeyboardAvoidingScreenProps) {
+}) => {
   return (
     <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} className='flex-1' {...props}>
       <ScrollView>

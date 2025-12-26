@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { ArrowLeft } from 'lucide-react-native';
 import { useEffect } from 'react';
 
-export function useTabsHeader(title: string, showBackButton = false) {
+export const useTabsHeader = (title: string, showBackButton = false) => {
   const navigation = useNavigation();
 
   useEffect(() => {

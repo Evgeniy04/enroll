@@ -17,6 +17,7 @@ import {
   requestMediaLibraryPermissionsAsync,
 } from 'expo-image-picker';
 import { Pencil } from "lucide-react-native";
+import { FC } from "react";
 import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Toast from 'react-native-toast-message';
@@ -26,7 +27,7 @@ interface AvatarPickerProps {
   setImage: (value?: string) => void
 }
 
-export function AvatarPicker({image, setImage}: AvatarPickerProps) {
+export const AvatarPicker: FC<AvatarPickerProps> = ({image, setImage}) => {
   const bottomTabBarHeight = useBottomTabBarHeight();
   const { bottom: bottomSafeAreaInsets } = useSafeAreaInsets();
   const { colors } = useTheme();

@@ -1,6 +1,6 @@
 import { Stack } from 'expo-router';
 
-export default function SettingsStack() {
+const SettingsStack = () => {
   return (
     <Stack screenOptions={{ headerShown: false }} >
       <Stack.Screen name="index" />
@@ -8,3 +8,5 @@ export default function SettingsStack() {
     </Stack>
   );
 }
+
+export default SettingsStack;

@@ -5,7 +5,7 @@ import { Link, Stack } from 'expo-router';
 import { Search } from 'lucide-react-native';
 import { View } from 'react-native';
 
-export default function NotFoundScreen() {
+const NotFoundScreen = () => {
   return (
     <>
       <Stack.Screen options={{ title: 'Ой! Не найдено' }} />
@@ -26,3 +26,5 @@ export default function NotFoundScreen() {
     </>
   );
 }
+
+export default NotFoundScreen;

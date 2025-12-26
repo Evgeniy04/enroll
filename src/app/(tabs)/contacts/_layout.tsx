@@ -1,10 +1,12 @@
 import { Stack } from 'expo-router';
 
-export default function ContactsStack() {
+const ContactsStack = () => {
   return (
     <Stack screenOptions={{ headerShown: false }} >
       <Stack.Screen name="index" />
-      <Stack.Screen name="profile" />
+      <Stack.Screen name="ContactDetails" />
     </Stack>
   );
 }
+
+export default ContactsStack;

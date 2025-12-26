@@ -15,15 +15,14 @@ import {
 import {
   getSpecialistForm,
 } from '@/screens/settings/components/specialist-forms';
-
-type SpecialistProfileCardProps = SelectValueProps;
+import { FC } from 'react';
 
 const ACTIVITY_OPTIONS = [
   { label: 'Мастер производственного обучения', value: 'driving_instructor' },
   { label: 'Другое', value: 'other' },
 ];
 
-export function SpecialistProfileCard({ value, onValueChange }: SpecialistProfileCardProps) {
+export const SpecialistProfileCard: FC<SelectValueProps> = ({ value, onValueChange }) => {
   const contentInsets = useContentInsets();
   const SpecialistForm = value
     ? getSpecialistForm(value.value)

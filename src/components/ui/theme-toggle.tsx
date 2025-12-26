@@ -3,11 +3,12 @@ import { ToggleGroup, ToggleGroupIcon, ToggleGroupItem } from '@/components/ui/t
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { MoonStarIcon, Smartphone, SunIcon } from 'lucide-react-native';
 import { useColorScheme } from 'nativewind';
+import { FC } from 'react';
 import Toast from 'react-native-toast-message';
 
 type ColorScheme = "light" | "dark" | "system";
 
-export function ThemeToggle({ className }: { className?: string }) {
+export const ThemeToggle: FC<{ className?: string }> = ({ className }) => {
   const { colorScheme, setColorScheme } = useColorScheme();
   const bottomTabBarHeight = useBottomTabBarHeight();
 

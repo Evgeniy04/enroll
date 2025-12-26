@@ -5,7 +5,7 @@ import { ContentInsets } from '@/hooks/useContentInsets';
 import { useRootContext as useRootContextPopover } from '@rn-primitives/popover';
 import { format } from 'date-fns';
 import { useColorScheme } from 'nativewind';
-import { useMemo, useState } from 'react';
+import { FC, useMemo, useState } from 'react';
 import { Calendar, CalendarProps, DateData } from 'react-native-calendars';
 
 type DatePickerProps = {
@@ -26,7 +26,7 @@ type DatePickerProps = {
   yearLabel?: string;
 };
 
-export function DatePicker({
+export const DatePicker: FC<DatePickerProps> = ({
   currentDate = new Date(),
   setCurrentDate,
   contentInsets,
@@ -42,7 +42,7 @@ export function DatePicker({
   endYear = new Date().getFullYear(),
   monthLabel = 'Месяц',
   yearLabel = 'Год',
-}: DatePickerProps) {
+}) => {
   const { colorScheme } = useColorScheme();
   const { onOpenChange } = useRootContextPopover();
   const [ displayDate, setDisplayDate ] = useState(() => format(currentDate, 'yyyy-MM-dd'));

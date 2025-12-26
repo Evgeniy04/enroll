@@ -9,7 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import React from 'react';
+import React, { FC } from 'react';
 
 export interface SelectValueProps {
   value?: Option;
@@ -27,7 +27,7 @@ interface SelectFieldProps extends FormFieldProps, SelectValueProps {
   contentInsets?: any;
 }
 
-export function SelectField({
+export const SelectField: FC<SelectFieldProps> = ({
   // FormField
   nativeID,
   label,
@@ -42,7 +42,7 @@ export function SelectField({
   options,
   groupLabel,
   contentInsets,
-}: SelectFieldProps) {
+}) => {
   return (
     <FormField
       nativeID={nativeID}

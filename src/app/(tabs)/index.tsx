@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { Calendar, EventRenderer, PartialTheme } from "react-native-big-calendar";
 
-export default function HomeScreen() {
+const HomeScreen = () => {
   const { colorScheme } = useColorScheme();
   const screenHeight = useScreenHeight();
 
@@ -144,3 +144,5 @@ export default function HomeScreen() {
     />
   );
 }
+
+export default HomeScreen;

@@ -6,6 +6,7 @@ import { Text } from '@/components/ui/text';
 import { ContentInsets, useContentInsets } from '@/hooks/useContentInsets';
 import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
+import { FC } from 'react';
 import { View } from 'react-native';
 
 const todayDate = new Date();
@@ -23,7 +24,7 @@ export interface DatePickerFieldProps extends FormFieldProps {
   side?: 'top' | 'bottom';
 }
 
-export const DatePickerField = ({
+export const DatePickerField: FC<DatePickerFieldProps> = ({
   // FormField
   nativeID,
   label,
@@ -42,7 +43,7 @@ export const DatePickerField = ({
   maxDate = todayDate.toDateString(),
   side = 'top',
   contentInsets,
-}: DatePickerFieldProps) => {
+}) => {
   contentInsets = useContentInsets();
 
   return (

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Dimensions } from "react-native";
 
-export default function useScreenHeight() {
+const useScreenHeight = () => {
   const [height, setHeight] = useState(Dimensions.get("window").height);
 
   useEffect(() => {
@@ -14,3 +14,5 @@ export default function useScreenHeight() {
 
   return height;
 }
+
+export default useScreenHeight;

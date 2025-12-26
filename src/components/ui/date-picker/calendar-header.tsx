@@ -1,7 +1,7 @@
 import { HeaderSelect } from '@/components/ui/date-picker/header-select';
 import { ContentInsets } from '@/hooks/useContentInsets';
 import { Option } from '@rn-primitives/select';
-import { useCallback, useMemo } from 'react';
+import { FC, useCallback, useMemo } from 'react';
 import { View } from 'react-native';
 
 type CalendarHeaderProps = {
@@ -15,7 +15,7 @@ type CalendarHeaderProps = {
   yearLabel?: string;
 };
 
-export function CalendarHeader({
+export const CalendarHeader: FC<CalendarHeaderProps> = ({
   current,
   addMonth,
   contentInsets,
@@ -24,7 +24,7 @@ export function CalendarHeader({
   yearOptions,
   monthLabel = 'Месяц',
   yearLabel = 'Год',
-}: CalendarHeaderProps) {
+}) => {
   const currentDate = useMemo(() => new Date(current), [current]);
   const month = currentDate.getMonth();
   const year = currentDate.getFullYear();

@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/select';
 import { ContentInsets } from '@/hooks/useContentInsets';
 import { Option } from '@rn-primitives/select';
+import { FC } from 'react';
 import { View } from 'react-native';
 
 type HeaderSelectOption = {
@@ -26,14 +27,14 @@ type HeaderSelectProps = {
   contentInsets: ContentInsets;
 };
 
-export function HeaderSelect({
+export const HeaderSelect: FC<HeaderSelectProps> = ({
   value,
   onChange,
   placeholder,
   label,
   options,
   contentInsets,
-}: HeaderSelectProps) {
+}) => {
   return (
     <View className="flex-1">
       <Select
