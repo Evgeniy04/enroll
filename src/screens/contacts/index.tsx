@@ -39,8 +39,7 @@ export const Contacts = () => {
           <Button
             variant="ghost"
             size="icon"
-            onPress={(event) => {
-              event.stopPropagation();
+            onPress={() => {
               console.log('Удалить', item.id);
             }}
           >
