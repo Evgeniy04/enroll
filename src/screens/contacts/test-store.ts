@@ -12,3 +12,10 @@ export const CONTACTS = [
   { id: '11', name: 'Анна Сидорова', phone: '+7 (900) 555-35-35', avatar: '' },
   { id: '12', name: 'Алексей Петров', phone: '+7 (911) 000-11-22', avatar: 'https://github.com/expo.png' },
 ];
+
+export interface Contact {
+  id: string;
+  name: string;
+  phone?: string;
+  avatar?: string;
+}

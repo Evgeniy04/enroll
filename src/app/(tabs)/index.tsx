@@ -9,13 +9,13 @@ import { Calendar, EventRenderer, PartialTheme } from "react-native-big-calendar
 
 const HomeScreen = () => {
   const { colorScheme } = useColorScheme();
-  const screenHeight = useScreenHeight();
 
-  const calendarHeight =        // Подсчет высоты календаря
-    screenHeight                // Высота всего экрана
-    - useBottomTabBarHeight()   // Высота панели вкладок
-    - useHeaderHeight()         // Высота заголовка экрана
-    + 46;                       // Константа для корректировки высоты календаря
+  const screenHeight = useScreenHeight();
+  const tabBarHeight = useBottomTabBarHeight();
+  const headerHeight = useHeaderHeight();
+  
+  // 46 - константа для корректировки высоты календаря
+  const sceneHeight = screenHeight - tabBarHeight - headerHeight + 46;
 
   const [events] = useState([
     {
@@ -125,7 +125,7 @@ const HomeScreen = () => {
       theme={themes[colorScheme ?? 'light']}
       mode="3days"
       events={events}
-      height={calendarHeight}
+      height={sceneHeight}
       eventCellStyle={(event) => ({
         backgroundColor: event.start <= new Date() && event.end >= new Date() ? '#06cdecff' : event.color,
         marginTop: 0,

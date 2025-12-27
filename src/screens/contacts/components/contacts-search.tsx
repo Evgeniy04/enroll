@@ -1,0 +1,14 @@
+import { TextField } from '@/components/ui/text-field';
+import { View } from 'react-native';
+
+export const ContactsSearch = () => {
+  return (
+    <View className='mx-5 mt-2.5 mb-5'>
+      <TextField
+        nativeID="contacts_search"
+        label="Поиск контактов"
+        placeholder='Например: Иван Иванов'
+      />
+    </View>
+  );
+}
