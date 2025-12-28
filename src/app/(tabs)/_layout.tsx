@@ -1,15 +1,13 @@
-import { ThemeToggle } from '@/components/ui/theme-toggle';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useTheme } from '@react-navigation/native';
 import { Tabs } from 'expo-router';
-import { Platform } from 'react-native';
 
 const TabLayout = () => {
   const { colors } = useTheme();
 
   return (
     <Tabs screenOptions={{
-        headerRight: () => <ThemeToggle className={`${Platform.select({android: 'mr-2'})}`} />,
+        headerShown: false,
         sceneStyle: {
           backgroundColor: colors.card,
         },
@@ -17,7 +15,7 @@ const TabLayout = () => {
       }}
     >
       <Tabs.Screen
-        name="index"
+        name="(home)"
         options={{
           title: 'Главная',
           tabBarIcon: ({ color }) => <FontAwesome size={28} name="home" color={color} />,

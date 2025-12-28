@@ -32,9 +32,9 @@ export const ContactListItem: FC<ContactListItemProps> = ({ item: contact, onDel
   const handlePress = useCallback(() => {
     router.push({
       pathname: '/contacts/contact-details',
-      params: { id: contact.id },
+      params: { id: contact.id, displayName: contact.name},
     });
-  }, [router, contact.id]);
+  }, [router, contact.id, contact.name]);
 
   const handleDelete = useCallback(() => {
     onDelete(contact.id);

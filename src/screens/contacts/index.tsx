@@ -3,20 +3,18 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
 import { TextField } from '@/components/ui/text-field';
-import { useRestoreTabsHeader } from '@/hooks/useRestoreTabsHeader';
 import useScreenHeight from '@/hooks/useScreenHeight';
 import { ContactListItem } from '@/screens/contacts/components/contact-list-item';
 import { ContactsSearch } from '@/screens/contacts/components/contacts-search';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useHeaderHeight } from '@react-navigation/elements';
+import { Stack } from 'expo-router';
 import { UserRoundPlus } from 'lucide-react-native';
 import { useCallback } from 'react';
 import { FlatList, ListRenderItemInfo, View } from 'react-native';
 import { Contact, CONTACTS } from './test-store';
 
 export const Contacts = () => {
-  useRestoreTabsHeader('Контакты');
-
   const screenHeight = useScreenHeight();
   const tabBarHeight = useBottomTabBarHeight();
   const headerHeight = useHeaderHeight();
@@ -38,6 +36,7 @@ export const Contacts = () => {
 
   return (
     <>
+      <Stack.Screen options={{ title: "Контакты" }} />
       <FlatList
         data={CONTACTS}
         keyExtractor={(item) => item.id}

@@ -1,20 +1,20 @@
 import { KeyboardAvoidingScreen } from "@/components/layout/keyboard-avoiding-screen";
-import { useTabsHeader } from "@/hooks/useTabsHeader";
-import { useLocalSearchParams } from "expo-router";
-import { CONTACTS } from "./test-store";
+import { Stack, useLocalSearchParams } from "expo-router";
 
 type ContactDetailsParams = {
   id: string;
+  displayName: string;
 };
 
 export const ContactDetails = () => {
-  const { id } = useLocalSearchParams<ContactDetailsParams>();
+  const { id, displayName } = useLocalSearchParams<ContactDetailsParams>();
   
-  useTabsHeader(CONTACTS[Number(id) - 1].name, true);
-
   return (
-    <KeyboardAvoidingScreen>
-      <></>
-    </KeyboardAvoidingScreen>
+    <>
+      <Stack.Screen options={{ title: displayName ?? 'Без имени' }} />
+      <KeyboardAvoidingScreen>
+        <></>
+      </KeyboardAvoidingScreen>
+    </>
   );
 }
