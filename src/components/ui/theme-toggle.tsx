@@ -4,6 +4,7 @@ import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { MoonStarIcon, Smartphone, SunIcon } from 'lucide-react-native';
 import { useColorScheme } from 'nativewind';
 import { FC } from 'react';
+import { Platform } from 'react-native';
 import Toast from 'react-native-toast-message';
 
 type ColorScheme = "light" | "dark" | "system";
@@ -39,14 +40,14 @@ export const ThemeToggle: FC<{ className?: string }> = ({ className }) => {
   };
 
   return (
-    <ToggleGroup value={colorScheme} onValueChange={handleSchemeChange} variant='outline' type='single' className={className} >
-      <ToggleGroupItem isFirst value='system' aria-label='Toggle system'>
+    <ToggleGroup size='default' value={colorScheme} onValueChange={handleSchemeChange} variant={Platform.select({ ios: 'default', default: 'outline' })} type='single' className={className} >
+      <ToggleGroupItem isFirst value='system' aria-label='Toggle system' className={`rounded-l-${Platform.OS === 'ios' ? 'full' : 'md'}`}>
         <ToggleGroupIcon as={Smartphone} />
       </ToggleGroupItem>
       <ToggleGroupItem value='light' aria-label='Toggle light'>
         <ToggleGroupIcon as={SunIcon} />
       </ToggleGroupItem>
-      <ToggleGroupItem isLast value='dark' aria-label='Toggle dark'>
+      <ToggleGroupItem isLast value='dark' aria-label='Toggle dark' className={`rounded-r-${Platform.OS === 'ios' ? 'full' : 'md'}`}>
         <ToggleGroupIcon as={MoonStarIcon} />
       </ToggleGroupItem>
     </ToggleGroup>
