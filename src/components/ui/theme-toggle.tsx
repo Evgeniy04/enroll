@@ -40,14 +40,14 @@ export const ThemeToggle: FC<{ className?: string }> = ({ className }) => {
   };
 
   return (
-    <ToggleGroup size='default' value={colorScheme} onValueChange={handleSchemeChange} variant={Platform.select({ ios: 'default', default: 'outline' })} type='single' className={className} >
-      <ToggleGroupItem isFirst value='system' aria-label='Toggle system' className={`rounded-l-${Platform.OS === 'ios' ? 'full' : 'md'}`}>
+    <ToggleGroup size='default' value={colorScheme} onValueChange={handleSchemeChange} variant={Platform.OS === 'ios' ? 'default' : 'outline'} type='single' className={className} >
+      <ToggleGroupItem isFirst value='system' aria-label='Toggle system' className={Platform.OS === 'ios' ? 'rounded-l-full' : 'rounded-l-md'}>
         <ToggleGroupIcon as={Smartphone} />
       </ToggleGroupItem>
       <ToggleGroupItem value='light' aria-label='Toggle light'>
         <ToggleGroupIcon as={SunIcon} />
       </ToggleGroupItem>
-      <ToggleGroupItem isLast value='dark' aria-label='Toggle dark' className={`rounded-r-${Platform.OS === 'ios' ? 'full' : 'md'}`}>
+      <ToggleGroupItem isLast value='dark' aria-label='Toggle dark' className={Platform.OS === 'ios' ? 'rounded-r-full' : 'rounded-r-md'}>
         <ToggleGroupIcon as={MoonStarIcon} />
       </ToggleGroupItem>
     </ToggleGroup>
