@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { DatePickerField } from '@/components/ui/date-picker-field';
 import { Icon } from '@/components/ui/icon';
-import { Separator } from '@/components/ui/separator';
 import { Text } from '@/components/ui/text';
 import { TextField } from '@/components/ui/text-field';
 import { router } from 'expo-router';
@@ -14,7 +13,6 @@ export const DrivingInstructorForm = () => {
 
   return (
     <>
-      <Separator />
       <DatePickerField
         nativeID="work-start-date"
         label="Дата начала работы"

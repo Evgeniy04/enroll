@@ -9,6 +9,7 @@ import {
   SelectField,
   SelectValueProps,
 } from '@/components/ui/select-field';
+import { Separator } from '@/components/ui/separator';
 import {
   useContentInsets,
 } from '@/hooks/useContentInsets';
@@ -45,6 +46,8 @@ export const SpecialistProfileCard: FC<SelectValueProps> = ({ value, onValueChan
           groupLabel='Деятельность'
           contentInsets={contentInsets}
         />
+
+        <Separator />
 
         {SpecialistForm && <SpecialistForm />}
       </CardContent>
