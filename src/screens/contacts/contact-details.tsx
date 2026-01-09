@@ -1,4 +1,5 @@
 import { KeyboardAvoidingScreen } from "@/components/layout/keyboard-avoiding-screen";
+import { ContactDetailsHeader } from "@/screens/contacts/components/contact-details-header";
 import { Stack, useLocalSearchParams } from "expo-router";
 
 type ContactDetailsParams = {
@@ -11,9 +12,9 @@ export const ContactDetails = () => {
   
   return (
     <>
-      <Stack.Screen options={{ title: displayName ?? 'Без имени' }} />
+      <Stack.Screen options={{ title: 'Запись' }} />
       <KeyboardAvoidingScreen>
-        <></>
+        <ContactDetailsHeader id={id} />
       </KeyboardAvoidingScreen>
     </>
   );

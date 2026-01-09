@@ -40,9 +40,7 @@ export const ContactListItem: FC<ContactListItemProps> = ({ item: contact, onDel
     onDelete(contact.id);
   }, [onDelete, contact.id]);
 
-  const initials = contact.name
-    .slice(0, 2)
-    .toUpperCase();
+  const initials = contact.name.split(' ').map(word => word[0]).join('').toUpperCase();
 
   return (
     <Card className="mx-5 my-2.5 p-0 gap-0">
@@ -51,7 +49,7 @@ export const ContactListItem: FC<ContactListItemProps> = ({ item: contact, onDel
         onPress={handlePress}
       >
         <View className="flex-1 flex-row">
-          <Avatar alt={contact.name} className="h-12 w-12 border border-border">
+          <Avatar alt={contact.name} className="size-12 border border-border">
             {contact.avatar && (
               <AvatarImage source={{ uri: contact.avatar }} />
             )}
