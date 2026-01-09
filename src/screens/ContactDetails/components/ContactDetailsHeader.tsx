@@ -7,7 +7,7 @@ import * as Linking from 'expo-linking';
 import { Clock, MapPin } from "lucide-react-native";
 import React, { FC, useMemo } from "react";
 import { View } from "react-native";
-import { CONTACTS } from "../test-store";
+import { CONTACTS } from "../../test-store";
 
 interface ContactDetailsHeaderProps {
   id: string;
@@ -31,6 +31,26 @@ export const ContactDetailsHeader: FC<ContactDetailsHeaderProps> = ({ id }) => {
     Linking.openURL(`tel:${contact.phone}`);
   };
 
+  const getExperienceText = (years: number) => {
+    if (years === 0) return 'Нет опыта';
+
+    const lastDigit = years % 10;
+    const lastTwoDigits = years % 100;
+    let yearsText: string;
+
+    if (lastTwoDigits >= 11 && lastTwoDigits <= 14) {
+      yearsText = `${years} лет опыта`;
+    } else if (lastDigit === 1) {
+      yearsText = `${years} год опыта`;
+    } else if (lastDigit >= 2 && lastDigit <= 4) {
+      yearsText = `${years} года опыта`;
+    } else {
+      yearsText = `${years} лет опыта`;
+    }
+
+    return yearsText;
+  };
+
   return (
     <Card className="m-5 items-center">
       <CardHeader>
@@ -49,15 +69,17 @@ export const ContactDetailsHeader: FC<ContactDetailsHeaderProps> = ({ id }) => {
 
         <View className="items-center">
           <Text className="text-center text-sm">
-            Мастер производственного обучения
+            {contact.activity}
           </Text>
-          <Text variant="code" className="text-center text-blue-700 bg-blue-50">
+          <Text
+            variant="code"
+            className="text-center bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300">
             <Icon
               as={Clock}
-              className="text-blue-700"
+              className="text-blue-700 dark:text-blue-300"
               style={{ transform: [{ translateY: 1 }] }}
             />{' '}
-            6&nbsp;лет&nbsp;опыта
+            {getExperienceText(contact.experienceYears)}
           </Text>
         </View>
 
@@ -67,7 +89,7 @@ export const ContactDetailsHeader: FC<ContactDetailsHeaderProps> = ({ id }) => {
             className="text-muted-foreground"
             style={{ transform: [{ translateY: 1 }] }}
           />{' '}
-          г. Томск, Октябрьский р-н, ул. Иркутский тракт 118/1
+          {contact.address}
         </Text>
       </CardContent>
 

@@ -1,5 +1,5 @@
-import { KeyboardAvoidingScreen } from "@/components/layout/keyboard-avoiding-screen";
-import { ContactDetailsHeader } from "@/screens/contacts/components/contact-details-header";
+import { KeyboardAvoidingScreen } from "@/components/layout/KeyboardAvoidingScreen";
+import { ContactDetailsHeader } from "@/screens/ContactDetails/components/ContactDetailsHeader";
 import { Stack, useLocalSearchParams } from "expo-router";
 
 type ContactDetailsParams = {

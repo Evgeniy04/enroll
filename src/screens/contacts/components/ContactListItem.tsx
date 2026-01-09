@@ -17,7 +17,7 @@ import { useRouter } from 'expo-router';
 import { Trash2 } from 'lucide-react-native';
 import { FC, useCallback } from 'react';
 import { Dimensions, Pressable, View } from 'react-native';
-import { Contact } from '../test-store';
+import { Contact } from '../../test-store';
 
 interface ContactListItemProps {
   item: Contact;
@@ -31,7 +31,7 @@ export const ContactListItem: FC<ContactListItemProps> = ({ item: contact, onDel
 
   const handlePress = useCallback(() => {
     router.push({
-      pathname: '/contacts/contact-details',
+      pathname: '/contacts/ContactDetails',
       params: { id: contact.id, displayName: contact.name},
     });
   }, [router, contact.id, contact.name]);

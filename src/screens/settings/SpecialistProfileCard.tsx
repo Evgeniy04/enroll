@@ -9,14 +9,18 @@ import {
   SelectField,
   SelectValueProps,
 } from '@/components/ui/select-field';
-import { Separator } from '@/components/ui/separator';
+import {
+  Separator,
+} from '@/components/ui/separator';
 import {
   useContentInsets,
 } from '@/hooks/useContentInsets';
 import {
   getSpecialistForm,
-} from '@/screens/settings/components/specialist-forms';
-import { FC } from 'react';
+} from '@/screens/Settings/SpecialistForms';
+import {
+  FC,
+} from 'react';
 
 const ACTIVITY_OPTIONS = [
   { label: 'Мастер производственного обучения', value: 'driving_instructor' },

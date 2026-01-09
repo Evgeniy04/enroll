@@ -4,15 +4,15 @@ import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
 import { TextField } from '@/components/ui/text-field';
 import useScreenHeight from '@/hooks/useScreenHeight';
-import { ContactListItem } from '@/screens/contacts/components/contact-list-item';
-import { ContactSearch } from '@/screens/contacts/components/contact-search';
+import { ContactListItem } from '@/screens/Contacts/components/ContactListItem';
+import { ContactSearch } from '@/screens/Contacts/components/ContactSearch';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { useHeaderHeight } from '@react-navigation/elements';
 import { Stack } from 'expo-router';
 import { UserRoundPlus } from 'lucide-react-native';
 import { useCallback } from 'react';
 import { FlatList, ListRenderItemInfo, View } from 'react-native';
-import { Contact, CONTACTS } from './test-store';
+import { Contact, CONTACTS } from '../test-store';
 
 export const Contacts = () => {
   const screenHeight = useScreenHeight();

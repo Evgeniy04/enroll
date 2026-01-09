@@ -1,4 +1,4 @@
-import { KeyboardAvoidingScreen } from "@/components/layout/keyboard-avoiding-screen";
+import { KeyboardAvoidingScreen } from "@/components/layout/KeyboardAvoidingScreen";
 import { AvatarPicker } from "@/components/ui/avatar-picker";
 import { Button } from "@/components/ui/button";
 import { DatePickerField } from "@/components/ui/date-picker-field";

@@ -50,7 +50,7 @@ export const DrivingInstructorForm = () => {
         helperText="Например: место встречи у&nbsp;метро, машина с&nbsp;белыми полосами"
         multiline
       />
-      <Button onPress={() => router.push('/settings/add-vehicle')} variant="secondary">
+      <Button onPress={() => router.push('/settings/AddVehicle')} variant="secondary">
         <Icon as={Plus} className="text-foreground" />
         <Text>Добавить транспорт</Text>
       </Button>

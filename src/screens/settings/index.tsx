@@ -1,10 +1,10 @@
-import { KeyboardAvoidingScreen } from '@/components/layout/keyboard-avoiding-screen';
+import { KeyboardAvoidingScreen } from '@/components/layout/KeyboardAvoidingScreen';
 import { Button } from '@/components/ui/button';
 import { Option } from '@/components/ui/select';
 import { Text } from '@/components/ui/text';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
-import { PersonalInfoForm } from '@/screens/settings/components/personal-info-form';
-import { SpecialistProfileCard } from '@/screens/settings/components/specialist-profile-card';
+import { PersonalInfoForm } from '@/screens/Settings/PersonalInfoForm';
+import { SpecialistProfileCard } from '@/screens/Settings/SpecialistProfileCard';
 import { Stack } from 'expo-router';
 import { useState } from 'react';
 import { View } from 'react-native';

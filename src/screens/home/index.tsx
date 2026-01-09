@@ -6,7 +6,7 @@ import { useColorScheme } from 'nativewind';
 import React, { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { Calendar as EventCalendar, EventRenderer, PartialTheme } from "react-native-big-calendar";
-import { Event, EVENTS } from './test-store';
+import { Event, EVENTS } from '../test-store';
 
 export const Home = () => {
   const { colorScheme } = useColorScheme();
