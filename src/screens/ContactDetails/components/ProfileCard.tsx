@@ -9,11 +9,11 @@ import React, { FC, useMemo } from "react";
 import { View } from "react-native";
 import { CONTACTS } from "../../test-store";
 
-interface ContactDetailsHeaderProps {
+interface ProfileCardProps {
   id: string;
 }
 
-export const ContactDetailsHeader: FC<ContactDetailsHeaderProps> = ({ id }) => {
+export const ProfileCard: FC<ProfileCardProps> = ({ id }) => {
   const contact = useMemo(() => {
     const index = Number(id) - 1;
     return CONTACTS[index];

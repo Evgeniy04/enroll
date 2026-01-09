@@ -1,6 +1,8 @@
 import { KeyboardAvoidingScreen } from "@/components/layout/KeyboardAvoidingScreen";
-import { ContactDetailsHeader } from "@/screens/ContactDetails/components/ContactDetailsHeader";
+import { InfoCard } from "@/screens/ContactDetails/components/InfoCard";
+import { ProfileCard } from "@/screens/ContactDetails/components/ProfileCard";
 import { Stack, useLocalSearchParams } from "expo-router";
+import { BriefcaseBusiness, CarIcon, MapPin } from "lucide-react-native";
 
 type ContactDetailsParams = {
   id: string;
@@ -14,7 +16,26 @@ export const ContactDetails = () => {
     <>
       <Stack.Screen options={{ title: 'Запись' }} />
       <KeyboardAvoidingScreen>
-        <ContactDetailsHeader id={id} />
+        <ProfileCard id={id} />
+        <InfoCard title="Профессиональная информация" icon={BriefcaseBusiness} items={[
+            { label: 'Вид деятельности', value: 'Мастер производственного обучения' },
+            { label: 'Категория водительских прав', value: 'A, B, C' },
+            { label: 'Водительский стаж', value: '15 лет' },
+          ]}
+        />
+        <InfoCard title="Автомобиль" icon={CarIcon} items={[
+            { label: 'Марка и модель', value: 'Toyota Corolla' },
+            { label: 'Тип трансмиссии', value: 'Автоматическая' },
+            { label: 'Год выпуска', value: '2020' },
+            { label: 'Регистрационный номер', value: 'О900ОО 70' },
+            { label: 'Дополнительно', value: 'Дублирующие педали, кондиционер, камера заднего вида' },
+          ]}
+        />
+        <InfoCard title="Место" icon={MapPin} items={[
+            { label: 'Адрес', value: 'г. Томск, пр. Мира, 118 б' },
+            { label: 'Дополнительно', value: 'Автошкола и прилегающие районы, экзаменационные маршруты' },
+          ]}
+        />
       </KeyboardAvoidingScreen>
     </>
   );
