@@ -1,9 +1,9 @@
 import {
   DrivingInstructorForm,
-} from '@/screens/Settings/SpecialistForms/DrivingInstructorForm';
+} from '@/screens/Settings/components/SpecialistForms/DrivingInstructorForm';
 import {
   OtherSpecialistForm,
-} from '@/screens/Settings/SpecialistForms/OtherSpecialistForm';
+} from '@/screens/Settings/components/SpecialistForms/OtherSpecialistForm';
 import { ComponentType } from 'react';
 
 const SPECIALIST_FORMS_MAP: Record<string, ComponentType> = {
@@ -16,7 +16,7 @@ export const getSpecialistForm = (value: string) =>
 
 export {
   DrivingInstructorForm
-} from '@/screens/Settings/SpecialistForms/DrivingInstructorForm';
+} from '@/screens/Settings/components/SpecialistForms/DrivingInstructorForm';
 export {
   OtherSpecialistForm
-} from '@/screens/Settings/SpecialistForms/OtherSpecialistForm';
+} from '@/screens/Settings/components/SpecialistForms/OtherSpecialistForm';
