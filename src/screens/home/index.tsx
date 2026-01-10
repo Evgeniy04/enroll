@@ -1,3 +1,4 @@
+import { CalendarViewMode, EventCalendarViewToggle } from '@/components/ui/event-calendar-view-toggle';
 import { useContentInsets } from '@/hooks/useContentInsets';
 import useScreenHeight from '@/hooks/useScreenHeight';
 import 'dayjs/locale/ru';
@@ -9,6 +10,7 @@ import { Calendar as EventCalendar, EventRenderer, PartialTheme } from "react-na
 import { Event, EVENTS } from '../test-store';
 
 export const Home = () => {
+  const [ viewMode, setViewMode ] = useState<CalendarViewMode>('3days');
   const { colorScheme } = useColorScheme();
 
   const screenHeight = useScreenHeight();
@@ -50,11 +52,16 @@ export const Home = () => {
 
   return (
     <>
-      <Stack.Screen options={{ title: "Главная" }} />
+      <Stack.Screen
+        options={{
+          title: "Главная",
+          headerRight: () => <EventCalendarViewToggle value={viewMode} onChange={setViewMode} />
+        }}
+      />
       <EventCalendar
         locale="ru"
         theme={themes[colorScheme ?? 'light']}
-        mode="3days"
+        mode={viewMode}
         events={events}
         height={sceneHeight}
         eventCellStyle={(event) => ({

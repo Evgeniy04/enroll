@@ -7,47 +7,80 @@ import { FC } from 'react';
 import { Platform } from 'react-native';
 import Toast from 'react-native-toast-message';
 
-type ColorScheme = "light" | "dark" | "system";
+type ColorScheme = 'light' | 'dark' | 'system';
 
-export const ThemeToggle: FC<{ className?: string }> = ({ className }) => {
+const THEME_TOAST_CONFIG: Record<ColorScheme, AlertProps> = {
+  light: {
+    title: 'Включили солнышко! ☀️',
+    description: 'Яркость на максимум!',
+  },
+  dark: {
+    title: 'Ночь, улица, фонарь... 🌙',
+    description: 'Тёмный режим включён',
+  },
+  system: {
+    title: 'Автопилот активирован! 🚀',
+    description: 'Следуем настройкам системы',
+  },
+};
+
+interface ThemeToggleProps {
+  className?: string;
+}
+
+export const ThemeToggle: FC<ThemeToggleProps> = ({ className }) => {
   const { colorScheme, setColorScheme } = useColorScheme();
   const bottomTabBarHeight = useBottomTabBarHeight();
 
-  const handleSchemeChange = (value?: string) => {
-    if (value !== 'light' && value !== 'dark' && value !== 'system') return;
+  const handleSchemeChange = (nextScheme?: string) => {
+    if (
+      nextScheme !== 'light' &&
+      nextScheme !== 'dark' &&
+      nextScheme !== 'system'
+    ) {
+      return;
+    }
 
-    const config: Record<ColorScheme, AlertProps> = {
-      light: {
-        title: 'Включили солнышко! ☀️',
-        description: 'Яркость на максимум!',
-      },
-      dark: {
-        title: 'Ночь, улица, фонарь... 🌙',
-        description: 'Темный режим включен',
-      },
-      system: {
-        title: 'Автопилот активирован! 🚀',
-        description: 'Следуем настройкам системы',
-      },
-    };
+    setColorScheme(nextScheme);
 
-    setColorScheme(value);
     Toast.show({
       type: 'success',
-      props: config[value],
+      props: THEME_TOAST_CONFIG[nextScheme],
       bottomOffset: bottomTabBarHeight,
     });
   };
 
   return (
-    <ToggleGroup size='default' value={colorScheme} onValueChange={handleSchemeChange} variant={Platform.OS === 'ios' ? 'default' : 'outline'} type='single' className={className} >
-      <ToggleGroupItem isFirst value='system' aria-label='Toggle system' className={Platform.OS === 'ios' ? 'rounded-l-full' : 'rounded-l-md'}>
+    <ToggleGroup
+      type='single'
+      size='default'
+      value={colorScheme}
+      onValueChange={handleSchemeChange}
+      variant={Platform.OS === 'ios' ? 'default' : 'outline'}
+      className={className}
+    >
+      <ToggleGroupItem
+        isFirst
+        value='system'
+        aria-label='System theme'
+        className={Platform.OS === 'ios' ? 'rounded-l-full' : 'rounded-l-md'}
+      >
         <ToggleGroupIcon as={Smartphone} />
       </ToggleGroupItem>
-      <ToggleGroupItem value='light' aria-label='Toggle light'>
+
+      <ToggleGroupItem
+        value='light'
+        aria-label='Light theme'
+      >
         <ToggleGroupIcon as={SunIcon} />
       </ToggleGroupItem>
-      <ToggleGroupItem isLast value='dark' aria-label='Toggle dark' className={Platform.OS === 'ios' ? 'rounded-r-full' : 'rounded-r-md'}>
+
+      <ToggleGroupItem
+        isLast
+        value='dark'
+        aria-label='Dark theme'
+        className={Platform.OS === 'ios' ? 'rounded-r-full' : 'rounded-r-md'}
+      >
         <ToggleGroupIcon as={MoonStarIcon} />
       </ToggleGroupItem>
     </ToggleGroup>
