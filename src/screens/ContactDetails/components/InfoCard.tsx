@@ -1,3 +1,4 @@
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Icon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
@@ -9,12 +10,14 @@ interface InfoCardProps {
   title: string;
   icon: LucideIcon;
   items: { label: string; value: string }[];
+  photoUri?: string;
 }
 
 export const InfoCard: FC<InfoCardProps> = ({
   title,
   icon,
   items,
+  photoUri,
 }) => {
   return (
     <Card className="m-5">
@@ -30,6 +33,12 @@ export const InfoCard: FC<InfoCardProps> = ({
       </CardHeader>
 
       <CardContent className="gap-5">
+        {photoUri && (
+          <Avatar alt="Фотография" className="size-32 border border-border mx-auto">
+            <AvatarImage source={{ uri: photoUri }} />
+          </Avatar>
+        )}
+
         {items.map((item, idx) => (
           <View key={idx}>
             <Text variant='muted' className="text-muted-foreground">{item.label}</Text>

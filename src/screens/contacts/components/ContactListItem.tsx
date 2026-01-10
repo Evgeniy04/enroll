@@ -50,9 +50,7 @@ export const ContactListItem: FC<ContactListItemProps> = ({ item: contact, onDel
       >
         <View className="flex-1 flex-row">
           <Avatar alt={contact.name} className="size-12 border border-border">
-            {contact.avatar && (
-              <AvatarImage source={{ uri: contact.avatar }} />
-            )}
+            <AvatarImage source={{ uri: contact.avatar }} />
             <AvatarFallback>
               <Text>{initials}</Text>
             </AvatarFallback>

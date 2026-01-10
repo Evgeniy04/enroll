@@ -29,7 +29,7 @@ export const ContactDetails = () => {
             { label: 'Год выпуска', value: '2020' },
             { label: 'Регистрационный номер', value: 'О900ОО 70' },
             { label: 'Дополнительно', value: 'Дублирующие педали, кондиционер, камера заднего вида' },
-          ]}
+          ]} photoUri="https://hips.hearstapps.com/hmg-prod/images/2023-range-rover-se-p400-lwb-105-1650304551.jpg?crop=0.960xw:0.810xh;0,0.115xh&resize=2048:*"
         />
         <InfoCard title="Место" icon={MapPin} items={[
             { label: 'Адрес', value: 'г. Томск, пр. Мира, 118 б' },
