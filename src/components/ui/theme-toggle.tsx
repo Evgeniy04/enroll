@@ -53,7 +53,7 @@ export const ThemeToggle: FC<ThemeToggleProps> = ({ className }) => {
   return (
     <ToggleGroup
       type='single'
-      size='default'
+      size='sm'
       value={colorScheme}
       onValueChange={handleSchemeChange}
       variant={Platform.OS === 'ios' ? 'default' : 'outline'}

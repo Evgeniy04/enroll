@@ -55,7 +55,8 @@ export const Home = () => {
       <Stack.Screen
         options={{
           title: "Главная",
-          headerRight: () => <EventCalendarViewToggle value={viewMode} onChange={setViewMode} />
+          headerTitleAlign: "center",
+          headerLeft: () => <EventCalendarViewToggle value={viewMode} onChange={setViewMode} />,
         }}
       />
       <EventCalendar

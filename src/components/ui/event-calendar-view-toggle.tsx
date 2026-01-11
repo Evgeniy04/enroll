@@ -58,7 +58,7 @@ export const EventCalendarViewToggle: FC<EventCalendarViewToggleProps> = ({
   return (
     <ToggleGroup
       type='single'
-      size='default'
+      size='sm'
       value={value}
       onValueChange={handleChange}
       variant={Platform.OS === 'ios' ? 'default' : 'outline'}
