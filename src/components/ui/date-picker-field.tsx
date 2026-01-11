@@ -4,8 +4,7 @@ import { FormField, FormFieldProps } from '@/components/ui/form-field';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Text } from '@/components/ui/text';
 import { ContentInsets, useContentInsets } from '@/hooks/useContentInsets';
-import { format } from 'date-fns';
-import { ru } from 'date-fns/locale';
+import dayjs from 'dayjs';
 import { FC } from 'react';
 import { View } from 'react-native';
 
@@ -36,7 +35,7 @@ export const DatePickerField: FC<DatePickerFieldProps> = ({
   currentDate,
   setCurrentDate,
   title = 'Выберите дату',
-  placeholder = currentDate ? format(currentDate, 'dd MMMM yyyy', { locale: ru }) : 'Выберите дату',
+  placeholder = currentDate ? dayjs(currentDate).format('DD MMMM YYYY') : title,
   startYear = 1950,
   endYear = todayDate.getFullYear(),
   minDate = new Date(startYear, 0, 1).toDateString(),

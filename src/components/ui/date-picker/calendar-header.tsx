@@ -1,43 +1,50 @@
 import { HeaderSelect } from '@/components/ui/date-picker/header-select';
 import { ContentInsets } from '@/hooks/useContentInsets';
+import { cn } from '@/lib/utils';
 import { Option } from '@rn-primitives/select';
+import dayjs from 'dayjs';
 import { FC, useCallback, useMemo } from 'react';
 import { View } from 'react-native';
+import { generateMonthOptions, generateYearOptions } from './calendar-utils';
 
 type CalendarHeaderProps = {
-  current: string;
-  addMonth: (count: number) => void;
+  currentDate: Date;
+  onChangeDate?: (previousDate: Date) => void;
+  addMonth?: (count: number) => void;
   contentInsets: ContentInsets;
-  monthLabels: string[];
-  monthOptions: { value: string; label: string }[];
-  yearOptions: { value: string; label: string }[];
-  monthLabel?: string;
-  yearLabel?: string;
+  startYear?: number;
+  endYear?: number;
+  className?: string;
 };
 
 export const CalendarHeader: FC<CalendarHeaderProps> = ({
-  current,
+  currentDate,
+  onChangeDate,
   addMonth,
   contentInsets,
-  monthLabels,
-  monthOptions,
-  yearOptions,
-  monthLabel = 'Месяц',
-  yearLabel = 'Год',
+  startYear = 1950,
+  endYear = new Date().getFullYear(),
+  className,
 }) => {
-  const currentDate = useMemo(() => new Date(current), [current]);
   const month = currentDate.getMonth();
   const year = currentDate.getFullYear();
 
+  const monthLabels = useMemo(() => dayjs.months(), []);
+  
+  const monthOptions = useMemo(() => generateMonthOptions(monthLabels), [monthLabels]);
+  const yearOptions = useMemo(() => generateYearOptions(startYear, endYear), [startYear, endYear]);
+
   const handleMonthChange = useCallback((option?: Option) => {
     if (!option) return;
-    addMonth(Number(option.value) - month);
-  }, [addMonth, month]);
+    onChangeDate && onChangeDate(dayjs(currentDate).add(Number(option.value) - month, 'month').toDate());
+    addMonth && addMonth(Number(option.value) - month);
+  }, [onChangeDate, addMonth, currentDate, month]);
 
   const handleYearChange = useCallback((option?: Option) => {
     if (!option) return;
-    addMonth((Number(option.value) - year) * 12);
-  }, [addMonth, year]);
+    onChangeDate && onChangeDate(dayjs(currentDate).add(Number(option.value) - year, 'year').toDate());
+    addMonth && addMonth((Number(option.value) - year) * 12);
+  }, [onChangeDate, addMonth, currentDate, year]);
 
   const monthValue = useMemo(
     () => ({ value: String(month), label: monthLabels[month] }),
@@ -50,12 +57,12 @@ export const CalendarHeader: FC<CalendarHeaderProps> = ({
   );
   
   return (
-    <View className="flex-row gap-5">
+    <View className={cn("flex-row gap-5", className)}>
       <HeaderSelect
         value={monthValue}
         onChange={handleMonthChange}
         placeholder={monthLabels[month]}
-        label={monthLabel}
+        label='Месяц'
         options={monthOptions}
         contentInsets={contentInsets}
       />
@@ -64,7 +71,7 @@ export const CalendarHeader: FC<CalendarHeaderProps> = ({
         value={yearValue}
         onChange={handleYearChange}
         placeholder={String(year)}
-        label={yearLabel}
+        label='Год'
         options={yearOptions}
         contentInsets={contentInsets}
       />
