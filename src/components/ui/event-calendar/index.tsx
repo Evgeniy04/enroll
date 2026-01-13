@@ -5,6 +5,7 @@ import {
   EventCalendarProps
 } from '@/components/ui/event-calendar/event-calendar.types';
 import { CALENDAR_CONSTANTS, getBigCalendarTheme } from '@/config';
+import { cn } from '@/lib/utils';
 import dayjs from 'dayjs';
 import { useColorScheme } from 'nativewind';
 import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
@@ -24,6 +25,8 @@ export const EventCalendar: FC<EventCalendarProps> = ({
   onViewModeChange,
   viewMode: externalViewMode,
   currentDate: externalCurrentDate,
+  showVerticalScrollIndicator,
+  className,
 }) => {
   const { colorScheme } = useColorScheme();
 
@@ -131,7 +134,7 @@ export const EventCalendar: FC<EventCalendarProps> = ({
   );
 
   return (
-    <View className="flex-1">
+    <View className={cn("flex-1", className)}>
       {HeaderToRender && (
         <HeaderToRender
           currentDate={currentDate}
@@ -153,6 +156,7 @@ export const EventCalendar: FC<EventCalendarProps> = ({
         renderEvent={renderEvent ?? defaultRenderEvent}
         onPressEvent={onPressEvent}
         onSwipeEnd={handleSwipeEnd}
+        showVerticalScrollIndicator={showVerticalScrollIndicator}
       />
     </View>
   );

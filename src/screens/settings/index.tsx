@@ -18,7 +18,7 @@ export const Settings = () => {
         options={{
           title: "Настройки",
           headerTitleAlign: "center",
-          headerLeft: () => <ThemeToggle />
+          headerLeft: () => <ThemeToggle enableIosSpecials />
         }}
       />
       <KeyboardAvoidingScreen>

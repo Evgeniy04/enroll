@@ -1,8 +1,11 @@
 import { KeyboardAvoidingScreen } from "@/components/layout/KeyboardAvoidingScreen";
+import { Card } from "@/components/ui/card";
+import { EventCalendar } from "@/components/ui/event-calendar";
 import { InfoCard } from "@/screens/ContactDetails/components/InfoCard";
 import { ProfileCard } from "@/screens/ContactDetails/components/ProfileCard";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { BriefcaseBusiness, CarIcon, MapPin } from "lucide-react-native";
+import { EVENTS } from "../test-store";
 
 type ContactDetailsParams = {
   id: string;
@@ -17,6 +20,9 @@ export const ContactDetails = () => {
       <Stack.Screen options={{ title: 'Запись' }} />
       <KeyboardAvoidingScreen>
         <ProfileCard id={id} />
+        <Card className="m-5 overflow-hidden">
+          <EventCalendar sceneHeight={500} events={EVENTS} showVerticalScrollIndicator />
+        </Card>
         <InfoCard title="Профессиональная информация" icon={BriefcaseBusiness} items={[
             { label: 'Вид деятельности', value: 'Мастер производственного обучения' },
             { label: 'Категория водительских прав', value: 'A, B, C' },

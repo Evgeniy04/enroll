@@ -25,10 +25,11 @@ const THEME_TOAST_CONFIG: Record<ColorScheme, AlertProps> = {
 };
 
 interface ThemeToggleProps {
+  enableIosSpecials?: boolean;
   className?: string;
 }
 
-export const ThemeToggle: FC<ThemeToggleProps> = ({ className }) => {
+export const ThemeToggle: FC<ThemeToggleProps> = ({ enableIosSpecials, className }) => {
   const { colorScheme, setColorScheme } = useColorScheme();
   const bottomTabBarHeight = useBottomTabBarHeight();
 
@@ -50,20 +51,22 @@ export const ThemeToggle: FC<ThemeToggleProps> = ({ className }) => {
     });
   };
 
+  const isIos = enableIosSpecials && Platform.OS === 'ios';
+
   return (
     <ToggleGroup
       type='single'
       size='sm'
       value={colorScheme}
       onValueChange={handleSchemeChange}
-      variant={Platform.OS === 'ios' ? 'default' : 'outline'}
+      variant={isIos ? 'default' : 'outline'}
       className={className}
     >
       <ToggleGroupItem
         isFirst
         value='system'
         aria-label='System theme'
-        className={Platform.OS === 'ios' ? 'rounded-l-full' : 'rounded-l-md'}
+        className={isIos ? 'rounded-l-full' : 'rounded-l-md'}
       >
         <ToggleGroupIcon as={Smartphone} />
       </ToggleGroupItem>
@@ -79,7 +82,7 @@ export const ThemeToggle: FC<ThemeToggleProps> = ({ className }) => {
         isLast
         value='dark'
         aria-label='Dark theme'
-        className={Platform.OS === 'ios' ? 'rounded-r-full' : 'rounded-r-md'}
+        className={isIos ? 'rounded-r-full' : 'rounded-r-md'}
       >
         <ToggleGroupIcon as={MoonStarIcon} />
       </ToggleGroupItem>

@@ -26,7 +26,7 @@ export const Home = () => {
         options={{
           title: dayjs(currentDate).format('MMMM YYYY'),
           headerTitleAlign: "center",
-          headerLeft: () => <EventCalendarViewToggle value={viewMode} onChange={setViewMode} />,
+          headerLeft: () => <EventCalendarViewToggle value={viewMode} onChange={setViewMode} enableIosSpecials />,
         }}
       />
       <EventCalendar

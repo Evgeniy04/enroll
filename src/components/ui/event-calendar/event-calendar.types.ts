@@ -1,4 +1,4 @@
-import React from "react";
+import { ComponentType } from "react";
 import { EventRenderer } from "react-native-big-calendar";
 export type CalendarViewMode = 'day' | '3days' | 'week';
 
@@ -18,11 +18,13 @@ export interface EventCalendarProps {
   onPressEvent?: (event: CalendarEvent) => void;
   renderEvent?: EventRenderer;
   eventCellStyle?: (event: CalendarEvent) => object;
-  HeaderComponent?: React.ComponentType<CalendarHeaderProps> | null;
+  HeaderComponent?: ComponentType<CalendarHeaderProps> | null;
   onDateChange?: (date: Date) => void;
   onViewModeChange?: (mode: CalendarViewMode) => void;
   viewMode?: CalendarViewMode;
   currentDate?: Date;
+  showVerticalScrollIndicator?: boolean;
+  className?: string;
 }
 
 export interface CalendarHeaderProps {

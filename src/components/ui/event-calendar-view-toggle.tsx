@@ -26,12 +26,14 @@ const CALENDAR_VIEW_TOAST_CONFIG: Record<CalendarViewMode, AlertProps> = {
 interface EventCalendarViewToggleProps {
   value: CalendarViewMode;
   onChange: (mode: CalendarViewMode) => void;
+  enableIosSpecials?: boolean;
   className?: string;
 }
 
 export const EventCalendarViewToggle: FC<EventCalendarViewToggleProps> = ({
   value,
   onChange,
+  enableIosSpecials,
   className,
 }) => {
   const bottomTabBarHeight = useBottomTabBarHeight();
@@ -54,20 +56,22 @@ export const EventCalendarViewToggle: FC<EventCalendarViewToggleProps> = ({
     });
   };
 
+  const isIos = enableIosSpecials && Platform.OS === 'ios';
+
   return (
     <ToggleGroup
       type='single'
       size='sm'
       value={value}
       onValueChange={handleChange}
-      variant={Platform.OS === 'ios' ? 'default' : 'outline'}
+      variant={isIos ? 'default' : 'outline'}
       className={className}
     >
       <ToggleGroupItem
         isFirst
         value='day'
         aria-label='1 день'
-        className={Platform.OS === 'ios' ? 'rounded-l-full' : 'rounded-l-md'}
+        className={isIos ? 'rounded-l-full' : 'rounded-l-md'}
       >
         <ToggleGroupIcon as={CalendarDays} />
       </ToggleGroupItem>
@@ -83,7 +87,7 @@ export const EventCalendarViewToggle: FC<EventCalendarViewToggleProps> = ({
         isLast
         value='week'
         aria-label='7 дней'
-        className={Platform.OS === 'ios' ? 'rounded-r-full' : 'rounded-r-md'}
+        className={isIos ? 'rounded-r-full' : 'rounded-r-md'}
       >
         <ToggleGroupIcon as={Calendar} />
       </ToggleGroupItem>
