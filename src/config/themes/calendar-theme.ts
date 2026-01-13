@@ -1,11 +1,11 @@
 import { THEME } from '@/lib/theme';
+import type { PartialTheme } from 'react-native-big-calendar';
 import type { CalendarProps } from 'react-native-calendars';
 
 /**
- * Генерирует конфигурацию темы для react-native-calendars
- * на основе текущей цветовой схемы
+ * Генерирует тему для react-native-calendars (date picker)
  */
-export const getCalendarTheme = (
+export const getCalendarsTheme = (
   mode: 'light' | 'dark'
 ): CalendarProps['theme'] => {
   const t = THEME[mode];
@@ -50,6 +50,25 @@ export const getCalendarTheme = (
     /* Прочее */
     indicatorColor: t.primary,
   };
+};
+
+/**
+ * Генерирует тему для react-native-big-calendar (event calendar)
+ */
+export const getBigCalendarTheme = (
+  mode: 'light' | 'dark'
+): PartialTheme => {
+  return {
+    light: {},
+    dark: {
+      palette: {
+        primary: { main: '#6185d0', contrastText: '#000' },
+        gray: {
+          '100': '#333', '200': '#666', '300': '#888', '500': '#aaa', '800': '#ccc',
+        },
+      },
+    },
+  }[mode];
 };
 
 export const CALENDAR_CONSTANTS = {

@@ -1,5 +1,5 @@
 import { CalendarViewMode, EventCalendarViewToggle } from '@/components/ui/event-calendar-view-toggle';
-import { CALENDAR_CONSTANTS } from '@/config';
+import { CALENDAR_CONSTANTS, getBigCalendarTheme } from '@/config';
 import { useContentInsets } from '@/hooks/useContentInsets';
 import useScreenHeight from '@/hooks/useScreenHeight';
 import dayjs from 'dayjs';
@@ -7,20 +7,8 @@ import { Stack } from 'expo-router';
 import { useColorScheme } from 'nativewind';
 import React, { useCallback, useMemo, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-import { Calendar as EventCalendar, EventRenderer, PartialTheme } from "react-native-big-calendar";
+import { Calendar as EventCalendar, EventRenderer } from "react-native-big-calendar";
 import { Event, EVENTS } from '../test-store';
-
-const CALENDAR_THEMES: Record<string, PartialTheme> = {
-  default: {},
-  dark: {
-    palette: {
-      primary: { main: '#6185d0', contrastText: '#000' },
-      gray: {
-        '100': '#333', '200': '#666', '300': '#888', '500': '#aaa', '800': '#ccc',
-      },
-    },
-  },
-};
 
 export const Home = () => {
   const { colorScheme } = useColorScheme();
@@ -74,7 +62,10 @@ export const Home = () => {
     };
   }, []);
 
-  const currentTheme = CALENDAR_THEMES[colorScheme ?? 'light'];
+  const currentTheme = useMemo(
+    () => getBigCalendarTheme(colorScheme ?? 'light'),
+    [colorScheme]
+  );
 
   const handleSwipeEnd = useCallback(
     (date: Date) => setCurrentDate(date),
