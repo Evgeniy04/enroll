@@ -1,3 +1,4 @@
+import { generateMonthOptions, generateYearOptions } from '@/components/ui/date-picker/calendar-utils';
 import { HeaderSelect } from '@/components/ui/date-picker/header-select';
 import { ContentInsets } from '@/hooks/useContentInsets';
 import { cn } from '@/lib/utils';
@@ -5,7 +6,6 @@ import { Option } from '@rn-primitives/select';
 import dayjs from 'dayjs';
 import { FC, useCallback, useMemo } from 'react';
 import { View } from 'react-native';
-import { generateMonthOptions, generateYearOptions } from './calendar-utils';
 
 type CalendarHeaderProps = {
   currentDate: Date;
