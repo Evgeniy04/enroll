@@ -1,12 +1,11 @@
 import { AlertProps } from '@/components/ui/base-toast';
+import { CalendarViewMode } from '@/components/ui/event-calendar/event-calendar.types';
 import { ToggleGroup, ToggleGroupIcon, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { Calendar, CalendarDays, CalendarRange } from 'lucide-react-native';
 import { FC } from 'react';
 import { Platform } from 'react-native';
 import Toast from 'react-native-toast-message';
-
-export type CalendarViewMode = 'day' | '3days' | 'week';
 
 const CALENDAR_VIEW_TOAST_CONFIG: Record<CalendarViewMode, AlertProps> = {
   day: {
