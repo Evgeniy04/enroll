@@ -1,5 +1,5 @@
 import { CalendarHeader } from '@/components/ui/date-picker/calendar-header';
-import { CALENDAR_CONSTANTS, getCalendarTheme } from '@/config';
+import { CALENDAR_CONSTANTS, getCalendarsTheme } from '@/config';
 import { ContentInsets } from '@/hooks/useContentInsets';
 import { useRootContext as useRootContextPopover } from '@rn-primitives/popover';
 import dayjs from 'dayjs';
@@ -40,7 +40,7 @@ export const DatePicker: FC<DatePickerProps> = ({
   const { colorScheme } = useColorScheme();
   const { onOpenChange } = useRootContextPopover();
   const [ displayDate, setDisplayDate ] = useState(() => dayjs(currentDate).format('YYYY-MM-DD'));
-  const calendarTheme = customTheme ?? getCalendarTheme(colorScheme ?? 'light');
+  const calendarTheme = customTheme ?? getCalendarsTheme(colorScheme ?? 'light');
 
   const handleDayPress = (day: DateData) => {
     const selectedDate = new Date(day.dateString);
