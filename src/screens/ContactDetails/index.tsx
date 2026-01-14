@@ -21,7 +21,14 @@ export const ContactDetails = () => {
       <KeyboardAvoidingScreen>
         <ProfileCard id={id} />
         <Card className="m-5 overflow-hidden">
-          <EventCalendar sceneHeight={500} events={EVENTS} showVerticalScrollIndicator />
+          <EventCalendar
+            sceneHeight={500}
+            events={EVENTS}
+            showVerticalScrollIndicator 
+            onPressEvent={(e) => {
+              console.log("Нажали на событие:", e);
+            }}
+          />
         </Card>
         <InfoCard title="Профессиональная информация" icon={BriefcaseBusiness} items={[
             { label: 'Вид деятельности', value: 'Мастер производственного обучения' },
