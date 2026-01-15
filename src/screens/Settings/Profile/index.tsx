@@ -4,23 +4,28 @@ import { SettingsHeaderAction } from '@/components/ui/header';
 import { Option } from '@/components/ui/select';
 import { Text } from '@/components/ui/text';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
-import { PersonalInfoForm } from '@/screens/Settings/components/PersonalInfoForm';
-import { SpecialistProfileCard } from '@/screens/Settings/components/SpecialistProfileCard';
-import { Stack } from 'expo-router';
-import { useState } from 'react';
+import { PersonalInfoForm } from '@/screens/Settings/Profile/components/PersonalInfoForm';
+import { SpecialistProfileCard } from '@/screens/Settings/Profile/components/SpecialistProfileCard';
+import { Stack, useRouter } from 'expo-router';
+import { useCallback, useState } from 'react';
 import { View } from 'react-native';
 
-export const Settings = () => {
+export const Profile = () => {
+  const router = useRouter();
   const [ activityType, setActivityType ] = useState<Option>(undefined);
+
+  const handleSettingsPress = useCallback(() => {
+    router.push('/settings/Work');
+  }, [router]);
 
   return (
     <>
       <Stack.Screen
         options={{
-          title: "Настройки",
+          title: "Мой профиль",
           headerTitleAlign: "center",
           headerLeft: () => <ThemeToggle enableIosSpecials />,
-          headerRight: () => <SettingsHeaderAction />,
+          headerRight: () => <SettingsHeaderAction onPress={handleSettingsPress} />,
         }}
       />
       <KeyboardAvoidingScreen>

@@ -2,7 +2,9 @@ import { Stack } from 'expo-router';
 
 const SettingsStack = () => {
   return (
-    <Stack />
+    <Stack>
+      <Stack.Screen name="Profile" />
+    </Stack>
   );
 }
 

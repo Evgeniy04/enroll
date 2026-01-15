@@ -17,7 +17,7 @@ import {
 } from '@/hooks/useContentInsets';
 import {
   getSpecialistForm,
-} from '@/screens/Settings/components/SpecialistForms';
+} from '@/screens/Settings/Profile/components/SpecialistForms';
 import {
   FC,
 } from 'react';
