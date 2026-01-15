@@ -10,7 +10,7 @@ import { Stack, useRouter } from 'expo-router';
 import { useCallback, useState } from 'react';
 import { View } from 'react-native';
 
-export const Profile = () => {
+export const ProfileSettings = () => {
   const router = useRouter();
   const [ activityType, setActivityType ] = useState<Option>(undefined);
 

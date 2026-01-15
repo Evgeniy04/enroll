@@ -1,7 +1,6 @@
 import { CalendarHeader } from '@/components/ui/date-picker/calendar-header';
 import { CALENDAR_CONSTANTS, getCalendarsTheme } from '@/config';
 import { ContentInsets } from '@/hooks/useContentInsets';
-import { useRootContext as useRootContextPopover } from '@rn-primitives/popover';
 import dayjs from 'dayjs';
 import { useColorScheme } from 'nativewind';
 import { FC, useMemo, useState } from 'react';
@@ -12,6 +11,7 @@ type DatePickerProps = {
   setCurrentDate: (date: Date) => void;
   contentInsets: ContentInsets;
   onClose?: () => void;
+  onDayPress?: (day: DateData) => void;
   minDate?: string;
   maxDate?: string;
   disabledDates?: string[];
@@ -26,9 +26,8 @@ type DatePickerProps = {
 
 export const DatePicker: FC<DatePickerProps> = ({
   currentDate = new Date(),
-  setCurrentDate,
   contentInsets,
-  onClose,
+  onDayPress,
   minDate,
   maxDate,
   disabledDates,
@@ -38,20 +37,8 @@ export const DatePicker: FC<DatePickerProps> = ({
   endYear,
 }) => {
   const { colorScheme } = useColorScheme();
-  const { onOpenChange } = useRootContextPopover();
   const [ displayDate, setDisplayDate ] = useState(() => dayjs(currentDate).format('YYYY-MM-DD'));
   const calendarTheme = customTheme ?? getCalendarsTheme(colorScheme ?? 'light');
-
-  const handleDayPress = (day: DateData) => {
-    const selectedDate = new Date(day.dateString);
-    setCurrentDate(selectedDate);
-    
-    if (onClose) {
-      onClose();
-    } else {
-      onOpenChange(false);
-    }
-  };
 
   const mergedMarkedDates = useMemo(() => {
     const selectedDateString = dayjs(currentDate).format('YYYY-MM-DD');
@@ -80,7 +67,7 @@ export const DatePicker: FC<DatePickerProps> = ({
       markedDates={mergedMarkedDates}
       firstDay={CALENDAR_CONSTANTS.FIRST_DAY}
       enableSwipeMonths
-      onDayPress={handleDayPress}
+      onDayPress={onDayPress}
       onMonthChange={(date: DateData) => {
         setDisplayDate(date.dateString);
       }}

@@ -1,7 +1,7 @@
 import { KeyboardAvoidingScreen } from '@/components/layout/KeyboardAvoidingScreen';
 import { Stack } from 'expo-router';
 
-export const Work = () => {
+export const WorkSettings = () => {
   return (
     <>
       <Stack.Screen
