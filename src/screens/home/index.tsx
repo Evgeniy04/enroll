@@ -1,6 +1,7 @@
 import { EventCalendar } from '@/components/ui/event-calendar';
 import { EventCalendarViewToggle } from '@/components/ui/event-calendar-view-toggle';
 import { CalendarViewMode } from '@/components/ui/event-calendar/event-calendar.types';
+import { NotificationsHeaderAction } from '@/components/ui/header';
 import { useContentInsets } from '@/hooks/useContentInsets';
 import useScreenHeight from '@/hooks/useScreenHeight';
 import dayjs from 'dayjs';
@@ -27,6 +28,7 @@ export const Home = () => {
           title: dayjs(currentDate).format('MMMM YYYY'),
           headerTitleAlign: "center",
           headerLeft: () => <EventCalendarViewToggle value={viewMode} onChange={setViewMode} enableIosSpecials />,
+          headerRight: () => <NotificationsHeaderAction />,
         }}
       />
       <EventCalendar

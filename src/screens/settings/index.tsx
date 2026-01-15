@@ -1,5 +1,6 @@
 import { KeyboardAvoidingScreen } from '@/components/layout/KeyboardAvoidingScreen';
 import { Button } from '@/components/ui/button';
+import { SettingsHeaderAction } from '@/components/ui/header';
 import { Option } from '@/components/ui/select';
 import { Text } from '@/components/ui/text';
 import { ThemeToggle } from '@/components/ui/theme-toggle';
@@ -18,7 +19,8 @@ export const Settings = () => {
         options={{
           title: "Настройки",
           headerTitleAlign: "center",
-          headerLeft: () => <ThemeToggle enableIosSpecials />
+          headerLeft: () => <ThemeToggle enableIosSpecials />,
+          headerRight: () => <SettingsHeaderAction />,
         }}
       />
       <KeyboardAvoidingScreen>
