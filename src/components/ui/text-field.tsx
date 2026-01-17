@@ -1,8 +1,8 @@
 import { FormField, FormFieldProps } from '@/components/ui/form-field';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
-import React, { FC } from 'react';
-import { TextInputProps } from 'react-native';
+import { FC, Ref } from 'react';
+import { TextInput, TextInputProps } from 'react-native';
 
 const keyboardTypeByType: Record<
   NonNullable<TextFieldProps['type']>,
@@ -17,6 +17,7 @@ const keyboardTypeByType: Record<
 };
 
 interface TextFieldProps extends FormFieldProps, Omit<TextInputProps, 'nativeID'> {
+  inputRef?: Ref<TextInput>;
   type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url';
 }
 
@@ -28,9 +29,11 @@ export const TextField: FC<TextFieldProps> = ({
   helperText,
   required = false,
   disabled = false,
-  // CurrentField
+
+  // Field
   type = 'text',
   multiline,
+  inputRef,
   ...inputProps
 }) => {
   return (
@@ -43,6 +46,7 @@ export const TextField: FC<TextFieldProps> = ({
       disabled={disabled}
     >
       <Input
+        ref={inputRef}
         nativeID={nativeID}
         aria-labelledby={nativeID}
         aria-invalid={!!error}
@@ -56,4 +60,4 @@ export const TextField: FC<TextFieldProps> = ({
       />
     </FormField>
   );
-}
+};
