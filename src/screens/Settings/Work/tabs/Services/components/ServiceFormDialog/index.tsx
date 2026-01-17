@@ -6,15 +6,18 @@ import {
 } from '@/components/ui/dialog';
 import { Icon } from '@/components/ui/icon';
 import { useWindowDimensions } from '@/hooks/useWindowDimensions';
+import {
+  ServiceForm
+} from '@/screens/Settings/Work/tabs/Services/components/ServiceFormDialog/ServiceForm';
+import { Service } from '@/screens/Settings/Work/tabs/Services/Services.types';
 import { Plus } from 'lucide-react-native';
 import React, { FC } from 'react';
-import { Service } from '../../Services.types';
-import { ServiceForm } from './ServiceForm';
 
 interface ServiceFormDialogProps {
   onAddPress: (service: Service) => void;
   editingService: Service | null;
   onUpdatePress: (service: Service) => void;
+  isControlled?: boolean;
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
@@ -23,11 +26,11 @@ export const ServiceFormDialog: FC<ServiceFormDialogProps> = ({
   onAddPress,
   editingService,
   onUpdatePress,
+  isControlled,
   open,
   onOpenChange,
 }) => {
   const { width: screenWidth } = useWindowDimensions();
-  const isControlled = Boolean(open);
 
   const handleSubmit = (service: Omit<Service, 'id'>) => {
     if (editingService && onUpdatePress) {
