@@ -90,14 +90,14 @@ export const ServiceManager: FC = () => {
       </CardHeader>
       <CardContent className='gap-5'>
         {services.length === 0 ? (
-          <View>
+          <Card className="border-dashed gap-0">
             <Text className="text-center text-muted-foreground">Пока нет созданных услуг</Text>
             <View className="flex-row justify-center items-center">
               <Text variant='muted' className="text-center text-muted-foreground">Нажмите</Text>
               <Text variant='code' className='px-2 ml-2'>+</Text>
               <Text variant='muted' className="text-center text-muted-foreground">, чтобы начать</Text>
             </View>
-          </View>
+          </Card>
         ) : (
           services.map((service) => (
             <ServiceCard
