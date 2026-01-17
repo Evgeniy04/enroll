@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react";
 import { Dimensions } from "react-native";
 
-const useScreenHeight = () => {
-  const [height, setHeight] = useState(Dimensions.get("window").height);
+export const useWindowDimensions = () => {
+  const [windowDimensions, setWindowDimensions] = useState(Dimensions.get("window"));
 
   useEffect(() => {
     const subscription = Dimensions.addEventListener("change", ({ window }) => {
-      setHeight(window.height);
+      setWindowDimensions(window);
     });
 
     return () => subscription?.remove();
   }, []);
 
-  return height;
+  return windowDimensions;
 }
-
-export default useScreenHeight;
