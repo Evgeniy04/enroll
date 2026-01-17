@@ -1,3 +1,5 @@
+import { Service } from "./Settings/Work/tabs/Services/Services.types";
+
 export interface Contact {
   id: string;
   name: string;
@@ -197,3 +199,18 @@ export interface Event {
   end: Date;
   color: string;
 }
+
+export const services: Service[] = [
+  {
+    id: '0',
+    name: 'Стрижка',
+    duration: 30,
+    breakAfter: 0,
+  },
+  {
+    id: '1',
+    name: 'Массаж',
+    duration: 45,
+    breakAfter: 15,
+  },
+]
