@@ -57,7 +57,7 @@ export const ServiceManager: FC = () => {
 
   const handleDeletePress = (id: string) => {
     confirm({
-      title: "Удалить контакт?",
+      title: "Удалить услугу?",
       cancelText: "Отменить",
       confirmText: "Подтвердить",
       onConfirm: () => deleteService(id),
