@@ -1,12 +1,12 @@
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
 import { FormField, FormFieldProps } from '@/components/ui/form-field';
+import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
 import { cn } from '@/lib/utils';
 import { Minus, Plus } from 'lucide-react-native';
 import React, { FC } from 'react';
 import { View } from 'react-native';
-import { Button } from './button';
-import { Card } from './card';
-import { Icon } from './icon';
 
 export interface DurationFieldProps extends FormFieldProps {
   value?: number;
