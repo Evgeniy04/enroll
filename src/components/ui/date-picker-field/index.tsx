@@ -29,7 +29,7 @@ export const DatePickerField: FC<DatePickerFieldProps> = ({
 }) => {
   const contentInsets = useContentInsets();
   placeholder = currentDate ? dayjs(currentDate).format('DD MMMM YYYY') : title;
-  console.log(title);
+
   return (
     <FormField
       nativeID={nativeID}
