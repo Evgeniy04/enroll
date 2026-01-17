@@ -1,12 +1,12 @@
 import { KeyboardAvoidingScreen } from '@/components/layout/KeyboardAvoidingScreen';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Text } from '@/components/ui/text';
+import { WeeklyCalendar } from '@/screens/Settings/Work/tabs/Schedule';
 import { ServiceManager } from '@/screens/Settings/Work/tabs/Services';
+import { ScheduleBuilder } from '@/screens/Settings/Work/tabs/Templates';
 import { Stack } from 'expo-router';
 import { useState } from 'react';
 import { View } from 'react-native';
-import { ScheduleBuilder } from './tabs/DayTemplates';
-import { WeeklyCalendar } from './tabs/Schedule';
 
 export const WorkSettings = () => {
   const [value, setValue] = useState('services');

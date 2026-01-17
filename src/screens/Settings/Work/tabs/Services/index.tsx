@@ -7,25 +7,18 @@ import {
 } from '@/components/ui/card';
 import { Text } from '@/components/ui/text';
 import { useConfirm } from '@/hooks/useConfirm';
+import { ServiceCard } from '@/screens/Settings/Work/tabs/Services/components/ServiceCard';
+import { ServiceFormDialog } from '@/screens/Settings/Work/tabs/Services/components/ServiceFormDialog';
+import { Service } from '@/screens/Settings/Work/tabs/Services/Services.types';
 import { services as servicesTestData } from '@/screens/test-store';
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { View } from 'react-native';
-import { ServiceCard } from './components/ServiceCard';
-import { ServiceFormDialog } from './components/ServiceFormDialog';
-import { Service } from './Services.types';
 
 export const ServiceManager: FC = () => {
   const { confirm, ConfirmDialogElement } = useConfirm();
-  const [ services, setServices ] = useState<Service[]>([]);
+  const [ services, setServices ] = useState<Service[]>(servicesTestData);
   const [ editingService, setEditingService ] = useState<Service | null>(null);
   const [ isDialogOpen, setIsDialogOpen ] = useState(false);
-
-  useEffect(
-    () => {
-      setServices(servicesTestData)
-    },
-    [],
-  );
 
   const deleteService = (id: string) => {
     setServices((prev) => prev.filter((s) => s.id !== id));
@@ -37,7 +30,7 @@ export const ServiceManager: FC = () => {
       id: Date.now().toString(),
     };
     
-    setServices([...services, newService]);
+    setServices(prev => [...prev, newService]);
   }
 
   const handleEditPress = (id: string) => {
