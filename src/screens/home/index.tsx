@@ -3,7 +3,7 @@ import { EventCalendarViewToggle } from '@/components/ui/event-calendar-view-tog
 import { CalendarViewMode } from '@/components/ui/event-calendar/event-calendar.types';
 import { NotificationsHeaderAction } from '@/components/ui/header';
 import { useContentInsets } from '@/hooks/useContentInsets';
-import useScreenHeight from '@/hooks/useScreenHeight';
+import { useWindowDimensions } from '@/hooks/useWindowDimensions';
 import dayjs from 'dayjs';
 import { Stack } from 'expo-router';
 import React, { useMemo, useState } from "react";
@@ -11,7 +11,7 @@ import { Event, EVENTS } from '../test-store';
 
 export const Home = () => {
   const { top: topHeaderHeight, bottom: bottomTabBarHeight } = useContentInsets();
-  const screenHeight = useScreenHeight();
+  const { height: screenHeight } = useWindowDimensions();
   const [ viewMode, setViewMode ] = useState<CalendarViewMode>('3days');
   const [ currentDate, setCurrentDate ] = useState<Date>(new Date());
   const [ events ] = useState<Event[]>(EVENTS);

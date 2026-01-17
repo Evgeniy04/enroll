@@ -3,7 +3,7 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
 import { TextField } from '@/components/ui/text-field';
-import useScreenHeight from '@/hooks/useScreenHeight';
+import { useWindowDimensions } from '@/hooks/useWindowDimensions';
 import { ContactListItem } from '@/screens/Contacts/components/ContactListItem';
 import { ContactSearch } from '@/screens/Contacts/components/ContactSearch';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
@@ -15,7 +15,7 @@ import { FlatList, ListRenderItemInfo, View } from 'react-native';
 import { Contact, CONTACTS } from '../test-store';
 
 export const Contacts = () => {
-  const screenHeight = useScreenHeight();
+  const { height: screenHeight } = useWindowDimensions();
   const tabBarHeight = useBottomTabBarHeight();
   const headerHeight = useHeaderHeight();
   

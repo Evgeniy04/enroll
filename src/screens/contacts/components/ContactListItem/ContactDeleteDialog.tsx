@@ -8,8 +8,8 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import { Text } from '@/components/ui/text';
+import { useWindowDimensions } from '@/hooks/useWindowDimensions';
 import { FC } from 'react';
-import { Dimensions } from 'react-native';
 
 interface ContactDeleteDialogProps {
   isOpen: boolean;
@@ -22,7 +22,7 @@ export const ContactDeleteDialog: FC<ContactDeleteDialogProps> = ({
   onOpenChange,
   onConfirm,
 }) => {
-  const screenWidth = Dimensions.get('window').width;
+  const { width: screenWidth } = useWindowDimensions();
 
   return (
     <AlertDialog open={isOpen} onOpenChange={onOpenChange}>

@@ -1,10 +1,10 @@
+import { useConfirm } from '@/hooks/useConfirm';
 import { ContactCard } from '@/screens/Contacts/components/ContactListItem/ContactCard';
 import { ContactContextMenu } from '@/screens/Contacts/components/ContactListItem/ContactContextMenu';
-import { ContactDeleteDialog } from '@/screens/Contacts/components/ContactListItem/ContactDeleteDialog';
 import * as Haptics from 'expo-haptics';
 import * as Linking from 'expo-linking';
 import { useRouter } from 'expo-router';
-import { FC, useCallback, useState } from 'react';
+import { FC, useCallback } from 'react';
 import { Contact } from '../../../test-store';
 
 interface ContactListItemProps {
@@ -14,7 +14,7 @@ interface ContactListItemProps {
 
 export const ContactListItem: FC<ContactListItemProps> = ({ item: contact, onDelete }) => {
   const router = useRouter();
-  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const { confirm, ConfirmDialogElement } = useConfirm();
 
   const handlePress = useCallback(() => {
     router.push({
@@ -31,14 +31,14 @@ export const ContactListItem: FC<ContactListItemProps> = ({ item: contact, onDel
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
   }, []);
 
-  const handleDeletePress = useCallback(() => {
-    setIsDeleteDialogOpen(false);
-    onDelete(contact.id);
-  }, [onDelete, contact.id]);
-
   const handleDeleteMenuPress = useCallback(() => {
-    setIsDeleteDialogOpen(true);
-  }, []);
+    confirm({
+      title: "Удалить контакт?",
+      cancelText: "Отменить",
+      confirmText: "Подтвердить",
+      onConfirm: () => onDelete(contact.id),
+    });
+  }, [confirm, onDelete, contact.id]);
 
   return (
     <>
@@ -51,11 +51,7 @@ export const ContactListItem: FC<ContactListItemProps> = ({ item: contact, onDel
         />
       </ContactContextMenu>
 
-      <ContactDeleteDialog
-        isOpen={isDeleteDialogOpen}
-        onOpenChange={setIsDeleteDialogOpen}
-        onConfirm={handleDeletePress}
-      />
+      {ConfirmDialogElement}
     </>
   );
 };
