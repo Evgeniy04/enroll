@@ -45,13 +45,13 @@ export const ServiceCard: FC<ServiceCardProps> = ({
       </View>
 
       <View className="flex-row justify-between items-center">
-        <Text variant="muted">Длительность</Text>
-        <Text variant="muted">{service.duration} мин</Text>
+        <Text variant="muted" className='text-muted-foreground'>Длительность</Text>
+        <Text variant="muted" className='text-muted-foreground'>{service.duration} мин</Text>
       </View>
 
       <View className="flex-row justify-between items-center">
-        <Text variant="muted">Перерыв после</Text>
-        <Text variant="muted">
+        <Text variant="muted" className='text-muted-foreground'>Перерыв после</Text>
+        <Text variant="muted" className='text-muted-foreground'>
           {service.breakAfter ? `${service.breakAfter} мин` : 'отсутствует'}
         </Text>
       </View>

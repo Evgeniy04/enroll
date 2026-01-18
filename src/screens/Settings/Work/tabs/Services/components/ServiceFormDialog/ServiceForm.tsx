@@ -16,28 +16,27 @@ import { Service } from '../../Services.types';
 
 interface ServiceFormProps {
   initialData: Service | null;
-  onSubmit: (service: Omit<Service, 'id'>) => void;
+  onSubmit: (service: Service) => void;
 }
-
 export const ServiceForm: FC<ServiceFormProps> = ({ onSubmit, initialData }) => {
-  const [ serviceName, setServiceName ] = useState('');
+  const [ name, setName ] = useState('');
   const [ duration, setDuration ] = useState(30);
   const [ breakAfter, setBreakAfter ] = useState(0);
 
   useEffect(() => {
     if (initialData) {
-      setServiceName(initialData.name);
+      setName(initialData.name);
       setDuration(initialData.duration);
       setBreakAfter(initialData.breakAfter);
     } else {
-      setServiceName('');
+      setName('');
       setDuration(30);
       setBreakAfter(0);
     }
   }, [initialData]);
 
   const handleSubmit = () => {
-    onSubmit({ name: serviceName, duration, breakAfter });
+    onSubmit({ id: initialData ? initialData.id : '', name, duration, breakAfter });
   };
 
   return (
@@ -52,8 +51,8 @@ export const ServiceForm: FC<ServiceFormProps> = ({ onSubmit, initialData }) => 
           label="Название услуги"
           placeholder="Например: Стрижка, Массаж"
           required
-          value={serviceName}
-          onChangeText={setServiceName}
+          value={name}
+          onChangeText={setName}
         />
 
         <NumberPickerField
@@ -92,7 +91,7 @@ export const ServiceForm: FC<ServiceFormProps> = ({ onSubmit, initialData }) => 
         </DialogClose>
 
         <DialogClose asChild>
-          <Button className="flex-1" onPress={handleSubmit} disabled={!serviceName.trim()}>
+          <Button className="flex-1" onPress={handleSubmit} disabled={!name.trim()}>
             <Icon as={Check} className="text-primary-foreground" />
             <Text>{initialData ? 'Сохранить' : 'Добавить'}</Text>
           </Button>
