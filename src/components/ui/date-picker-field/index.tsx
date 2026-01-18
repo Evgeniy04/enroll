@@ -41,7 +41,7 @@ export const DatePickerField: FC<DatePickerFieldProps> = ({
     >
       <Popover>
         <PopoverTrigger asChild>
-          <Button variant="outline">
+          <Button variant="outline" disabled={disabled}>
             <Text aria-labelledby={nativeID}>
               {placeholder}
             </Text>
