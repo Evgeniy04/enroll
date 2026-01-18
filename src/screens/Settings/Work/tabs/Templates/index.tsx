@@ -1,4 +1,3 @@
-import { KeyboardAvoidingScreen } from '@/components/layout/KeyboardAvoidingScreen';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Icon } from '@/components/ui/icon';
@@ -42,39 +41,37 @@ export const ScheduleBuilder: FC = () => {
   }, [visibleForm]);
 
   return (
-    <KeyboardAvoidingScreen>
-      <Card>
-        <CardHeader className="flex-row justify-between">
-          <View className="flex-1">
-            <CardTitle>Шаблоны дня</CardTitle>
-          </View>
+    <Card>
+      <CardHeader className="flex-row justify-between">
+        <View className="flex-1">
+          <CardTitle>Шаблоны дня</CardTitle>
+        </View>
 
-          {!visibleForm && (
-            <Button size="icon" onPress={handleOpenFormPress}>
-              <Icon as={Plus} className="text-primary-foreground" />
-            </Button>
-          )}
-        </CardHeader>
+        {!visibleForm && (
+          <Button size="icon" onPress={handleOpenFormPress}>
+            <Icon as={Plus} className="text-primary-foreground" />
+          </Button>
+        )}
+      </CardHeader>
 
-        <CardContent className="gap-5">
-          {visibleForm && (
-            <TemplateForm
-              ref={templateNameRef}
-              onCancel={handleCancelFormPress}
-              onSubmit={handleCreateFormPress}
-            />
-          )}
-          
-          {templates.length === 0 ? (
-            <Card className="flex-row justify-center items-center border-dashed gap-0">
-              <Text variant="muted" className="text-center text-muted-foreground">
-                Создайте первый шаблон, нажав
-              </Text>
-              <Text variant="code" className="px-2 ml-2">+</Text>
-            </Card>
-          ) : (null)}
-        </CardContent>
-      </Card>
-    </KeyboardAvoidingScreen>
+      <CardContent className="gap-5">
+        {visibleForm && (
+          <TemplateForm
+            ref={templateNameRef}
+            onCancel={handleCancelFormPress}
+            onSubmit={handleCreateFormPress}
+          />
+        )}
+        
+        {templates.length === 0 ? (
+          <Card className="flex-row justify-center items-center border-dashed gap-0">
+            <Text variant="muted" className="text-center text-muted-foreground">
+              Создайте первый шаблон, нажав
+            </Text>
+            <Text variant="code" className="px-2 ml-2">+</Text>
+          </Card>
+        ) : (null)}
+      </CardContent>
+    </Card>
   );
 };

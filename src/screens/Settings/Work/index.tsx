@@ -18,13 +18,13 @@ export const WorkSettings = () => {
           title: "Параметры работы",
         }}
       />
-      <KeyboardAvoidingScreen className='p-5'>
-        <View className='mb-5'>
+      <KeyboardAvoidingScreen>
+        <View className='m-5'>
           <Text variant='h3'>Управление записью</Text>
           <Text>Настройте услуги, создайте шаблоны дня и примените их к расписанию</Text>
         </View>
 
-        <Tabs value={value} onValueChange={setValue}>
+        <Tabs value={value} onValueChange={setValue} className='m-5'>
           <TabsList className="w-full justify-between">
             <TabsTrigger value="services">
               <Text>Услуги</Text>
