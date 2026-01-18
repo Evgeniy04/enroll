@@ -8,7 +8,17 @@ import { Minus, Plus } from 'lucide-react-native';
 import React, { FC } from 'react';
 import { View } from 'react-native';
 
-export interface DurationFieldProps extends FormFieldProps {
+const formatNumberValue = (
+  value: number,
+  formatValue?: (value: number) => string,
+  unit?: string
+) => {
+  if (formatValue) return formatValue(value);
+  if (unit) return `${value} ${unit}`;
+  return value.toString();
+};
+
+export interface NumberPickerFieldProps extends FormFieldProps {
   value?: number;
   onChange?: (value: number | ((previous: number) => number)) => void;
   min?: number;
@@ -16,9 +26,13 @@ export interface DurationFieldProps extends FormFieldProps {
   step?: number;
   /** Максимум 3 пресета */
   presets?: number[];
+  /** Единица измерения (шт, мин, %, и т.п.) */
+  unit?: string;
+  /** Кастомное форматирование значения */
+  formatValue?: (value: number) => string;
 }
 
-export const DurationField: FC<DurationFieldProps> = ({
+export const NumberPickerField: FC<NumberPickerFieldProps> = ({
   // FormField
   nativeID,
   label,
@@ -30,10 +44,12 @@ export const DurationField: FC<DurationFieldProps> = ({
   // Field
   value = 0,
   onChange,
-  min = 5,
-  max = 480,
-  step = 5,
-  presets = [15, 30, 60],
+  min = 0,
+  max = Number.MAX_SAFE_INTEGER,
+  step = 1,
+  presets = [],
+  unit,
+  formatValue,
 }) => {
   const clamp = (v: number) => Math.min(max, Math.max(min, v));
 
@@ -57,26 +73,25 @@ export const DurationField: FC<DurationFieldProps> = ({
       >
         <Card
           className={cn(
-            'dark:bg-input/30 bg-background flex-row items-center justify-between px-1 py-1',
+            'flex-row items-center justify-between px-1 py-1',
+            'dark:bg-input/30 bg-background',
             error ? 'border-destructive' : 'border-border'
           )}
         >
           <Button
-            variant='ghost'
-            className='size-8'
+            variant="ghost"
+            className="size-8"
             disabled={disabled || value <= min}
             onPress={handleDecrementPress}
           >
             <Icon as={Minus} />
           </Button>
 
-          <Text>
-            {value} минут
-          </Text>
+          <Text>{formatNumberValue(value, formatValue, unit)}</Text>
 
           <Button
-            variant='ghost'
-            className='size-8'
+            variant="ghost"
+            className="size-8"
             disabled={disabled || value >= max}
             onPress={handleIncrementPress}
           >
@@ -86,26 +101,25 @@ export const DurationField: FC<DurationFieldProps> = ({
 
         {presets.length > 0 && (
           <View className="flex-row flex-wrap gap-2 justify-center mt-2">
-            {presets.slice(0, 3).map((preset: number) => {
-                if (preset < min || preset > max) return null;
-                const active = preset === value;
+            {presets.slice(0, 3).map((preset) => {
+              if (preset < min || preset > max) return null;
 
-                const handleSelectPresetPress = () => onChange?.(clamp(preset));
+              const active = preset === value;
 
-                return (
-                  <Button
-                    key={preset.toString()}
-                    disabled={disabled}
-                    variant={active ? 'default' : 'outline'}
-                    className='flex-1'
-                    onPress={handleSelectPresetPress}
-                  >
-                    <Text variant="small">
-                      {preset}
-                    </Text>
-                  </Button>
-                );
-              })}
+              return (
+                <Button
+                  key={preset}
+                  disabled={disabled}
+                  variant={active ? 'default' : 'outline'}
+                  className="flex-1"
+                  onPress={() => onChange?.(clamp(preset))}
+                >
+                  <Text variant="small">
+                    {formatNumberValue(preset, formatValue, unit)}
+                  </Text>
+                </Button>
+              );
+            })}
           </View>
         )}
       </View>

@@ -5,8 +5,8 @@ import {
   DialogHeader,
   DialogTitle
 } from '@/components/ui/dialog';
-import { DurationField } from '@/components/ui/duration-picker-field';
 import { Icon } from '@/components/ui/icon';
+import { NumberPickerField } from '@/components/ui/number-picker-field';
 import { Text } from '@/components/ui/text';
 import { TextField } from '@/components/ui/text-field';
 import { Check, X } from 'lucide-react-native';
@@ -56,25 +56,30 @@ export const ServiceForm: FC<ServiceFormProps> = ({ onSubmit, initialData }) => 
           onChangeText={setServiceName}
         />
 
-        <DurationField
+        <NumberPickerField
           nativeID="service-duration"
           label="Длительность услуги"
           value={duration}
           onChange={setDuration}
+          step={5}
           min={5}
           max={1440}
           helperText="Время оказания услуги"
+          unit="мин"
+          presets={[30, 60, 90]}
         />
 
-        <DurationField
+        <NumberPickerField
           nativeID="service-break-after"
           label="Перерыв после услуги"
           value={breakAfter}
           onChange={setBreakAfter}
+          step={5}
           min={0}
           max={1440}
           helperText="Подготовка перед следующим клиентом"
-          presets={[0, 5, 15]}
+          presets={[15, 30, 45]}
+          unit="мин"
         />
       </View>
 
