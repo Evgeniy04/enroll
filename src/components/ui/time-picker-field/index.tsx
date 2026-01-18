@@ -1,19 +1,26 @@
 import { Button } from '@/components/ui/button';
 import { FormField, FormFieldProps } from '@/components/ui/form-field';
 import { Text } from '@/components/ui/text';
-import { formatTime, TimeProps } from '@/components/ui/time-picker-field/utils/formatTime';
+import { FormatTimeOptions, TimeProps } from '@/components/ui/time-picker-field/time-picker-field.types';
+import { formatTime } from '@/components/ui/time-picker-field/utils/formatTime';
 import { useColorScheme } from 'nativewind';
-import { FC, useCallback, useState } from 'react';
+import { FC, useCallback, useMemo, useState } from 'react';
 import { TimerPickerModal, TimerPickerModalProps } from 'react-native-timer-picker';
 
-interface TimePickerFieldProps extends FormFieldProps, TimerPickerModalProps {
-  onConfirm: (pickedTime: TimeProps) => void;
-  visible: boolean;
-  setIsVisible: (isVisible: boolean) => void;
+interface TimePickerFieldProps
+  extends Omit<
+    TimerPickerModalProps, 'onConfirm' | 'visible' | 'setIsVisible'
+  >, 
+  FormFieldProps 
+{
+  value?: TimeProps;
+  defaultValue?: TimeProps;
+  onChange?: (value: TimeProps) => void;
   modalTitle: string;
   placeholder?: string;
   confirmText?: string;
   cancelText?: string;
+  formatOptions?: FormatTimeOptions;
 }
 
 export const TimePickerField: FC<TimePickerFieldProps> = ({
@@ -22,42 +29,51 @@ export const TimePickerField: FC<TimePickerFieldProps> = ({
   label,
   error,
   helperText,
-  required = false,
-  disabled = false,
+  required,
+  disabled,
 
   // Field
-  onConfirm,
-  visible,
-  setIsVisible,
+  value,
+  defaultValue,
+  onChange,
   modalTitle,
   placeholder,
-  confirmText="Выбрать",
-  cancelText="Отменить",
-  ...props
+  confirmText = 'Выбрать',
+  cancelText = 'Отменить',
+  formatOptions,
+  ...modalProps
 }) => {
   const { colorScheme } = useColorScheme();
-  const [ innerPlaceholder, setInnerPlaceholder ] = useState<string>(formatTime({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  }));
+  const [ visible, setIsVisible ] = useState(false);
+  const [ internalValue, setInternalValue ] = useState<TimeProps>(
+    defaultValue ?? { hours: 0, minutes: 0 }
+  );
+
+  const currentValue = value ? value : internalValue;
+
+  const displayValue = useMemo(
+    () => formatTime(currentValue, formatOptions),
+    [currentValue, formatOptions]
+  );
 
   const handleOpenPress = useCallback(() => {
     setIsVisible(true);
-  }, [setIsVisible])
+  }, [setIsVisible]);
 
-  const handleCancel = useCallback(() => {
+  const handleCancelPress = useCallback(() => {
     setIsVisible(false);
   }, [setIsVisible]);
 
   const handleConfirm = useCallback(
-    (pickedTime: TimeProps) => {
-      onConfirm(pickedTime);
-      setInnerPlaceholder(formatTime(pickedTime));
+    (picked: TimeProps) => {
+      if (!value) {
+        setInternalValue(picked);
+      }
+
+      onChange?.(picked);
       setIsVisible(false);
     },
-    [onConfirm, setIsVisible],
+    [value, onChange, setIsVisible]
   );
 
   return (
@@ -69,18 +85,18 @@ export const TimePickerField: FC<TimePickerFieldProps> = ({
       required={required}
       disabled={disabled}
     >
-      <Button variant="outline" onPress={handleOpenPress}>
+      <Button variant="outline" onPress={handleOpenPress} disabled={disabled}>
         <Text aria-labelledby={nativeID}>
-          {placeholder ?? innerPlaceholder}
+          {placeholder ?? displayValue}
         </Text>
       </Button>
 
       <TimerPickerModal
+        {...modalProps}
         visible={visible}
         setIsVisible={setIsVisible}
-        onCancel={handleCancel}
+        onCancel={handleCancelPress}
         onConfirm={handleConfirm}
-        closeOnOverlayPress
         modalTitle={modalTitle}
         cancelButtonText={cancelText}
         confirmButtonText={confirmText}
@@ -88,13 +104,8 @@ export const TimePickerField: FC<TimePickerFieldProps> = ({
         hourLabel="ч"
         minuteLabel="м"
         secondLabel="с"
-        styles={{
-          theme: colorScheme ?? 'light',
-        }}
-        {...props}
+        styles={{ theme: colorScheme ?? 'light' }}
       />
     </FormField>
   );
 };
-
-export * from '@/components/ui/time-picker-field/utils/formatTime';

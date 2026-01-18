@@ -1,26 +1,34 @@
-export interface TimeProps {
-  days?: number;
-  hours?: number;
-  minutes?: number;
-  seconds?: number;
-}
+import { FormatTimeOptions, TimeProps, TimeUnit } from "@/components/ui/time-picker-field/time-picker-field.types";
 
-export const formatTime = ({
-  days,
-  hours = 0,
-  minutes = 0,
-  seconds,
-}: TimeProps) => {
-    const timeParts = [];
+const DEFAULT_LABELS: Record<TimeUnit, string> = {
+  days: 'д',
+  hours: 'ч',
+  minutes: 'мин',
+  seconds: 'с',
+};
 
-    if (days !== undefined && days !== 0) {
-        timeParts.push(days.toString().padStart(2, "0") + ' д');
-    }
-    timeParts.push(hours.toString().padStart(2, "0") + ' ч');
-    timeParts.push(minutes.toString().padStart(2, "0")  + ' м');
-    if (seconds !== undefined && seconds !== 0) {
-        timeParts.push(seconds.toString().padStart(2, "0") + ' с');
-    }
+export const formatTime = (
+  time: TimeProps,
+  {
+    units = ['days', 'hours', 'minutes', 'seconds'],
+    labels = DEFAULT_LABELS,
+    separator = ' : ',
+    unitSeparator = ' ',
+    padLength = 2,
+    showZero = false,
+  }: FormatTimeOptions = {},
+): string => {
+  return units
+    .map((unit) => {
+      const value = time[unit];
 
-    return timeParts.join(" : ");
+      if (value === undefined) return null;
+      if (!showZero && value === 0) return null;
+
+      const label = labels[unit] ?? DEFAULT_LABELS[unit];
+
+      return `${value.toString().padStart(padLength, '0')}${unitSeparator}${label}`;
+    })
+    .filter(Boolean)
+    .join(separator);
 };
