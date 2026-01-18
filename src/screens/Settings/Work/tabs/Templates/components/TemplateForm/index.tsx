@@ -28,7 +28,7 @@ export const TemplateForm: FC<TemplateFormProps> = ({
   };
 
   return (
-    <Card>
+    <Card className='dark:bg-black bg-gray-100'>
       <CardContent>
         <TextField
           nativeID="template-name"
