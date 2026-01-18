@@ -93,7 +93,7 @@ export const ServiceForm: FC<ServiceFormProps> = ({ onSubmit, initialData }) => 
         <DialogClose asChild>
           <Button className="flex-1" onPress={handleSubmit} disabled={!name.trim()}>
             <Icon as={Check} className="text-primary-foreground" />
-            <Text>{initialData ? 'Сохранить' : 'Добавить'}</Text>
+            <Text>{initialData ? 'Сохранить' : 'Создать'}</Text>
           </Button>
         </DialogClose>
       </DialogFooter>
