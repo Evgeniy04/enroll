@@ -1,4 +1,5 @@
 import { Service } from "./Settings/Work/tabs/Services/Services.types";
+import { Template } from "./Settings/Work/tabs/Templates/Templates.types";
 
 export interface Contact {
   id: string;
@@ -212,5 +213,18 @@ export const services: Service[] = [
     name: 'Массаж',
     duration: 45,
     breakAfter: 15,
+  },
+]
+
+export const templates: Template[] = [
+  {
+    id: '0',
+    name: 'Будние дни',
+    slots: [],
+  },
+  {
+    id: '1',
+    name: 'Выходные дни',
+    slots: [],
   },
 ]
