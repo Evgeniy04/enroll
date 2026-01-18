@@ -25,14 +25,14 @@ export const WorkSettings = () => {
         </View>
 
         <Tabs value={value} onValueChange={setValue} className='m-5'>
-          <TabsList className="w-full justify-between">
-            <TabsTrigger value="services">
+          <TabsList className="w-full justify-between h-12">
+            <TabsTrigger value="services" className='h-full'>
               <Text>Услуги</Text>
             </TabsTrigger>
-            <TabsTrigger value="day-templates">
+            <TabsTrigger value="day-templates" className='h-full'>
               <Text>Шаблоны дня</Text>
             </TabsTrigger>
-            <TabsTrigger value="schedule">
+            <TabsTrigger value="schedule" className='h-full'>
               <Text>Расписание</Text>
             </TabsTrigger>
           </TabsList>
