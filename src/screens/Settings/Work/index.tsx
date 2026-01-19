@@ -2,8 +2,8 @@ import { KeyboardAvoidingScreen } from '@/components/layout/KeyboardAvoidingScre
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Text } from '@/components/ui/text';
 import { WeeklyCalendar } from '@/screens/Settings/Work/tabs/Schedule';
-import { ServiceManager } from '@/screens/Settings/Work/tabs/Services';
-import { ScheduleBuilder } from '@/screens/Settings/Work/tabs/Templates';
+import { ServiceList } from '@/screens/Settings/Work/tabs/Services';
+import { TemplateList } from '@/screens/Settings/Work/tabs/Templates';
 import { Stack } from 'expo-router';
 import { useState } from 'react';
 import { View } from 'react-native';
@@ -38,11 +38,11 @@ export const WorkSettings = () => {
           </TabsList>
   
           <TabsContent value="services">
-            <ServiceManager />
+            <ServiceList />
           </TabsContent>
   
           <TabsContent value="day-templates">
-            <ScheduleBuilder />
+            <TemplateList />
           </TabsContent>
 
           <TabsContent value="schedule">

@@ -12,12 +12,13 @@ import { TextField } from '@/components/ui/text-field';
 import { Check, X } from 'lucide-react-native';
 import { FC, useEffect, useState } from "react";
 import { View } from 'react-native';
-import { Service } from '../../Services.types';
+import { Service } from '../Services.types';
 
 interface ServiceFormProps {
   initialData: Service | null;
   onSubmit: (service: Service) => void;
 }
+
 export const ServiceForm: FC<ServiceFormProps> = ({ onSubmit, initialData }) => {
   const [ name, setName ] = useState('');
   const [ duration, setDuration ] = useState(30);

@@ -11,7 +11,7 @@ import { TextField } from '@/components/ui/text-field';
 import { Check, X } from 'lucide-react-native';
 import { FC, useEffect, useState } from "react";
 import { View } from 'react-native';
-import { Template } from '../../Templates.types';
+import { Template } from '../Templates.types';
 
 interface TemplateFormProps {
   initialData: Template | null;
@@ -36,7 +36,7 @@ export const TemplateForm: FC<TemplateFormProps> = ({ onSubmit, initialData }) =
   return (
     <>
       <DialogHeader>
-        <DialogTitle>{initialData ? 'Редактировать услугу' : 'Новая услуга'}</DialogTitle>
+        <DialogTitle>{initialData ? 'Редактировать шаблон' : 'Новый шаблон'}</DialogTitle>
       </DialogHeader>
 
       <View className="gap-6">
