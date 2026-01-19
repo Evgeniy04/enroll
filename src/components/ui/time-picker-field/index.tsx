@@ -93,6 +93,7 @@ export const TimePickerField: FC<TimePickerFieldProps> = ({
 
       <TimerPickerModal
         {...modalProps}
+        initialValue={internalValue}
         visible={visible}
         setIsVisible={setIsVisible}
         onCancel={handleCancelPress}
