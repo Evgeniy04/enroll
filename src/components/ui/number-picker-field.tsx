@@ -20,7 +20,7 @@ const formatNumberValue = (
 
 export interface NumberPickerFieldProps extends FormFieldProps {
   value?: number;
-  onChange?: (value: number | ((previous: number) => number)) => void;
+  onChange?: (value: number) => void;
   min?: number;
   max?: number;
   step?: number;
@@ -53,8 +53,8 @@ export const NumberPickerField: FC<NumberPickerFieldProps> = ({
 }) => {
   const clamp = (v: number) => Math.min(max, Math.max(min, v));
 
-  const handleIncrementPress = () => onChange?.((prev: number) => clamp(prev + step));
-  const handleDecrementPress = () => onChange?.((prev: number) => clamp(prev - step));
+  const handleIncrementPress = () => onChange?.(clamp(value + step));
+  const handleDecrementPress = () => onChange?.(clamp(value - step));
 
   return (
     <FormField
