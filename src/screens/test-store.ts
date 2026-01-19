@@ -210,7 +210,7 @@ export const services: Service[] = [
   },
   {
     id: '1',
-    name: 'Массаж',
+    name: 'Очень длинное название услуги для теста',
     duration: 45,
     breakAfter: 15,
   },
