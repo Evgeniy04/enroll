@@ -96,33 +96,35 @@ export const EntityList = <T extends { id: string }>({
   ), []);
 
   return (
-    <Card>
-      <CardHeader className="flex-row justify-between">
-        <View className="flex-1">
-          <CardTitle>{entityTitle}</CardTitle>
-          {entityDescription && <CardDescription>{entityDescription}</CardDescription>}
-        </View>
+    <>
+      <Card>
+        <CardHeader className="flex-row justify-between">
+          <View className="flex-1">
+            <CardTitle>{entityTitle}</CardTitle>
+            {entityDescription && <CardDescription>{entityDescription}</CardDescription>}
+          </View>
 
-        <Button size="icon" onPress={() => setIsDialogOpen(true)}>
-          <Icon as={Plus} className="text-primary-foreground" />
-        </Button>
-      </CardHeader>
+          <Button size="icon" onPress={() => setIsDialogOpen(true)}>
+            <Icon as={Plus} className="text-primary-foreground" />
+          </Button>
+        </CardHeader>
 
-      <CardContent className="gap-5">
-        {entities.length === 0 ? emptyState : (
-          entities.map(entity => 
-            <EntityCard
-              {...entityToCardProps(entity)}
-              key={entity.id}
-              entityId={entity.id}
-              onEdit={() => handleEdit(entity.id)}
-              onDelete={() => handleDelete(entity.id)}
-            />
-          )
-        )}
-      </CardContent>
+        <CardContent className="gap-5">
+          {entities.length === 0 ? emptyState : (
+            entities.map(entity => 
+              <EntityCard
+                {...entityToCardProps(entity)}
+                key={entity.id}
+                entityId={entity.id}
+                onEdit={() => handleEdit(entity.id)}
+                onDelete={() => handleDelete(entity.id)}
+              />
+            )
+          )}
+        </CardContent>
+      </Card>
 
-      {isDialogOpen && <FormDialog<T>
+      {<FormDialog<T>
         FormComponent={EntityForm}
         editingItem={activeEntity}
         open={isDialogOpen}
@@ -131,6 +133,6 @@ export const EntityList = <T extends { id: string }>({
       />}
 
       {ConfirmDialogElement}
-    </Card>
+    </>
   );
 };
