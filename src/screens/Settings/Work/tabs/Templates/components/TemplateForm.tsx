@@ -8,17 +8,17 @@ import {
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
 import { TextField } from '@/components/ui/text-field';
+import { FormProps } from '@/screens/Settings/Work/tabs/components/FormDialog';
 import { Check, X } from 'lucide-react-native';
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { View } from 'react-native';
 import { Template } from '../Templates.types';
 
-interface TemplateFormProps {
-  initialData: Template | null;
-  onSubmit: (template: Template) => void;
-}
-
-export const TemplateForm: FC<TemplateFormProps> = ({ onSubmit, initialData }) => {
+export const TemplateForm  = ({
+  initialData,
+  onCreate,
+  onUpdate
+}: FormProps<Template>) => {
   const [ name, setName ] = useState('');
 
   useEffect(() => {
@@ -30,7 +30,11 @@ export const TemplateForm: FC<TemplateFormProps> = ({ onSubmit, initialData }) =
   }, [initialData]);
 
   const handleSubmit = () => {
-    onSubmit({ id: initialData ? initialData.id : '', name, slots: [] });
+    if (initialData) {
+      onUpdate({ id: initialData.id, name });
+    } else {
+      onCreate({ name, slots: [] });
+    }
   };
 
   return (

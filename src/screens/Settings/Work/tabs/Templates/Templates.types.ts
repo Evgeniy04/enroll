@@ -1,7 +1,9 @@
+import { TimeProps } from "@/components/ui/time-picker-field/time-picker-field.types";
+
 export interface ScheduleSlot {
   id: string;
   serviceId: string;
-  startTime: string;
+  startTime: TimeProps;
   count: number;
 }
 

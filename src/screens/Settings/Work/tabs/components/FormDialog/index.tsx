@@ -5,32 +5,43 @@ import {
 import { useWindowDimensions } from '@/hooks/useWindowDimensions';
 import { FC } from 'react';
 
-export interface FormDialogProps<FormData> {
-  FormComponent: FC<{ onSubmit: (data: FormData) => void; initialData: FormData | null }>;
-  onSubmit: (item: FormData) => void;
-  editingItem: FormData | null;
+export interface FormProps<T> {
+  initialData: T | null;
+  onCreate: (data: Omit<T, 'id'>) => void;
+  onUpdate: (patch: Partial<T> & { id: string }) => void;
+}
+
+export interface FormDialogProps<T> extends Omit<FormProps<T>, 'initialData'> {
+  FormComponent: FC<FormProps<T>>;
+  editingItem: T | null;
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
 
-export const FormDialog = <FormData,>({
+export const FormDialog = <T,>({
   FormComponent,
-  onSubmit,
+  onCreate,
+  onUpdate,
   editingItem,
   open,
   onOpenChange,
-}: FormDialogProps<FormData>) => {
+}: FormDialogProps<T>) => {
   const { width: screenWidth } = useWindowDimensions();
 
-  const handleSubmitPress = (data: FormData) => {
-    onSubmit(data);
+  const handleCreatePress = (data: Omit<T, 'id'>) => {
+    onCreate(data);
+    onOpenChange?.(false);
+  };
+
+  const handleUpdatePress = (patch: Partial<T> & { id: string }) => {
+    onUpdate(patch);
     onOpenChange?.(false);
   };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent style={{ width: screenWidth - 40, alignSelf: 'center' }}>
-        <FormComponent onSubmit={handleSubmitPress} initialData={editingItem} />
+        <FormComponent initialData={editingItem} onCreate={handleCreatePress} onUpdate={handleUpdatePress} />
       </DialogContent>
     </Dialog>
   );

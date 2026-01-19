@@ -8,7 +8,14 @@ import { FC, useMemo, useState } from 'react';
 export const ServiceList: FC = () => {
   const [ services, setServices ] = useState<Service[]>(mockServices);
 
-  const operations = useMemo(() => createEntityOperations(setServices), []);
+  const operations = useMemo(
+    () =>
+      createEntityOperations(setServices, (data) => ({
+        ...data,
+        id: Date.now().toString(),
+      })),
+    [setServices]
+  );
 
   return (
     <EntityList<Service>

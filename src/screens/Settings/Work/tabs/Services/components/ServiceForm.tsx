@@ -9,17 +9,17 @@ import { Icon } from '@/components/ui/icon';
 import { NumberPickerField } from '@/components/ui/number-picker-field';
 import { Text } from '@/components/ui/text';
 import { TextField } from '@/components/ui/text-field';
+import { FormProps } from '@/screens/Settings/Work/tabs/components/FormDialog';
 import { Check, X } from 'lucide-react-native';
-import { FC, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { View } from 'react-native';
 import { Service } from '../Services.types';
 
-interface ServiceFormProps {
-  initialData: Service | null;
-  onSubmit: (service: Service) => void;
-}
-
-export const ServiceForm: FC<ServiceFormProps> = ({ onSubmit, initialData }) => {
+export const ServiceForm = ({
+  initialData,
+  onCreate,
+  onUpdate
+}: FormProps<Service>) => {
   const [ name, setName ] = useState('');
   const [ duration, setDuration ] = useState(30);
   const [ breakAfter, setBreakAfter ] = useState(0);
@@ -37,7 +37,20 @@ export const ServiceForm: FC<ServiceFormProps> = ({ onSubmit, initialData }) => 
   }, [initialData]);
 
   const handleSubmit = () => {
-    onSubmit({ id: initialData ? initialData.id : '', name, duration, breakAfter });
+    if (initialData) {
+      onUpdate({
+        id: initialData.id,
+        name,
+        duration,
+        breakAfter,
+      });
+    } else {
+      onCreate({
+        name,
+        duration,
+        breakAfter,
+      });
+    }
   };
 
   return (
