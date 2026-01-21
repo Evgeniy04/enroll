@@ -27,7 +27,7 @@ export const TemplateList: FC = () => {
       onDelete={operations.remove}
       entityForm={TemplateForm}
       entityTitle="Управление шаблонами дня"
-      entityDescription="Создавайте и настраивайте шаблоны рабочего расписания."
+      entityDescription="Создайте и настройте шаблоны рабочего расписания."
       entityToCardProps={t => {
         const totalDuration = calculateTotalDuration(t.slots, services);
 
