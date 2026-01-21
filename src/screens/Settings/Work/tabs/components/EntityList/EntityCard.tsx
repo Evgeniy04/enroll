@@ -58,14 +58,14 @@ export const EntityCard: FC<EntityCardProps> = ({
   );
 
   const CardHeaderContent = (
-    <>
-      <View className="flex-row justify-between items-center mb-5">
+    <View className='flex-1 justify-between'>
+      <View className="flex-row justify-between mb-5">
         <Text variant="h4" className="flex-1 mr-2" numberOfLines={1}>
           {title}
         </Text>
 
         {open ? (
-          <Text variant="code" className="bg-primary-foreground">
+          <Text variant="code" className="bg-primary-foreground border border-primary/30">
             Настройка
           </Text>
         ) : (
@@ -81,32 +81,36 @@ export const EntityCard: FC<EntityCardProps> = ({
         )}
       </View>
 
-      {descriptionItems.map((item) => (
-        <View key={item.label} className="flex-row justify-between items-center">
-          <Text variant="muted" className="text-muted-foreground">{item.label}</Text>
-          <Text variant="muted" className="text-muted-foreground">{item.value}</Text>
-        </View>
-      ))}
-    </>
+      <View>
+        {descriptionItems.map((item) => (
+          <View key={item.label} className="flex-row justify-between items-center">
+            <Text variant="muted" className="flex-1 mr-2 text-muted-foreground">{item.label}</Text>
+            <Text variant="muted" className="text-muted-foreground">{item.value}</Text>
+          </View>
+        ))}
+      </View>
+    </View>
   )
 
   return (
     <Wrapper {...wrapperProps}>
       <Card className={cn('p-0 gap-0 overflow-hidden', open && 'border-primary/30')}>
-        {isExpandable ? (
-          <CollapsibleTrigger asChild>
-            <Pressable className={cn('p-5 active:opacity-70', open && 'bg-accent')}>
-              {CardHeaderContent}
-            </Pressable>
-          </CollapsibleTrigger>
-        ) : (
-          <View className="p-5">{CardHeaderContent}</View>
-        )}
+        <View className='min-h-32'>
+          {isExpandable ? (
+            <CollapsibleTrigger asChild>
+              <Pressable className={cn('p-3 flex-1 active:opacity-70', open && 'bg-accent')}>
+                {CardHeaderContent}
+              </Pressable>
+            </CollapsibleTrigger>
+          ) : (
+            <View className='p-3'>{CardHeaderContent}</View>
+          )}
+        </View>
 
         {isExpandable && (
           <CollapsibleContent>
             <Separator className="bg-primary/30" />
-            <View className="p-2">
+            <View className='p-3'>
               {children}
             </View>
           </CollapsibleContent>
