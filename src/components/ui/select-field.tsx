@@ -65,6 +65,7 @@ export const SelectField: FC<SelectFieldProps> = ({
           aria-invalid={!!error}
           aria-describedby={error ? `${nativeID}-error` : helperText ? `${nativeID}-helper` : undefined}
           className={error ? 'border-destructive' : ''}
+          disabled={disabled}
         >
           <SelectValue placeholder={placeholder} className='flex-1'/>
         </SelectTrigger>
