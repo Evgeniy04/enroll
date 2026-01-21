@@ -1,10 +1,9 @@
 import { Button } from '@/components/ui/button';
 import {
   Card,
-  CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
+  CardTitle
 } from '@/components/ui/card';
 import { EmptyState } from '@/components/ui/empty-state';
 import { Icon } from '@/components/ui/icon';
@@ -110,21 +109,23 @@ export const EntityList = <T extends { id: string }>({
 
   return (
     <>
-      <Card>
-        <CardHeader className="flex-row justify-between">
-          <View className="flex-1">
-            <CardTitle>{entityTitle}</CardTitle>
-            {entityDescription && (
-              <CardDescription>{entityDescription}</CardDescription>
-            )}
-          </View>
+      <View className='gap-6'>
+        <Card className='bg-accent'>
+          <CardHeader className="flex-row justify-between">
+            <View className="flex-1">
+              <CardTitle>{entityTitle}</CardTitle>
+              {entityDescription && (
+                <CardDescription>{entityDescription}</CardDescription>
+              )}
+            </View>
 
-          <Button size="icon" onPress={handleCreate}>
-            <Icon as={Plus} className="text-primary-foreground" />
-          </Button>
-        </CardHeader>
+            <Button size="icon" onPress={handleCreate}>
+              <Icon as={Plus} className="text-primary-foreground" />
+            </Button>
+          </CardHeader>
+        </Card>
 
-        <CardContent className="gap-5">
+        <View className="gap-3">
           {entities.length === 0
             ? <EmptyState
                 message="Пока ничего нет"
@@ -154,8 +155,8 @@ export const EntityList = <T extends { id: string }>({
               {renderDetails?.(entity)}
             </EntityCard>
           ))}
-        </CardContent>
-      </Card>
+        </View>
+      </View>
 
       <FormDialog<T>
         FormComponent={EntityForm}
