@@ -218,13 +218,93 @@ export const services: Service[] = [
 
 export const templates: Template[] = [
   {
-    id: '0',
-    name: 'Будние дни',
-    slots: [],
+    id: 't1',
+    name: 'Стандартный день',
+    slots: [
+      {
+        id: 'sl1',
+        serviceId: 's2',
+        startTime: { hours: 9, minutes: 0 },
+        count: 4
+      },
+      {
+        id: 'sl2',
+        serviceId: 's1',
+        startTime: { hours: 14, minutes: 0 },
+        count: 3
+      }
+    ]
   },
   {
-    id: '1',
-    name: 'Выходные дни',
-    slots: [],
+    id: 't2',
+    name: 'Интенсивный день',
+    slots: [
+      {
+        id: 'sl3',
+        serviceId: 's2',
+        startTime: { hours: 9, minutes: 0 },
+        count: 6
+      },
+      {
+        id: 'sl4',
+        serviceId: 's5',
+        startTime: { hours: 16, minutes: 0 },
+        count: 2
+      }
+    ]
   },
-]
+  {
+    id: 't3',
+    name: 'Короткий день',
+    slots: [
+      {
+        id: 'sl5',
+        serviceId: 's1',
+        startTime: { hours: 10, minutes: 0 },
+        count: 3
+      },
+      {
+        id: 'sl6',
+        serviceId: 's5',
+        startTime: { hours: 12, minutes: 0 },
+        count: 2
+      }
+    ]
+  },
+  {
+    id: 't4',
+    name: 'VIP день',
+    slots: [
+      {
+        id: 'sl7',
+        serviceId: 's4',
+        startTime: { hours: 10, minutes: 0 },
+        count: 3
+      }
+    ]
+  },
+  {
+    id: 't5',
+    name: 'Утренняя смена',
+    slots: [
+      {
+        id: 'sl8',
+        serviceId: 's2',
+        startTime: { hours: 8, minutes: 0 },
+        count: 4
+      }
+    ]
+  },
+  {
+    id: 't6',
+    name: 'Вечерняя смена',
+    slots: [
+      {
+        id: 'sl9',
+        serviceId: 's2',
+        startTime: { hours: 16, minutes: 0 },
+        count: 4
+      }
+    ]
+  }
+];
