@@ -12,7 +12,7 @@ interface BookingLimitSettingsButtonProps {
 }
 
 export const BookingLimitSettingsButton: FC<BookingLimitSettingsButtonProps> = ({
-  label = 'Ограничения записи',
+  label = 'Ограничение записи',
   value = 'отсутствуют',
   onPress,
 }) => {
