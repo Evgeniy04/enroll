@@ -15,7 +15,7 @@ import { FlatList, ListRenderItemInfo, View } from 'react-native';
 import { Contact, CONTACTS } from '../test-store';
 
 export const Contacts = () => {
-  const { height: screenHeight } = useWindowDimensions();
+  const { width: screenWidth, height: screenHeight } = useWindowDimensions();
   const tabBarHeight = useBottomTabBarHeight();
   const headerHeight = useHeaderHeight();
   
@@ -68,7 +68,7 @@ export const Contacts = () => {
               <Icon as={UserRoundPlus} size={20} className='text-primary-foreground'/>
             </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px]">
+          <DialogContent style={{ width: screenWidth - 40, alignSelf: 'center' }}>
             <DialogHeader>
               <DialogTitle>Добавить контакт</DialogTitle>
               <DialogDescription>
