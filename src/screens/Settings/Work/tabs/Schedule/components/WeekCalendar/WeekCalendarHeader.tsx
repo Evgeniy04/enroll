@@ -8,7 +8,7 @@ import { ChevronLeft, ChevronRight, RotateCcw } from 'lucide-react-native';
 import React, { FC } from 'react';
 import { View } from 'react-native';
 
-interface CalendarHeaderProps {
+interface WeekCalendarHeaderProps {
   weekStart: Dayjs;
   onPrevWeek: () => void;
   onNextWeek: () => void;
@@ -16,7 +16,7 @@ interface CalendarHeaderProps {
   className?: string;
 }
 
-export const CalendarHeader: FC<CalendarHeaderProps> = ({
+export const WeekCalendarHeader: FC<WeekCalendarHeaderProps> = ({
   weekStart,
   onPrevWeek,
   onNextWeek,
