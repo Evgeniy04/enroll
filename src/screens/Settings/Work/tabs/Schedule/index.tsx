@@ -10,11 +10,17 @@ import { BookingLimitSettingsButton } from '@/screens/Settings/Work/tabs/Schedul
 import { FillTools } from '@/screens/Settings/Work/tabs/Schedule/components/FillTools';
 import { WeekCalendar } from '@/screens/Settings/Work/tabs/Schedule/components/WeekCalendar';
 import { templates } from '@/screens/test-store';
-import { FC } from "react";
+import { FC, useState } from "react";
 import { View } from 'react-native';
+import { BookingLimitSettingsDialog } from './components/BookingLimitSettingsDialog';
 
 export const Schedule: FC = () => {
   const { confirm, ConfirmDialogElement } = useConfirm();
+  const [ showBookingLimitSettings, setShowBookingLimitSettings ] = useState<boolean>(false);
+
+  const handleLimit = (value?: boolean) => {
+    setShowBookingLimitSettings(prev => value ?? !prev);
+  }
 
   const handlePeriods = () => {
   };
@@ -47,7 +53,7 @@ export const Schedule: FC = () => {
           </CardHeader>
         </Card>
         <View className="gap-3">
-          <BookingLimitSettingsButton />
+          <BookingLimitSettingsButton onPress={handleLimit} />
           <Separator />
           <FillTools
             onPeriods={handlePeriods}
@@ -59,7 +65,8 @@ export const Schedule: FC = () => {
           <WeekCalendar templates={templates} />
         </View>
       </View>
-
+      
+      <BookingLimitSettingsDialog open={showBookingLimitSettings} onOpenChange={handleLimit} onConfirm={() => {}} />
       {ConfirmDialogElement}
     </>
   );

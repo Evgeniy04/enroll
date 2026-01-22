@@ -27,7 +27,7 @@ interface ToggleGroupFieldBaseProps extends FormFieldProps {
 interface ToggleGroupFieldSingleProps extends ToggleGroupFieldBaseProps {
   type: 'single';
   value: string;
-  onValueChange: (value: string | undefined) => void;
+  onValueChange: (value?: string) => void;
 }
 
 interface ToggleGroupFieldMultipleProps extends ToggleGroupFieldBaseProps {

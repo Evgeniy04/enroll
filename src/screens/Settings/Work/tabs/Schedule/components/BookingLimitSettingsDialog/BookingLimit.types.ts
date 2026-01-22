@@ -1,0 +1,1 @@
+export type BookingLimitMode = 'days-ahead' | 'specific-date' | 'unlimited';
