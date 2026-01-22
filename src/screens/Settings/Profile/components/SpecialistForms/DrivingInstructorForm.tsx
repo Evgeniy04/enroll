@@ -3,11 +3,13 @@ import { DatePickerField } from '@/components/ui/date-picker-field';
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
 import { TextField } from '@/components/ui/text-field';
+import { useContentInsets } from '@/hooks/useContentInsets';
 import { router } from 'expo-router';
 import { Plus } from 'lucide-react-native';
 import { useState } from 'react';
 
 export const DrivingInstructorForm = () => {
+  const contentInsets = useContentInsets();
   const [ workStartDate, setWorkStartDate ] = useState<Date>();
   const [ drivingStartDate, setDrivingStartDate ] = useState<Date>();
 
@@ -19,6 +21,7 @@ export const DrivingInstructorForm = () => {
         helperText="Дата, с&nbsp;которой вы&nbsp;начали работать в&nbsp;профессии"
         currentDate={workStartDate}
         setCurrentDate={setWorkStartDate}
+        contentInsets={contentInsets}
         required
       />
       <DatePickerField
@@ -27,6 +30,7 @@ export const DrivingInstructorForm = () => {
         helperText="Дата, с&nbsp;которой вы&nbsp;начали водить транспорт"
         currentDate={drivingStartDate}
         setCurrentDate={setDrivingStartDate}
+        contentInsets={contentInsets}
         required
       />
       <TextField

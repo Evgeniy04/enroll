@@ -12,6 +12,7 @@ import {
 import {
   Separator,
 } from '@/components/ui/separator';
+import { useContentInsets } from '@/hooks/useContentInsets';
 import {
   getSpecialistForm,
 } from '@/screens/Settings/Profile/components/SpecialistForms';
@@ -25,6 +26,7 @@ const ACTIVITY_OPTIONS = [
 ];
 
 export const SpecialistProfileCard: FC<SelectValueProps> = ({ value, onValueChange }) => {
+  const contentInsets = useContentInsets();
   const SpecialistForm = value
     ? getSpecialistForm(value.value)
     : null;
@@ -44,6 +46,7 @@ export const SpecialistProfileCard: FC<SelectValueProps> = ({ value, onValueChan
           placeholder='Выберите вид деятельности'
           options={ACTIVITY_OPTIONS}
           groupLabel='Деятельность'
+          contentInsets={contentInsets}
         />
 
         <Separator />

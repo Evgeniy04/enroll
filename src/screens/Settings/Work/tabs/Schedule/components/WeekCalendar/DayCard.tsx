@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Option } from "@/components/ui/select";
 import { SelectField } from "@/components/ui/select-field";
 import { Text } from "@/components/ui/text";
+import { useContentInsets } from "@/hooks/useContentInsets";
 import { cn } from "@/lib/utils";
 import dayjs, { Dayjs } from 'dayjs';
 import { FC, useState } from "react";
@@ -21,6 +22,7 @@ export const DayCard: FC<DayCardProps> = ({
   templates,
   onTemplateChange
 }) => {
+  const contentInsets = useContentInsets();
   const [ template, setTemplate ] = useState<Option>();
 
   const handleTemplateChange = (value: Option | undefined) => {
@@ -62,6 +64,7 @@ export const DayCard: FC<DayCardProps> = ({
           onValueChange={handleTemplateChange}
           options={templates}
           disabled={disabled}
+          contentInsets={contentInsets}
         />
       </CardContent>
     </Card>

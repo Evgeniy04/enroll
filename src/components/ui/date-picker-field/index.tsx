@@ -4,7 +4,6 @@ import { DatePickerFieldProps } from '@/components/ui/date-picker-field/date-pic
 import { FormField } from '@/components/ui/form-field';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Text } from '@/components/ui/text';
-import { useContentInsets } from '@/hooks/useContentInsets';
 import dayjs from 'dayjs';
 import { FC } from 'react';
 
@@ -26,8 +25,8 @@ export const DatePickerField: FC<DatePickerFieldProps> = ({
   minDate,
   maxDate,
   side = 'top',
+  contentInsets,
 }) => {
-  const contentInsets = useContentInsets();
   placeholder = currentDate ? dayjs(currentDate).format('DD MMMM YYYY') : title;
 
   return (

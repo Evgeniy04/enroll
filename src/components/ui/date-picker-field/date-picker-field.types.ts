@@ -13,7 +13,7 @@ export interface DatePickerFieldContactProps {
   contentInsets: ContentInsets;
 }
 
-export interface DatePickerFieldProps extends FormFieldProps, Omit<DatePickerFieldContactProps, 'contentInsets'> {
+export interface DatePickerFieldProps extends FormFieldProps, DatePickerFieldContactProps {
   placeholder?: string;
   side?: 'top' | 'bottom';
 }
