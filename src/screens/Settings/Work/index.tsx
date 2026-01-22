@@ -1,7 +1,7 @@
 import { KeyboardAvoidingScreen } from '@/components/layout/KeyboardAvoidingScreen';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Text } from '@/components/ui/text';
-import { WeeklyCalendar } from '@/screens/Settings/Work/tabs/Schedule';
+import { Schedule } from '@/screens/Settings/Work/tabs/Schedule';
 import { ServiceList } from '@/screens/Settings/Work/tabs/Services';
 import { TemplateList } from '@/screens/Settings/Work/tabs/Templates';
 import { Stack } from 'expo-router';
@@ -46,7 +46,7 @@ export const WorkSettings = () => {
           </TabsContent>
 
           <TabsContent value="schedule">
-            <WeeklyCalendar />
+            <Schedule />
           </TabsContent>
         </Tabs>
       </KeyboardAvoidingScreen>

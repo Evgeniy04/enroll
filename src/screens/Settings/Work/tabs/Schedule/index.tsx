@@ -1,42 +1,66 @@
-import { Button } from '@/components/ui/button';
 import {
   Card,
-  CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
-  CardTitle,
+  CardTitle
 } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Text } from '@/components/ui/text';
+import { Separator } from '@/components/ui/separator';
+import { useConfirm } from '@/hooks/useConfirm';
+import { RecordLimitsButton } from '@/screens/Settings/Work/tabs/Schedule//components/RecordLimitsButton';
+import { FillTools } from '@/screens/Settings/Work/tabs/Schedule/components/FillTools';
+import { WeekCalendar } from '@/screens/Settings/Work/tabs/Schedule/components/WeekCalendar';
+import { templates } from '@/screens/test-store';
 import { FC } from "react";
 import { View } from 'react-native';
 
-export const WeeklyCalendar: FC = () => {
+export const Schedule: FC = () => {
+  const { confirm, ConfirmDialogElement } = useConfirm();
+
+  const handlePeriods = () => {
+  };
+
+  const handleShifts = () => {
+  };
+
+  const handleWeeks = () => {
+  };
+
+  const handleReset = () => {
+    confirm({
+      title: 'Сбросить график?',
+      description: 'Все дни в расписании будут помечены как выходные. Рабочие дни и доступные слоты будут полностью удалены.',
+      confirmText: 'Сбросить',
+      cancelText: 'Отмена',
+      onConfirm: () => {},
+    });
+  };
+
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Расписание</CardTitle>
-        <CardDescription>
-          Управляй недельным расписанием и исключениями
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="gap-6">
+    <>
+      <View className='gap-6'>
+        <Card className='bg-accent'>
+          <CardHeader>
+            <CardTitle>График работы</CardTitle>
+            <CardDescription>
+              Примените созданные шаблоны дня к рабочим датам. 
+            </CardDescription>
+          </CardHeader>
+        </Card>
         <View className="gap-3">
-          <Label htmlFor="tabs-demo-job-title">Job Title</Label>
-          <Input id="tabs-demo-job-title" defaultValue="Regional Manager" />
+          <RecordLimitsButton />
+          <Separator />
+          <FillTools
+            onPeriods={handlePeriods}
+            onShifts={handleShifts}
+            onWeeks={handleWeeks}
+            onReset={handleReset}
+          />
+          <Separator />
+          <WeekCalendar templates={templates} />
         </View>
-        <View className="gap-3">
-          <Label htmlFor="tabs-demo-favorite">Favorite feature</Label>
-          <Input id="tabs-demo-favorite" defaultValue="CLI" />
-        </View>
-      </CardContent>
-      <CardFooter>
-        <Button>
-          <Text>Submit survey</Text>
-        </Button>
-      </CardFooter>
-    </Card>
+      </View>
+
+      {ConfirmDialogElement}
+    </>
   );
 };
