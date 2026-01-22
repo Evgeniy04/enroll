@@ -5,13 +5,13 @@ import { Settings } from 'lucide-react-native';
 import { FC } from 'react';
 import { View } from 'react-native';
 
-interface Props {
+interface BookingLimitSettingsButtonProps {
   label?: string;
   value?: string;
   onPress?: () => void;
 }
 
-export const RecordLimitsButton: FC<Props> = ({
+export const BookingLimitSettingsButton: FC<BookingLimitSettingsButtonProps> = ({
   label = 'Ограничения записи',
   value = 'отсутствуют',
   onPress,

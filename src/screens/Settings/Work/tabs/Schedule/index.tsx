@@ -6,7 +6,7 @@ import {
 } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { useConfirm } from '@/hooks/useConfirm';
-import { RecordLimitsButton } from '@/screens/Settings/Work/tabs/Schedule//components/RecordLimitsButton';
+import { BookingLimitSettingsButton } from '@/screens/Settings/Work/tabs/Schedule/components/BookingLimitSettingsButton';
 import { FillTools } from '@/screens/Settings/Work/tabs/Schedule/components/FillTools';
 import { WeekCalendar } from '@/screens/Settings/Work/tabs/Schedule/components/WeekCalendar';
 import { templates } from '@/screens/test-store';
@@ -47,7 +47,7 @@ export const Schedule: FC = () => {
           </CardHeader>
         </Card>
         <View className="gap-3">
-          <RecordLimitsButton />
+          <BookingLimitSettingsButton />
           <Separator />
           <FillTools
             onPeriods={handlePeriods}
