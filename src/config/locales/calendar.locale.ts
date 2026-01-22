@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
+import isBetween from 'dayjs/plugin/isBetween';
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 import isTodayPlugin from 'dayjs/plugin/isToday';
@@ -13,6 +14,7 @@ dayjs.extend(localeData);
 dayjs.extend(updateLocale);
 dayjs.extend(weekday);
 dayjs.extend(isTodayPlugin);
+dayjs.extend(isBetween);
 dayjs.extend(isSameOrBefore);
 dayjs.extend(isSameOrAfter);
 dayjs.extend(localizedFormat);
