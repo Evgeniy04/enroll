@@ -43,9 +43,10 @@ export const PeriodsDialog: FC<PeriodsDialogProps> = ({
 
   const now = dayjs();
   const year = now.year();
+  const disabled = !selectedRangeDate?.start || !selectedRangeDate?.end || !template;
 
   const handleConfirm = () => {
-    if (!selectedRangeDate || !selectedRangeDate.start || !selectedRangeDate.end || !template) return;
+    if (!selectedRangeDate?.start || !selectedRangeDate?.end || !template) return;
 
     onConfirm({
       startDate: selectedRangeDate.start,
@@ -101,7 +102,7 @@ export const PeriodsDialog: FC<PeriodsDialogProps> = ({
         </DialogClose>
 
         <DialogClose asChild>
-          <Button className="flex-1" onPress={handleConfirm} disabled={!selectedRangeDate || !selectedRangeDate.start || !selectedRangeDate.end || !template}>
+          <Button className="flex-1" onPress={handleConfirm} disabled={disabled}>
             <Text>Применить</Text>
           </Button>
         </DialogClose>
@@ -109,4 +110,3 @@ export const PeriodsDialog: FC<PeriodsDialogProps> = ({
     </DialogContent>
   );
 };
-
