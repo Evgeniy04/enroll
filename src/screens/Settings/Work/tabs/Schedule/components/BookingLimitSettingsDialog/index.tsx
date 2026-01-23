@@ -12,7 +12,7 @@ import { Separator } from '@/components/ui/separator';
 import { Text } from '@/components/ui/text';
 import { useContentInsets } from '@/hooks/useContentInsets';
 import { useWindowDimensions } from '@/hooks/useWindowDimensions';
-import { BookingLimitMode } from '@/screens/Settings/Work/tabs/Schedule/components/BookingLimitSettingsDialog/BookingLimit.types';
+import { BookingLimitValue } from '@/screens/Settings/Work/tabs/Schedule/components/BookingLimitSettingsDialog/BookingLimit.types';
 import { DaysAheadFields } from '@/screens/Settings/Work/tabs/Schedule/components/BookingLimitSettingsDialog/DaysAheadFields';
 import { ModeSelector } from '@/screens/Settings/Work/tabs/Schedule/components/BookingLimitSettingsDialog/ModeSelector';
 import { SpecificDateFields } from '@/screens/Settings/Work/tabs/Schedule/components/BookingLimitSettingsDialog/SpecificDateFields';
@@ -22,11 +22,7 @@ import { View } from 'react-native';
 interface BookingLimitSettingsDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onConfirm: (value: {
-    mode: BookingLimitMode;
-    daysAhead?: number;
-    endDate?: Date;
-  }) => void;
+  onConfirm: (value: BookingLimitValue) => void;
 }
 
 export const BookingLimitSettingsDialog: FC<BookingLimitSettingsDialogProps> = ({
@@ -104,7 +100,7 @@ export const BookingLimitSettingsDialog: FC<BookingLimitSettingsDialogProps> = (
           </DialogClose>
 
           <DialogClose asChild>
-            <Button className="flex-1" onPress={handleConfirm}>
+            <Button className="flex-1" onPress={handleConfirm} disabled={mode === 'specific-date' && !Boolean(endDate)}>
               <Text>Применить</Text>
             </Button>
           </DialogClose>

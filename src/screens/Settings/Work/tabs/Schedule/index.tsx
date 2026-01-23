@@ -7,16 +7,20 @@ import {
 import { Separator } from '@/components/ui/separator';
 import { useConfirm } from '@/hooks/useConfirm';
 import { BookingLimitSettingsButton } from '@/screens/Settings/Work/tabs/Schedule/components/BookingLimitSettingsButton';
+import { BookingLimitSettingsDialog } from '@/screens/Settings/Work/tabs/Schedule/components/BookingLimitSettingsDialog';
+import { BookingLimitValue } from '@/screens/Settings/Work/tabs/Schedule/components/BookingLimitSettingsDialog/BookingLimit.types';
 import { FillTools } from '@/screens/Settings/Work/tabs/Schedule/components/FillTools';
 import { WeekCalendar } from '@/screens/Settings/Work/tabs/Schedule/components/WeekCalendar';
 import { templates } from '@/screens/test-store';
 import { FC, useState } from "react";
 import { View } from 'react-native';
-import { BookingLimitSettingsDialog } from './components/BookingLimitSettingsDialog';
 
 export const Schedule: FC = () => {
   const { confirm, ConfirmDialogElement } = useConfirm();
   const [ showBookingLimitSettings, setShowBookingLimitSettings ] = useState<boolean>(false);
+  const [ bookingLimitValue, setBookingLimitValue ] = useState<BookingLimitValue>({
+    mode: 'unlimited',
+  });
 
   const handleLimit = (value?: boolean) => {
     setShowBookingLimitSettings(prev => value ?? !prev);
@@ -53,7 +57,7 @@ export const Schedule: FC = () => {
           </CardHeader>
         </Card>
         <View className="gap-3">
-          <BookingLimitSettingsButton onPress={handleLimit} />
+          <BookingLimitSettingsButton onPress={handleLimit} value={bookingLimitValue} />
           <Separator />
           <FillTools
             onPeriods={handlePeriods}
@@ -66,7 +70,7 @@ export const Schedule: FC = () => {
         </View>
       </View>
       
-      <BookingLimitSettingsDialog open={showBookingLimitSettings} onOpenChange={handleLimit} onConfirm={() => {}} />
+      <BookingLimitSettingsDialog open={showBookingLimitSettings} onOpenChange={handleLimit} onConfirm={setBookingLimitValue} />
       {ConfirmDialogElement}
     </>
   );

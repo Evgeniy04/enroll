@@ -1,29 +1,45 @@
 import { Button } from '@/components/ui/button';
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
+import { BookingLimitValue } from '@/screens/Settings/Work/tabs/Schedule/components/BookingLimitSettingsDialog/BookingLimit.types';
+import { getPluralWord } from '@/utils/plural';
+import dayjs from 'dayjs';
 import { Settings } from 'lucide-react-native';
 import { FC } from 'react';
 import { View } from 'react-native';
 
 interface BookingLimitSettingsButtonProps {
-  label?: string;
-  value?: string;
-  onPress?: () => void;
+  value: BookingLimitValue;
+  onPress: () => void;
 }
 
 export const BookingLimitSettingsButton: FC<BookingLimitSettingsButtonProps> = ({
-  label = 'Ограничение записи',
-  value = 'отсутствуют',
+  value,
   onPress,
 }) => {
+  const formatValue = (val: BookingLimitValue) => {
+    const { mode, daysAhead, endDate } = val;
+
+    switch (mode) {
+      case 'unlimited':
+        return 'отсутствует';
+      case 'days-ahead':
+        if (daysAhead) return `${daysAhead} ${getPluralWord(daysAhead, ['день', 'дня', 'дней'])}`
+        break;
+      case 'specific-date':
+        if (endDate) return `до ${dayjs(endDate).format('DD MMM YYYY')}`
+        break;
+    }
+  };
+  
   return (
     <Button variant='default' className='justify-between' onPress={onPress}>
       <View className='flex-row items-center gap-1'>
         <Icon as={Settings} className='text-primary-foreground' />
-        <Text>{label}</Text>
+        <Text>Ограничение записи</Text>
       </View>
       <Text variant='muted' className='text-muted-foreground'>—</Text>
-      <Text variant='muted' className='text-muted-foreground'>{value}</Text>
+      <Text variant='muted' className='text-muted-foreground'>{formatValue(value)}</Text>
     </Button>
   );
 };
