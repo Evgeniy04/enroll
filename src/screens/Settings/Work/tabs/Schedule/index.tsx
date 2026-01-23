@@ -6,6 +6,7 @@ import {
 } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { useConfirm } from '@/hooks/useConfirm';
+import { useDialog } from '@/hooks/useDialog';
 import { BookingLimitSettingsButton } from '@/screens/Settings/Work/tabs/Schedule/components/BookingLimitSettingsButton';
 import { BookingLimitSettingsDialog } from '@/screens/Settings/Work/tabs/Schedule/components/BookingLimitSettingsDialog';
 import { BookingLimitValue } from '@/screens/Settings/Work/tabs/Schedule/components/BookingLimitSettingsDialog/BookingLimit.types';
@@ -17,14 +18,18 @@ import { View } from 'react-native';
 
 export const Schedule: FC = () => {
   const { confirm, ConfirmDialogElement } = useConfirm();
-  const [ showBookingLimitSettings, setShowBookingLimitSettings ] = useState<boolean>(false);
+  const { openDialog, DialogElement } = useDialog();
   const [ bookingLimitValue, setBookingLimitValue ] = useState<BookingLimitValue>({
     mode: 'unlimited',
+    daysAhead: 30,
   });
 
-  const handleLimit = (value?: boolean) => {
-    setShowBookingLimitSettings(prev => value ?? !prev);
-  }
+  const handleOpenBookingLimitDialog = () => {
+    openDialog(BookingLimitSettingsDialog, {
+      onConfirm: setBookingLimitValue,
+      initialData: bookingLimitValue,
+    });
+  };
 
   const handlePeriods = () => {
   };
@@ -57,7 +62,10 @@ export const Schedule: FC = () => {
           </CardHeader>
         </Card>
         <View className="gap-3">
-          <BookingLimitSettingsButton onPress={handleLimit} value={bookingLimitValue} />
+          <BookingLimitSettingsButton
+            onPress={handleOpenBookingLimitDialog}
+            value={bookingLimitValue}
+          />
           <Separator />
           <FillTools
             onPeriods={handlePeriods}
@@ -70,7 +78,7 @@ export const Schedule: FC = () => {
         </View>
       </View>
       
-      <BookingLimitSettingsDialog open={showBookingLimitSettings} onOpenChange={handleLimit} onConfirm={setBookingLimitValue} />
+      {DialogElement}
       {ConfirmDialogElement}
     </>
   );

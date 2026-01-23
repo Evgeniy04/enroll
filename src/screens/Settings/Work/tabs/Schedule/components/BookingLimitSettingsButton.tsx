@@ -24,8 +24,7 @@ export const BookingLimitSettingsButton: FC<BookingLimitSettingsButtonProps> = (
       case 'unlimited':
         return 'отсутствует';
       case 'days-ahead':
-        if (daysAhead) return `${daysAhead} ${getPluralWord(daysAhead, ['день', 'дня', 'дней'])}`
-        break;
+        return `${daysAhead} ${getPluralWord(daysAhead, ['день', 'дня', 'дней'])}`
       case 'specific-date':
         if (endDate) return `до ${dayjs(endDate).format('DD MMM YYYY')}`
         break;
