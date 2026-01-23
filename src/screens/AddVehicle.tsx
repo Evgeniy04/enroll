@@ -1,6 +1,7 @@
 import { KeyboardAvoidingScreen } from "@/components/layout/KeyboardAvoidingScreen";
 import { AvatarPicker } from "@/components/ui/avatar-picker";
 import { Button } from "@/components/ui/button";
+import { DatePickerValue } from "@/components/ui/date-picker";
 import { DatePickerField } from "@/components/ui/date-picker-field";
 import { Option } from "@/components/ui/select";
 import { SelectField } from "@/components/ui/select-field";
@@ -20,7 +21,7 @@ export const AddVehicle = () => {
   const contentInsets = useContentInsets();
   const [ image, setImage ] = useState<string | undefined>('https://hips.hearstapps.com/hmg-prod/images/2023-range-rover-se-p400-lwb-105-1650304551.jpg?crop=0.960xw:0.810xh;0,0.115xh&resize=2048:*');
   const [ transmissionType, setTransmissionType ] = useState<Option>(undefined);
-  const [ manufactureDate, setManufactureDate ] = useState<Date>();
+  const [ manufactureDate, setManufactureDate ] = useState<DatePickerValue>();
   
   return (
     <>
@@ -65,8 +66,8 @@ export const AddVehicle = () => {
             nativeID="manufacture-date"
             label="Дата выпуска"
             helperText="Укажите дату, когда транспортное средство было выпущено"
-            currentDate={manufactureDate}
-            setCurrentDate={setManufactureDate}
+            currentValue={manufactureDate}
+            setCurrentValue={setManufactureDate}
             startYear={1990}
             contentInsets={contentInsets}
           />

@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import { DatePickerValue } from '@/components/ui/date-picker';
 import { DatePickerField } from '@/components/ui/date-picker-field';
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
@@ -10,8 +11,8 @@ import { useState } from 'react';
 
 export const DrivingInstructorForm = () => {
   const contentInsets = useContentInsets();
-  const [ workStartDate, setWorkStartDate ] = useState<Date>();
-  const [ drivingStartDate, setDrivingStartDate ] = useState<Date>();
+  const [ workStartDate, setWorkStartDate ] = useState<DatePickerValue>();
+  const [ drivingStartDate, setDrivingStartDate ] = useState<DatePickerValue>();
 
   return (
     <>
@@ -19,8 +20,8 @@ export const DrivingInstructorForm = () => {
         nativeID="work-start-date"
         label="Дата начала работы"
         helperText="Дата, с&nbsp;которой вы&nbsp;начали работать в&nbsp;профессии"
-        currentDate={workStartDate}
-        setCurrentDate={setWorkStartDate}
+        currentValue={workStartDate}
+        setCurrentValue={setWorkStartDate}
         contentInsets={contentInsets}
         required
       />
@@ -28,8 +29,8 @@ export const DrivingInstructorForm = () => {
         nativeID="driving-start-date"
         label="Дата начала водительского стажа"
         helperText="Дата, с&nbsp;которой вы&nbsp;начали водить транспорт"
-        currentDate={drivingStartDate}
-        setCurrentDate={setDrivingStartDate}
+        currentValue={drivingStartDate}
+        setCurrentValue={setDrivingStartDate}
         contentInsets={contentInsets}
         required
       />

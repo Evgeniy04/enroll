@@ -4,8 +4,7 @@ import { DatePickerFieldProps } from '@/components/ui/date-picker-field/date-pic
 import { FormField } from '@/components/ui/form-field';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Text } from '@/components/ui/text';
-import dayjs from 'dayjs';
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 
 export const DatePickerField: FC<DatePickerFieldProps> = ({
   // FormField
@@ -15,19 +14,28 @@ export const DatePickerField: FC<DatePickerFieldProps> = ({
   helperText,
   required = false,
   disabled = false,
-  // CurrentField
-  currentDate,
-  setCurrentDate,
+
+  // DatePickerField
+  currentValue,
+  setCurrentValue,
   title = 'Выберите дату',
-  placeholder = currentDate ? dayjs(currentDate).format('DD MMMM YYYY') : title,
+  placeholder,
   startYear,
   endYear,
   minDate,
   maxDate,
   side = 'top',
   contentInsets,
+  rangeSelection
 }) => {
-  placeholder = currentDate ? dayjs(currentDate).format('DD MMMM YYYY') : title;
+  const defaultPlaceholder = useMemo(() => {
+      const startText = currentValue ? currentValue.start.format('DD MMMM YYYY') : title;
+      const endText = currentValue?.end?.format('DD MMMM YYYY') ? ` — ${currentValue.end.format('DD MMMM YYYY')}` : '';
+
+      return startText + endText;
+    },
+    [currentValue, title]
+  );
 
   return (
     <FormField
@@ -42,7 +50,7 @@ export const DatePickerField: FC<DatePickerFieldProps> = ({
         <PopoverTrigger asChild>
           <Button variant="outline" disabled={disabled}>
             <Text aria-labelledby={nativeID}>
-              {placeholder}
+              {placeholder ?? defaultPlaceholder}
             </Text>
           </Button>
         </PopoverTrigger>
@@ -53,8 +61,8 @@ export const DatePickerField: FC<DatePickerFieldProps> = ({
           side={side}
         >
           <DatePickerContent
-            currentDate={currentDate}
-            setCurrentDate={setCurrentDate}
+            currentValue={currentValue}
+            setCurrentValue={setCurrentValue}
             title={title}
             helperText={helperText}
             minDate={minDate}
@@ -62,6 +70,7 @@ export const DatePickerField: FC<DatePickerFieldProps> = ({
             startYear={startYear}
             endYear={endYear}
             contentInsets={contentInsets}
+            rangeSelection={rangeSelection}
           />
         </PopoverContent>
       </Popover>

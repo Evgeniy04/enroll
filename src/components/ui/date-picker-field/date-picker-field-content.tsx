@@ -1,36 +1,46 @@
-import { DatePicker } from '@/components/ui/date-picker';
+import { Button } from '@/components/ui/button';
+import { DatePicker, DatePickerValue } from '@/components/ui/date-picker';
 import { DatePickerFieldContactProps } from '@/components/ui/date-picker-field/date-picker-field.types';
+import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
 import { useRootContext as useRootContextPopover } from '@rn-primitives/popover';
+import { X } from 'lucide-react-native';
 import { FC } from 'react';
 import { View } from 'react-native';
-import { DateData } from 'react-native-calendars';
 
 const todayDate = new Date();
 
 export const DatePickerContent: FC<DatePickerFieldContactProps> = ({
   helperText,
-  currentDate,
-  setCurrentDate,
+  currentValue,
+  setCurrentValue,
   title,
   startYear = 1950,
   endYear = todayDate.getFullYear(),
   minDate = new Date(startYear, 0, 1).toDateString(),
   maxDate = todayDate.toDateString(),
   contentInsets,
+  rangeSelection
 }) => {
-  const { onOpenChange} = useRootContextPopover();
+  const { onOpenChange } = useRootContextPopover();
 
-  const handleDayPress = (day: DateData) => {
-    const selectedDate = new Date(day.dateString);
-    setCurrentDate(selectedDate);
-    onOpenChange(false);
+  const handleClose = () => onOpenChange?.(false);
+
+  const handleSetCurrentValue = (date: DatePickerValue) => {
+    setCurrentValue(date);
+
+    if (!rangeSelection) {
+      handleClose();
+    }
   };
 
   return (
     <View className="gap-4">
       <View className="gap-2">
-        <Text className="font-medium leading-none">{title}</Text>
+        <View className='flex-row items-center justify-between'>
+          <Text className="font-medium leading-none">{title}</Text>
+          <Button variant='ghost' size='icon' onPress={handleClose}><Icon as={X} /></Button>
+        </View>
         {helperText && (
           <Text className="text-muted-foreground text-sm">
             {helperText}
@@ -39,14 +49,14 @@ export const DatePickerContent: FC<DatePickerFieldContactProps> = ({
       </View>
 
       <DatePicker
-        currentDate={currentDate}
-        setCurrentDate={setCurrentDate}
+        currentValue={currentValue}
         contentInsets={contentInsets}
         minDate={minDate}
         maxDate={maxDate}
         startYear={startYear}
         endYear={endYear}
-        onDayPress={handleDayPress}
+        setCurrentValue={handleSetCurrentValue}
+        rangeSelection={rangeSelection}
       />
     </View>
   );

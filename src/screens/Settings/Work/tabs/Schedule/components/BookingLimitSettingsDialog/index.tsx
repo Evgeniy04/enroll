@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import { DatePickerValue } from '@/components/ui/date-picker';
 import {
   DialogClose,
   DialogContent,
@@ -32,7 +33,9 @@ export const BookingLimitSettingsDialog: FC<BookingLimitSettingsDialogProps> = (
   const contentInsets = useContentInsets();
   const [ mode, setMode ] = useState<string | undefined>(initialData.mode);
   const [ daysAhead, setDaysAhead ] = useState(initialData.daysAhead);
-  const [ endDate, setEndDate ] = useState<Date | undefined>(initialData.endDate);
+  const [ endDate, setEndDate ] = useState<DatePickerValue | undefined>(
+    initialData.endDate && { start: initialData.endDate }
+  );
 
   const handleChangeMode = (value?: string) => {
     if (!value) return;
@@ -45,7 +48,7 @@ export const BookingLimitSettingsDialog: FC<BookingLimitSettingsDialogProps> = (
     onConfirm({
       mode,
       daysAhead,
-      endDate: endDate && dayjs(endDate).isSameOrAfter(dayjs(), 'day') ? endDate : undefined,
+      endDate: endDate && endDate.start.isSameOrAfter(dayjs(), 'day') ? endDate.start : undefined,
     });
   };
 

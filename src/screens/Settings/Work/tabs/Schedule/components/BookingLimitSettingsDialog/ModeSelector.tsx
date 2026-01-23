@@ -1,12 +1,12 @@
+import { DatePickerValue } from '@/components/ui/date-picker';
 import { ToggleGroupField } from '@/components/ui/toggle-group-field';
-import dayjs from 'dayjs';
 import { Calendar, Clock, Infinity as InfinityIcon } from 'lucide-react-native';
 import { FC } from 'react';
 
 interface ModeSelectorProps {
   value: string;
   daysAhead: number;
-  endDate?: Date;
+  endDate?: DatePickerValue;
   onChange: (value: string | undefined) => void;
 }
 
@@ -28,7 +28,7 @@ export const ModeSelector: FC<ModeSelectorProps> = ({
       icon: Calendar,
       showText: true,
       label: `До ${
-        endDate ? dayjs(endDate).format('DD.MM.YYYY') : 'конкретной даты'
+        endDate ? endDate.start.format('DD.MM.YYYY') : 'конкретной даты'
       }`,
     },
     {
