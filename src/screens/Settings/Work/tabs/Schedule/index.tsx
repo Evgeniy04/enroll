@@ -10,7 +10,7 @@ import { useDialog } from '@/hooks/useDialog';
 import { BookingLimitSettingsButton } from '@/screens/Settings/Work/tabs/Schedule/components/BookingLimitSettingsButton';
 import { BookingLimitSettingsDialog } from '@/screens/Settings/Work/tabs/Schedule/components/BookingLimitSettingsDialog';
 import { BookingLimitValue } from '@/screens/Settings/Work/tabs/Schedule/components/BookingLimitSettingsDialog/BookingLimit.types';
-import { FillTools } from '@/screens/Settings/Work/tabs/Schedule/components/FillTools';
+import { Actions, PeriodsDialog, PeriodsValue } from '@/screens/Settings/Work/tabs/Schedule/components/FillingTools';
 import { WeekCalendar } from '@/screens/Settings/Work/tabs/Schedule/components/WeekCalendar';
 import { templates } from '@/screens/test-store';
 import { FC, useState } from "react";
@@ -23,6 +23,7 @@ export const Schedule: FC = () => {
     mode: 'unlimited',
     daysAhead: 30,
   });
+  const [ periodValue, setPeriodValue ] = useState<PeriodsValue>();
 
   const handleOpenBookingLimitDialog = () => {
     openDialog(BookingLimitSettingsDialog, {
@@ -31,13 +32,25 @@ export const Schedule: FC = () => {
     });
   };
 
-  const handlePeriods = () => {
+  const handleOpenPeriodsDialog = () => {
+    openDialog(PeriodsDialog, {
+      onConfirm: setPeriodValue,
+      templates: templates.map(({ name, id }) => ({ label: name, value: id }))
+    });
   };
 
-  const handleShifts = () => {
+  const handleOpenShiftsDialog = () => {
+    openDialog(BookingLimitSettingsDialog, {
+      onConfirm: setBookingLimitValue,
+      initialData: bookingLimitValue,
+    });
   };
 
-  const handleWeeks = () => {
+  const handleOpenWeeksDialog = () => {
+    openDialog(BookingLimitSettingsDialog, {
+      onConfirm: setBookingLimitValue,
+      initialData: bookingLimitValue,
+    });
   };
 
   const handleReset = () => {
@@ -67,10 +80,10 @@ export const Schedule: FC = () => {
             value={bookingLimitValue}
           />
           <Separator />
-          <FillTools
-            onPeriods={handlePeriods}
-            onShifts={handleShifts}
-            onWeeks={handleWeeks}
+          <Actions
+            onPeriods={handleOpenPeriodsDialog}
+            onShifts={handleOpenShiftsDialog}
+            onWeeks={handleOpenWeeksDialog}
             onReset={handleReset}
           />
           <Separator />
