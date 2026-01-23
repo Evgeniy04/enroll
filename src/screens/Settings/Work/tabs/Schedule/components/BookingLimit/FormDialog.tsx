@@ -12,20 +12,20 @@ import { Separator } from '@/components/ui/separator';
 import { Text } from '@/components/ui/text';
 import { useContentInsets } from '@/hooks/useContentInsets';
 import { useWindowDimensions } from '@/hooks/useWindowDimensions';
-import { BookingLimitValue } from '@/screens/Settings/Work/tabs/Schedule/components/BookingLimitSettingsDialog/BookingLimit.types';
-import { DaysAheadFields } from '@/screens/Settings/Work/tabs/Schedule/components/BookingLimitSettingsDialog/DaysAheadFields';
-import { ModeSelector } from '@/screens/Settings/Work/tabs/Schedule/components/BookingLimitSettingsDialog/ModeSelector';
-import { SpecificDateFields } from '@/screens/Settings/Work/tabs/Schedule/components/BookingLimitSettingsDialog/SpecificDateFields';
+import { BookingLimitValue } from '@/screens/Settings/Work/tabs/Schedule/components/BookingLimit/BookingLimit.types';
+import { DaysAheadFields } from '@/screens/Settings/Work/tabs/Schedule/components/BookingLimit/DaysAheadFields';
+import { ModeSelector } from '@/screens/Settings/Work/tabs/Schedule/components/BookingLimit/ModeSelector';
+import { SpecificDateFields } from '@/screens/Settings/Work/tabs/Schedule/components/BookingLimit/SpecificDateFields';
 import dayjs from 'dayjs';
 import { FC, useState } from 'react';
 import { View } from 'react-native';
 
-interface BookingLimitSettingsDialogProps {
+interface FormDialogProps {
   onConfirm: (value: BookingLimitValue) => void;
   initialData: BookingLimitValue;
 }
 
-export const BookingLimitSettingsDialog: FC<BookingLimitSettingsDialogProps> = ({
+export const FormDialog: FC<FormDialogProps> = ({
   onConfirm,
   initialData
 }) => {

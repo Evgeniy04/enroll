@@ -7,9 +7,7 @@ import {
 import { Separator } from '@/components/ui/separator';
 import { useConfirm } from '@/hooks/useConfirm';
 import { useDialog } from '@/hooks/useDialog';
-import { BookingLimitSettingsButton } from '@/screens/Settings/Work/tabs/Schedule/components/BookingLimitSettingsButton';
-import { BookingLimitSettingsDialog } from '@/screens/Settings/Work/tabs/Schedule/components/BookingLimitSettingsDialog';
-import { BookingLimitValue } from '@/screens/Settings/Work/tabs/Schedule/components/BookingLimitSettingsDialog/BookingLimit.types';
+import { FormDialog as BookingLimitDialog, BookingLimitValue, OpenButton } from '@/screens/Settings/Work/tabs/Schedule/components/BookingLimit';
 import { Actions, PeriodsDialog, PeriodsValue } from '@/screens/Settings/Work/tabs/Schedule/components/FillingTools';
 import { WeekCalendar } from '@/screens/Settings/Work/tabs/Schedule/components/WeekCalendar';
 import { templates } from '@/screens/test-store';
@@ -26,7 +24,7 @@ export const Schedule: FC = () => {
   const [ periodValue, setPeriodValue ] = useState<PeriodsValue>();
 
   const handleOpenBookingLimitDialog = () => {
-    openDialog(BookingLimitSettingsDialog, {
+    openDialog(BookingLimitDialog, {
       onConfirm: setBookingLimitValue,
       initialData: bookingLimitValue,
     });
@@ -40,14 +38,14 @@ export const Schedule: FC = () => {
   };
 
   const handleOpenShiftsDialog = () => {
-    openDialog(BookingLimitSettingsDialog, {
+    openDialog(BookingLimitDialog, {
       onConfirm: setBookingLimitValue,
       initialData: bookingLimitValue,
     });
   };
 
   const handleOpenWeeksDialog = () => {
-    openDialog(BookingLimitSettingsDialog, {
+    openDialog(BookingLimitDialog, {
       onConfirm: setBookingLimitValue,
       initialData: bookingLimitValue,
     });
@@ -75,7 +73,7 @@ export const Schedule: FC = () => {
           </CardHeader>
         </Card>
         <View className="gap-3">
-          <BookingLimitSettingsButton
+          <OpenButton
             onPress={handleOpenBookingLimitDialog}
             value={bookingLimitValue}
           />
