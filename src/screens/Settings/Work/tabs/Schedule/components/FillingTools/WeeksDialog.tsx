@@ -104,10 +104,9 @@ export const WeeksDialog: FC<WeeksDialogProps> = ({
 
       <View className="gap-3">
         <ToggleGroupField
-          nativeID="mode-selector"
+          nativeID="weekdays-selector"
           label="Выберите дни недели"
           type="multiple"
-          orientation='vertical'
           variant="outline"
           value={selectedDays}
           onValueChange={setSelectedDays}
