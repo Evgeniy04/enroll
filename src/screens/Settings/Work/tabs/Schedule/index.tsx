@@ -8,10 +8,10 @@ import { Separator } from '@/components/ui/separator';
 import { useConfirm } from '@/hooks/useConfirm';
 import { useDialog } from '@/hooks/useDialog';
 import { FormDialog as BookingLimitDialog, BookingLimitValue, OpenButton } from '@/screens/Settings/Work/tabs/Schedule/components/BookingLimit';
-import { Actions, PeriodsDialog, PeriodsValue } from '@/screens/Settings/Work/tabs/Schedule/components/FillingTools';
+import { Actions, PeriodsDialog, PeriodsValue, ShiftsDialog, ShiftsValue, WeeksDialog, WeeksValue } from '@/screens/Settings/Work/tabs/Schedule/components/FillingTools';
 import { WeekCalendar } from '@/screens/Settings/Work/tabs/Schedule/components/WeekCalendar';
 import { templates } from '@/screens/test-store';
-import { FC, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import { View } from 'react-native';
 
 export const Schedule: FC = () => {
@@ -22,6 +22,9 @@ export const Schedule: FC = () => {
     daysAhead: 30,
   });
   const [ periodValue, setPeriodValue ] = useState<PeriodsValue>();
+  const [ weeksValue, setWeeksValue ] = useState<WeeksValue>();
+  const [ shiftsValue, setShiftsValue ] = useState<ShiftsValue>();
+  const templateOptions = useMemo(() => templates.map(({ name, id }) => ({ label: name, value: id })), [])
 
   const handleOpenBookingLimitDialog = () => {
     openDialog(BookingLimitDialog, {
@@ -33,21 +36,21 @@ export const Schedule: FC = () => {
   const handleOpenPeriodsDialog = () => {
     openDialog(PeriodsDialog, {
       onConfirm: setPeriodValue,
-      templates: templates.map(({ name, id }) => ({ label: name, value: id }))
+      templates: templateOptions
     });
   };
 
   const handleOpenShiftsDialog = () => {
-    openDialog(BookingLimitDialog, {
-      onConfirm: setBookingLimitValue,
-      initialData: bookingLimitValue,
+    openDialog(ShiftsDialog, {
+      onConfirm: setShiftsValue,
+      templates: templateOptions,
     });
   };
 
   const handleOpenWeeksDialog = () => {
-    openDialog(BookingLimitDialog, {
-      onConfirm: setBookingLimitValue,
-      initialData: bookingLimitValue,
+    openDialog(WeeksDialog, {
+      onConfirm: setWeeksValue,
+      templates: templateOptions,
     });
   };
 
