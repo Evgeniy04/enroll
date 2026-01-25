@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button';
 import { FormField, FormFieldProps } from '@/components/ui/form-field';
 import { Text } from '@/components/ui/text';
 import { toggleVariants } from '@/components/ui/toggle';
@@ -16,12 +17,19 @@ interface ToggleOption {
   numberOfLines?: number;
 }
 
+interface TogglePreset {
+  label: string;
+  values: string[];
+}
+
 interface ToggleGroupFieldBaseProps extends FormFieldProps {
   options: ToggleOption[];
   disabled?: boolean;
   variant?: VariantProps<typeof toggleVariants>['variant'];
   size?: VariantProps<typeof toggleVariants>['size'];
   orientation?: 'horizontal' | 'vertical';
+  /** Максимум 3 пресета */
+  presets?: TogglePreset[];
 }
 
 interface ToggleGroupFieldSingleProps extends ToggleGroupFieldBaseProps {
@@ -56,6 +64,8 @@ export const ToggleGroupField: FC<ToggleGroupFieldProps> = ({
   type,
   variant,
   size,
+  /** Максимум 3 пресета */
+  presets = [],
   orientation = 'horizontal',
 }) => {
   const allIconsOnly = useMemo(
@@ -125,6 +135,35 @@ export const ToggleGroupField: FC<ToggleGroupFieldProps> = ({
         >
           {renderOptions}
         </ToggleGroup>
+      )}
+      {presets.length > 0 && (
+        <View className="flex-row flex-wrap gap-2 justify-center mt-2">
+          {presets.slice(0, 3).map((preset) => {
+            const active = type === 'single'
+              ? preset.values.length === 1 && value === preset.values[0]
+              : value.length === preset.values.length && preset.values.every(v => value.includes(v));
+
+            const applyPreset = () => {
+              if (type === 'single') {
+                onValueChange(preset.values[0]);
+              } else {
+                onValueChange(preset.values);
+              }
+            };
+
+            return (
+              <Button
+                key={preset.label}
+                disabled={disabled}
+                variant={active ? 'default' : 'outline'}
+                className="flex-1"
+                onPress={applyPreset}
+              >
+                <Text variant="small">{preset.label}</Text>
+              </Button>
+            );
+          })}
+        </View>
       )}
     </FormField>
   );
