@@ -34,7 +34,7 @@ export const SpecialistProfileCard: FC<SelectValueProps> = ({ value, onValueChan
   return (
     <Card className='m-5'>
       <CardHeader>
-        <CardTitle>Настройки профиля специалиста</CardTitle>
+        <CardTitle>Специализация</CardTitle>
         <CardDescription>Выберите вид деятельности и заполните необходимые поля.</CardDescription>
       </CardHeader>
       <CardContent className='gap-6'>
