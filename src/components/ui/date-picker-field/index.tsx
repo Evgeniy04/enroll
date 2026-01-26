@@ -29,9 +29,12 @@ export const DatePickerField: FC<DatePickerFieldProps> = ({
   rangeSelection
 }) => {
   const defaultPlaceholder = useMemo(() => {
-      const startText = currentValue ? currentValue.start.format('DD MMMM YYYY') : title;
-      const endText = currentValue?.end?.format('DD MMMM YYYY') ? ` — ${currentValue.end.format('DD MMMM YYYY')}` : '';
+      if (!currentValue) return title;
+      
+      const startText = currentValue.start.format('DD MMMM YYYY');
+      if (currentValue.start.isSame(currentValue.end)) return startText;
 
+      const endText = currentValue.end ? ` — ${currentValue.end.format('DD MMMM YYYY')}` : '';
       return startText + endText;
     },
     [currentValue, title]
