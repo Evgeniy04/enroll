@@ -112,6 +112,7 @@ export const WeeksDialog: FC<WeeksDialogProps> = ({
           onValueChange={setSelectedDays}
           options={weekdayOptions}
           presets={presets}
+          className='px-0 py-5'
         />
 
         <Separator />

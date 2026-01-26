@@ -30,6 +30,7 @@ interface ToggleGroupFieldBaseProps extends FormFieldProps {
   orientation?: 'horizontal' | 'vertical';
   /** Максимум 3 пресета */
   presets?: TogglePreset[];
+  className?: string;
 }
 
 interface ToggleGroupFieldSingleProps extends ToggleGroupFieldBaseProps {
@@ -67,6 +68,7 @@ export const ToggleGroupField: FC<ToggleGroupFieldProps> = ({
   /** Максимум 3 пресета */
   presets = [],
   orientation = 'horizontal',
+  className,
 }) => {
   const allIconsOnly = useMemo(
     () => options.every(option => !option.showText),
@@ -89,7 +91,8 @@ export const ToggleGroupField: FC<ToggleGroupFieldProps> = ({
           <View
             className={cn(
               'justify-center items-center gap-1',
-              orientation === 'horizontal' ? 'flex-row px-3 py-1' : 'py-2'
+              orientation === 'horizontal' ? 'flex-row px-3 py-1' : 'py-2',
+              className,
             )}
           >
             {option.icon && <ToggleGroupIcon as={option.icon} />}
@@ -102,7 +105,7 @@ export const ToggleGroupField: FC<ToggleGroupFieldProps> = ({
         </ToggleGroupItem>
       );
     });
-  }, [allIconsOnly, disabled, options, orientation]);
+  }, [allIconsOnly, disabled, options, orientation, className]);
 
   return (
     <FormField
