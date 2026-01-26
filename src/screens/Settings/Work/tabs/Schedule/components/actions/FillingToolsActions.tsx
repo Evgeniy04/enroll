@@ -14,14 +14,14 @@ interface ToolConfig {
   separated?: boolean;
 }
 
-interface ActionsProps {
+interface FillingToolsActionsProps {
   onPeriods: () => void;
   onWeeks: () => void;
   onShifts: () => void;
   onReset: () => void;
 }
 
-export const Actions: FC<ActionsProps> = ({
+export const FillingToolsActions: FC<FillingToolsActionsProps> = ({
   onPeriods,
   onWeeks,
   onShifts,

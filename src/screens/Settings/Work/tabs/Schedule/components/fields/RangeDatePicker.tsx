@@ -4,25 +4,21 @@ import { ContentInsets } from '@/hooks/useContentInsets';
 import dayjs from 'dayjs';
 import { FC } from 'react';
 
-interface SpecificDateFieldsProps {
+interface RangeDatePickerProps {
   value?: DatePickerValue;
-  onChange: (date: DatePickerValue) => void;
+  onChange: (value?: DatePickerValue) => void;
   contentInsets: ContentInsets;
 }
 
-export const SpecificDateFields: FC<SpecificDateFieldsProps> = ({
-  value,
-  onChange,
-  contentInsets,
-}) => {
+export const RangeDatePicker: FC<RangeDatePickerProps> = ({ value, onChange, contentInsets }) => {
   const now = dayjs();
   const year = now.year();
 
   return (
     <DatePickerField
-      nativeID="end-date"
-      label="Конечная дата"
-      helperText="Клиенты смогут записываться только до выбранной даты."
+      nativeID="range-dates"
+      title="Выберите период"
+      label="Выбранный период"
       currentValue={value}
       setCurrentValue={onChange}
       startYear={year}
@@ -30,6 +26,7 @@ export const SpecificDateFields: FC<SpecificDateFieldsProps> = ({
       minDate={now.toString()}
       maxDate={now.add(1, 'year').toString()}
       contentInsets={contentInsets}
+      rangeSelection
     />
   );
 };

@@ -1,19 +1,19 @@
 import { Button } from '@/components/ui/button';
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
-import { BookingLimitValue } from '@/screens/Settings/Work/tabs/Schedule/components/BookingLimit/BookingLimit.types';
+import { BookingLimitValue } from '@/screens/Settings/Work/tabs/Schedule/components/types/booking-limit';
 import { getPluralWord } from '@/utils/plural';
 import dayjs from 'dayjs';
 import { Settings } from 'lucide-react-native';
 import { FC } from 'react';
 import { View } from 'react-native';
 
-interface OpenButtonProps {
+interface BookingLimitActionsProps {
   value: BookingLimitValue;
   onPress: () => void;
 }
 
-export const OpenButton: FC<OpenButtonProps> = ({
+export const BookingLimitActions: FC<BookingLimitActionsProps> = ({
   value,
   onPress,
 }) => {

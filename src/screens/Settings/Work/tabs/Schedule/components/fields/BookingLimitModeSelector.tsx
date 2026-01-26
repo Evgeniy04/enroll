@@ -3,14 +3,14 @@ import { ToggleGroupField } from '@/components/ui/toggle-group-field';
 import { Calendar, Clock, Infinity as InfinityIcon } from 'lucide-react-native';
 import { FC } from 'react';
 
-interface ModeSelectorProps {
+interface BookingLimitModeSelectorProps {
   value: string;
   daysAhead: number;
   endDate?: DatePickerValue;
   onChange: (value: string | undefined) => void;
 }
 
-export const ModeSelector: FC<ModeSelectorProps> = ({
+export const BookingLimitModeSelector: FC<BookingLimitModeSelectorProps> = ({
   value,
   daysAhead,
   endDate,

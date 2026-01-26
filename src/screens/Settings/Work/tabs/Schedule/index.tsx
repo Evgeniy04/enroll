@@ -7,12 +7,18 @@ import {
 import { Separator } from '@/components/ui/separator';
 import { useConfirm } from '@/hooks/useConfirm';
 import { useDialog } from '@/hooks/useDialog';
-import { FormDialog as BookingLimitDialog, BookingLimitValue, OpenButton } from '@/screens/Settings/Work/tabs/Schedule/components/BookingLimit';
-import { Actions, PeriodsDialog, PeriodsValue, ShiftsDialog, ShiftsValue, WeeksDialog, WeeksValue } from '@/screens/Settings/Work/tabs/Schedule/components/FillingTools';
 import { WeekCalendar } from '@/screens/Settings/Work/tabs/Schedule/components/WeekCalendar';
 import { templates } from '@/screens/test-store';
 import { FC, useMemo, useState } from "react";
 import { View } from 'react-native';
+import { BookingLimitActions } from './components/actions/BookingLimitActions';
+import { FillingToolsActions } from './components/actions/FillingToolsActions';
+import { BookingLimitDialog } from './components/dialogs/BookingLimitDialog';
+import { PeriodsDialog } from './components/dialogs/PeriodsDialog';
+import { ShiftsDialog } from './components/dialogs/ShiftsDialog';
+import { WeeksDialog } from './components/dialogs/WeeksDialog';
+import { BookingLimitValue } from './components/types/booking-limit';
+import { PeriodsValue, ShiftsValue, WeeksValue } from './components/types/filling-tools';
 
 export const Schedule: FC = () => {
   const { confirm, ConfirmDialogElement } = useConfirm();
@@ -24,6 +30,11 @@ export const Schedule: FC = () => {
   const [ periodValue, setPeriodValue ] = useState<PeriodsValue>();
   const [ weeksValue, setWeeksValue ] = useState<WeeksValue>();
   const [ shiftsValue, setShiftsValue ] = useState<ShiftsValue>();
+
+  console.log(periodValue);
+  console.log(weeksValue);
+  console.log(shiftsValue);
+
   const templateOptions = useMemo(() => templates.map(({ name, id }) => ({ label: name, value: id })), [])
 
   const handleOpenBookingLimitDialog = () => {
@@ -76,12 +87,12 @@ export const Schedule: FC = () => {
           </CardHeader>
         </Card>
         <View className="gap-3">
-          <OpenButton
+          <BookingLimitActions
             onPress={handleOpenBookingLimitDialog}
             value={bookingLimitValue}
           />
           <Separator />
-          <Actions
+          <FillingToolsActions
             onPeriods={handleOpenPeriodsDialog}
             onShifts={handleOpenShiftsDialog}
             onWeeks={handleOpenWeeksDialog}

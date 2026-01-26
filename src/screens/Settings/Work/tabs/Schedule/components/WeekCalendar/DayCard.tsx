@@ -1,9 +1,9 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Option } from "@/components/ui/select";
-import { SelectField } from "@/components/ui/select-field";
 import { Text } from "@/components/ui/text";
 import { useContentInsets } from "@/hooks/useContentInsets";
 import { cn } from "@/lib/utils";
+import { TemplateSelect } from "@/screens/Settings/Work/tabs/Schedule/components/fields/TempleteSelect";
 import dayjs, { Dayjs } from 'dayjs';
 import { FC, useState } from "react";
 import { View } from "react-native";
@@ -55,13 +55,9 @@ export const DayCard: FC<DayCardProps> = ({
       </CardHeader>
 
       <CardContent className="p-2">
-        <SelectField
-          nativeID={`template-${date.unix()}`}
-          label="Применённый шаблон"
-          groupLabel="Шаблон"
-          placeholder="Выходной"
+        <TemplateSelect
           value={template}
-          onValueChange={handleTemplateChange}
+          onChange={handleTemplateChange}
           options={templates}
           disabled={disabled}
           contentInsets={contentInsets}
