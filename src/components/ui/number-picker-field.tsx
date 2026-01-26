@@ -30,6 +30,7 @@ export interface NumberPickerFieldProps extends FormFieldProps {
   unit?: string;
   /** Кастомное форматирование значения */
   formatValue?: (value: number) => string;
+  formClassName?: string;
 }
 
 export const NumberPickerField: FC<NumberPickerFieldProps> = ({
@@ -50,6 +51,7 @@ export const NumberPickerField: FC<NumberPickerFieldProps> = ({
   presets = [],
   unit,
   formatValue,
+  formClassName,
 }) => {
   const clamp = (v: number) => Math.min(max, Math.max(min, v));
 
@@ -64,6 +66,7 @@ export const NumberPickerField: FC<NumberPickerFieldProps> = ({
       helperText={helperText}
       required={required}
       disabled={disabled}
+      className={formClassName}
     >
       <View
         aria-labelledby={nativeID}
@@ -75,7 +78,8 @@ export const NumberPickerField: FC<NumberPickerFieldProps> = ({
           className={cn(
             'flex-row items-center justify-between px-1 py-1',
             'dark:bg-input/30 bg-background',
-            error ? 'border-destructive' : 'border-border'
+            error ? 'border-destructive' : 'border-border',
+            'gap-2',
           )}
         >
           <Button
