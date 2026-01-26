@@ -12,7 +12,7 @@ import { Event, EVENTS } from '../test-store';
 export const Home = () => {
   const { top: topHeaderHeight, bottom: bottomTabBarHeight } = useContentInsets();
   const { height: screenHeight } = useWindowDimensions();
-  const [ viewMode, setViewMode ] = useState<CalendarViewMode>('3days');
+  const [ viewMode, setViewMode ] = useState<CalendarViewMode>('day');
   const [ currentDate, setCurrentDate ] = useState<Date>(new Date());
   const [ events ] = useState<Event[]>(EVENTS);
 

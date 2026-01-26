@@ -16,7 +16,7 @@ export const EventCalendar: FC<EventCalendarProps> = ({
   sceneHeight,
   events,
   initialDate = new Date(),
-  initialViewMode = '3days',
+  initialViewMode = 'day',
   onPressEvent,
   renderEvent,
   eventCellStyle,
