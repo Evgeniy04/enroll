@@ -89,9 +89,9 @@ export const ShiftsDialog: FC<ShiftsDialogProps> = ({
   return (
     <DialogContent style={{ width: screenWidth - 40, alignSelf: 'center' }}>
       <DialogHeader>
-        <DialogTitle>График смен</DialogTitle>
+        <DialogTitle>График работы</DialogTitle>
         <DialogDescription>
-          Повторяющийся цикл.
+          Настройте рабочие дни, применив выбранные шаблоны.
         </DialogDescription>
       </DialogHeader>
 

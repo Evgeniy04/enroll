@@ -98,7 +98,7 @@ export const WeeksDialog: FC<WeeksDialogProps> = ({
       <DialogHeader>
         <DialogTitle>Дни недели</DialogTitle>
         <DialogDescription>
-          Повторяющиеся дни.
+          Выберите повторяющиеся дни недели для шаблона.
         </DialogDescription>
       </DialogHeader>
 

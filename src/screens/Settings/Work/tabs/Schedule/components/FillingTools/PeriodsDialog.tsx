@@ -64,7 +64,7 @@ export const PeriodsDialog: FC<PeriodsDialogProps> = ({
       <DialogHeader>
         <DialogTitle>Выбор периода</DialogTitle>
         <DialogDescription>
-          Выберите дни, на которые применится Ваш шаблон.
+          Укажите даты, на которые нужно применить выбранный шаблон.
         </DialogDescription>
       </DialogHeader>
 
