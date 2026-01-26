@@ -31,6 +31,8 @@ interface ToggleGroupFieldBaseProps extends FormFieldProps {
   /** Максимум 3 пресета */
   presets?: TogglePreset[];
   className?: string;
+  textClassName?: string;
+  iconClassName?: string;
 }
 
 interface ToggleGroupFieldSingleProps extends ToggleGroupFieldBaseProps {
@@ -69,6 +71,8 @@ export const ToggleGroupField: FC<ToggleGroupFieldProps> = ({
   presets = [],
   orientation = 'horizontal',
   className,
+  textClassName,
+  iconClassName,
 }) => {
   const allIconsOnly = useMemo(
     () => options.every(option => !option.showText),
@@ -95,9 +99,16 @@ export const ToggleGroupField: FC<ToggleGroupFieldProps> = ({
               className,
             )}
           >
-            {option.icon && <ToggleGroupIcon as={option.icon} />}
+            {option.icon && <ToggleGroupIcon as={option.icon} className={cn(iconClassName)}/>}
             {option.showText && (
-              <Text className="text-xs text-center" numberOfLines={textLines}>
+              <Text 
+                className={cn(
+                  "text-xs text-center",
+                  orientation === "horizontal" && "text-sm",
+                  textClassName,
+                )}
+                numberOfLines={textLines}
+              >
                 {option.label}
               </Text>
             )}
@@ -105,7 +116,7 @@ export const ToggleGroupField: FC<ToggleGroupFieldProps> = ({
         </ToggleGroupItem>
       );
     });
-  }, [allIconsOnly, disabled, options, orientation, className]);
+  }, [allIconsOnly, disabled, options, orientation, className, iconClassName, textClassName]);
 
   return (
     <FormField
