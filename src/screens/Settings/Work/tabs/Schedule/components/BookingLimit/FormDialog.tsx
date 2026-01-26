@@ -37,7 +37,7 @@ export const FormDialog: FC<FormDialogProps> = ({
     initialData.endDate && { start: initialData.endDate }
   );
 
-  const handleChangeMode = (value?: string) => {
+  const handleModeChange = (value?: string) => {
     if (!value) return;
     setMode(value);
   };
@@ -66,7 +66,7 @@ export const FormDialog: FC<FormDialogProps> = ({
           value={mode}
           daysAhead={daysAhead}
           endDate={endDate}
-          onChange={handleChangeMode}
+          onChange={handleModeChange}
         />
 
         {mode !== 'unlimited' && <Separator />}
