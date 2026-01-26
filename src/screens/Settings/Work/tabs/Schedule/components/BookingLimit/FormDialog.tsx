@@ -31,7 +31,7 @@ export const FormDialog: FC<FormDialogProps> = ({
 }) => {
   const { width: screenWidth } = useWindowDimensions();
   const contentInsets = useContentInsets();
-  const [ mode, setMode ] = useState<string | undefined>(initialData.mode);
+  const [ mode, setMode ] = useState<string>(initialData.mode);
   const [ daysAhead, setDaysAhead ] = useState(initialData.daysAhead);
   const [ endDate, setEndDate ] = useState<DatePickerValue | undefined>(
     initialData.endDate && { start: initialData.endDate }
@@ -63,7 +63,7 @@ export const FormDialog: FC<FormDialogProps> = ({
 
       <View className="gap-3">
         <ModeSelector
-          value={mode ?? 'unlimited'}
+          value={mode}
           daysAhead={daysAhead}
           endDate={endDate}
           onChange={handleChangeMode}
