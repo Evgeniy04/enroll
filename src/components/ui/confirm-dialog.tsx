@@ -7,10 +7,10 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from '@/components/ui/alert-dialog';
-import { Text } from '@/components/ui/text';
-import { useWindowDimensions } from '@/hooks/useWindowDimensions';
-import { FC } from 'react';
+} from "@/components/ui/alert-dialog";
+import { Text } from "@/components/ui/text";
+import { useWindowDimensions } from "@/hooks/useWindowDimensions";
+import { FC } from "react";
 
 interface ConfirmDialogProps {
   open: boolean;
@@ -28,8 +28,8 @@ export const ConfirmDialog: FC<ConfirmDialogProps> = ({
   onOpenChange,
   title,
   description,
-  confirmText = 'Подтвердить',
-  cancelText = 'Отменить',
+  confirmText = "Подтвердить",
+  cancelText = "Отменить",
   onConfirm,
   onCancel,
 }) => {
@@ -42,16 +42,14 @@ export const ConfirmDialog: FC<ConfirmDialogProps> = ({
 
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>
-      <AlertDialogContent 
-        style={{ width: screenWidth - 40, alignSelf: 'center' }}
+      <AlertDialogContent
+        style={{ width: screenWidth - 40, alignSelf: "center" }}
       >
         <AlertDialogHeader>
           <AlertDialogTitle>{title}</AlertDialogTitle>
 
           {description && (
-            <AlertDialogDescription>
-              {description}
-            </AlertDialogDescription>
+            <AlertDialogDescription>{description}</AlertDialogDescription>
           )}
         </AlertDialogHeader>
 

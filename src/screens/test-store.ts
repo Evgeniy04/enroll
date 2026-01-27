@@ -13,110 +13,110 @@ export interface Contact {
 
 export const CONTACTS: Contact[] = [
   {
-    id: '1',
-    name: 'Иван Кузнецов',
-    phone: '+7 (901) 234-56-01',
-    avatar: 'https://avatars.githubusercontent.com/u/1?v=4',
-    activity: 'Персональный тренер',
+    id: "1",
+    name: "Иван Кузнецов",
+    phone: "+7 (901) 234-56-01",
+    avatar: "https://avatars.githubusercontent.com/u/1?v=4",
+    activity: "Персональный тренер",
     experienceYears: 1,
-    address: 'г. Москва, ул. Тверская, д. 10',
+    address: "г. Москва, ул. Тверская, д. 10",
   },
   {
-    id: '2',
-    name: 'Анна Морозова',
-    phone: '+7 (902) 345-67-02',
-    avatar: 'https://avatars.githubusercontent.com/u/2?v=4',
-    activity: 'Мастер по маникюру',
+    id: "2",
+    name: "Анна Морозова",
+    phone: "+7 (902) 345-67-02",
+    avatar: "https://avatars.githubusercontent.com/u/2?v=4",
+    activity: "Мастер по маникюру",
     experienceYears: 4,
-    address: 'г. Санкт-Петербург, Невский проспект, д. 120',
+    address: "г. Санкт-Петербург, Невский проспект, д. 120",
   },
   {
-    id: '3',
-    name: 'Алексей Смирнов',
-    phone: '+7 (903) 456-78-03',
-    avatar: 'https://avatars.githubusercontent.com/u/3?v=4',
-    activity: 'Массажист',
+    id: "3",
+    name: "Алексей Смирнов",
+    phone: "+7 (903) 456-78-03",
+    avatar: "https://avatars.githubusercontent.com/u/3?v=4",
+    activity: "Массажист",
     experienceYears: 9,
-    address: 'г. Казань, ул. Баумана, д. 7',
+    address: "г. Казань, ул. Баумана, д. 7",
   },
   {
-    id: '4',
-    name: 'Ольга Васильева',
-    phone: '+7 (904) 567-89-04',
-    avatar: 'https://avatars.githubusercontent.com/u/4?v=4',
-    activity: 'Косметолог',
+    id: "4",
+    name: "Ольга Васильева",
+    phone: "+7 (904) 567-89-04",
+    avatar: "https://avatars.githubusercontent.com/u/4?v=4",
+    activity: "Косметолог",
     experienceYears: 7,
-    address: 'г. Екатеринбург, ул. Ленина, д. 25',
+    address: "г. Екатеринбург, ул. Ленина, д. 25",
   },
   {
-    id: '5',
-    name: 'Дмитрий Орлов',
-    phone: '+7 (905) 678-90-05',
-    avatar: 'https://avatars.githubusercontent.com/u/5?v=4',
-    activity: 'Автоинструктор',
+    id: "5",
+    name: "Дмитрий Орлов",
+    phone: "+7 (905) 678-90-05",
+    avatar: "https://avatars.githubusercontent.com/u/5?v=4",
+    activity: "Автоинструктор",
     experienceYears: 0,
-    address: 'г. Новосибирск, Красный проспект, д. 88',
+    address: "г. Новосибирск, Красный проспект, д. 88",
   },
   {
-    id: '6',
-    name: 'Екатерина Павлова',
-    phone: '+7 (906) 789-01-06',
-    avatar: 'https://avatars.githubusercontent.com/u/6?v=4',
-    activity: 'Парикмахер-стилист',
+    id: "6",
+    name: "Екатерина Павлова",
+    phone: "+7 (906) 789-01-06",
+    avatar: "https://avatars.githubusercontent.com/u/6?v=4",
+    activity: "Парикмахер-стилист",
     experienceYears: 5,
-    address: 'г. Самара, ул. Молодогвардейская, д. 15',
+    address: "г. Самара, ул. Молодогвардейская, д. 15",
   },
   {
-    id: '7',
-    name: 'Сергей Волков',
-    phone: '+7 (907) 890-12-07',
-    avatar: 'https://avatars.githubusercontent.com/u/7?v=4',
-    activity: 'Электрик',
+    id: "7",
+    name: "Сергей Волков",
+    phone: "+7 (907) 890-12-07",
+    avatar: "https://avatars.githubusercontent.com/u/7?v=4",
+    activity: "Электрик",
     experienceYears: 11,
-    address: 'г. Ростов-на-Дону, пр. Ворошиловский, д. 42',
+    address: "г. Ростов-на-Дону, пр. Ворошиловский, д. 42",
   },
   {
-    id: '8',
-    name: 'Мария Фёдорова',
-    phone: '+7 (908) 901-23-08',
-    avatar: 'https://avatars.githubusercontent.com/u/8?v=4',
-    activity: 'Визажист',
+    id: "8",
+    name: "Мария Фёдорова",
+    phone: "+7 (908) 901-23-08",
+    avatar: "https://avatars.githubusercontent.com/u/8?v=4",
+    activity: "Визажист",
     experienceYears: 6,
-    address: 'г. Краснодар, ул. Северная, д. 55',
+    address: "г. Краснодар, ул. Северная, д. 55",
   },
   {
-    id: '9',
-    name: 'Николай Соколов',
-    phone: '+7 (909) 012-34-09',
-    avatar: 'https://avatars.githubusercontent.com/u/9?v=4',
-    activity: 'Фотограф',
+    id: "9",
+    name: "Николай Соколов",
+    phone: "+7 (909) 012-34-09",
+    avatar: "https://avatars.githubusercontent.com/u/9?v=4",
+    activity: "Фотограф",
     experienceYears: 4,
-    address: 'г. Томск, пр. Ленина, д. 36',
+    address: "г. Томск, пр. Ленина, д. 36",
   },
   {
-    id: '10',
-    name: 'Татьяна Белова',
-    phone: '+7 (910) 123-45-10',
-    activity: 'Репетитор по математике',
+    id: "10",
+    name: "Татьяна Белова",
+    phone: "+7 (910) 123-45-10",
+    activity: "Репетитор по математике",
     experienceYears: 13,
-    address: 'г. Москва, ул. Большая Ордынка, д. 18',
+    address: "г. Москва, ул. Большая Ордынка, д. 18",
   },
   {
-    id: '11',
-    name: 'Андрей Михайлов',
-    phone: '+7 (911) 234-56-11',
-    avatar: 'https://avatars.githubusercontent.com/u/11?v=4',
-    activity: 'Мастер по ремонту бытовой техники',
+    id: "11",
+    name: "Андрей Михайлов",
+    phone: "+7 (911) 234-56-11",
+    avatar: "https://avatars.githubusercontent.com/u/11?v=4",
+    activity: "Мастер по ремонту бытовой техники",
     experienceYears: 15,
-    address: 'г. Пермь, Комсомольский проспект, д. 64',
+    address: "г. Пермь, Комсомольский проспект, д. 64",
   },
   {
-    id: '12',
-    name: 'Наталья Крылова',
-    phone: '+7 (912) 345-67-12',
-    activity: 'Клининговый специалист',
+    id: "12",
+    name: "Наталья Крылова",
+    phone: "+7 (912) 345-67-12",
+    activity: "Клининговый специалист",
     experienceYears: 5,
-    address: 'г. Воронеж, ул. Плехановская, д. 9',
+    address: "г. Воронеж, ул. Плехановская, д. 9",
   },
 ];
 
@@ -203,108 +203,108 @@ export interface Event {
 
 export const services: Service[] = [
   {
-    id: '0',
-    name: 'Стрижка',
+    id: "0",
+    name: "Стрижка",
     duration: 30,
     breakAfter: 0,
   },
   {
-    id: '1',
-    name: 'Очень длинное название услуги для теста',
+    id: "1",
+    name: "Очень длинное название услуги для теста",
     duration: 45,
     breakAfter: 15,
   },
-]
+];
 
 export const templates: Template[] = [
   {
-    id: 't1',
-    name: 'Стандартный день',
+    id: "t1",
+    name: "Стандартный день",
     slots: [
       {
-        id: 'sl1',
-        serviceId: 's2',
+        id: "sl1",
+        serviceId: "s2",
         startTime: { hours: 9, minutes: 0 },
-        count: 4
+        count: 4,
       },
       {
-        id: 'sl2',
-        serviceId: 's1',
+        id: "sl2",
+        serviceId: "s1",
         startTime: { hours: 14, minutes: 0 },
-        count: 3
-      }
-    ]
+        count: 3,
+      },
+    ],
   },
   {
-    id: 't2',
-    name: 'Интенсивный день',
+    id: "t2",
+    name: "Интенсивный день",
     slots: [
       {
-        id: 'sl3',
-        serviceId: 's2',
+        id: "sl3",
+        serviceId: "s2",
         startTime: { hours: 9, minutes: 0 },
-        count: 6
+        count: 6,
       },
       {
-        id: 'sl4',
-        serviceId: 's5',
+        id: "sl4",
+        serviceId: "s5",
         startTime: { hours: 16, minutes: 0 },
-        count: 2
-      }
-    ]
+        count: 2,
+      },
+    ],
   },
   {
-    id: 't3',
-    name: 'Короткий день',
+    id: "t3",
+    name: "Короткий день",
     slots: [
       {
-        id: 'sl5',
-        serviceId: 's1',
+        id: "sl5",
+        serviceId: "s1",
         startTime: { hours: 10, minutes: 0 },
-        count: 3
+        count: 3,
       },
       {
-        id: 'sl6',
-        serviceId: 's5',
+        id: "sl6",
+        serviceId: "s5",
         startTime: { hours: 12, minutes: 0 },
-        count: 2
-      }
-    ]
+        count: 2,
+      },
+    ],
   },
   {
-    id: 't4',
-    name: 'VIP день',
+    id: "t4",
+    name: "VIP день",
     slots: [
       {
-        id: 'sl7',
-        serviceId: 's4',
+        id: "sl7",
+        serviceId: "s4",
         startTime: { hours: 10, minutes: 0 },
-        count: 3
-      }
-    ]
+        count: 3,
+      },
+    ],
   },
   {
-    id: 't5',
-    name: 'Утренняя смена',
+    id: "t5",
+    name: "Утренняя смена",
     slots: [
       {
-        id: 'sl8',
-        serviceId: 's2',
+        id: "sl8",
+        serviceId: "s2",
         startTime: { hours: 8, minutes: 0 },
-        count: 4
-      }
-    ]
+        count: 4,
+      },
+    ],
   },
   {
-    id: 't6',
-    name: 'Вечерняя смена',
+    id: "t6",
+    name: "Вечерняя смена",
     slots: [
       {
-        id: 'sl9',
-        serviceId: 's2',
+        id: "sl9",
+        serviceId: "s2",
         startTime: { hours: 16, minutes: 0 },
-        count: 4
-      }
-    ]
-  }
+        count: 4,
+      },
+    ],
+  },
 ];

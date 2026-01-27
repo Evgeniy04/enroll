@@ -1,7 +1,7 @@
-import { Option } from '@/components/ui/select';
-import { SelectField } from '@/components/ui/select-field';
-import { ContentInsets } from '@/hooks/useContentInsets';
-import { FC } from 'react';
+import { Option } from "@/components/ui/select";
+import { SelectField } from "@/components/ui/select-field";
+import { ContentInsets } from "@/hooks/useContentInsets";
+import { FC } from "react";
 
 interface TemplateSelectProps {
   value?: Option;
@@ -19,7 +19,7 @@ export const TemplateSelect: FC<TemplateSelectProps> = ({
   options,
   onChange,
   disabled,
-  contentInsets
+  contentInsets,
 }) => (
   <SelectField
     nativeID="select-template"

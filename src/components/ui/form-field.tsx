@@ -1,8 +1,8 @@
-import { Label } from '@/components/ui/label';
-import { Text } from '@/components/ui/text';
-import { cn } from '@/lib/utils';
-import React, { FC, ReactNode } from 'react';
-import { View } from 'react-native';
+import { Label } from "@/components/ui/label";
+import { Text } from "@/components/ui/text";
+import { cn } from "@/lib/utils";
+import React, { FC, ReactNode } from "react";
+import { View } from "react-native";
 
 export interface FormFieldProps {
   nativeID: string;
@@ -26,7 +26,7 @@ export const FormField: FC<FormFieldProps & { children: ReactNode }> = ({
 }) => {
   return (
     <View className={cn("gap-1.5", className)}>
-      <Label nativeID={nativeID} className={disabled ? 'opacity-50' : ''}>
+      <Label nativeID={nativeID} className={disabled ? "opacity-50" : ""}>
         {label}
         {required && <Text className="text-destructive"> *</Text>}
       </Label>
@@ -50,4 +50,4 @@ export const FormField: FC<FormFieldProps & { children: ReactNode }> = ({
       )}
     </View>
   );
-}
+};

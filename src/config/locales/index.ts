@@ -8,4 +8,4 @@ export const initializeLocales = () => {
   configureCalendarLocale();
 };
 
-export { configureCalendarLocale } from '@/config/locales/calendar.locale';
+export { configureCalendarLocale } from "@/config/locales/calendar.locale";

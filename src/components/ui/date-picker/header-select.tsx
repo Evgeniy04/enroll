@@ -7,11 +7,11 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { ContentInsets } from '@/hooks/useContentInsets';
-import { Option } from '@rn-primitives/select';
-import { FC } from 'react';
-import { View } from 'react-native';
+} from "@/components/ui/select";
+import { ContentInsets } from "@/hooks/useContentInsets";
+import { Option } from "@rn-primitives/select";
+import { FC } from "react";
+import { View } from "react-native";
 
 type HeaderSelectOption = {
   value: string;
@@ -37,10 +37,7 @@ export const HeaderSelect: FC<HeaderSelectProps> = ({
 }) => {
   return (
     <View className="flex-1">
-      <Select
-        value={value}
-        onValueChange={onChange}
-      >
+      <Select value={value} onValueChange={onChange}>
         <SelectTrigger>
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
@@ -48,7 +45,7 @@ export const HeaderSelect: FC<HeaderSelectProps> = ({
           <NativeSelectScrollView>
             <SelectGroup>
               <SelectLabel>{label}</SelectLabel>
-              
+
               {options.map((option) => (
                 <SelectItem
                   key={option.value}
@@ -64,4 +61,4 @@ export const HeaderSelect: FC<HeaderSelectProps> = ({
       </Select>
     </View>
   );
-}
+};

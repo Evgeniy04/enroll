@@ -1,6 +1,6 @@
 import { ComponentType } from "react";
 import { EventRenderer } from "react-native-big-calendar";
-export type CalendarViewMode = 'day' | '3days' | 'week';
+export type CalendarViewMode = "day" | "3days" | "week";
 
 export interface CalendarEvent {
   start: Date;

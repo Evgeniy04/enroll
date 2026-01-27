@@ -1,33 +1,40 @@
-import { EventCalendar } from '@/components/ui/event-calendar';
-import { EventCalendarViewToggle } from '@/components/ui/event-calendar-view-toggle';
-import { CalendarViewMode } from '@/components/ui/event-calendar/event-calendar.types';
-import { NotificationsHeaderAction } from '@/components/ui/header';
-import { useContentInsets } from '@/hooks/useContentInsets';
-import { useWindowDimensions } from '@/hooks/useWindowDimensions';
-import dayjs from 'dayjs';
-import { Stack } from 'expo-router';
+import { EventCalendar } from "@/components/ui/event-calendar";
+import { EventCalendarViewToggle } from "@/components/ui/event-calendar-view-toggle";
+import { CalendarViewMode } from "@/components/ui/event-calendar/event-calendar.types";
+import { NotificationsHeaderAction } from "@/components/ui/header";
+import { useContentInsets } from "@/hooks/useContentInsets";
+import { useWindowDimensions } from "@/hooks/useWindowDimensions";
+import dayjs from "dayjs";
+import { Stack } from "expo-router";
 import React, { useMemo, useState } from "react";
-import { Event, EVENTS } from '../test-store';
+import { Event, EVENTS } from "../test-store";
 
 export const Home = () => {
-  const { top: topHeaderHeight, bottom: bottomTabBarHeight } = useContentInsets();
+  const { top: topHeaderHeight, bottom: bottomTabBarHeight } =
+    useContentInsets();
   const { height: screenHeight } = useWindowDimensions();
-  const [ viewMode, setViewMode ] = useState<CalendarViewMode>('day');
-  const [ currentDate, setCurrentDate ] = useState<Date>(new Date());
-  const [ events ] = useState<Event[]>(EVENTS);
+  const [viewMode, setViewMode] = useState<CalendarViewMode>("day");
+  const [currentDate, setCurrentDate] = useState<Date>(new Date());
+  const [events] = useState<Event[]>(EVENTS);
 
   const sceneHeight = useMemo(
-    () => screenHeight - topHeaderHeight - bottomTabBarHeight + 46, 
-    [screenHeight, topHeaderHeight, bottomTabBarHeight]
+    () => screenHeight - topHeaderHeight - bottomTabBarHeight + 46,
+    [screenHeight, topHeaderHeight, bottomTabBarHeight],
   );
 
   return (
     <>
       <Stack.Screen
         options={{
-          title: dayjs(currentDate).format('MMMM YYYY'),
+          title: dayjs(currentDate).format("MMMM YYYY"),
           headerTitleAlign: "center",
-          headerLeft: () => <EventCalendarViewToggle value={viewMode} onChange={setViewMode} enableIosSpecials />,
+          headerLeft: () => (
+            <EventCalendarViewToggle
+              value={viewMode}
+              onChange={setViewMode}
+              enableIosSpecials
+            />
+          ),
           headerRight: () => <NotificationsHeaderAction />,
         }}
       />

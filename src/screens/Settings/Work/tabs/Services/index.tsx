@@ -1,12 +1,12 @@
-import { EntityList } from '@/screens/Settings/Work/tabs/components/EntityList';
-import { ServiceForm } from '@/screens/Settings/Work/tabs/Services/components/ServiceForm';
-import { Service } from '@/screens/Settings/Work/tabs/Services/Services.types';
-import { createEntityOperations } from '@/screens/Settings/Work/tabs/utils/createEntityOperations';
-import { services as mockServices } from '@/screens/test-store';
-import { FC, useMemo, useState } from 'react';
+import { EntityList } from "@/screens/Settings/Work/tabs/components/EntityList";
+import { ServiceForm } from "@/screens/Settings/Work/tabs/Services/components/ServiceForm";
+import { Service } from "@/screens/Settings/Work/tabs/Services/Services.types";
+import { createEntityOperations } from "@/screens/Settings/Work/tabs/utils/createEntityOperations";
+import { services as mockServices } from "@/screens/test-store";
+import { FC, useMemo, useState } from "react";
 
 export const ServiceList: FC = () => {
-  const [ services, setServices ] = useState<Service[]>(mockServices);
+  const [services, setServices] = useState<Service[]>(mockServices);
 
   const operations = useMemo(
     () =>
@@ -14,7 +14,7 @@ export const ServiceList: FC = () => {
         ...data,
         id: Date.now().toString(),
       })),
-    [setServices]
+    [setServices],
   );
 
   return (
@@ -26,11 +26,14 @@ export const ServiceList: FC = () => {
       entityForm={ServiceForm}
       entityTitle="Управление услугами"
       entityDescription="Создайте услуги, которые будут доступны для записи."
-      entityToCardProps={s => ({
+      entityToCardProps={(s) => ({
         title: s.name,
         descriptionItems: [
-          { label: 'Длительность', value: `${s.duration} мин` },
-          { label: 'Перерыв', value: s.breakAfter ? `${s.breakAfter} мин` : 'отсутствует' },
+          { label: "Длительность", value: `${s.duration} мин` },
+          {
+            label: "Перерыв",
+            value: s.breakAfter ? `${s.breakAfter} мин` : "отсутствует",
+          },
         ],
       })}
       deleteConfirmTitle="Удалить услугу?"

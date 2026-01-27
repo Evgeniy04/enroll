@@ -13,45 +13,47 @@ import { useState } from "react";
 import { View } from "react-native";
 
 const TRANSMISSION_TYPE_OPTIONS = [
-  { label: 'Механическая', value: 'manual' },
-  { label: 'Автоматическая', value: 'automatic' },
+  { label: "Механическая", value: "manual" },
+  { label: "Автоматическая", value: "automatic" },
 ];
 
 export const AddVehicle = () => {
   const contentInsets = useContentInsets();
-  const [ image, setImage ] = useState<string | undefined>('https://hips.hearstapps.com/hmg-prod/images/2023-range-rover-se-p400-lwb-105-1650304551.jpg?crop=0.960xw:0.810xh;0,0.115xh&resize=2048:*');
-  const [ transmissionType, setTransmissionType ] = useState<Option>(undefined);
-  const [ manufactureDate, setManufactureDate ] = useState<DatePickerValue>();
-  
+  const [image, setImage] = useState<string | undefined>(
+    "https://hips.hearstapps.com/hmg-prod/images/2023-range-rover-se-p400-lwb-105-1650304551.jpg?crop=0.960xw:0.810xh;0,0.115xh&resize=2048:*",
+  );
+  const [transmissionType, setTransmissionType] = useState<Option>(undefined);
+  const [manufactureDate, setManufactureDate] = useState<DatePickerValue>();
+
   return (
     <>
       <Stack.Screen options={{ title: "Ваш автомобиль" }} />
       <KeyboardAvoidingScreen>
-        <AvatarPicker image={image} setImage={setImage}/>
+        <AvatarPicker image={image} setImage={setImage} />
 
-        <View className='m-5 gap-6'>
+        <View className="m-5 gap-6">
           <TextField
             nativeID="brand_model"
             label="Марка и модель транспортного средства"
-            placeholder='Например, Toyota Camry'
-            helperText='Укажите данные точно так, как они указаны в СТС'
+            placeholder="Например, Toyota Camry"
+            helperText="Укажите данные точно так, как они указаны в СТС"
             required
           />
           <SelectField
-            nativeID='transmission_type'
-            label='Тип трансмиссии'
+            nativeID="transmission_type"
+            label="Тип трансмиссии"
             value={transmissionType}
             onValueChange={setTransmissionType}
-            placeholder='Выберите тип трансмиссии'
+            placeholder="Выберите тип трансмиссии"
             options={TRANSMISSION_TYPE_OPTIONS}
-            groupLabel='Трансмиссия'
+            groupLabel="Трансмиссия"
             contentInsets={contentInsets}
             required
           />
           <TextField
             nativeID="registration_number"
             label="Регистрационный номер"
-            placeholder='Введите регистрационный номер'
+            placeholder="Введите регистрационный номер"
             helperText="Например: A123BC70"
             required
           />
@@ -59,7 +61,7 @@ export const AddVehicle = () => {
             nativeID="additional_info"
             label="Дополнительная информация"
             placeholder="Введите дополнительную информацию"
-            helperText='Например: цвет авто, модель двигателя и&nbsp;т.д.'
+            helperText="Например: цвет авто, модель двигателя и&nbsp;т.д."
             multiline
           />
           <DatePickerField
@@ -73,7 +75,7 @@ export const AddVehicle = () => {
           />
         </View>
 
-        <View className='m-5'>
+        <View className="m-5">
           <Button>
             <Text>Сохранить изменения</Text>
           </Button>
@@ -81,4 +83,4 @@ export const AddVehicle = () => {
       </KeyboardAvoidingScreen>
     </>
   );
-}
+};

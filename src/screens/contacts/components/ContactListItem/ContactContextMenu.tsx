@@ -1,7 +1,12 @@
-import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } from '@/components/ui/context-menu';
-import { Text } from '@/components/ui/text';
-import { useContentInsets } from '@/hooks/useContentInsets';
-import { FC, ReactNode } from 'react';
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu";
+import { Text } from "@/components/ui/text";
+import { useContentInsets } from "@/hooks/useContentInsets";
+import { FC, ReactNode } from "react";
 
 interface ContactContextMenuProps {
   children: ReactNode;
@@ -16,9 +21,7 @@ export const ContactContextMenu: FC<ContactContextMenuProps> = ({
 
   return (
     <ContextMenu>
-      <ContextMenuTrigger asChild>
-        {children}
-      </ContextMenuTrigger>
+      <ContextMenuTrigger asChild>{children}</ContextMenuTrigger>
       <ContextMenuContent insets={contentInsets}>
         <ContextMenuItem inset variant="destructive" onPress={onDeletePress}>
           <Text>Удалить</Text>

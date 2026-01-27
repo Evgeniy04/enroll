@@ -1,31 +1,30 @@
-import { Button, ButtonProps } from '@/components/ui/button';
-import { Icon } from '@/components/ui/icon';
-import { Text } from '@/components/ui/text';
-import { LucideIcon } from 'lucide-react-native';
-import { FC } from 'react';
-import { View } from 'react-native';
+import { Button, ButtonProps } from "@/components/ui/button";
+import { Icon } from "@/components/ui/icon";
+import { Text } from "@/components/ui/text";
+import { LucideIcon } from "lucide-react-native";
+import { FC } from "react";
+import { View } from "react-native";
 
 interface VerticalIconButtonProps extends ButtonProps {
   icon: LucideIcon;
   label: string;
-  variant?: ButtonProps['variant'];
+  variant?: ButtonProps["variant"];
   disabled?: boolean;
 }
 
 export const VerticalIconButton: FC<VerticalIconButtonProps> = ({
   icon,
   label,
-  variant = 'default',
+  variant = "default",
   disabled = false,
-  className = '',
+  className = "",
   ...buttonProps
 }) => {
-  const iconColorClassName =
-    disabled
-      ? 'text-muted-foreground'
-      : variant === 'destructive'
-      ? 'text-white'
-      : 'text-primary-foreground';
+  const iconColorClassName = disabled
+    ? "text-muted-foreground"
+    : variant === "destructive"
+      ? "text-white"
+      : "text-primary-foreground";
 
   return (
     <Button
@@ -35,10 +34,7 @@ export const VerticalIconButton: FC<VerticalIconButtonProps> = ({
       {...buttonProps}
     >
       <View className="items-center justify-center gap-1">
-        <Icon
-          as={icon}
-          className={iconColorClassName}
-        />
+        <Icon as={icon} className={iconColorClassName} />
         <Text className="text-xs">{label}</Text>
       </View>
     </Button>

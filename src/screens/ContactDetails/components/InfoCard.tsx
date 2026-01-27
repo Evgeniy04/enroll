@@ -22,27 +22,28 @@ export const InfoCard: FC<InfoCardProps> = ({
   return (
     <Card className="m-5">
       <CardHeader className="flex-row gap-5">
-        <Icon
-          as={icon}
-          size={22}
-          className="text-muted-foreground"
-        />
-        <CardTitle className="align-middle">
-          {title}
-        </CardTitle>
+        <Icon as={icon} size={22} className="text-muted-foreground" />
+        <CardTitle className="align-middle">{title}</CardTitle>
       </CardHeader>
 
       <CardContent className="gap-5">
         {photoUri && (
-          <Avatar alt="Фотография" className="size-32 border border-border mx-auto">
+          <Avatar
+            alt="Фотография"
+            className="mx-auto size-32 border border-border"
+          >
             <AvatarImage source={{ uri: photoUri }} />
           </Avatar>
         )}
 
         {items.map((item, idx) => (
           <View key={idx}>
-            <Text variant='muted' className="text-muted-foreground">{item.label}</Text>
-            <Text variant='default' className="text-foreground">{item.value}</Text>
+            <Text variant="muted" className="text-muted-foreground">
+              {item.label}
+            </Text>
+            <Text variant="default" className="text-foreground">
+              {item.value}
+            </Text>
           </View>
         ))}
       </CardContent>

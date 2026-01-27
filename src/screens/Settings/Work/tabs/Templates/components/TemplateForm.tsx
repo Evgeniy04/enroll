@@ -1,31 +1,31 @@
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   DialogClose,
   DialogFooter,
   DialogHeader,
-  DialogTitle
-} from '@/components/ui/dialog';
-import { Icon } from '@/components/ui/icon';
-import { Text } from '@/components/ui/text';
-import { TextField } from '@/components/ui/text-field';
-import { FormProps } from '@/screens/Settings/Work/tabs/components/FormDialog';
-import { Check, X } from 'lucide-react-native';
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Icon } from "@/components/ui/icon";
+import { Text } from "@/components/ui/text";
+import { TextField } from "@/components/ui/text-field";
+import { FormProps } from "@/screens/Settings/Work/tabs/components/FormDialog";
+import { Check, X } from "lucide-react-native";
 import { useEffect, useState } from "react";
-import { View } from 'react-native';
-import { Template } from '../Templates.types';
+import { View } from "react-native";
+import { Template } from "../Templates.types";
 
-export const TemplateForm  = ({
+export const TemplateForm = ({
   initialData,
   onCreate,
-  onUpdate
+  onUpdate,
 }: FormProps<Template>) => {
-  const [ name, setName ] = useState('');
+  const [name, setName] = useState("");
 
   useEffect(() => {
     if (initialData) {
       setName(initialData.name);
     } else {
-      setName('');
+      setName("");
     }
   }, [initialData]);
 
@@ -40,7 +40,9 @@ export const TemplateForm  = ({
   return (
     <>
       <DialogHeader>
-        <DialogTitle>{initialData ? 'Редактировать шаблон' : 'Новый шаблон'}</DialogTitle>
+        <DialogTitle>
+          {initialData ? "Редактировать шаблон" : "Новый шаблон"}
+        </DialogTitle>
       </DialogHeader>
 
       <View className="gap-6">
@@ -63,9 +65,13 @@ export const TemplateForm  = ({
         </DialogClose>
 
         <DialogClose asChild>
-          <Button className="flex-1" onPress={handleSubmit} disabled={!name.trim()}>
+          <Button
+            className="flex-1"
+            onPress={handleSubmit}
+            disabled={!name.trim()}
+          >
             <Icon as={Check} className="text-primary-foreground" />
-            <Text>{initialData ? 'Сохранить' : 'Создать'}</Text>
+            <Text>{initialData ? "Сохранить" : "Создать"}</Text>
           </Button>
         </DialogClose>
       </DialogFooter>

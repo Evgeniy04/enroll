@@ -1,11 +1,11 @@
-import { CalendarHeader } from '@/components/ui/date-picker/calendar-header';
-import { CALENDAR_CONSTANTS, getCalendarsTheme } from '@/config';
-import { ContentInsets } from '@/hooks/useContentInsets';
-import dayjs, { Dayjs } from 'dayjs';
-import { useColorScheme } from 'nativewind';
-import { FC, useMemo, useState } from 'react';
-import { Calendar, CalendarProps, DateData } from 'react-native-calendars';
-import { MarkedDates } from 'react-native-calendars/src/types';
+import { CalendarHeader } from "@/components/ui/date-picker/calendar-header";
+import { CALENDAR_CONSTANTS, getCalendarsTheme } from "@/config";
+import { ContentInsets } from "@/hooks/useContentInsets";
+import dayjs, { Dayjs } from "dayjs";
+import { useColorScheme } from "nativewind";
+import { FC, useMemo, useState } from "react";
+import { Calendar, CalendarProps, DateData } from "react-native-calendars";
+import { MarkedDates } from "react-native-calendars/src/types";
 
 export type Range = { start?: Dayjs; end?: Dayjs };
 
@@ -23,7 +23,7 @@ type DatePickerProps = {
   maxDate?: string;
   disabledDates?: string[];
   markedDates?: MarkedDates;
-  customTheme?: CalendarProps['theme'];
+  customTheme?: CalendarProps["theme"];
   locale?: string;
   startYear?: number;
   endYear?: number;
@@ -46,10 +46,13 @@ export const DatePicker: FC<DatePickerProps> = ({
   rangeSelection = false,
 }) => {
   const { colorScheme } = useColorScheme();
-  const [ displayDate, setDisplayDate ] = useState(currentValue.start.format('YYYY-MM-DD'));
-  const [ range, setRange ] = useState<Range>({});
+  const [displayDate, setDisplayDate] = useState(
+    currentValue.start.format("YYYY-MM-DD"),
+  );
+  const [range, setRange] = useState<Range>({});
 
-  const calendarTheme = customTheme ?? getCalendarsTheme(colorScheme ?? 'light');
+  const calendarTheme =
+    customTheme ?? getCalendarsTheme(colorScheme ?? "light");
 
   const handleDayPress = (day: DateData) => {
     const selectedDate = dayjs(day.dateString);
@@ -63,8 +66,10 @@ export const DatePicker: FC<DatePickerProps> = ({
 
       if (range.start && !range.end) {
         const start = range.start;
-        const end = selectedDate.isBefore(start, 'day') ? start : selectedDate;
-        const newStart = selectedDate.isBefore(start, 'day') ? selectedDate : start;
+        const end = selectedDate.isBefore(start, "day") ? start : selectedDate;
+        const newStart = selectedDate.isBefore(start, "day")
+          ? selectedDate
+          : start;
         const finalRange: DatePickerValue = { start: newStart, end };
         setRange(finalRange);
         setCurrentValue?.(finalRange);
@@ -84,10 +89,10 @@ export const DatePicker: FC<DatePickerProps> = ({
     const result: MarkedDates = {};
     let current = start;
 
-    while (current.isSameOrBefore(end, 'day')) {
-      const dateStr = current.format('YYYY-MM-DD');
-      const isStart = current.isSame(start, 'day');
-      const isEnd = current.isSame(end, 'day');
+    while (current.isSameOrBefore(end, "day")) {
+      const dateStr = current.format("YYYY-MM-DD");
+      const isStart = current.isSame(start, "day");
+      const isEnd = current.isSame(end, "day");
 
       result[dateStr] = {
         ...(isStart ? { startingDay: true } : {}),
@@ -95,11 +100,16 @@ export const DatePicker: FC<DatePickerProps> = ({
         color: calendarTheme?.selectedDayBackgroundColor,
         textColor: calendarTheme?.selectedDayTextColor,
       };
-      current = current.add(1, 'day');
+      current = current.add(1, "day");
     }
 
     return result;
-  }, [range, rangeSelection, calendarTheme?.selectedDayBackgroundColor, calendarTheme?.selectedDayTextColor]);
+  }, [
+    range,
+    rangeSelection,
+    calendarTheme?.selectedDayBackgroundColor,
+    calendarTheme?.selectedDayTextColor,
+  ]);
 
   const mergedMarkedDates: MarkedDates = useMemo(() => {
     const result: MarkedDates = {
@@ -107,7 +117,7 @@ export const DatePicker: FC<DatePickerProps> = ({
     };
 
     if (disabledDates?.length) {
-      disabledDates.forEach(date => {
+      disabledDates.forEach((date) => {
         result[date] = {
           ...(result[date] ?? {}),
           disabled: true,
@@ -120,18 +130,24 @@ export const DatePicker: FC<DatePickerProps> = ({
       return { ...result, ...rangeMarkedDates };
     }
 
-    const selectedDateString = currentValue.start.format('YYYY-MM-DD');
+    const selectedDateString = currentValue.start.format("YYYY-MM-DD");
     result[selectedDateString] = {
       ...(result[selectedDateString] ?? {}),
       selected: true,
     };
 
     return result;
-  }, [markedDates, disabledDates, rangeMarkedDates, rangeSelection, currentValue]);
+  }, [
+    markedDates,
+    disabledDates,
+    rangeMarkedDates,
+    rangeSelection,
+    currentValue,
+  ]);
 
   return (
     <Calendar
-      markingType={rangeSelection ? 'period' : 'dot'}
+      markingType={rangeSelection ? "period" : "dot"}
       current={displayDate}
       minDate={minDate}
       maxDate={maxDate}

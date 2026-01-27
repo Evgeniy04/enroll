@@ -1,22 +1,22 @@
-import { DefaultCalendarHeader } from '@/components/ui/event-calendar/calendar-header';
+import { DefaultCalendarHeader } from "@/components/ui/event-calendar/calendar-header";
 import {
   CalendarEvent,
   CalendarViewMode,
-  EventCalendarProps
-} from '@/components/ui/event-calendar/event-calendar.types';
-import { CALENDAR_CONSTANTS, getBigCalendarTheme } from '@/config';
-import { cn } from '@/lib/utils';
-import dayjs from 'dayjs';
-import { useColorScheme } from 'nativewind';
-import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
-import { Calendar, EventRenderer } from 'react-native-big-calendar';
+  EventCalendarProps,
+} from "@/components/ui/event-calendar/event-calendar.types";
+import { CALENDAR_CONSTANTS, getBigCalendarTheme } from "@/config";
+import { cn } from "@/lib/utils";
+import dayjs from "dayjs";
+import { useColorScheme } from "nativewind";
+import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
+import { Text, TouchableOpacity, View } from "react-native";
+import { Calendar, EventRenderer } from "react-native-big-calendar";
 
 export const EventCalendar: FC<EventCalendarProps> = ({
   sceneHeight,
   events,
   initialDate = new Date(),
-  initialViewMode = 'day',
+  initialViewMode = "day",
   onPressEvent,
   renderEvent,
   eventCellStyle,
@@ -37,65 +37,62 @@ export const EventCalendar: FC<EventCalendarProps> = ({
     useState<Date>(initialDate);
 
   const theme = useMemo(
-    () => getBigCalendarTheme(colorScheme ?? 'light'),
-    [colorScheme]
+    () => getBigCalendarTheme(colorScheme ?? "light"),
+    [colorScheme],
   );
 
-  const viewMode = externalViewMode
-    ? externalViewMode
-    : internalViewMode;
+  const viewMode = externalViewMode ? externalViewMode : internalViewMode;
 
   const currentDate = externalCurrentDate
     ? externalCurrentDate
     : internalCurrentDate;
 
-  const setCurrentDate = onDateChange
-    ? onDateChange
-    : setInternalCurrentDate;
+  const setCurrentDate = onDateChange ? onDateChange : setInternalCurrentDate;
 
-  const setViewMode = onViewModeChange
-    ? onViewModeChange
-    : setInternalViewMode;
+  const setViewMode = onViewModeChange ? onViewModeChange : setInternalViewMode;
 
   const calendarDate = useMemo(
     () => {
-      if (viewMode === 'week') {
+      if (viewMode === "week") {
         return dayjs(currentDate).weekday(0).toDate();
       }
 
       return currentDate;
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [viewMode]
+    [viewMode],
   );
 
   useEffect(
     () => {
-      if (!dayjs(currentDate).isSame(calendarDate, 'day')) {
+      if (!dayjs(currentDate).isSame(calendarDate, "day")) {
         setCurrentDate(calendarDate);
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [calendarDate, setCurrentDate]
+    [calendarDate, setCurrentDate],
   );
 
   const handleSwipeEnd = useCallback(
     (date: Date) => {
       setCurrentDate(date);
     },
-    [setCurrentDate]
+    [setCurrentDate],
   );
 
   const handleViewModeChange = useCallback(
     (mode: CalendarViewMode) => {
       setViewMode(mode);
     },
-    [setViewMode]
+    [setViewMode],
   );
 
   const defaultRenderEvent: EventRenderer = useCallback(
     (event, touchableOpacityProps) => (
-      <TouchableOpacity {...touchableOpacityProps} key={touchableOpacityProps.key}>
+      <TouchableOpacity
+        {...touchableOpacityProps}
+        key={touchableOpacityProps.key}
+      >
         <View className="flex-1 justify-center">
           <Text className="text-xs color-white" numberOfLines={1}>
             {event.title}
@@ -103,7 +100,7 @@ export const EventCalendar: FC<EventCalendarProps> = ({
         </View>
       </TouchableOpacity>
     ),
-    []
+    [],
   );
 
   const defaultEventCellStyle = useCallback((event: CalendarEvent) => {
@@ -111,26 +108,24 @@ export const EventCalendar: FC<EventCalendarProps> = ({
     const isCurrent = event.start <= now && event.end >= now;
 
     return {
-      backgroundColor: isCurrent ? '#06cdecff' : event.color || '#3b82f6',
+      backgroundColor: isCurrent ? "#06cdecff" : event.color || "#3b82f6",
       marginTop: 0,
       marginLeft: 0,
       marginRight: 0,
       borderTopWidth: 1,
-      borderColor: '#000',
+      borderColor: "#000",
     };
   }, []);
 
   const HeaderToRender =
-    HeaderComponent === undefined
-      ? DefaultCalendarHeader
-      : HeaderComponent;
+    HeaderComponent === undefined ? DefaultCalendarHeader : HeaderComponent;
 
   /**
    * Ключ для перерисовки календаря при смене режима просмотра или даты инициализации
    */
   const calendarKey = useMemo(
-    () => `${viewMode}-${dayjs(calendarDate).format('YYYY-MM-DD')}`,
-    [viewMode, calendarDate]
+    () => `${viewMode}-${dayjs(calendarDate).format("YYYY-MM-DD")}`,
+    [viewMode, calendarDate],
   );
 
   return (

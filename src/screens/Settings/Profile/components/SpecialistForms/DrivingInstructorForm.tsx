@@ -1,18 +1,18 @@
-import { Button } from '@/components/ui/button';
-import { DatePickerValue } from '@/components/ui/date-picker';
-import { DatePickerField } from '@/components/ui/date-picker-field';
-import { Icon } from '@/components/ui/icon';
-import { Text } from '@/components/ui/text';
-import { TextField } from '@/components/ui/text-field';
-import { useContentInsets } from '@/hooks/useContentInsets';
-import { router } from 'expo-router';
-import { Plus } from 'lucide-react-native';
-import { useState } from 'react';
+import { Button } from "@/components/ui/button";
+import { DatePickerValue } from "@/components/ui/date-picker";
+import { DatePickerField } from "@/components/ui/date-picker-field";
+import { Icon } from "@/components/ui/icon";
+import { Text } from "@/components/ui/text";
+import { TextField } from "@/components/ui/text-field";
+import { useContentInsets } from "@/hooks/useContentInsets";
+import { router } from "expo-router";
+import { Plus } from "lucide-react-native";
+import { useState } from "react";
 
 export const DrivingInstructorForm = () => {
   const contentInsets = useContentInsets();
-  const [ workStartDate, setWorkStartDate ] = useState<DatePickerValue>();
-  const [ drivingStartDate, setDrivingStartDate ] = useState<DatePickerValue>();
+  const [workStartDate, setWorkStartDate] = useState<DatePickerValue>();
+  const [drivingStartDate, setDrivingStartDate] = useState<DatePickerValue>();
 
   return (
     <>
@@ -55,7 +55,10 @@ export const DrivingInstructorForm = () => {
         helperText="Например: место встречи у&nbsp;метро, машина с&nbsp;белыми полосами"
         multiline
       />
-      <Button onPress={() => router.push('/settings/AddVehicle')} variant="secondary">
+      <Button
+        onPress={() => router.push("/settings/AddVehicle")}
+        variant="secondary"
+      >
         <Icon as={Plus} className="text-foreground" />
         <Text>Добавить транспорт</Text>
       </Button>

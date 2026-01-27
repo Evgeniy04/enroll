@@ -1,4 +1,4 @@
-import { FormField, FormFieldProps } from '@/components/ui/form-field';
+import { FormField, FormFieldProps } from "@/components/ui/form-field";
 import {
   Option,
   Select,
@@ -8,9 +8,9 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { ContentInsets } from '@/hooks/useContentInsets';
-import React, { FC } from 'react';
+} from "@/components/ui/select";
+import { ContentInsets } from "@/hooks/useContentInsets";
+import React, { FC } from "react";
 
 export interface SelectValueProps {
   value?: Option;
@@ -62,14 +62,20 @@ export const SelectField: FC<SelectFieldProps> = ({
         <SelectTrigger
           nativeID={nativeID}
           aria-invalid={!!error}
-          aria-describedby={error ? `${nativeID}-error` : helperText ? `${nativeID}-helper` : undefined}
-          className={error ? 'border-destructive' : ''}
+          aria-describedby={
+            error
+              ? `${nativeID}-error`
+              : helperText
+                ? `${nativeID}-helper`
+                : undefined
+          }
+          className={error ? "border-destructive" : ""}
           disabled={disabled}
         >
-          <SelectValue placeholder={placeholder} className='flex-1'/>
+          <SelectValue placeholder={placeholder} className="flex-1" />
         </SelectTrigger>
 
-        <SelectContent insets={contentInsets} className='max-h-80'>
+        <SelectContent insets={contentInsets} className="max-h-80">
           <SelectGroup>
             {groupLabel && <SelectLabel>{groupLabel}</SelectLabel>}
             {options.map((option) => (
@@ -86,4 +92,4 @@ export const SelectField: FC<SelectFieldProps> = ({
       </Select>
     </FormField>
   );
-}
+};

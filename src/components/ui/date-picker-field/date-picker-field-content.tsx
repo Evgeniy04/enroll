@@ -1,12 +1,12 @@
-import { Button } from '@/components/ui/button';
-import { DatePicker, DatePickerValue } from '@/components/ui/date-picker';
-import { DatePickerFieldContactProps } from '@/components/ui/date-picker-field/date-picker-field.types';
-import { Icon } from '@/components/ui/icon';
-import { Text } from '@/components/ui/text';
-import { useRootContext as useRootContextPopover } from '@rn-primitives/popover';
-import { X } from 'lucide-react-native';
-import { FC } from 'react';
-import { View } from 'react-native';
+import { Button } from "@/components/ui/button";
+import { DatePicker, DatePickerValue } from "@/components/ui/date-picker";
+import { DatePickerFieldContactProps } from "@/components/ui/date-picker-field/date-picker-field.types";
+import { Icon } from "@/components/ui/icon";
+import { Text } from "@/components/ui/text";
+import { useRootContext as useRootContextPopover } from "@rn-primitives/popover";
+import { X } from "lucide-react-native";
+import { FC } from "react";
+import { View } from "react-native";
 
 const todayDate = new Date();
 
@@ -20,7 +20,7 @@ export const DatePickerContent: FC<DatePickerFieldContactProps> = ({
   minDate = new Date(startYear, 0, 1).toDateString(),
   maxDate = todayDate.toDateString(),
   contentInsets,
-  rangeSelection
+  rangeSelection,
 }) => {
   const { onOpenChange } = useRootContextPopover();
 
@@ -37,14 +37,14 @@ export const DatePickerContent: FC<DatePickerFieldContactProps> = ({
   return (
     <View className="gap-4">
       <View className="gap-2">
-        <View className='flex-row items-center justify-between'>
+        <View className="flex-row items-center justify-between">
           <Text className="font-medium leading-none">{title}</Text>
-          <Button variant='ghost' size='icon' onPress={handleClose}><Icon as={X} /></Button>
+          <Button variant="ghost" size="icon" onPress={handleClose}>
+            <Icon as={X} />
+          </Button>
         </View>
         {helperText && (
-          <Text className="text-muted-foreground text-sm">
-            {helperText}
-          </Text>
+          <Text className="text-sm text-muted-foreground">{helperText}</Text>
         )}
       </View>
 
@@ -60,4 +60,4 @@ export const DatePickerContent: FC<DatePickerFieldContactProps> = ({
       />
     </View>
   );
-}
+};

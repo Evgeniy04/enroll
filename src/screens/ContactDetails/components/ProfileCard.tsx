@@ -1,10 +1,15 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
 import { Icon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { getPluralWord } from "@/utils/plural";
-import * as Linking from 'expo-linking';
+import * as Linking from "expo-linking";
 import { Clock, MapPin } from "lucide-react-native";
 import React, { FC, useMemo } from "react";
 import { View } from "react-native";
@@ -23,7 +28,7 @@ export const ProfileCard: FC<ProfileCardProps> = ({ id }) => {
   const initials = useMemo(() => {
     return contact.name
       .split(" ")
-      .map(word => word.charAt(0))
+      .map((word) => word.charAt(0))
       .join("")
       .toUpperCase();
   }, [contact.name]);
@@ -33,8 +38,8 @@ export const ProfileCard: FC<ProfileCardProps> = ({ id }) => {
   };
 
   const getExperienceText = (years: number) => {
-    if (years === 0) return 'Нет опыта';
-    return `${years} ${getPluralWord(contact.experienceYears, ['год', 'года', 'лет'])} опыта`;
+    if (years === 0) return "Нет опыта";
+    return `${years} ${getPluralWord(contact.experienceYears, ["год", "года", "лет"])} опыта`;
   };
 
   return (
@@ -48,23 +53,22 @@ export const ProfileCard: FC<ProfileCardProps> = ({ id }) => {
         </Avatar>
       </CardHeader>
 
-      <CardContent className="gap-3 items-center">
+      <CardContent className="items-center gap-3">
         <Text variant="h3" className="text-center">
           {contact.name}
         </Text>
 
         <View className="items-center">
-          <Text className="text-center text-sm">
-            {contact.activity}
-          </Text>
+          <Text className="text-center text-sm">{contact.activity}</Text>
           <Text
             variant="code"
-            className="text-center bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300">
+            className="bg-blue-50 text-center text-blue-700 dark:bg-blue-950 dark:text-blue-300"
+          >
             <Icon
               as={Clock}
               className="text-blue-700 dark:text-blue-300"
               style={{ transform: [{ translateY: 1 }] }}
-            />{' '}
+            />{" "}
             {getExperienceText(contact.experienceYears)}
           </Text>
         </View>
@@ -74,7 +78,7 @@ export const ProfileCard: FC<ProfileCardProps> = ({ id }) => {
             as={MapPin}
             className="text-muted-foreground"
             style={{ transform: [{ translateY: 1 }] }}
-          />{' '}
+          />{" "}
           {contact.address}
         </Text>
       </CardContent>

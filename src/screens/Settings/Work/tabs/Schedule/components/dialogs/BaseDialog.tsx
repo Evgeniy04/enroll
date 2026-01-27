@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   DialogClose,
   DialogContent,
@@ -6,11 +6,11 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog';
-import { Text } from '@/components/ui/text';
-import { useWindowDimensions } from '@/hooks/useWindowDimensions';
-import { FC, ReactNode } from 'react';
-import { View } from 'react-native';
+} from "@/components/ui/dialog";
+import { Text } from "@/components/ui/text";
+import { useWindowDimensions } from "@/hooks/useWindowDimensions";
+import { FC, ReactNode } from "react";
+import { View } from "react-native";
 
 interface BaseDialogProps {
   title: string;
@@ -30,7 +30,7 @@ export const BaseDialog: FC<BaseDialogProps> = ({
   const { width } = useWindowDimensions();
 
   return (
-    <DialogContent style={{ width: width - 40, alignSelf: 'center' }}>
+    <DialogContent style={{ width: width - 40, alignSelf: "center" }}>
       <DialogHeader>
         <DialogTitle>{title}</DialogTitle>
         {description && <DialogDescription>{description}</DialogDescription>}

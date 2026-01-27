@@ -1,9 +1,7 @@
-import { Stack } from 'expo-router';
+import { Stack } from "expo-router";
 
 const HomeStack = () => {
-  return (
-    <Stack />
-  );
-}
+  return <Stack />;
+};
 
 export default HomeStack;

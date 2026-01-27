@@ -1,4 +1,4 @@
-import { Stack } from 'expo-router';
+import { Stack } from "expo-router";
 
 const SettingsStack = () => {
   return (
@@ -6,6 +6,6 @@ const SettingsStack = () => {
       <Stack.Screen name="Profile" />
     </Stack>
   );
-}
+};
 
 export default SettingsStack;

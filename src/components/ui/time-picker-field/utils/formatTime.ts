@@ -1,19 +1,23 @@
-import { FormatTimeOptions, TimeProps, TimeUnit } from "@/components/ui/time-picker-field/time-picker-field.types";
+import {
+  FormatTimeOptions,
+  TimeProps,
+  TimeUnit,
+} from "@/components/ui/time-picker-field/time-picker-field.types";
 
 const DEFAULT_LABELS: Record<TimeUnit, string> = {
-  days: 'д',
-  hours: 'ч',
-  minutes: 'мин',
-  seconds: 'с',
+  days: "д",
+  hours: "ч",
+  minutes: "мин",
+  seconds: "с",
 };
 
 export const formatTime = (
   time: TimeProps,
   {
-    units = ['days', 'hours', 'minutes', 'seconds'],
+    units = ["days", "hours", "minutes", "seconds"],
     labels = DEFAULT_LABELS,
-    separator = ' : ',
-    unitSeparator = ' ',
+    separator = " : ",
+    unitSeparator = " ",
     padLength = 2,
     showZero = false,
   }: FormatTimeOptions = {},
@@ -27,7 +31,7 @@ export const formatTime = (
 
       const label = labels[unit] ?? DEFAULT_LABELS[unit];
 
-      return `${value.toString().padStart(padLength, '0')}${unitSeparator}${label}`;
+      return `${value.toString().padStart(padLength, "0")}${unitSeparator}${label}`;
     })
     .filter(Boolean)
     .join(separator);

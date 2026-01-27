@@ -1,13 +1,17 @@
-import { Button } from '@/components/ui/button';
-import { FormField, FormFieldProps } from '@/components/ui/form-field';
-import { Text } from '@/components/ui/text';
-import { toggleVariants } from '@/components/ui/toggle';
-import { ToggleGroup, ToggleGroupIcon, ToggleGroupItem } from '@/components/ui/toggle-group';
-import { cn } from '@/lib/utils';
-import type { VariantProps } from 'class-variance-authority';
-import { LucideIcon } from 'lucide-react-native';
-import { FC, useMemo } from 'react';
-import { View } from 'react-native';
+import { Button } from "@/components/ui/button";
+import { FormField, FormFieldProps } from "@/components/ui/form-field";
+import { Text } from "@/components/ui/text";
+import { toggleVariants } from "@/components/ui/toggle";
+import {
+  ToggleGroup,
+  ToggleGroupIcon,
+  ToggleGroupItem,
+} from "@/components/ui/toggle-group";
+import { cn } from "@/lib/utils";
+import type { VariantProps } from "class-variance-authority";
+import { LucideIcon } from "lucide-react-native";
+import { FC, useMemo } from "react";
+import { View } from "react-native";
 
 interface ToggleOption {
   label: string;
@@ -25,9 +29,9 @@ interface TogglePreset {
 interface ToggleGroupFieldBaseProps extends FormFieldProps {
   options: ToggleOption[];
   disabled?: boolean;
-  variant?: VariantProps<typeof toggleVariants>['variant'];
-  size?: VariantProps<typeof toggleVariants>['size'];
-  orientation?: 'horizontal' | 'vertical';
+  variant?: VariantProps<typeof toggleVariants>["variant"];
+  size?: VariantProps<typeof toggleVariants>["size"];
+  orientation?: "horizontal" | "vertical";
   /** Максимум 3 пресета */
   presets?: TogglePreset[];
   className?: string;
@@ -36,13 +40,13 @@ interface ToggleGroupFieldBaseProps extends FormFieldProps {
 }
 
 interface ToggleGroupFieldSingleProps extends ToggleGroupFieldBaseProps {
-  type: 'single';
+  type: "single";
   value: string;
   onValueChange: (value?: string) => void;
 }
 
 interface ToggleGroupFieldMultipleProps extends ToggleGroupFieldBaseProps {
-  type: 'multiple';
+  type: "multiple";
   value: string[];
   onValueChange: (value: string[]) => void;
 }
@@ -69,14 +73,14 @@ export const ToggleGroupField: FC<ToggleGroupFieldProps> = ({
   size,
   /** Максимум 3 пресета */
   presets = [],
-  orientation = 'horizontal',
+  orientation = "horizontal",
   className,
   textClassName,
   iconClassName,
 }) => {
   const allIconsOnly = useMemo(
-    () => options.every(option => !option.showText),
-    [options]
+    () => options.every((option) => !option.showText),
+    [options],
   );
 
   const renderOptions = useMemo(() => {
@@ -90,20 +94,22 @@ export const ToggleGroupField: FC<ToggleGroupFieldProps> = ({
           isFirst={index === 0}
           isLast={index === options.length - 1}
           disabled={disabled}
-          className={cn(allIconsOnly ? 'flex-1' : 'flex-1 self-stretch h-auto')}
+          className={cn(allIconsOnly ? "flex-1" : "h-auto flex-1 self-stretch")}
         >
           <View
             className={cn(
-              'justify-center items-center gap-1',
-              orientation === 'horizontal' ? 'flex-row px-3 py-1' : 'py-2',
+              "items-center justify-center gap-1",
+              orientation === "horizontal" ? "flex-row px-3 py-1" : "py-2",
               className,
             )}
           >
-            {option.icon && <ToggleGroupIcon as={option.icon} className={cn(iconClassName)}/>}
+            {option.icon && (
+              <ToggleGroupIcon as={option.icon} className={cn(iconClassName)} />
+            )}
             {option.showText && (
-              <Text 
+              <Text
                 className={cn(
-                  "text-xs text-center",
+                  "text-center text-xs",
                   orientation === "horizontal" && "text-sm",
                   textClassName,
                 )}
@@ -116,7 +122,15 @@ export const ToggleGroupField: FC<ToggleGroupFieldProps> = ({
         </ToggleGroupItem>
       );
     });
-  }, [allIconsOnly, disabled, options, orientation, className, iconClassName, textClassName]);
+  }, [
+    allIconsOnly,
+    disabled,
+    options,
+    orientation,
+    className,
+    iconClassName,
+    textClassName,
+  ]);
 
   return (
     <FormField
@@ -127,9 +141,9 @@ export const ToggleGroupField: FC<ToggleGroupFieldProps> = ({
       required={required}
       disabled={disabled}
     >
-      {type === 'single' ? (
+      {type === "single" ? (
         <ToggleGroup
-          type='single'
+          type="single"
           value={value}
           onValueChange={onValueChange}
           disabled={disabled}
@@ -140,7 +154,7 @@ export const ToggleGroupField: FC<ToggleGroupFieldProps> = ({
         </ToggleGroup>
       ) : (
         <ToggleGroup
-          type='multiple'
+          type="multiple"
           value={value}
           onValueChange={onValueChange}
           disabled={disabled}
@@ -151,14 +165,16 @@ export const ToggleGroupField: FC<ToggleGroupFieldProps> = ({
         </ToggleGroup>
       )}
       {presets.length > 0 && (
-        <View className="flex-row flex-wrap gap-2 justify-center mt-2">
+        <View className="mt-2 flex-row flex-wrap justify-center gap-2">
           {presets.slice(0, 3).map((preset) => {
-            const active = type === 'single'
-              ? preset.values.length === 1 && value === preset.values[0]
-              : value.length === preset.values.length && preset.values.every(v => value.includes(v));
+            const active =
+              type === "single"
+                ? preset.values.length === 1 && value === preset.values[0]
+                : value.length === preset.values.length &&
+                  preset.values.every((v) => value.includes(v));
 
             const applyPreset = () => {
-              if (type === 'single') {
+              if (type === "single") {
                 onValueChange(preset.values[0]);
               } else {
                 onValueChange(preset.values);
@@ -169,7 +185,7 @@ export const ToggleGroupField: FC<ToggleGroupFieldProps> = ({
               <Button
                 key={preset.label}
                 disabled={disabled}
-                variant={active ? 'default' : 'outline'}
+                variant={active ? "default" : "outline"}
                 className="flex-1"
                 onPress={applyPreset}
               >

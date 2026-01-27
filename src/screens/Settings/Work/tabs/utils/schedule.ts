@@ -1,8 +1,11 @@
-import { TimeProps } from '@/components/ui/time-picker-field/time-picker-field.types';
-import { Service } from '../Services/Services.types';
-import { ScheduleSlot } from '../Templates/Templates.types';
+import { TimeProps } from "@/components/ui/time-picker-field/time-picker-field.types";
+import { Service } from "../Services/Services.types";
+import { ScheduleSlot } from "../Templates/Templates.types";
 
-export const calculateEndTime = (slot: ScheduleSlot, service: Service | null): TimeProps => {
+export const calculateEndTime = (
+  slot: ScheduleSlot,
+  service: Service | null,
+): TimeProps => {
   if (!service) return slot.startTime;
 
   const { hours = 9, minutes = 0 } = slot.startTime;
@@ -17,7 +20,7 @@ export const calculateTotalDuration = (
   services: Service[],
 ): number => {
   return slots?.reduce((total, slot) => {
-    const service = services.find(s => s.id === slot.serviceId);
+    const service = services.find((s) => s.id === slot.serviceId);
     if (!service) return total;
 
     const slotDuration = service.duration + service.breakAfter;

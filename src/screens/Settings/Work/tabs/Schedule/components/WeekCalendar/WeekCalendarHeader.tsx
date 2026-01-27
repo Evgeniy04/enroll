@@ -1,12 +1,12 @@
-import { Button } from '@/components/ui/button';
-import { CardContent } from '@/components/ui/card';
-import { Icon } from '@/components/ui/icon';
-import { Text } from '@/components/ui/text';
-import { cn } from '@/lib/utils';
-import dayjs, { Dayjs } from 'dayjs';
-import { ChevronLeft, ChevronRight, RotateCcw } from 'lucide-react-native';
-import React, { FC } from 'react';
-import { View } from 'react-native';
+import { Button } from "@/components/ui/button";
+import { CardContent } from "@/components/ui/card";
+import { Icon } from "@/components/ui/icon";
+import { Text } from "@/components/ui/text";
+import { cn } from "@/lib/utils";
+import dayjs, { Dayjs } from "dayjs";
+import { ChevronLeft, ChevronRight, RotateCcw } from "lucide-react-native";
+import React, { FC } from "react";
+import { View } from "react-native";
 
 interface WeekCalendarHeaderProps {
   weekStart: Dayjs;
@@ -21,40 +21,47 @@ export const WeekCalendarHeader: FC<WeekCalendarHeaderProps> = ({
   onPrevWeek,
   onNextWeek,
   onGoToToday,
-  className
+  className,
 }) => {
-  const weekEnd = weekStart.add(6, 'day');
+  const weekEnd = weekStart.add(6, "day");
 
   const showGoToCurrentWeekButton = !dayjs().isBetween(
     weekStart,
     weekEnd,
     null,
-    '[]'
+    "[]",
   );
 
   const formatWeekRange = (start: Dayjs, end: Dayjs) => {
-    const startStr = start.format('D MMM');
-    const endStr = end.format('D MMM');
+    const startStr = start.format("D MMM");
+    const endStr = end.format("D MMM");
     return `${startStr} - ${endStr}`;
   };
 
   return (
-    <CardContent className={cn("p-2 gap-2", className)}>
-      <View className='flex-row justify-between items-center'>
+    <CardContent className={cn("gap-2 p-2", className)}>
+      <View className="flex-row items-center justify-between">
         <Button size="icon" variant="outline" onPress={onPrevWeek}>
           <Icon as={ChevronLeft} />
         </Button>
-        
-        <View className='justify-center'>
-          <Text variant='small' className='text-center text-muted-foreground'>
+
+        <View className="justify-center">
+          <Text variant="small" className="text-center text-muted-foreground">
             {weekStart.year()}
           </Text>
-          <Text variant='lead' className='text-primary'>{formatWeekRange(weekStart, weekEnd)}</Text>
+          <Text variant="lead" className="text-primary">
+            {formatWeekRange(weekStart, weekEnd)}
+          </Text>
         </View>
-        
-        <View className='flex-row'>
+
+        <View className="flex-row">
           {showGoToCurrentWeekButton && (
-            <Button size="icon" variant="outline" className='border-r-0 rounded-r-none' onPress={onGoToToday}>
+            <Button
+              size="icon"
+              variant="outline"
+              className="rounded-r-none border-r-0"
+              onPress={onGoToToday}
+            >
               <Icon as={RotateCcw} />
             </Button>
           )}
@@ -63,8 +70,8 @@ export const WeekCalendarHeader: FC<WeekCalendarHeaderProps> = ({
             variant="outline"
             className={cn(
               showGoToCurrentWeekButton
-                ? 'border-l-0 rounded-l-none'
-                : 'border-l border-l-border rounded-l-md'
+                ? "rounded-l-none border-l-0"
+                : "rounded-l-md border-l border-l-border",
             )}
             onPress={onNextWeek}
           >

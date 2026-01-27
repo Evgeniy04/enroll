@@ -5,7 +5,7 @@ export interface TimeProps {
   seconds?: number;
 }
 
-export type TimeUnit = 'days' | 'hours' | 'minutes' | 'seconds';
+export type TimeUnit = "days" | "hours" | "minutes" | "seconds";
 
 export interface FormatTimeOptions {
   /**
@@ -21,7 +21,7 @@ export interface FormatTimeOptions {
    */
   separator?: string;
   /**
-   * Разделитель между числом и единицей 
+   * Разделитель между числом и единицей
    */
   unitSeparator?: string;
   /**

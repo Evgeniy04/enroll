@@ -1,7 +1,7 @@
-import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
-import { useHeaderHeight } from '@react-navigation/elements';
-import { Platform } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
+import { useHeaderHeight } from "@react-navigation/elements";
+import { Platform } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export type ContentInsets = {
   top: number;
@@ -16,7 +16,10 @@ export const useContentInsets = (): ContentInsets => {
   const bottomTabBarHeight = useBottomTabBarHeight();
 
   return {
-    top: Platform.select({android: topSafeAreaInsets + headerHeight, default: headerHeight}),
+    top: Platform.select({
+      android: topSafeAreaInsets + headerHeight,
+      default: headerHeight,
+    }),
     bottom: bottomTabBarHeight,
     left: 20,
     right: 20,

@@ -8,15 +8,17 @@ interface NotificationsHeaderActionProps {
   onPress?: () => void;
 }
 
-export const NotificationsHeaderAction: FC<NotificationsHeaderActionProps> = ({ onPress }) => {
+export const NotificationsHeaderAction: FC<NotificationsHeaderActionProps> = ({
+  onPress,
+}) => {
   return (
     <Button
       onPress={onPress}
-      variant={Platform.OS === 'ios' ? 'ghost' : 'outline'} 
-      size='sm' 
-      className='rounded-full'
+      variant={Platform.OS === "ios" ? "ghost" : "outline"}
+      size="sm"
+      className="rounded-full"
     >
-      <Icon as={Bell} className='size-4' />
+      <Icon as={Bell} className="size-4" />
     </Button>
   );
-}
+};

@@ -17,14 +17,20 @@ interface TemplateSlotCardProps {
   onRemove: (id: string) => void;
 }
 
-export const TemplateSlotCard: FC<TemplateSlotCardProps> = ({ slot, service, onRemove }) => (
-  <Card className="p-3 flex-row items-center gap-3">
+export const TemplateSlotCard: FC<TemplateSlotCardProps> = ({
+  slot,
+  service,
+  onRemove,
+}) => (
+  <Card className="flex-row items-center gap-3 p-3">
     <View className="flex-1 gap-1">
       <Text>
-        {formatTime(slot.startTime, TIME_FORMAT_CONFIG)} – {formatTime(calculateEndTime(slot, service), TIME_FORMAT_CONFIG)}
+        {formatTime(slot.startTime, TIME_FORMAT_CONFIG)} –{" "}
+        {formatTime(calculateEndTime(slot, service), TIME_FORMAT_CONFIG)}
       </Text>
       <Text variant="muted" className="text-muted-foreground">
-        {service.name} · {slot.count} × ({service.duration} мин{service.breakAfter > 0 && ` + ${service.breakAfter} мин`})
+        {service.name} · {slot.count} × ({service.duration} мин
+        {service.breakAfter > 0 && ` + ${service.breakAfter} мин`})
       </Text>
     </View>
 

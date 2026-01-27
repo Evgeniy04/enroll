@@ -1,17 +1,17 @@
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { FormField, FormFieldProps } from '@/components/ui/form-field';
-import { Icon } from '@/components/ui/icon';
-import { Text } from '@/components/ui/text';
-import { cn } from '@/lib/utils';
-import { Minus, Plus } from 'lucide-react-native';
-import React, { FC } from 'react';
-import { View } from 'react-native';
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { FormField, FormFieldProps } from "@/components/ui/form-field";
+import { Icon } from "@/components/ui/icon";
+import { Text } from "@/components/ui/text";
+import { cn } from "@/lib/utils";
+import { Minus, Plus } from "lucide-react-native";
+import React, { FC } from "react";
+import { View } from "react-native";
 
 const formatNumberValue = (
   value: number,
   formatValue?: (value: number) => string,
-  unit?: string
+  unit?: string,
 ) => {
   if (formatValue) return formatValue(value);
   if (unit) return `${value} ${unit}`;
@@ -71,15 +71,21 @@ export const NumberPickerField: FC<NumberPickerFieldProps> = ({
       <View
         aria-labelledby={nativeID}
         aria-invalid={!!error}
-        aria-describedby={error ? `${nativeID}-error` : helperText ? `${nativeID}-helper` : undefined}
-        className={cn(disabled && 'opacity-50')}
+        aria-describedby={
+          error
+            ? `${nativeID}-error`
+            : helperText
+              ? `${nativeID}-helper`
+              : undefined
+        }
+        className={cn(disabled && "opacity-50")}
       >
         <Card
           className={cn(
-            'flex-row items-center justify-between px-1 py-1',
-            'dark:bg-input/30 bg-background',
-            error ? 'border-destructive' : 'border-border',
-            'gap-2',
+            "flex-row items-center justify-between px-1 py-1",
+            "bg-background dark:bg-input/30",
+            error ? "border-destructive" : "border-border",
+            "gap-2",
           )}
         >
           <Button
@@ -104,7 +110,7 @@ export const NumberPickerField: FC<NumberPickerFieldProps> = ({
         </Card>
 
         {presets.length > 0 && (
-          <View className="flex-row flex-wrap gap-2 justify-center mt-2">
+          <View className="mt-2 flex-row flex-wrap justify-center gap-2">
             {presets.slice(0, 3).map((preset) => {
               if (preset < min || preset > max) return null;
 
@@ -114,7 +120,7 @@ export const NumberPickerField: FC<NumberPickerFieldProps> = ({
                 <Button
                   key={preset}
                   disabled={disabled}
-                  variant={active ? 'default' : 'outline'}
+                  variant={active ? "default" : "outline"}
                   className="flex-1"
                   onPress={() => onChange?.(clamp(preset))}
                 >

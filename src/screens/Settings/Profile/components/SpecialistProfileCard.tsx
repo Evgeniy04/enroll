@@ -4,48 +4,42 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import {
-  SelectField,
-  SelectValueProps,
-} from '@/components/ui/select-field';
-import {
-  Separator,
-} from '@/components/ui/separator';
-import { useContentInsets } from '@/hooks/useContentInsets';
-import {
-  getSpecialistForm,
-} from '@/screens/Settings/Profile/components/SpecialistForms';
-import {
-  FC,
-} from 'react';
+} from "@/components/ui/card";
+import { SelectField, SelectValueProps } from "@/components/ui/select-field";
+import { Separator } from "@/components/ui/separator";
+import { useContentInsets } from "@/hooks/useContentInsets";
+import { getSpecialistForm } from "@/screens/Settings/Profile/components/SpecialistForms";
+import { FC } from "react";
 
 const ACTIVITY_OPTIONS = [
-  { label: 'Мастер производственного обучения', value: 'driving_instructor' },
-  { label: 'Другое', value: 'other' },
+  { label: "Мастер производственного обучения", value: "driving_instructor" },
+  { label: "Другое", value: "other" },
 ];
 
-export const SpecialistProfileCard: FC<SelectValueProps> = ({ value, onValueChange }) => {
+export const SpecialistProfileCard: FC<SelectValueProps> = ({
+  value,
+  onValueChange,
+}) => {
   const contentInsets = useContentInsets();
-  const SpecialistForm = value
-    ? getSpecialistForm(value.value)
-    : null;
+  const SpecialistForm = value ? getSpecialistForm(value.value) : null;
 
   return (
-    <Card className='m-5'>
+    <Card className="m-5">
       <CardHeader>
         <CardTitle>Специализация</CardTitle>
-        <CardDescription>Выберите вид деятельности и заполните необходимые поля.</CardDescription>
+        <CardDescription>
+          Выберите вид деятельности и заполните необходимые поля.
+        </CardDescription>
       </CardHeader>
-      <CardContent className='gap-6'>
+      <CardContent className="gap-6">
         <SelectField
-          nativeID='activity'
-          label='Вид деятельности'
+          nativeID="activity"
+          label="Вид деятельности"
           value={value}
           onValueChange={onValueChange}
-          placeholder='Выберите вид деятельности'
+          placeholder="Выберите вид деятельности"
           options={ACTIVITY_OPTIONS}
-          groupLabel='Деятельность'
+          groupLabel="Деятельность"
           contentInsets={contentInsets}
         />
 
@@ -54,5 +48,5 @@ export const SpecialistProfileCard: FC<SelectValueProps> = ({ value, onValueChan
         {SpecialistForm && <SpecialistForm />}
       </CardContent>
     </Card>
-  )
-}
+  );
+};

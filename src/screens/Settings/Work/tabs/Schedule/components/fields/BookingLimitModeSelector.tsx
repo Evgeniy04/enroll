@@ -1,7 +1,7 @@
-import { DatePickerValue } from '@/components/ui/date-picker';
-import { ToggleGroupField } from '@/components/ui/toggle-group-field';
-import { Calendar, Clock, Infinity as InfinityIcon } from 'lucide-react-native';
-import { FC } from 'react';
+import { DatePickerValue } from "@/components/ui/date-picker";
+import { ToggleGroupField } from "@/components/ui/toggle-group-field";
+import { Calendar, Clock, Infinity as InfinityIcon } from "lucide-react-native";
+import { FC } from "react";
 
 interface BookingLimitModeSelectorProps {
   value: string;
@@ -18,26 +18,26 @@ export const BookingLimitModeSelector: FC<BookingLimitModeSelectorProps> = ({
 }) => {
   const options = [
     {
-      value: 'days-ahead',
+      value: "days-ahead",
       icon: Clock,
       showText: true,
       label: `На ${daysAhead} дней вперёд`,
     },
     {
-      value: 'specific-date',
+      value: "specific-date",
       icon: Calendar,
       showText: true,
       label: `До ${
-        endDate ? endDate.start.format('DD.MM.YYYY') : 'конкретной даты'
+        endDate ? endDate.start.format("DD.MM.YYYY") : "конкретной даты"
       }`,
     },
     {
-      value: 'unlimited',
+      value: "unlimited",
       icon: InfinityIcon,
       showText: true,
-      label: 'Без ограничения',
+      label: "Без ограничения",
     },
-  ]
+  ];
 
   return (
     <ToggleGroupField

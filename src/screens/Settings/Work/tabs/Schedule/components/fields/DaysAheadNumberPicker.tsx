@@ -1,13 +1,16 @@
-import { NumberPickerField } from '@/components/ui/number-picker-field';
-import { getPluralWord } from '@/utils/plural';
-import { FC } from 'react';
+import { NumberPickerField } from "@/components/ui/number-picker-field";
+import { getPluralWord } from "@/utils/plural";
+import { FC } from "react";
 
 interface DaysAheadNumberPickerProps {
   value: number;
   onChange: (value: number) => void;
 }
 
-export const DaysAheadNumberPicker: FC<DaysAheadNumberPickerProps> = ({ value, onChange }) => (
+export const DaysAheadNumberPicker: FC<DaysAheadNumberPickerProps> = ({
+  value,
+  onChange,
+}) => (
   <NumberPickerField
     nativeID="days-ahead"
     label="Количество дней"
@@ -20,7 +23,7 @@ export const DaysAheadNumberPicker: FC<DaysAheadNumberPickerProps> = ({ value, o
     unit="д."
     helperText={`Клиенты смогут записываться на ближайшие ${value} ${getPluralWord(
       value,
-      ['день', 'дня', 'дней'],
+      ["день", "дня", "дней"],
     )} от их текущей даты.`}
   />
 );

@@ -1,14 +1,14 @@
-import dayjs from 'dayjs';
-import 'dayjs/locale/ru';
-import isBetween from 'dayjs/plugin/isBetween';
-import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
-import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
-import isTodayPlugin from 'dayjs/plugin/isToday';
-import localeData from 'dayjs/plugin/localeData';
-import localizedFormat from 'dayjs/plugin/localizedFormat';
-import updateLocale from 'dayjs/plugin/updateLocale';
-import weekday from 'dayjs/plugin/weekday';
-import { LocaleConfig } from 'react-native-calendars';
+import dayjs from "dayjs";
+import "dayjs/locale/ru";
+import isBetween from "dayjs/plugin/isBetween";
+import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
+import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
+import isTodayPlugin from "dayjs/plugin/isToday";
+import localeData from "dayjs/plugin/localeData";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+import updateLocale from "dayjs/plugin/updateLocale";
+import weekday from "dayjs/plugin/weekday";
+import { LocaleConfig } from "react-native-calendars";
 
 dayjs.extend(localeData);
 dayjs.extend(updateLocale);
@@ -20,7 +20,20 @@ dayjs.extend(isSameOrAfter);
 dayjs.extend(localizedFormat);
 
 dayjs.updateLocale("ru", {
-  months: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
+  months: [
+    "Январь",
+    "Февраль",
+    "Март",
+    "Апрель",
+    "Май",
+    "Июнь",
+    "Июль",
+    "Август",
+    "Сентябрь",
+    "Октябрь",
+    "Ноябрь",
+    "Декабрь",
+  ],
   weekdaysShort: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
 });
 dayjs.locale("ru");

@@ -1,14 +1,14 @@
-import { DatePickerValue } from '@/components/ui/date-picker';
-import { Separator } from '@/components/ui/separator';
-import { Text } from '@/components/ui/text';
-import { useContentInsets } from '@/hooks/useContentInsets';
-import { BaseDialog } from '@/screens/Settings/Work/tabs/Schedule/components/dialogs/BaseDialog';
-import { BookingLimitModeSelector } from '@/screens/Settings/Work/tabs/Schedule/components/fields/BookingLimitModeSelector';
-import { DaysAheadNumberPicker } from '@/screens/Settings/Work/tabs/Schedule/components/fields/DaysAheadNumberPicker';
-import { EndDatePicker } from '@/screens/Settings/Work/tabs/Schedule/components/fields/EndDatePicker';
-import { BookingLimitValue } from '@/screens/Settings/Work/tabs/Schedule/components/types/booking-limit';
-import dayjs from 'dayjs';
-import { FC, useState } from 'react';
+import { DatePickerValue } from "@/components/ui/date-picker";
+import { Separator } from "@/components/ui/separator";
+import { Text } from "@/components/ui/text";
+import { useContentInsets } from "@/hooks/useContentInsets";
+import { BaseDialog } from "@/screens/Settings/Work/tabs/Schedule/components/dialogs/BaseDialog";
+import { BookingLimitModeSelector } from "@/screens/Settings/Work/tabs/Schedule/components/fields/BookingLimitModeSelector";
+import { DaysAheadNumberPicker } from "@/screens/Settings/Work/tabs/Schedule/components/fields/DaysAheadNumberPicker";
+import { EndDatePicker } from "@/screens/Settings/Work/tabs/Schedule/components/fields/EndDatePicker";
+import { BookingLimitValue } from "@/screens/Settings/Work/tabs/Schedule/components/types/booking-limit";
+import dayjs from "dayjs";
+import { FC, useState } from "react";
 
 interface BookingLimitDialogProps {
   onConfirm: (value: BookingLimitValue) => void;
@@ -17,13 +17,13 @@ interface BookingLimitDialogProps {
 
 export const BookingLimitDialog: FC<BookingLimitDialogProps> = ({
   onConfirm,
-  initialData
+  initialData,
 }) => {
   const contentInsets = useContentInsets();
-  const [ mode, setMode ] = useState<string>(initialData.mode);
-  const [ daysAhead, setDaysAhead ] = useState(initialData.daysAhead);
-  const [ endDate, setEndDate ] = useState<DatePickerValue | undefined>(
-    initialData.endDate && { start: initialData.endDate }
+  const [mode, setMode] = useState<string>(initialData.mode);
+  const [daysAhead, setDaysAhead] = useState(initialData.daysAhead);
+  const [endDate, setEndDate] = useState<DatePickerValue | undefined>(
+    initialData.endDate && { start: initialData.endDate },
   );
 
   const handleModeChange = (value?: string) => {
@@ -32,12 +32,20 @@ export const BookingLimitDialog: FC<BookingLimitDialogProps> = ({
   };
 
   const handleConfirm = () => {
-    if (mode !== 'days-ahead' && mode !== 'specific-date' && mode !== 'unlimited') return;
-    
+    if (
+      mode !== "days-ahead" &&
+      mode !== "specific-date" &&
+      mode !== "unlimited"
+    )
+      return;
+
     onConfirm({
       mode,
       daysAhead,
-      endDate: endDate && endDate.start.isSameOrAfter(dayjs(), 'day') ? endDate.start : undefined,
+      endDate:
+        endDate && endDate.start.isSameOrAfter(dayjs(), "day")
+          ? endDate.start
+          : undefined,
     });
   };
 
@@ -45,7 +53,7 @@ export const BookingLimitDialog: FC<BookingLimitDialogProps> = ({
     <BaseDialog
       title="Ограничение записи"
       description="Настройте, как далеко клиенты могут записываться вперёд."
-      confirmDisabled={mode === 'specific-date' && !Boolean(endDate)}
+      confirmDisabled={mode === "specific-date" && !Boolean(endDate)}
       onConfirm={handleConfirm}
     >
       <BookingLimitModeSelector
@@ -55,16 +63,13 @@ export const BookingLimitDialog: FC<BookingLimitDialogProps> = ({
         onChange={handleModeChange}
       />
 
-      {mode !== 'unlimited' && <Separator />}
+      {mode !== "unlimited" && <Separator />}
 
-      {mode === 'days-ahead' && (
-        <DaysAheadNumberPicker
-          value={daysAhead}
-          onChange={setDaysAhead}
-        />
+      {mode === "days-ahead" && (
+        <DaysAheadNumberPicker value={daysAhead} onChange={setDaysAhead} />
       )}
 
-      {mode === 'specific-date' && (
+      {mode === "specific-date" && (
         <EndDatePicker
           helperText="Клиенты смогут записываться только до выбранной даты."
           value={endDate}
@@ -73,8 +78,8 @@ export const BookingLimitDialog: FC<BookingLimitDialogProps> = ({
         />
       )}
 
-      {mode === 'unlimited' && (
-        <Text variant='blockquote'>Ограничения не применяются</Text>
+      {mode === "unlimited" && (
+        <Text variant="blockquote">Ограничения не применяются</Text>
       )}
     </BaseDialog>
   );

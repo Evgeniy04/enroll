@@ -5,29 +5,28 @@ import { View } from "react-native";
 import { ToastConfigParams } from "react-native-toast-message";
 
 type AlertProps = {
-  title: string,
-  description: string,
+  title: string;
+  description: string;
 };
 
 type ToastProps = ToastConfigParams<AlertProps>;
 
 type BaseToastProps = {
-  variant: 'default' | 'destructive',
-  toastProps: ToastProps,
-}
+  variant: "default" | "destructive";
+  toastProps: ToastProps;
+};
 
-const BaseToast: FC<BaseToastProps> = ({variant, toastProps}) => {
-  const icon = variant === 'default' ? CircleCheck : CircleAlert;
+const BaseToast: FC<BaseToastProps> = ({ variant, toastProps }) => {
+  const icon = variant === "default" ? CircleCheck : CircleAlert;
 
-  return <View className="w-full px-4 mb-2">
-    <Alert variant={variant} icon={icon}>
-      <AlertTitle>{toastProps.props.title}</AlertTitle>
-      <AlertDescription>
-        {toastProps.props.description}
-      </AlertDescription>
-    </Alert>
-  </View>
-}
+  return (
+    <View className="mb-2 w-full px-4">
+      <Alert variant={variant} icon={icon}>
+        <AlertTitle>{toastProps.props.title}</AlertTitle>
+        <AlertDescription>{toastProps.props.description}</AlertDescription>
+      </Alert>
+    </View>
+  );
+};
 
 export { AlertProps, BaseToast, ToastProps };
-

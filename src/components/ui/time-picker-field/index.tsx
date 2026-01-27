@@ -1,18 +1,22 @@
-import { Button } from '@/components/ui/button';
-import { FormField, FormFieldProps } from '@/components/ui/form-field';
-import { Text } from '@/components/ui/text';
-import { FormatTimeOptions, TimeProps } from '@/components/ui/time-picker-field/time-picker-field.types';
-import { formatTime } from '@/components/ui/time-picker-field/utils/formatTime';
-import { useColorScheme } from 'nativewind';
-import { FC, useCallback, useMemo, useState } from 'react';
-import { TimerPickerModal, TimerPickerModalProps } from 'react-native-timer-picker';
+import { Button } from "@/components/ui/button";
+import { FormField, FormFieldProps } from "@/components/ui/form-field";
+import { Text } from "@/components/ui/text";
+import {
+  FormatTimeOptions,
+  TimeProps,
+} from "@/components/ui/time-picker-field/time-picker-field.types";
+import { formatTime } from "@/components/ui/time-picker-field/utils/formatTime";
+import { useColorScheme } from "nativewind";
+import { FC, useCallback, useMemo, useState } from "react";
+import {
+  TimerPickerModal,
+  TimerPickerModalProps,
+} from "react-native-timer-picker";
 
 interface TimePickerFieldProps
-  extends Omit<
-    TimerPickerModalProps, 'onConfirm' | 'visible' | 'setIsVisible'
-  >, 
-  FormFieldProps 
-{
+  extends
+    Omit<TimerPickerModalProps, "onConfirm" | "visible" | "setIsVisible">,
+    FormFieldProps {
   value?: TimeProps;
   defaultValue?: TimeProps;
   onChange?: (value: TimeProps) => void;
@@ -38,22 +42,22 @@ export const TimePickerField: FC<TimePickerFieldProps> = ({
   onChange,
   modalTitle,
   placeholder,
-  confirmText = 'Выбрать',
-  cancelText = 'Отменить',
+  confirmText = "Выбрать",
+  cancelText = "Отменить",
   formatOptions,
   ...modalProps
 }) => {
   const { colorScheme } = useColorScheme();
-  const [ visible, setIsVisible ] = useState(false);
-  const [ internalValue, setInternalValue ] = useState<TimeProps>(
-    defaultValue ?? { hours: 0, minutes: 0 }
+  const [visible, setIsVisible] = useState(false);
+  const [internalValue, setInternalValue] = useState<TimeProps>(
+    defaultValue ?? { hours: 0, minutes: 0 },
   );
 
   const currentValue = value ? value : internalValue;
 
   const displayValue = useMemo(
     () => formatTime(currentValue, formatOptions),
-    [currentValue, formatOptions]
+    [currentValue, formatOptions],
   );
 
   const handleOpenPress = useCallback(() => {
@@ -73,7 +77,7 @@ export const TimePickerField: FC<TimePickerFieldProps> = ({
       onChange?.(picked);
       setIsVisible(false);
     },
-    [value, onChange, setIsVisible]
+    [value, onChange, setIsVisible],
   );
 
   return (
@@ -86,9 +90,7 @@ export const TimePickerField: FC<TimePickerFieldProps> = ({
       disabled={disabled}
     >
       <Button variant="outline" onPress={handleOpenPress} disabled={disabled}>
-        <Text aria-labelledby={nativeID}>
-          {placeholder ?? displayValue}
-        </Text>
+        <Text aria-labelledby={nativeID}>{placeholder ?? displayValue}</Text>
       </Button>
 
       <TimerPickerModal
@@ -105,7 +107,7 @@ export const TimePickerField: FC<TimePickerFieldProps> = ({
         hourLabel="ч"
         minuteLabel="м"
         secondLabel="с"
-        styles={{ theme: colorScheme ?? 'light' }}
+        styles={{ theme: colorScheme ?? "light" }}
       />
     </FormField>
   );

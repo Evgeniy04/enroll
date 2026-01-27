@@ -1,10 +1,10 @@
-import { Card, CardContent } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
-import { cn } from '@/lib/utils';
-import { DayCard } from '@/screens/Settings/Work/tabs/Schedule/components/WeekCalendar/DayCard';
-import { WeekCalendarHeader } from '@/screens/Settings/Work/tabs/Schedule/components/WeekCalendar/WeekCalendarHeader';
-import { Template } from '@/screens/Settings/Work/tabs/Templates/Templates.types';
-import dayjs from 'dayjs';
+import { Card, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
+import { DayCard } from "@/screens/Settings/Work/tabs/Schedule/components/WeekCalendar/DayCard";
+import { WeekCalendarHeader } from "@/screens/Settings/Work/tabs/Schedule/components/WeekCalendar/WeekCalendarHeader";
+import { Template } from "@/screens/Settings/Work/tabs/Templates/Templates.types";
+import dayjs from "dayjs";
 import { FC, useState } from "react";
 
 interface WeekCalendarProps {
@@ -14,31 +14,44 @@ interface WeekCalendarProps {
 
 export const WeekCalendar: FC<WeekCalendarProps> = ({
   templates,
-  className
+  className,
 }) => {
-  const [ currentWeekStart, setCurrentWeekStart ] = useState(dayjs().weekday(0));
+  const [currentWeekStart, setCurrentWeekStart] = useState(dayjs().weekday(0));
 
   const handlePrevWeek = () => {
-    setCurrentWeekStart(prev => prev.add(-7, 'day'));
+    setCurrentWeekStart((prev) => prev.add(-7, "day"));
   };
 
   const handleNextWeek = () => {
-    setCurrentWeekStart(prev => prev.add(7, 'day'));
+    setCurrentWeekStart((prev) => prev.add(7, "day"));
   };
 
   const handleGoToToday = () => {
     setCurrentWeekStart(dayjs().weekday(0));
-  }
+  };
 
   return (
-    <Card className={cn('p-0 gap-0 overflow-hidden shadow-lg dark:shadow-primary bg-neutral-100 dark:bg-neutral-950', className)}>
-      <WeekCalendarHeader weekStart={currentWeekStart} onNextWeek={handleNextWeek} onPrevWeek={handlePrevWeek} onGoToToday={handleGoToToday} />
-      <Separator className='bg-primary/10' />
-      <CardContent className="p-2 gap-3">
+    <Card
+      className={cn(
+        "gap-0 overflow-hidden bg-neutral-100 p-0 shadow-lg dark:bg-neutral-950 dark:shadow-primary",
+        className,
+      )}
+    >
+      <WeekCalendarHeader
+        weekStart={currentWeekStart}
+        onNextWeek={handleNextWeek}
+        onPrevWeek={handlePrevWeek}
+        onGoToToday={handleGoToToday}
+      />
+      <Separator className="bg-primary/10" />
+      <CardContent className="gap-3 p-2">
         {Array.from({ length: 7 }, (_, n) => (
           <DayCard
             key={n}
-            templates={templates.map(({ name, id }) => ({ label: name, value: id }))}
+            templates={templates.map(({ name, id }) => ({
+              label: name,
+              value: id,
+            }))}
             date={currentWeekStart.weekday(n)}
           />
         ))}

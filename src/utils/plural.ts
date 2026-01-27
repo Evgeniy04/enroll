@@ -8,7 +8,10 @@
  * @param locale Язык в формате BCP-47, по умолчанию 'ru-RU'
  * @returns Строка с правильной формой слова, например: "день", "дня", "дней"
  */
-export function getPluralWord(count: number, forms: [string, string, string]): string {
+export function getPluralWord(
+  count: number,
+  forms: [string, string, string],
+): string {
   const lastDigit = count % 10;
   const lastTwoDigits = count % 100;
 

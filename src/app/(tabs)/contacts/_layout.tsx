@@ -1,9 +1,7 @@
-import { Stack } from 'expo-router';
+import { Stack } from "expo-router";
 
 const ContactsStack = () => {
-  return (
-    <Stack />
-  );
-}
+  return <Stack />;
+};
 
 export default ContactsStack;

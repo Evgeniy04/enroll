@@ -1,28 +1,28 @@
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   DialogClose,
   DialogFooter,
   DialogHeader,
-  DialogTitle
-} from '@/components/ui/dialog';
-import { Icon } from '@/components/ui/icon';
-import { NumberPickerField } from '@/components/ui/number-picker-field';
-import { Text } from '@/components/ui/text';
-import { TextField } from '@/components/ui/text-field';
-import { FormProps } from '@/screens/Settings/Work/tabs/components/FormDialog';
-import { Check, X } from 'lucide-react-native';
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Icon } from "@/components/ui/icon";
+import { NumberPickerField } from "@/components/ui/number-picker-field";
+import { Text } from "@/components/ui/text";
+import { TextField } from "@/components/ui/text-field";
+import { FormProps } from "@/screens/Settings/Work/tabs/components/FormDialog";
+import { Check, X } from "lucide-react-native";
 import { useEffect, useState } from "react";
-import { View } from 'react-native';
-import { Service } from '../Services.types';
+import { View } from "react-native";
+import { Service } from "../Services.types";
 
 export const ServiceForm = ({
   initialData,
   onCreate,
-  onUpdate
+  onUpdate,
 }: FormProps<Service>) => {
-  const [ name, setName ] = useState('');
-  const [ duration, setDuration ] = useState(30);
-  const [ breakAfter, setBreakAfter ] = useState(0);
+  const [name, setName] = useState("");
+  const [duration, setDuration] = useState(30);
+  const [breakAfter, setBreakAfter] = useState(0);
 
   useEffect(() => {
     if (initialData) {
@@ -30,7 +30,7 @@ export const ServiceForm = ({
       setDuration(initialData.duration);
       setBreakAfter(initialData.breakAfter);
     } else {
-      setName('');
+      setName("");
       setDuration(30);
       setBreakAfter(0);
     }
@@ -56,7 +56,9 @@ export const ServiceForm = ({
   return (
     <>
       <DialogHeader>
-        <DialogTitle>{initialData ? 'Редактировать услугу' : 'Новая услуга'}</DialogTitle>
+        <DialogTitle>
+          {initialData ? "Редактировать услугу" : "Новая услуга"}
+        </DialogTitle>
       </DialogHeader>
 
       <View className="gap-6">
@@ -105,9 +107,13 @@ export const ServiceForm = ({
         </DialogClose>
 
         <DialogClose asChild>
-          <Button className="flex-1" onPress={handleSubmit} disabled={!name.trim()}>
+          <Button
+            className="flex-1"
+            onPress={handleSubmit}
+            disabled={!name.trim()}
+          >
             <Icon as={Check} className="text-primary-foreground" />
-            <Text>{initialData ? 'Сохранить' : 'Создать'}</Text>
+            <Text>{initialData ? "Сохранить" : "Создать"}</Text>
           </Button>
         </DialogClose>
       </DialogFooter>

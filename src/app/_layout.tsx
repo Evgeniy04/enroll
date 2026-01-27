@@ -1,29 +1,29 @@
-import { initializeApp, toastConfig } from '@/config';
-import { NAV_THEME } from '@/lib/theme';
-import { ActionSheetProvider } from '@expo/react-native-action-sheet';
-import { ThemeProvider } from '@react-navigation/native';
-import { PortalHost } from '@rn-primitives/portal';
-import * as NavigationBar from 'expo-navigation-bar';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { StatusBar } from 'expo-status-bar';
-import { useColorScheme } from 'nativewind';
-import { useEffect, useState } from 'react';
-import { Platform } from 'react-native';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import Toast from 'react-native-toast-message';
+import { initializeApp, toastConfig } from "@/config";
+import { NAV_THEME } from "@/lib/theme";
+import { ActionSheetProvider } from "@expo/react-native-action-sheet";
+import { ThemeProvider } from "@react-navigation/native";
+import { PortalHost } from "@rn-primitives/portal";
+import * as NavigationBar from "expo-navigation-bar";
+import { Stack } from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
+import { StatusBar } from "expo-status-bar";
+import { useColorScheme } from "nativewind";
+import { useEffect, useState } from "react";
+import { Platform } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import Toast from "react-native-toast-message";
 import "../../global.css";
 
 export {
   // Перехватывает любые ошибки, выбрасываемые компонентом Layout.
-  ErrorBoundary
-} from 'expo-router';
+  ErrorBoundary,
+} from "expo-router";
 
 SplashScreen.preventAutoHideAsync();
 
 const Routes = () => {
-  const [ isLoaded ] = useState(true);
-  const [ isSignedIn ] = useState(true);
+  const [isLoaded] = useState(true);
+  const [isSignedIn] = useState(true);
 
   useEffect(() => {
     if (isLoaded) {
@@ -39,7 +39,10 @@ const Routes = () => {
     <Stack>
       {/* Экраны, которые показываются только когда пользователь НЕ авторизован. */}
       <Stack.Protected guard={!isSignedIn}>
-        <Stack.Screen name="(auth)/sign-in" options={{ headerShown: false, title: 'Войти' }} />
+        <Stack.Screen
+          name="(auth)/sign-in"
+          options={{ headerShown: false, title: "Войти" }}
+        />
       </Stack.Protected>
 
       {/* Экраны, которые показываются только когда пользователь авторизован. */}
@@ -50,7 +53,7 @@ const Routes = () => {
       {/* Экраны вне защитных блоков доступны всем (например, страница "не найдено"). */}
     </Stack>
   );
-}
+};
 
 const Layout = () => {
   const { colorScheme } = useColorScheme();
@@ -59,24 +62,26 @@ const Layout = () => {
     initializeApp();
   }, []);
 
-  if (Platform.OS === 'android') {
-    NavigationBar.setButtonStyleAsync(colorScheme === 'dark' ? 'light' : 'dark');
+  if (Platform.OS === "android") {
+    NavigationBar.setButtonStyleAsync(
+      colorScheme === "dark" ? "light" : "dark",
+    );
   }
 
   return (
-    <GestureHandlerRootView className='flex-1'>
-      <ThemeProvider value={NAV_THEME[colorScheme ?? 'light']}>
+    <GestureHandlerRootView className="flex-1">
+      <ThemeProvider value={NAV_THEME[colorScheme ?? "light"]}>
         <ActionSheetProvider>
           <>
-            <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
+            <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />
             <Routes />
-            <Toast config={toastConfig} position='bottom' />
+            <Toast config={toastConfig} position="bottom" />
             <PortalHost />
           </>
         </ActionSheetProvider>
       </ThemeProvider>
     </GestureHandlerRootView>
   );
-}
+};
 
 export default Layout;

@@ -8,15 +8,17 @@ interface SettingsHeaderActionProps {
   onPress?: () => void;
 }
 
-export const SettingsHeaderAction: FC<SettingsHeaderActionProps> = ({ onPress }) => {
+export const SettingsHeaderAction: FC<SettingsHeaderActionProps> = ({
+  onPress,
+}) => {
   return (
     <Button
       onPress={onPress}
-      variant={Platform.OS === 'ios' ? 'ghost' : 'outline'} 
-      size='sm' 
-      className='rounded-full'
+      variant={Platform.OS === "ios" ? "ghost" : "outline"}
+      size="sm"
+      className="rounded-full"
     >
-      <Icon as={Settings2} className='size-4' />
+      <Icon as={Settings2} className="size-4" />
     </Button>
   );
-}
+};

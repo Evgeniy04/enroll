@@ -11,16 +11,28 @@ interface EmptyStateProps {
   hint?: string | ReactNode;
 }
 
-export const EmptyState: FC<EmptyStateProps> = ({ icon: IconComponent, message, hint }) => (
-  <Card className="border-dashed gap-2 p-4 items-center">
-    {IconComponent && <Icon as={IconComponent} size={32} className="text-muted-foreground mb-2" />}
+export const EmptyState: FC<EmptyStateProps> = ({
+  icon: IconComponent,
+  message,
+  hint,
+}) => (
+  <Card className="items-center gap-2 border-dashed p-4">
+    {IconComponent && (
+      <Icon
+        as={IconComponent}
+        size={32}
+        className="mb-2 text-muted-foreground"
+      />
+    )}
     <Text variant="muted" className="text-center text-muted-foreground">
       {message}
     </Text>
     {hint && (
-      <View className="flex-row justify-center items-center mt-2 flex-wrap">
+      <View className="mt-2 flex-row flex-wrap items-center justify-center">
         {typeof hint === "string" ? (
-          <Text variant="muted" className="text-muted-foreground text-center">{hint}</Text>
+          <Text variant="muted" className="text-center text-muted-foreground">
+            {hint}
+          </Text>
         ) : (
           hint
         )}

@@ -1,10 +1,13 @@
-import { Text } from '@/components/ui/text';
-import { PendingSlot, TemplateSlotForm } from '@/screens/Settings/Work/tabs/Templates/components/TemplateSlotsEditor/TemplateSlotForm';
-import { TemplateSlotList } from '@/screens/Settings/Work/tabs/Templates/components/TemplateSlotsEditor/TemplateSlotList';
-import { FC, useCallback, useState } from 'react';
-import { View } from 'react-native';
-import { Service } from '../../../Services/Services.types';
-import { ScheduleSlot, Template } from '../../Templates.types';
+import { Text } from "@/components/ui/text";
+import {
+  PendingSlot,
+  TemplateSlotForm,
+} from "@/screens/Settings/Work/tabs/Templates/components/TemplateSlotsEditor/TemplateSlotForm";
+import { TemplateSlotList } from "@/screens/Settings/Work/tabs/Templates/components/TemplateSlotsEditor/TemplateSlotList";
+import { FC, useCallback, useState } from "react";
+import { View } from "react-native";
+import { Service } from "../../../Services/Services.types";
+import { ScheduleSlot, Template } from "../../Templates.types";
 
 export interface TemplateSlotsEditorProps {
   template: Template;
@@ -23,7 +26,10 @@ export const TemplateSlotsEditor: FC<TemplateSlotsEditorProps> = ({
     count: 1,
   });
 
-  const setSlots = useCallback((slots: ScheduleSlot[]) => onChange({ ...template, slots }), [template, onChange]);
+  const setSlots = useCallback(
+    (slots: ScheduleSlot[]) => onChange({ ...template, slots }),
+    [template, onChange],
+  );
 
   const handleAddSlot = useCallback(() => {
     if (!pendingSlot.serviceId) return;
@@ -35,23 +41,42 @@ export const TemplateSlotsEditor: FC<TemplateSlotsEditorProps> = ({
       serviceId: pendingSlot.serviceId.value,
     };
 
-    setSlots([...template.slots, slot].sort((a, b) => (a.startTime.hours ?? 0) * 60 + (a.startTime.minutes ?? 0) - ((b.startTime.hours ?? 0) * 60 + (b.startTime.minutes ?? 0))));
-    setPendingSlot(prev => ({ ...prev, count: 1 }));
+    setSlots(
+      [...template.slots, slot].sort(
+        (a, b) =>
+          (a.startTime.hours ?? 0) * 60 +
+          (a.startTime.minutes ?? 0) -
+          ((b.startTime.hours ?? 0) * 60 + (b.startTime.minutes ?? 0)),
+      ),
+    );
+    setPendingSlot((prev) => ({ ...prev, count: 1 }));
   }, [pendingSlot, template.slots, setSlots]);
 
-  const handleRemoveSlot = useCallback((id: string) => {
-    setSlots(template.slots.filter(s => s.id !== id));
-  }, [template.slots, setSlots]);
+  const handleRemoveSlot = useCallback(
+    (id: string) => {
+      setSlots(template.slots.filter((s) => s.id !== id));
+    },
+    [template.slots, setSlots],
+  );
 
   return (
     <View className="gap-4">
-      <View className="flex-row justify-between items-center">
+      <View className="flex-row items-center justify-between">
         <Text variant="h4">Настройка расписания</Text>
       </View>
 
-      <TemplateSlotForm pendingSlot={pendingSlot} services={services} onChange={setPendingSlot} onAdd={handleAddSlot} />
+      <TemplateSlotForm
+        pendingSlot={pendingSlot}
+        services={services}
+        onChange={setPendingSlot}
+        onAdd={handleAddSlot}
+      />
       <Text>Список услуг в расписании</Text>
-      <TemplateSlotList slots={template.slots} services={services} onRemove={handleRemoveSlot} />
+      <TemplateSlotList
+        slots={template.slots}
+        services={services}
+        onRemove={handleRemoveSlot}
+      />
     </View>
   );
 };

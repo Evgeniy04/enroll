@@ -1,25 +1,28 @@
-import { useConfirm } from '@/hooks/useConfirm';
-import { ContactCard } from '@/screens/Contacts/components/ContactListItem/ContactCard';
-import { ContactContextMenu } from '@/screens/Contacts/components/ContactListItem/ContactContextMenu';
-import * as Haptics from 'expo-haptics';
-import * as Linking from 'expo-linking';
-import { useRouter } from 'expo-router';
-import { FC, useCallback } from 'react';
-import { Contact } from '../../../test-store';
+import { useConfirm } from "@/hooks/useConfirm";
+import { ContactCard } from "@/screens/Contacts/components/ContactListItem/ContactCard";
+import { ContactContextMenu } from "@/screens/Contacts/components/ContactListItem/ContactContextMenu";
+import * as Haptics from "expo-haptics";
+import * as Linking from "expo-linking";
+import { useRouter } from "expo-router";
+import { FC, useCallback } from "react";
+import { Contact } from "../../../test-store";
 
 interface ContactListItemProps {
   item: Contact;
   onDelete: (id: string) => void;
 }
 
-export const ContactListItem: FC<ContactListItemProps> = ({ item: contact, onDelete }) => {
+export const ContactListItem: FC<ContactListItemProps> = ({
+  item: contact,
+  onDelete,
+}) => {
   const router = useRouter();
   const { confirm, ConfirmDialogElement } = useConfirm();
 
   const handlePress = useCallback(() => {
     router.push({
-      pathname: '/contacts/ContactDetails',
-      params: { id: contact.id, displayName: contact.name},
+      pathname: "/contacts/ContactDetails",
+      params: { id: contact.id, displayName: contact.name },
     });
   }, [router, contact.id, contact.name]);
 
