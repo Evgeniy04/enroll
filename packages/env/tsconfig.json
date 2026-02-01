@@ -1,0 +1,3 @@
+{
+  "extends": "@enroll/config/tsconfig.base.json"
+}
