@@ -52,7 +52,10 @@ export const ProfileCardView: FC<ProfileCardViewProps> = ({
 
       <View className="flex-row items-center gap-1.5">
         <Icon as={MapPin} size={16} className="text-muted-foreground" />
-        <Text className="text-sm text-muted-foreground" numberOfLines={2}>
+        <Text
+          className="flex-1 text-sm text-muted-foreground"
+          numberOfLines={2}
+        >
           {contact.address}
         </Text>
       </View>

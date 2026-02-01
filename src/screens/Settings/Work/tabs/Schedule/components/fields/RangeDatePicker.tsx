@@ -1,8 +1,8 @@
-import { DatePickerValue } from '@/components/ui/date-picker';
-import { DatePickerField } from '@/components/ui/date-picker-field';
-import { ContentInsets } from '@/hooks/useContentInsets';
-import dayjs from 'dayjs';
-import { FC } from 'react';
+import { DatePickerValue } from "@/components/ui/date-picker";
+import { DatePickerField } from "@/components/ui/date-picker-field";
+import { ContentInsets } from "@/hooks/useContentInsets";
+import dayjs from "dayjs";
+import { FC } from "react";
 
 interface RangeDatePickerProps {
   value?: DatePickerValue;
@@ -10,7 +10,11 @@ interface RangeDatePickerProps {
   contentInsets: ContentInsets;
 }
 
-export const RangeDatePicker: FC<RangeDatePickerProps> = ({ value, onChange, contentInsets }) => {
+export const RangeDatePicker: FC<RangeDatePickerProps> = ({
+  value,
+  onChange,
+  contentInsets,
+}) => {
   const now = dayjs();
   const year = now.year();
 
@@ -24,7 +28,7 @@ export const RangeDatePicker: FC<RangeDatePickerProps> = ({ value, onChange, con
       startYear={year}
       endYear={year + 1}
       minDate={now.toString()}
-      maxDate={now.add(1, 'year').toString()}
+      maxDate={now.add(1, "year").toString()}
       contentInsets={contentInsets}
       rangeSelection
     />

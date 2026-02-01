@@ -1,5 +1,5 @@
-import { ConfirmDialog } from '@/components/ui/confirm-dialog';
-import { useState } from 'react';
+import { ConfirmDialog } from "@/components/ui/confirm-dialog";
+import { useState } from "react";
 
 interface ConfirmOptions {
   title: string;

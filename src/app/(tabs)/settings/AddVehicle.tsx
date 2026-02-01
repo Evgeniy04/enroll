@@ -1,3 +1,3 @@
-import { AddVehicle } from '@/screens/AddVehicle';
+import { AddVehicle } from "@/screens/AddVehicle";
 
 export default AddVehicle;

@@ -1,6 +1,6 @@
-import { DatePickerValue } from '@/components/ui/date-picker';
-import { FormFieldProps } from '@/components/ui/form-field';
-import { ContentInsets } from '@/hooks/useContentInsets';
+import { DatePickerValue } from "@/components/ui/date-picker";
+import { FormFieldProps } from "@/components/ui/form-field";
+import { ContentInsets } from "@/hooks/useContentInsets";
 
 export interface DatePickerFieldContactProps {
   helperText?: string;
@@ -15,7 +15,8 @@ export interface DatePickerFieldContactProps {
   rangeSelection?: boolean;
 }
 
-export interface DatePickerFieldProps extends FormFieldProps, DatePickerFieldContactProps {
+export interface DatePickerFieldProps
+  extends FormFieldProps, DatePickerFieldContactProps {
   placeholder?: string;
-  side?: 'top' | 'bottom';
+  side?: "top" | "bottom";
 }
