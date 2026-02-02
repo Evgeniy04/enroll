@@ -1,10 +1,6 @@
 {
   "name": "enroll",
   "private": true,
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
   "type": "module",
   "scripts": {
     "dev": "turbo dev",
@@ -20,7 +16,8 @@
     "db:start": "turbo -F @enroll/db db:start",
     "db:watch": "turbo -F @enroll/db db:watch",
     "db:stop": "turbo -F @enroll/db db:stop",
-    "db:down": "turbo -F @enroll/db db:down"
+    "db:down": "turbo -F @enroll/db db:down",
+    "setup": "bash scripts/setup.sh"
   },
   "dependencies": {
     "@enroll/env": "workspace:*",
@@ -32,6 +29,15 @@
     "@types/node": "^22.13.14",
     "turbo": "^2.6.3",
     "typescript": "catalog:"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@prisma/engines",
+      "esbuild",
+      "prisma",
+      "simple-git-hooks",
+      "unrs-resolver"
+    ]
   },
   "packageManager": "pnpm@10.28.2"
 }
