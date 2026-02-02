@@ -40,7 +40,9 @@ export const ContactCard: FC<ContactCardProps> = ({
       <Card className="flex-row items-center p-6">
         <View className="flex-1 flex-row">
           <Avatar alt={contact.name} className="size-12 border border-border">
-            <AvatarImage source={{ uri: contact.avatar }} />
+            <AvatarImage
+              source={{ uri: contact.avatar, cache: "force-cache" }}
+            />
             <AvatarFallback>
               <Text>{initials}</Text>
             </AvatarFallback>
