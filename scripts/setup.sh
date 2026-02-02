@@ -43,15 +43,7 @@ fi
 [[ -z "$IP" ]] && err "Не удалось получить IP-адрес. Проверьте подключение к сети."
 info "Используем IP: ${GREEN}$IP${NC}"
 
-# -- 2. Запуск базы данных --
-if ! docker info >/dev/null 2>&1; then
-  err "Docker запущен? Пожалуйста, запустите Docker Desktop."
-fi
-
-info "Запуск Docker-контейнеров..."
-pnpm db:start || warn "Контейнеры уже запущены или произошла ошибка при старте."
-
-# -- 3. Настройка apps/native/.env --
+# -- 2. Настройка apps/native/.env --
 info "Настройка Native окружения..."
 SERVER_URL="http://$IP:3000"
 
@@ -63,7 +55,7 @@ else
   echo "EXPO_PUBLIC_SERVER_URL=$SERVER_URL" >> "$NATIVE_ENV"
 fi
 
-# -- 4. Настройка apps/server/.env --
+# -- 3. Настройка apps/server/.env --
 info "Настройка Server окружения..."
 if [[ ! -f "$SERVER_ENV" ]]; then
   AUTH_SECRET=$(openssl rand -base64 32)
@@ -81,15 +73,24 @@ else
   done
 fi
 
-# -- 5. Установка и миграции --
+# -- 4. Установка и миграции --
 info "Установка зависимостей (pnpm install)..."
 pnpm install
 
-info "Подготовка базы данных (Prisma)..."
+info "Подготовка базы данных..."
+
+# Запуск базы данных --
+if ! docker info >/dev/null 2>&1; then
+  err "Docker запущен? Пожалуйста, запустите Docker Desktop."
+fi
+
+info "Запуск Docker-контейнеров..."
+pnpm db:start || warn "Контейнеры уже запущены или произошла ошибка при старте."
+
 pnpm db:generate
 pnpm db:push
 
-# -- 6. Запуск --
+# -- 5. Запуск --
 echo -e "\n${GREEN}${BOLD}✅ Настройка завершена успешно!${NC}"
 info "Запускаю сервер разработки..."
 pnpm dev
