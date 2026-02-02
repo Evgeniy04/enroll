@@ -83,7 +83,7 @@ fi
 
 # -- 5. Установка и миграции --
 info "Установка зависимостей (pnpm install)..."
-pnpm install --silent
+pnpm install
 
 info "Подготовка базы данных (Prisma)..."
 pnpm db:generate
