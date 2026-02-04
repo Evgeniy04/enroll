@@ -1,7 +1,6 @@
-import {
-  DrivingInstructorForm,
-  OtherSpecialistForm,
-} from "@/screens/Settings/Profile/components/SpecialistForms";
+import { DrivingInstructorForm } from "@/screens/Settings/Profile/components/SpecialistForms/DrivingInstructorForm";
+import { OtherSpecialistForm } from "@/screens/Settings/Profile/components/SpecialistForms/OtherSpecialistForm";
+
 import { ComponentType } from "react";
 
 const SPECIALIST_FORMS_MAP: Record<string, ComponentType> = {
@@ -11,6 +10,3 @@ const SPECIALIST_FORMS_MAP: Record<string, ComponentType> = {
 export const getSpecialistForm = (value: string) =>
   SPECIALIST_FORMS_MAP[value as keyof typeof SPECIALIST_FORMS_MAP] ??
   OtherSpecialistForm;
-
-export { DrivingInstructorForm } from "@/screens/Settings/Profile/components/SpecialistForms/DrivingInstructorForm";
-export { OtherSpecialistForm } from "@/screens/Settings/Profile/components/SpecialistForms/OtherSpecialistForm";
