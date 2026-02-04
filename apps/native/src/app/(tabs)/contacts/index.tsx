@@ -1,3 +1,3 @@
-import { Contacts } from "@/screens/Contacts";
+import { ContactsList } from "@/screens/ContactsList";
 
-export default Contacts;
+export default ContactsList;

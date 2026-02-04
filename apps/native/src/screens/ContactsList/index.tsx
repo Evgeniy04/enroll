@@ -13,8 +13,8 @@ import { Icon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { TextField } from "@/components/ui/text-field";
 import { useWindowDimensions } from "@/hooks/useWindowDimensions";
-import { ContactListItem } from "@/screens/Contacts/components/ContactListItem";
-import { ContactSearch } from "@/screens/Contacts/components/ContactSearch";
+import { ContactListItem } from "@/screens/ContactsList/components/ContactListItem";
+import { ContactSearch } from "@/screens/ContactsList/components/ContactSearch";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { useHeaderHeight } from "@react-navigation/elements";
 import { Stack } from "expo-router";
@@ -23,7 +23,7 @@ import { useCallback } from "react";
 import { FlatList, ListRenderItemInfo, View } from "react-native";
 import { Contact, CONTACTS } from "../test-store";
 
-export const Contacts = () => {
+export const ContactsList = () => {
   const { width: screenWidth, height: screenHeight } = useWindowDimensions();
   const tabBarHeight = useBottomTabBarHeight();
   const headerHeight = useHeaderHeight();

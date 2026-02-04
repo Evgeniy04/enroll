@@ -1,6 +1,6 @@
 import { useConfirm } from "@/hooks/useConfirm";
-import { ContactCard } from "@/screens/Contacts/components/ContactListItem/ContactCard";
-import { ContactContextMenu } from "@/screens/Contacts/components/ContactListItem/ContactContextMenu";
+import { ContactCard } from "@/screens/ContactsList/components/ContactListItem/ContactCard";
+import { ContactContextMenu } from "@/screens/ContactsList/components/ContactListItem/ContactContextMenu";
 import * as Haptics from "expo-haptics";
 import * as Linking from "expo-linking";
 import { useRouter } from "expo-router";
