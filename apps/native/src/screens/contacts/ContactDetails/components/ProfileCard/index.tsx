@@ -2,7 +2,7 @@ import React, { FC, useMemo, useCallback } from "react";
 import { Linking } from "react-native";
 import { getPluralWord } from "@/utils/plural";
 import { ProfileCardView } from "@/screens/contacts/ContactDetails/components/ProfileCard/ProfileCardView";
-import { CONTACTS } from "../../../../test-store";
+import { CONTACTS } from "@/screens/test-store";
 
 interface ProfileCardProps {
   id: string;

@@ -1,7 +1,7 @@
-import { EntityList } from "@/screens/Settings/Work/tabs/components/EntityList";
-import { ServiceForm } from "@/screens/Settings/Work/tabs/Services/components/ServiceForm";
-import { Service } from "@/screens/Settings/Work/tabs/Services/Services.types";
-import { createEntityOperations } from "@/screens/Settings/Work/tabs/utils/createEntityOperations";
+import { EntityList } from "@/screens/settings/Work/tabs/components/EntityList";
+import { ServiceForm } from "@/screens/settings/Work/tabs/Services/components/ServiceForm";
+import { Service } from "@/screens/settings/Work/tabs/Services/Services.types";
+import { createEntityOperations } from "@/screens/settings/Work/tabs/utils/createEntityOperations";
 import { services as mockServices } from "@/screens/test-store";
 import { FC, useMemo, useState } from "react";
 

@@ -1,5 +1,5 @@
-import { DrivingInstructorForm } from "@/screens/Settings/Profile/components/SpecialistForms/DrivingInstructorForm";
-import { OtherSpecialistForm } from "@/screens/Settings/Profile/components/SpecialistForms/OtherSpecialistForm";
+import { DrivingInstructorForm } from "@/screens/settings/Profile/components/SpecialistForms/DrivingInstructorForm";
+import { OtherSpecialistForm } from "@/screens/settings/Profile/components/SpecialistForms/OtherSpecialistForm";
 
 import { ComponentType } from "react";
 

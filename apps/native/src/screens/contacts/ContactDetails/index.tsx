@@ -5,7 +5,7 @@ import { InfoCard } from "@/screens/contacts/ContactDetails/components/InfoCard"
 import { ProfileCard } from "@/screens/contacts/ContactDetails/components/ProfileCard";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { BriefcaseBusiness, CarIcon, MapPin } from "lucide-react-native";
-import { EVENTS } from "../../test-store";
+import { EVENTS } from "@/screens/test-store";
 
 type ContactDetailsParams = {
   id: string;

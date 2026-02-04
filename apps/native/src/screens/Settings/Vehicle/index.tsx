@@ -17,7 +17,7 @@ const TRANSMISSION_TYPE_OPTIONS = [
   { label: "Автоматическая", value: "automatic" },
 ];
 
-export const AddVehicle = () => {
+export const Vehicle = () => {
   const contentInsets = useContentInsets();
   const [image, setImage] = useState<string | undefined>(
     "https://hips.hearstapps.com/hmg-prod/images/2023-range-rover-se-p400-lwb-105-1650304551.jpg?crop=0.960xw:0.810xh;0,0.115xh&resize=2048:*",

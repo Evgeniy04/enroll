@@ -6,7 +6,7 @@ import { Text } from "@/components/ui/text";
 import { Phone } from "lucide-react-native";
 import { FC, useMemo } from "react";
 import { Pressable, View } from "react-native";
-import { Contact } from "../../../test-store";
+import { Contact } from "@/screens/test-store";
 
 interface ContactCardProps {
   contact: Contact;

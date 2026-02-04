@@ -1,3 +1,3 @@
-import { WorkSettings } from "@/screens/Settings";
+import { Work } from "@/screens/settings/Work";
 
-export default WorkSettings;
+export default Work;

@@ -1,9 +1,9 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
-import { DayCard } from "@/screens/Settings/Work/tabs/Schedule/components/WeekCalendar/DayCard";
-import { WeekCalendarHeader } from "@/screens/Settings/Work/tabs/Schedule/components/WeekCalendar/WeekCalendarHeader";
-import { Template } from "@/screens/Settings/Work/tabs/Templates/Templates.types";
+import { DayCard } from "@/screens/settings/Work/tabs/Schedule/components/WeekCalendar/DayCard";
+import { WeekCalendarHeader } from "@/screens/settings/Work/tabs/Schedule/components/WeekCalendar/WeekCalendarHeader";
+import { Template } from "@/screens/settings/Work/tabs/Templates/Templates.types";
 import dayjs from "dayjs";
 import { FC, useState } from "react";
 

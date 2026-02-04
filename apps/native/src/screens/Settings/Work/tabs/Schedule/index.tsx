@@ -7,22 +7,22 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { useConfirm } from "@/hooks/useConfirm";
 import { useDialog } from "@/hooks/useDialog";
-import { WeekCalendar } from "@/screens/Settings/Work/tabs/Schedule/components/WeekCalendar";
+import { WeekCalendar } from "@/screens/settings/Work/tabs/Schedule/components/WeekCalendar";
 import { templates } from "@/screens/test-store";
 import { FC, useMemo, useState } from "react";
 import { View } from "react-native";
-import { BookingLimitActions } from "./components/actions/BookingLimitActions";
-import { FillingToolsActions } from "./components/actions/FillingToolsActions";
-import { BookingLimitDialog } from "./components/dialogs/BookingLimitDialog";
-import { PeriodsDialog } from "./components/dialogs/PeriodsDialog";
-import { ShiftsDialog } from "./components/dialogs/ShiftsDialog";
-import { WeeksDialog } from "./components/dialogs/WeeksDialog";
-import { BookingLimitValue } from "./components/types/booking-limit";
+import { BookingLimitActions } from "@/screens/settings/Work/tabs/Schedule/components/actions/BookingLimitActions";
+import { FillingToolsActions } from "@/screens/settings/Work/tabs/Schedule/components/actions/FillingToolsActions";
+import { BookingLimitDialog } from "@/screens/settings/Work/tabs/Schedule/components/dialogs/BookingLimitDialog";
+import { PeriodsDialog } from "@/screens/settings/Work/tabs/Schedule/components/dialogs/PeriodsDialog";
+import { ShiftsDialog } from "@/screens/settings/Work/tabs/Schedule/components/dialogs/ShiftsDialog";
+import { WeeksDialog } from "@/screens/settings/Work/tabs/Schedule/components/dialogs/WeeksDialog";
+import { BookingLimitValue } from "@/screens/settings/Work/tabs/Schedule/components/types/booking-limit";
 import {
   PeriodsValue,
   ShiftsValue,
   WeeksValue,
-} from "./components/types/filling-tools";
+} from "@/screens/settings/Work/tabs/Schedule/components/types/filling-tools";
 
 export const Schedule: FC = () => {
   const { confirm, ConfirmDialogElement } = useConfirm();

@@ -3,7 +3,7 @@ import { Option } from "@/components/ui/select";
 import { Text } from "@/components/ui/text";
 import { useContentInsets } from "@/hooks/useContentInsets";
 import { cn } from "@/lib/utils";
-import { TemplateSelect } from "@/screens/Settings/Work/tabs/Schedule/components/fields/TempleteSelect";
+import { TemplateSelect } from "@/screens/settings/Work/tabs/Schedule/components/fields/TempleteSelect";
 import dayjs, { Dayjs } from "dayjs";
 import { FC, useState } from "react";
 import { View } from "react-native";

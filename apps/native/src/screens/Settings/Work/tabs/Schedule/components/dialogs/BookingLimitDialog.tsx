@@ -2,11 +2,11 @@ import { DatePickerValue } from "@/components/ui/date-picker";
 import { Separator } from "@/components/ui/separator";
 import { Text } from "@/components/ui/text";
 import { useContentInsets } from "@/hooks/useContentInsets";
-import { BaseDialog } from "@/screens/Settings/Work/tabs/Schedule/components/dialogs/BaseDialog";
-import { BookingLimitModeSelector } from "@/screens/Settings/Work/tabs/Schedule/components/fields/BookingLimitModeSelector";
-import { DaysAheadNumberPicker } from "@/screens/Settings/Work/tabs/Schedule/components/fields/DaysAheadNumberPicker";
-import { EndDatePicker } from "@/screens/Settings/Work/tabs/Schedule/components/fields/EndDatePicker";
-import { BookingLimitValue } from "@/screens/Settings/Work/tabs/Schedule/components/types/booking-limit";
+import { BaseDialog } from "@/screens/settings/Work/tabs/Schedule/components/dialogs/BaseDialog";
+import { BookingLimitModeSelector } from "@/screens/settings/Work/tabs/Schedule/components/fields/BookingLimitModeSelector";
+import { DaysAheadNumberPicker } from "@/screens/settings/Work/tabs/Schedule/components/fields/DaysAheadNumberPicker";
+import { EndDatePicker } from "@/screens/settings/Work/tabs/Schedule/components/fields/EndDatePicker";
+import { BookingLimitValue } from "@/screens/settings/Work/tabs/Schedule/components/types/booking-limit";
 import dayjs from "dayjs";
 import { FC, useState } from "react";
 

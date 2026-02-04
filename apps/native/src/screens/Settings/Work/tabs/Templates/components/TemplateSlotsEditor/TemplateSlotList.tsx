@@ -1,5 +1,5 @@
 import { EmptyState } from "@/components/ui/empty-state";
-import { TemplateSlotCard } from "@/screens/Settings/Work/tabs/Templates/components/TemplateSlotsEditor/TemplateSlotCard";
+import { TemplateSlotCard } from "@/screens/settings/Work/tabs/Templates/components/TemplateSlotsEditor/TemplateSlotCard";
 import { Clock } from "lucide-react-native";
 import { FC } from "react";
 import { View } from "react-native";

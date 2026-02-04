@@ -1,3 +1,3 @@
-import { ProfileSettings } from "@/screens/Settings";
+import { Profile } from "@/screens/settings/Profile";
 
-export default ProfileSettings;
+export default Profile;

@@ -5,7 +5,7 @@ import * as Haptics from "expo-haptics";
 import * as Linking from "expo-linking";
 import { useRouter } from "expo-router";
 import { FC, useCallback } from "react";
-import { Contact } from "../../../../test-store";
+import { Contact } from "@/screens/test-store";
 
 interface ContactListItemProps {
   item: Contact;

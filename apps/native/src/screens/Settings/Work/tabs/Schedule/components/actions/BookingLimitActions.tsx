@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
-import { BookingLimitValue } from "@/screens/Settings/Work/tabs/Schedule/components/types/booking-limit";
+import { BookingLimitValue } from "@/screens/settings/Work/tabs/Schedule/components/types/booking-limit";
 import { getPluralWord } from "@/utils/plural";
 import dayjs from "dayjs";
 import { Settings } from "lucide-react-native";

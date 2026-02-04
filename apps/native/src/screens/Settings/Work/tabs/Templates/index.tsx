@@ -1,9 +1,9 @@
-import { Template } from "@/screens/Settings/Work/tabs/Templates/Templates.types";
-import { TemplateForm } from "@/screens/Settings/Work/tabs/Templates/components/TemplateForm";
-import { TemplateSlotsEditor } from "@/screens/Settings/Work/tabs/Templates/components/TemplateSlotsEditor";
-import { EntityList } from "@/screens/Settings/Work/tabs/components/EntityList";
-import { createEntityOperations } from "@/screens/Settings/Work/tabs/utils/createEntityOperations";
-import { calculateTotalDuration } from "@/screens/Settings/Work/tabs/utils/schedule";
+import { Template } from "@/screens/settings/Work/tabs/Templates/Templates.types";
+import { TemplateForm } from "@/screens/settings/Work/tabs/Templates/components/TemplateForm";
+import { TemplateSlotsEditor } from "@/screens/settings/Work/tabs/Templates/components/TemplateSlotsEditor";
+import { EntityList } from "@/screens/settings/Work/tabs/components/EntityList";
+import { createEntityOperations } from "@/screens/settings/Work/tabs/utils/createEntityOperations";
+import { calculateTotalDuration } from "@/screens/settings/Work/tabs/utils/schedule";
 import { templates as mockTemplates, services } from "@/screens/test-store";
 import { FC, useMemo, useState } from "react";
 

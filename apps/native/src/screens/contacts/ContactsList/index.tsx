@@ -21,7 +21,7 @@ import { Stack } from "expo-router";
 import { UserRoundPlus } from "lucide-react-native";
 import { useCallback } from "react";
 import { FlatList, ListRenderItemInfo, View } from "react-native";
-import { Contact, CONTACTS } from "../../test-store";
+import { Contact, CONTACTS } from "@/screens/test-store";
 
 export const ContactsList = () => {
   const { width: screenWidth, height: screenHeight } = useWindowDimensions();

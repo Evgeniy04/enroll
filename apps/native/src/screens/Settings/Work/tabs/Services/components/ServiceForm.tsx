@@ -9,7 +9,7 @@ import { Icon } from "@/components/ui/icon";
 import { NumberPickerField } from "@/components/ui/number-picker-field";
 import { Text } from "@/components/ui/text";
 import { TextField } from "@/components/ui/text-field";
-import { FormProps } from "@/screens/Settings/Work/tabs/components/FormDialog";
+import { FormProps } from "@/screens/settings/Work/tabs/components/FormDialog";
 import { Check, X } from "lucide-react-native";
 import { useEffect, useState } from "react";
 import { View } from "react-native";

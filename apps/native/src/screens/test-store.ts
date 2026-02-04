@@ -1,5 +1,5 @@
-import { Service } from "./Settings/Work/tabs/Services/Services.types";
-import { Template } from "./Settings/Work/tabs/Templates/Templates.types";
+import { Service } from "./settings/Work/tabs/Services/Services.types";
+import { Template } from "./settings/Work/tabs/Templates/Templates.types";
 
 export interface Contact {
   id: string;

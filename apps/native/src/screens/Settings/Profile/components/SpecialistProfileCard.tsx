@@ -8,7 +8,7 @@ import {
 import { SelectField, SelectValueProps } from "@/components/ui/select-field";
 import { Separator } from "@/components/ui/separator";
 import { useContentInsets } from "@/hooks/useContentInsets";
-import { getSpecialistForm } from "@/screens/Settings/Profile/components/SpecialistForms";
+import { getSpecialistForm } from "@/screens/settings/Profile/components/SpecialistForms";
 import { FC } from "react";
 
 const ACTIVITY_OPTIONS = [

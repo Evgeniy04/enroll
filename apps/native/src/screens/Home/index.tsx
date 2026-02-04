@@ -7,7 +7,7 @@ import { useWindowDimensions } from "@/hooks/useWindowDimensions";
 import dayjs from "dayjs";
 import { Stack } from "expo-router";
 import React, { useMemo, useState } from "react";
-import { Event, EVENTS } from "../test-store";
+import { Event, EVENTS } from "@/screens/test-store";
 
 export const Home = () => {
   const { top: topHeaderHeight, bottom: bottomTabBarHeight } =

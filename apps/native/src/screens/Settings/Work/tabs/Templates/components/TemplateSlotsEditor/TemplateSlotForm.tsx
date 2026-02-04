@@ -8,7 +8,7 @@ import { Text } from "@/components/ui/text";
 import { TimePickerField } from "@/components/ui/time-picker-field";
 import { TimeProps } from "@/components/ui/time-picker-field/time-picker-field.types";
 import { useContentInsets } from "@/hooks/useContentInsets";
-import { TIME_FORMAT_CONFIG } from "@/screens/Settings/Work/tabs/constants/time";
+import { TIME_FORMAT_CONFIG } from "@/screens/settings/Work/tabs/constants/time";
 import { Plus } from "lucide-react-native";
 import { FC } from "react";
 import { View } from "react-native";

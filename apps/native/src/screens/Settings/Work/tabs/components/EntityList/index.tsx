@@ -9,11 +9,11 @@ import { EmptyState } from "@/components/ui/empty-state";
 import { Icon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { useConfirm } from "@/hooks/useConfirm";
-import { EntityCard } from "@/screens/Settings/Work/tabs/components/EntityList/EntityCard";
+import { EntityCard } from "@/screens/settings/Work/tabs/components/EntityList/EntityCard";
 import {
   FormDialog,
   FormProps,
-} from "@/screens/Settings/Work/tabs/components/FormDialog";
+} from "@/screens/settings/Work/tabs/components/FormDialog";
 import { Plus } from "lucide-react-native";
 import { FC, useCallback, useState } from "react";
 import { View } from "react-native";

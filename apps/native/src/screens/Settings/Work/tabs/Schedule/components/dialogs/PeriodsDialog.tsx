@@ -1,10 +1,10 @@
 import { DatePickerValue } from "@/components/ui/date-picker";
 import { Option } from "@/components/ui/select";
 import { useContentInsets } from "@/hooks/useContentInsets";
-import { RangeDatePicker } from "@/screens/Settings/Work/tabs/Schedule/components//fields/RangeDatePicker";
-import { TemplateSelect } from "@/screens/Settings/Work/tabs/Schedule/components//fields/TempleteSelect";
-import { PeriodsValue } from "@/screens/Settings/Work/tabs/Schedule/components//types/filling-tools";
-import { BaseDialog } from "@/screens/Settings/Work/tabs/Schedule/components/dialogs/BaseDialog";
+import { RangeDatePicker } from "@/screens/settings/Work/tabs/Schedule/components/fields/RangeDatePicker";
+import { TemplateSelect } from "@/screens/settings/Work/tabs/Schedule/components/fields/TempleteSelect";
+import { PeriodsValue } from "@/screens/settings/Work/tabs/Schedule/components/types/filling-tools";
+import { BaseDialog } from "@/screens/settings/Work/tabs/Schedule/components/dialogs/BaseDialog";
 import { FC, useState } from "react";
 
 interface PeriodsDialogProps {

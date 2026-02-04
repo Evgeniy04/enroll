@@ -2,8 +2,8 @@ import { Text } from "@/components/ui/text";
 import {
   PendingSlot,
   TemplateSlotForm,
-} from "@/screens/Settings/Work/tabs/Templates/components/TemplateSlotsEditor/TemplateSlotForm";
-import { TemplateSlotList } from "@/screens/Settings/Work/tabs/Templates/components/TemplateSlotsEditor/TemplateSlotList";
+} from "@/screens/settings/Work/tabs/Templates/components/TemplateSlotsEditor/TemplateSlotForm";
+import { TemplateSlotList } from "@/screens/settings/Work/tabs/Templates/components/TemplateSlotsEditor/TemplateSlotList";
 import { FC, useCallback, useState } from "react";
 import { View } from "react-native";
 import { Service } from "../../../Services/Services.types";

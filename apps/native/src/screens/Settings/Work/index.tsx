@@ -1,14 +1,14 @@
 import { KeyboardAvoidingScreen } from "@/components/layout/KeyboardAvoidingScreen";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Text } from "@/components/ui/text";
-import { Schedule } from "@/screens/Settings/Work/tabs/Schedule";
-import { ServiceList } from "@/screens/Settings/Work/tabs/Services";
-import { TemplateList } from "@/screens/Settings/Work/tabs/Templates";
+import { Schedule } from "@/screens/settings/Work/tabs/Schedule";
+import { ServiceList } from "@/screens/settings/Work/tabs/Services";
+import { TemplateList } from "@/screens/settings/Work/tabs/Templates";
 import { Stack } from "expo-router";
 import { useState } from "react";
 import { View } from "react-native";
 
-export const WorkSettings = () => {
+export const Work = () => {
   const [value, setValue] = useState("services");
 
   return (
