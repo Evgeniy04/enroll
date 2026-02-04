@@ -1,0 +1,25 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "tags": ["-lintignore"],
+  "workspaces": {
+    ".": {},
+    "apps/native": {
+      "metro": { "config": [] },
+      "ignore": ["metro.config.js", "babel.config.js"]
+    }
+  },
+  "ignoreDependencies": [
+    "@better-auth/expo",
+    "@enroll/env",
+    "better-auth",
+    "dotenv",
+    "expo-image",
+    "expo-symbols",
+    "zod",
+    "@prisma/client",
+    "pg"
+  ],
+  "ignoreIssues": {
+    "apps/native/src/components/ui/**": ["exports", "types"]
+  }
+}

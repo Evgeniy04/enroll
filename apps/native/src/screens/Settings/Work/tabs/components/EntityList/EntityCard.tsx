@@ -13,7 +13,7 @@ import { Pencil, Trash } from "lucide-react-native";
 import { FC, Fragment, useCallback } from "react";
 import { GestureResponderEvent, Pressable, View } from "react-native";
 
-export interface EntityCardProps {
+interface EntityCardProps {
   entityId: string;
   title: string;
   descriptionItems?: { label: string; value: string }[];

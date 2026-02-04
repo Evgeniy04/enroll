@@ -18,7 +18,7 @@ const formatNumberValue = (
   return value.toString();
 };
 
-export interface NumberPickerFieldProps extends FormFieldProps {
+interface NumberPickerFieldProps extends FormFieldProps {
   value?: number;
   onChange?: (value: number) => void;
   min?: number;

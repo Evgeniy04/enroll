@@ -9,7 +9,7 @@ import { View } from "react-native";
 import { Service } from "../../../Services/Services.types";
 import { ScheduleSlot, Template } from "../../Templates.types";
 
-export interface TemplateSlotsEditorProps {
+interface TemplateSlotsEditorProps {
   template: Template;
   services: Service[];
   onChange: (template: Template) => void;

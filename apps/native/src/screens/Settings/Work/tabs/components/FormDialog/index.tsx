@@ -8,7 +8,7 @@ export interface FormProps<T> {
   onUpdate: (patch: Partial<T> & { id: string }) => void;
 }
 
-export interface FormDialogProps<T> extends Omit<FormProps<T>, "initialData"> {
+interface FormDialogProps<T> extends Omit<FormProps<T>, "initialData"> {
   FormComponent: FC<FormProps<T>>;
   editingItem: T | null;
   open: boolean;

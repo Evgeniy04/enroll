@@ -16,16 +16,19 @@
     "db:watch": "turbo -F @enroll/db db:watch",
     "db:stop": "turbo -F @enroll/db db:stop",
     "db:down": "turbo -F @enroll/db db:down",
-    "setup": "bash scripts/setup.sh"
+    "setup": "bash scripts/setup.sh",
+    "knip": "dotenv -e apps/server/.env -- knip"
   },
   "dependencies": {
     "@enroll/env": "workspace:*",
+    "dayjs": "catalog:",
     "dotenv": "catalog:",
     "zod": "catalog:"
   },
   "devDependencies": {
     "@enroll/config": "workspace:*",
     "@types/node": "^22.13.14",
+    "knip": "^5.83.0",
     "turbo": "^2.6.3",
     "typescript": "catalog:"
   },

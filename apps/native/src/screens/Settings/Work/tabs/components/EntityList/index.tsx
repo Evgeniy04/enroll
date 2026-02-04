@@ -23,7 +23,7 @@ type ActiveState<T> =
   | { type: "card"; entityId: string }
   | { type: null };
 
-export interface EntityListProps<T> extends Omit<FormProps<T>, "initialData"> {
+interface EntityListProps<T> extends Omit<FormProps<T>, "initialData"> {
   entities: T[];
   onDelete: (id: string) => void;
   entityForm: FC<FormProps<T>>;

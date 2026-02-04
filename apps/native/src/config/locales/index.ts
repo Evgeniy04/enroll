@@ -7,5 +7,3 @@ import { configureCalendarLocale } from "@/config/locales/calendar.locale";
 export const initializeLocales = () => {
   configureCalendarLocale();
 };
-
-export { configureCalendarLocale } from "@/config/locales/calendar.locale";

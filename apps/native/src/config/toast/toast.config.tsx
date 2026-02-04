@@ -9,5 +9,3 @@ export const toastConfig: ToastConfig = {
     <BaseToast variant="destructive" toastProps={toastProps} />
   ),
 };
-
-export const TOAST_DEFAULT_POSITION = "bottom";

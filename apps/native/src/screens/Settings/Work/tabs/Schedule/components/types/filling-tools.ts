@@ -18,8 +18,3 @@ export interface ShiftsValue {
   endDate: Dayjs;
   template: string;
 }
-
-export interface TemplateOption {
-  label: string;
-  value: string;
-}
