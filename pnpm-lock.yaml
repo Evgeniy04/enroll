@@ -7,10 +7,10 @@ settings:
 catalogs:
   default:
     '@better-auth/expo':
-      specifier: ^1.4.9
+      specifier: ^1.4.18
       version: 1.4.18
     better-auth:
-      specifier: ^1.4.9
+      specifier: ^1.4.18
       version: 1.4.18
     dayjs:
       specifier: ^1.11.19
@@ -19,7 +19,7 @@ catalogs:
       specifier: ^17.2.2
       version: 17.2.3
     typescript:
-      specifier: 'catalog:'
+      specifier: ^5.9.2
       version: 5.9.3
     zod:
       specifier: ^4.1.13
@@ -199,7 +199,7 @@ importers:
         specifier: 0.81.5
         version: 0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0)
       react-native-big-calendar:
-        specifier: ^5.0.0-beta.9
+        specifier: 5.0.0-beta.12
         version: 5.0.0-beta.12(e62e63197f84758f4805a5f0c7a651bd)
       react-native-calendars:
         specifier: ^1.1313.0
