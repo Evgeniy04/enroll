@@ -11,7 +11,7 @@ import { Text } from "@/components/ui/text";
 import { TextField } from "@/components/ui/text-field";
 import { FormProps } from "@/screens/settings/Work/tabs/components/FormDialog";
 import { Check, X } from "lucide-react-native";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { View } from "react-native";
 import { Service } from "../Services.types";
 
@@ -20,21 +20,13 @@ export const ServiceForm = ({
   onCreate,
   onUpdate,
 }: FormProps<Service>) => {
-  const [name, setName] = useState("");
-  const [duration, setDuration] = useState(30);
-  const [breakAfter, setBreakAfter] = useState(0);
-
-  useEffect(() => {
-    if (initialData) {
-      setName(initialData.name);
-      setDuration(initialData.duration);
-      setBreakAfter(initialData.breakAfter);
-    } else {
-      setName("");
-      setDuration(30);
-      setBreakAfter(0);
-    }
-  }, [initialData]);
+  const [name, setName] = useState(initialData ? initialData.name : "");
+  const [duration, setDuration] = useState(
+    initialData ? initialData.duration : 30,
+  );
+  const [breakAfter, setBreakAfter] = useState(
+    initialData ? initialData.breakAfter : 0,
+  );
 
   const handleSubmit = () => {
     if (initialData) {

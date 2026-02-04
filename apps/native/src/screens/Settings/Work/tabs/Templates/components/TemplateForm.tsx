@@ -10,7 +10,7 @@ import { Text } from "@/components/ui/text";
 import { TextField } from "@/components/ui/text-field";
 import { FormProps } from "@/screens/settings/Work/tabs/components/FormDialog";
 import { Check, X } from "lucide-react-native";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { View } from "react-native";
 import { Template } from "../Templates.types";
 
@@ -19,15 +19,7 @@ export const TemplateForm = ({
   onCreate,
   onUpdate,
 }: FormProps<Template>) => {
-  const [name, setName] = useState("");
-
-  useEffect(() => {
-    if (initialData) {
-      setName(initialData.name);
-    } else {
-      setName("");
-    }
-  }, [initialData]);
+  const [name, setName] = useState(initialData ? initialData.name : "");
 
   const handleSubmit = () => {
     if (initialData) {

@@ -5,10 +5,9 @@ import { ThemeProvider } from "@react-navigation/native";
 import { PortalHost } from "@rn-primitives/portal";
 import * as NavigationBar from "expo-navigation-bar";
 import { Stack } from "expo-router";
-import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useColorScheme } from "nativewind";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Platform } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Toast from "react-native-toast-message";
@@ -19,17 +18,11 @@ export {
   ErrorBoundary,
 } from "expo-router";
 
-SplashScreen.preventAutoHideAsync();
+initializeApp();
 
 const Routes = () => {
   const [isLoaded] = useState(true);
   const [isSignedIn] = useState(true);
-
-  useEffect(() => {
-    if (isLoaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [isLoaded]);
 
   if (!isLoaded) {
     return null;
@@ -57,10 +50,6 @@ const Routes = () => {
 
 const Layout = () => {
   const { colorScheme } = useColorScheme();
-
-  useEffect(() => {
-    initializeApp();
-  }, []);
 
   if (Platform.OS === "android") {
     NavigationBar.setButtonStyleAsync(
