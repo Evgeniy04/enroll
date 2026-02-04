@@ -1,11 +1,11 @@
 import { useConfirm } from "@/hooks/useConfirm";
-import { ContactCard } from "@/screens/ContactsList/components/ContactListItem/ContactCard";
-import { ContactContextMenu } from "@/screens/ContactsList/components/ContactListItem/ContactContextMenu";
+import { ContactCard } from "@/screens/contacts/ContactsList/components/ContactListItem/ContactCard";
+import { ContactContextMenu } from "@/screens/contacts/ContactsList/components/ContactListItem/ContactContextMenu";
 import * as Haptics from "expo-haptics";
 import * as Linking from "expo-linking";
 import { useRouter } from "expo-router";
 import { FC, useCallback } from "react";
-import { Contact } from "../../../test-store";
+import { Contact } from "../../../../test-store";
 
 interface ContactListItemProps {
   item: Contact;
