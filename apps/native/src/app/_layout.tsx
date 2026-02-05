@@ -32,10 +32,7 @@ const Routes = () => {
     <Stack>
       {/* Экраны, которые показываются только когда пользователь НЕ авторизован. */}
       <Stack.Protected guard={!isSignedIn}>
-        <Stack.Screen
-          name="(auth)/sign-in"
-          options={{ headerShown: false, title: "Войти" }}
-        />
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
       </Stack.Protected>
 
       {/* Экраны, которые показываются только когда пользователь авторизован. */}
