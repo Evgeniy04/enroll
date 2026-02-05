@@ -1,82 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { getGradientColors, GradientIcon } from "@/components/ui/gradient-icon";
 import { Icon } from "@/components/ui/icon";
+import { InfoCard } from "@/components/ui/info-card";
 import { Text } from "@/components/ui/text";
-import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import { CalendarCheck, Clock, PhoneOff, Play } from "lucide-react-native";
-import { FC } from "react";
-import { ColorValue, View } from "react-native";
+import { View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-
-interface AdvantageCardProps {
-  icon: any;
-  title: string;
-  description: string;
-  variant?: "blue" | "purple" | "emerald";
-}
-
-const GRADIENT_COLORS: Record<
-  "blue" | "purple" | "emerald",
-  [ColorValue, ColorValue, ...ColorValue[]]
-> = {
-  blue: ["#3b82f6", "#06b6d4"],
-  purple: ["#8b5cf6", "#ec4899"],
-  emerald: ["#10b981", "#14b8a6"],
-};
-
-interface GradientIconProps {
-  icon: any;
-  variant: "blue" | "purple" | "emerald";
-  size?: number;
-  sizeIcon?: number;
-  style?: object;
-}
-
-const GradientIcon: FC<GradientIconProps> = ({
-  icon,
-  variant,
-  size = 36,
-  sizeIcon = size * 0.75,
-  style,
-}) => (
-  <LinearGradient
-    colors={GRADIENT_COLORS[variant]}
-    start={{ x: 0, y: 0 }}
-    end={{ x: 1, y: 1 }}
-    style={{
-      width: size,
-      height: size,
-      borderRadius: size / 4,
-      justifyContent: "center",
-      alignItems: "center",
-      ...style,
-    }}
-  >
-    <Icon as={icon} size={sizeIcon} className="text-primary-foreground" />
-  </LinearGradient>
-);
-
-const AdvantageCard: FC<AdvantageCardProps> = ({
-  icon,
-  title,
-  description,
-  variant = "blue",
-}) => (
-  <Card className="rounded-2xl border border-info/50 bg-background shadow-sm">
-    <CardContent className="flex-row items-center gap-4">
-      <GradientIcon icon={icon} variant={variant} />
-
-      <View className="flex-1 gap-1">
-        <Text className="font-medium">{title}</Text>
-        <Text variant="muted" className="text-muted-foreground">
-          {description}
-        </Text>
-      </View>
-    </CardContent>
-  </Card>
-);
 
 export const Welcome = () => {
   const router = useRouter();
@@ -84,7 +16,7 @@ export const Welcome = () => {
 
   const onPressContinue = () =>
     router.push({
-      pathname: "/SignIn",
+      pathname: "/Otp",
     });
 
   return (
@@ -108,7 +40,7 @@ export const Welcome = () => {
               Запишитесь сейчас.
             </Text>
 
-            <Text variant="h1" className="text-center text-info-foreground">
+            <Text variant="h1" className="text-center text-cyan-500">
               Успейте вовремя.
             </Text>
 
@@ -118,25 +50,27 @@ export const Welcome = () => {
           </View>
 
           <View className="w-full gap-4">
-            <AdvantageCard
+            <InfoCard
               icon={Clock}
               title="Быстро и спокойно"
               description="Вся запись занимает меньше минуты"
-              variant="blue"
+              className="shadow-md"
             />
 
-            <AdvantageCard
+            <InfoCard
               icon={PhoneOff}
               title="Без звонков"
               description="Никаких ожиданий и неловких разговоров"
-              variant="purple"
+              colors={getGradientColors("purple")}
+              className="shadow-md"
             />
 
-            <AdvantageCard
+            <InfoCard
               icon={CalendarCheck}
               title="В удобное время"
               description="Только актуальные и свободные окна"
-              variant="emerald"
+              colors={getGradientColors("emerald")}
+              className="shadow-md"
             />
           </View>
         </View>
@@ -148,26 +82,26 @@ export const Welcome = () => {
           bottom: insets.bottom + 20,
         }}
       >
-        <Card className="rounded-2xl border border-info/50 bg-background py-2 shadow-sm">
+        <Card className="rounded-2xl border-info/50 py-2">
           <CardContent className="flex-row items-center gap-4">
             <View className="flex-row items-center">
               <GradientIcon
                 icon={Clock}
-                variant="blue"
+                colors={getGradientColors("blue")}
                 size={24}
                 sizeIcon={16}
                 style={{ borderRadius: 12 }}
               />
               <GradientIcon
                 icon={PhoneOff}
-                variant="purple"
+                colors={getGradientColors("purple")}
                 size={24}
                 sizeIcon={16}
                 style={{ marginLeft: -8, borderRadius: 12 }}
               />
               <GradientIcon
                 icon={CalendarCheck}
-                variant="emerald"
+                colors={getGradientColors("emerald")}
                 size={24}
                 sizeIcon={16}
                 style={{ marginLeft: -8, borderRadius: 12 }}

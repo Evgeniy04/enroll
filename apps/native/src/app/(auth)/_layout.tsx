@@ -4,7 +4,7 @@ const AuthStack = () => {
   return (
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Welcome" />
-      <Stack.Screen name="SignIn" />
+      <Stack.Screen name="Otp" />
     </Stack>
   );
 };

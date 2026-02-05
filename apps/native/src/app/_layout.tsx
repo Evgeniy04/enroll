@@ -22,7 +22,7 @@ initializeApp();
 
 const Routes = () => {
   const [isLoaded] = useState(true);
-  const [isSignedIn] = useState(true);
+  const [isSignedIn] = useState(false);
 
   if (!isLoaded) {
     return null;

@@ -1,5 +1,5 @@
+import { CalendarViewMode } from "@/components/ui/base-event-calendar";
 import { AlertProps } from "@/components/ui/base-toast";
-import { CalendarViewMode } from "@/components/ui/event-calendar/event-calendar.types";
 import {
   ToggleGroup,
   ToggleGroupIcon,
