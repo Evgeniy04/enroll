@@ -21,7 +21,7 @@ export const ContactDetails = () => {
       <Stack.Screen options={{ title: "Запись" }} />
       <KeyboardAvoidingScreen>
         <ProfileCard id={id} />
-        <Card className="m-5 overflow-hidden">
+        <Card className="m-5 overflow-hidden p-0">
           <EventCalendar
             date={date}
             onDateChange={setDate}
