@@ -1,12 +1,14 @@
 import { KeyboardAvoidingScreen } from "@/components/layout/KeyboardAvoidingScreen";
 import { Card } from "@/components/ui/card";
 import { EventCalendar } from "@/components/ui/event-calendar";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Text } from "@/components/ui/text";
 import { InfoCard } from "@/screens/contacts/ContactDetails/components/InfoCard";
 import { ProfileCard } from "@/screens/contacts/ContactDetails/components/ProfileCard";
 import { EVENTS } from "@/screens/test-store";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { BriefcaseBusiness, CarIcon, MapPin } from "lucide-react-native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type ContactDetailsParams = {
   id: string;
@@ -15,6 +17,18 @@ type ContactDetailsParams = {
 export const ContactDetails = () => {
   const { id } = useLocalSearchParams<ContactDetailsParams>();
   const [date, setDate] = useState<Date>(new Date());
+  const [shouldRenderCalendar, setShouldRenderCalendar] = useState(false);
+
+  useEffect(() => {
+    const handle = window.requestIdleCallback(
+      () => {
+        setShouldRenderCalendar(true);
+      },
+      { timeout: 500 },
+    );
+
+    return () => window.cancelIdleCallback(handle);
+  }, []);
 
   return (
     <>
@@ -22,16 +36,22 @@ export const ContactDetails = () => {
       <KeyboardAvoidingScreen>
         <ProfileCard id={id} />
         <Card className="m-5 overflow-hidden p-0">
-          <EventCalendar
-            date={date}
-            onDateChange={setDate}
-            height={500}
-            events={EVENTS}
-            onPressEvent={(e) => {
-              console.log("Нажали на событие:", e);
-            }}
-            showVerticalScrollIndicator
-          />
+          {shouldRenderCalendar ? (
+            <EventCalendar
+              date={date}
+              onDateChange={setDate}
+              height={500}
+              events={EVENTS}
+              onPressEvent={(e) => {
+                console.log("Нажали на событие:", e);
+              }}
+              showVerticalScrollIndicator
+            />
+          ) : (
+            <Skeleton className="h-[500] w-full items-center justify-center">
+              <Text>Данные загружаются...</Text>
+            </Skeleton>
+          )}
         </Card>
         <InfoCard
           title="Профессиональная информация"
