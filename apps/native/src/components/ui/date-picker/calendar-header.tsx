@@ -7,7 +7,7 @@ import { ContentInsets } from "@/hooks/useContentInsets";
 import { cn } from "@/lib/utils";
 import { Option } from "@rn-primitives/select";
 import dayjs from "dayjs";
-import { FC, useCallback, useMemo } from "react";
+import { FC, useMemo } from "react";
 import { View } from "react-native";
 
 type CalendarHeaderProps = {
@@ -32,54 +32,39 @@ export const CalendarHeader: FC<CalendarHeaderProps> = ({
   const month = currentDate.getMonth();
   const year = currentDate.getFullYear();
 
-  const monthLabels = useMemo(() => dayjs.months(), []);
+  const monthLabels = dayjs.months();
 
-  const monthOptions = useMemo(
-    () => generateMonthOptions(monthLabels),
-    [monthLabels],
-  );
+  const monthOptions = generateMonthOptions(monthLabels);
   const yearOptions = useMemo(
     () => generateYearOptions(startYear, endYear),
     [startYear, endYear],
   );
 
-  const handleMonthChange = useCallback(
-    (option?: Option) => {
-      if (!option) return;
-      onChangeDate &&
-        onChangeDate(
-          dayjs(currentDate)
-            .add(Number(option.value) - month, "month")
-            .toDate(),
-        );
-      addMonth && addMonth(Number(option.value) - month);
-    },
-    [onChangeDate, addMonth, currentDate, month],
-  );
+  const handleMonthChange = (option?: Option) => {
+    if (!option) return;
+    onChangeDate &&
+      onChangeDate(
+        dayjs(currentDate)
+          .add(Number(option.value) - month, "month")
+          .toDate(),
+      );
+    addMonth && addMonth(Number(option.value) - month);
+  };
 
-  const handleYearChange = useCallback(
-    (option?: Option) => {
-      if (!option) return;
-      onChangeDate &&
-        onChangeDate(
-          dayjs(currentDate)
-            .add(Number(option.value) - year, "year")
-            .toDate(),
-        );
-      addMonth && addMonth((Number(option.value) - year) * 12);
-    },
-    [onChangeDate, addMonth, currentDate, year],
-  );
+  const handleYearChange = (option?: Option) => {
+    if (!option) return;
+    onChangeDate &&
+      onChangeDate(
+        dayjs(currentDate)
+          .add(Number(option.value) - year, "year")
+          .toDate(),
+      );
+    addMonth && addMonth((Number(option.value) - year) * 12);
+  };
 
-  const monthValue = useMemo(
-    () => ({ value: String(month), label: monthLabels[month] }),
-    [month, monthLabels],
-  );
+  const monthValue = { value: String(month), label: monthLabels[month] };
 
-  const yearValue = useMemo(
-    () => ({ value: String(year), label: String(year) }),
-    [year],
-  );
+  const yearValue = { value: String(year), label: String(year) };
 
   return (
     <View className={cn("flex-row gap-5", className)}>

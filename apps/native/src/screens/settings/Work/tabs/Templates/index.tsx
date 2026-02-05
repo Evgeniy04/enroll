@@ -5,19 +5,15 @@ import { EntityList } from "@/screens/settings/Work/tabs/components/EntityList";
 import { createEntityOperations } from "@/screens/settings/Work/tabs/utils/createEntityOperations";
 import { calculateTotalDuration } from "@/screens/settings/Work/tabs/utils/schedule";
 import { templates as mockTemplates, services } from "@/screens/test-store";
-import { FC, useMemo, useState } from "react";
+import { FC, useState } from "react";
 
 export const TemplateList: FC = () => {
   const [templates, setTemplates] = useState<Template[]>(mockTemplates);
 
-  const operations = useMemo(
-    () =>
-      createEntityOperations(setTemplates, (data) => ({
-        ...data,
-        id: Date.now().toString(),
-      })),
-    [setTemplates],
-  );
+  const operations = createEntityOperations(setTemplates, (data) => ({
+    ...data,
+    id: Date.now().toString(),
+  }));
 
   return (
     <EntityList<Template>

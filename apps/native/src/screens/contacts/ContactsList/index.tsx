@@ -15,13 +15,12 @@ import { TextField } from "@/components/ui/text-field";
 import { useWindowDimensions } from "@/hooks/useWindowDimensions";
 import { ContactListItem } from "@/screens/contacts/ContactsList/components/ContactListItem";
 import { ContactSearch } from "@/screens/contacts/ContactsList/components/ContactSearch";
+import { Contact, CONTACTS } from "@/screens/test-store";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { useHeaderHeight } from "@react-navigation/elements";
 import { Stack } from "expo-router";
 import { UserRoundPlus } from "lucide-react-native";
-import { useCallback } from "react";
 import { FlatList, ListRenderItemInfo, View } from "react-native";
-import { Contact, CONTACTS } from "@/screens/test-store";
 
 export const ContactsList = () => {
   const { width: screenWidth, height: screenHeight } = useWindowDimensions();
@@ -32,15 +31,12 @@ export const ContactsList = () => {
 
   const hasContacts = CONTACTS.length > 0;
 
-  const handleDelete = useCallback((id: string) => {
+  const handleDelete = (id: string) => {
     console.log("Удалить контакт:", id);
-  }, []);
+  };
 
-  const renderItem = useCallback(
-    ({ item }: ListRenderItemInfo<Contact>) => (
-      <ContactListItem item={item} onDelete={handleDelete} />
-    ),
-    [handleDelete],
+  const renderItem = ({ item }: ListRenderItemInfo<Contact>) => (
+    <ContactListItem item={item} onDelete={handleDelete} />
   );
 
   return (

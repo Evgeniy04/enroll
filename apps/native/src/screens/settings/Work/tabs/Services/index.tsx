@@ -3,19 +3,15 @@ import { ServiceForm } from "@/screens/settings/Work/tabs/Services/components/Se
 import { Service } from "@/screens/settings/Work/tabs/Services/Services.types";
 import { createEntityOperations } from "@/screens/settings/Work/tabs/utils/createEntityOperations";
 import { services as mockServices } from "@/screens/test-store";
-import { FC, useMemo, useState } from "react";
+import { FC, useState } from "react";
 
 export const ServiceList: FC = () => {
   const [services, setServices] = useState<Service[]>(mockServices);
 
-  const operations = useMemo(
-    () =>
-      createEntityOperations(setServices, (data) => ({
-        ...data,
-        id: Date.now().toString(),
-      })),
-    [setServices],
-  );
+  const operations = createEntityOperations(setServices, (data) => ({
+    ...data,
+    id: Date.now().toString(),
+  }));
 
   return (
     <EntityList<Service>

@@ -15,7 +15,7 @@ import {
   FormProps,
 } from "@/screens/settings/Work/tabs/components/FormDialog";
 import { Plus } from "lucide-react-native";
-import { FC, useCallback, useState } from "react";
+import { FC, useState } from "react";
 import { View } from "react-native";
 
 type ActiveState<T> =
@@ -57,59 +57,50 @@ export const EntityList = <T extends { id: string }>({
   /**
    * Обрабатывает нажатие по карточке сущности.
    */
-  const handleCardOpenChange = useCallback(
-    (entityId: string, open: boolean) => {
-      setActiveState((prev) => {
-        if (!open) return { type: null };
-        if (prev.type === "card" && prev.entityId === entityId) {
-          return { type: null };
-        }
-        return { type: "card", entityId };
-      });
-    },
-    [],
-  );
+  const handleCardOpenChange = (entityId: string, open: boolean) => {
+    setActiveState((prev) => {
+      if (!open) return { type: null };
+      if (prev.type === "card" && prev.entityId === entityId) {
+        return { type: null };
+      }
+      return { type: "card", entityId };
+    });
+  };
 
   /**
    * Обрабатывает нажатие кнопки редактировать в карточке сущности.
    */
-  const handleEditEntity = useCallback(
-    (id: string) => {
-      const entity = entities.find((e) => e.id === id) ?? null;
-      setActiveState({ type: "dialog", entity });
-    },
-    [entities],
-  );
+  const handleEditEntity = (id: string) => {
+    const entity = entities.find((e) => e.id === id) ?? null;
+    setActiveState({ type: "dialog", entity });
+  };
 
   /**
    * Обрабатывает нажатие кнопки "создать" сущность.
    */
-  const handleCreate = useCallback(() => {
+  const handleCreate = () => {
     setActiveState({ type: "dialog", entity: null });
-  }, []);
+  };
 
   /**
    * Обрабатывает закрытие диалога формы редактирования/создания сущности.
    */
-  const handleDialogOpenChange = useCallback((open: boolean) => {
+  const handleDialogOpenChange = (open: boolean) => {
     if (!open) setActiveState({ type: null });
-  }, []);
+  };
 
   /**
    * Обрабатывает нажатие кнопки удалить,
    * выводит диалог подтверждения удаления.
    */
-  const handleDelete = useCallback(
-    (id: string) => {
-      confirm({
-        title: deleteConfirmTitle,
-        cancelText: "Отменить",
-        confirmText: "Подтвердить",
-        onConfirm: () => onDelete(id),
-      });
-    },
-    [confirm, deleteConfirmTitle, onDelete],
-  );
+  const handleDelete = (id: string) => {
+    confirm({
+      title: deleteConfirmTitle,
+      cancelText: "Отменить",
+      confirmText: "Подтвердить",
+      onConfirm: () => onDelete(id),
+    });
+  };
 
   return (
     <>

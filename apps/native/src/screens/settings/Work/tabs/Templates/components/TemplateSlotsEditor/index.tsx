@@ -4,7 +4,7 @@ import {
   TemplateSlotForm,
 } from "@/screens/settings/Work/tabs/Templates/components/TemplateSlotsEditor/TemplateSlotForm";
 import { TemplateSlotList } from "@/screens/settings/Work/tabs/Templates/components/TemplateSlotsEditor/TemplateSlotList";
-import { FC, useCallback, useState } from "react";
+import { FC, useState } from "react";
 import { View } from "react-native";
 import { Service } from "../../../Services/Services.types";
 import { ScheduleSlot, Template } from "../../Templates.types";
@@ -26,12 +26,9 @@ export const TemplateSlotsEditor: FC<TemplateSlotsEditorProps> = ({
     count: 1,
   });
 
-  const setSlots = useCallback(
-    (slots: ScheduleSlot[]) => onChange({ ...template, slots }),
-    [template, onChange],
-  );
+  const setSlots = (slots: ScheduleSlot[]) => onChange({ ...template, slots });
 
-  const handleAddSlot = useCallback(() => {
+  const handleAddSlot = () => {
     if (!pendingSlot.serviceId) return;
 
     const slot: ScheduleSlot = {
@@ -50,14 +47,11 @@ export const TemplateSlotsEditor: FC<TemplateSlotsEditorProps> = ({
       ),
     );
     setPendingSlot((prev) => ({ ...prev, count: 1 }));
-  }, [pendingSlot, template.slots, setSlots]);
+  };
 
-  const handleRemoveSlot = useCallback(
-    (id: string) => {
-      setSlots(template.slots.filter((s) => s.id !== id));
-    },
-    [template.slots, setSlots],
-  );
+  const handleRemoveSlot = (id: string) => {
+    setSlots(template.slots.filter((s) => s.id !== id));
+  };
 
   return (
     <View className="gap-4">

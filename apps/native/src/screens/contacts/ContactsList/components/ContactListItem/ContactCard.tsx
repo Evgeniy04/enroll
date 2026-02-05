@@ -3,10 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Icon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
-import { Phone } from "lucide-react-native";
-import { FC, useMemo } from "react";
-import { Pressable, View } from "react-native";
 import { Contact } from "@/screens/test-store";
+import { Phone } from "lucide-react-native";
+import { FC } from "react";
+import { Pressable, View } from "react-native";
 
 interface ContactCardProps {
   contact: Contact;
@@ -21,15 +21,11 @@ export const ContactCard: FC<ContactCardProps> = ({
   onLongPress,
   onCallPress,
 }) => {
-  const initials = useMemo(
-    () =>
-      contact.name
-        .split(" ")
-        .map((word) => word[0])
-        .join("")
-        .toUpperCase(),
-    [contact.name],
-  );
+  const initials = contact.name
+    .split(" ")
+    .map((word) => word[0])
+    .join("")
+    .toUpperCase();
 
   return (
     <Pressable

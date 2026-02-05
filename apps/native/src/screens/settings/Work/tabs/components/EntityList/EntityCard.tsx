@@ -10,7 +10,7 @@ import { Separator } from "@/components/ui/separator";
 import { Text } from "@/components/ui/text";
 import { cn } from "@/lib/utils";
 import { Pencil, Trash } from "lucide-react-native";
-import { FC, Fragment, useCallback } from "react";
+import { FC, Fragment } from "react";
 import { GestureResponderEvent, Pressable, View } from "react-native";
 
 interface EntityCardProps {
@@ -38,21 +38,15 @@ export const EntityCard: FC<EntityCardProps> = ({
   const Wrapper = isExpandable ? Collapsible : Fragment;
   const wrapperProps = isExpandable ? { open, onOpenChange } : {};
 
-  const handleEdit = useCallback(
-    (e: GestureResponderEvent) => {
-      e.stopPropagation();
-      onEdit(entityId);
-    },
-    [onEdit, entityId],
-  );
+  const handleEdit = (e: GestureResponderEvent) => {
+    e.stopPropagation();
+    onEdit(entityId);
+  };
 
-  const handleDelete = useCallback(
-    (e: GestureResponderEvent) => {
-      e.stopPropagation();
-      onDelete(entityId);
-    },
-    [onDelete, entityId],
-  );
+  const handleDelete = (e: GestureResponderEvent) => {
+    e.stopPropagation();
+    onDelete(entityId);
+  };
 
   const CardHeaderContent = (
     <View className="flex-1 justify-between">

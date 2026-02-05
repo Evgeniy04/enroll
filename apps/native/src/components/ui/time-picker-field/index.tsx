@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/time-picker-field/time-picker-field.types";
 import { formatTime } from "@/components/ui/time-picker-field/utils/formatTime";
 import { useColorScheme } from "nativewind";
-import { FC, useCallback, useMemo, useState } from "react";
+import { FC, useState } from "react";
 import {
   TimerPickerModal,
   TimerPickerModalProps,
@@ -55,30 +55,20 @@ export const TimePickerField: FC<TimePickerFieldProps> = ({
 
   const currentValue = value ? value : internalValue;
 
-  const displayValue = useMemo(
-    () => formatTime(currentValue, formatOptions),
-    [currentValue, formatOptions],
-  );
+  const displayValue = formatTime(currentValue, formatOptions);
 
-  const handleOpenPress = useCallback(() => {
-    setIsVisible(true);
-  }, [setIsVisible]);
+  const handleOpenPress = () => setIsVisible(true);
 
-  const handleCancelPress = useCallback(() => {
+  const handleCancelPress = () => setIsVisible(false);
+
+  const handleConfirm = (picked: TimeProps) => {
+    if (!value) {
+      setInternalValue(picked);
+    }
+
+    onChange?.(picked);
     setIsVisible(false);
-  }, [setIsVisible]);
-
-  const handleConfirm = useCallback(
-    (picked: TimeProps) => {
-      if (!value) {
-        setInternalValue(picked);
-      }
-
-      onChange?.(picked);
-      setIsVisible(false);
-    },
-    [value, onChange, setIsVisible],
-  );
+  };
 
   return (
     <FormField

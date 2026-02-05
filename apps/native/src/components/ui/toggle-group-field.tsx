@@ -10,7 +10,7 @@ import {
 import { cn } from "@/lib/utils";
 import type { VariantProps } from "class-variance-authority";
 import { LucideIcon } from "lucide-react-native";
-import { FC, useMemo } from "react";
+import { FC } from "react";
 import { View } from "react-native";
 
 interface ToggleOption {
@@ -78,59 +78,46 @@ export const ToggleGroupField: FC<ToggleGroupFieldProps> = ({
   textClassName,
   iconClassName,
 }) => {
-  const allIconsOnly = useMemo(
-    () => options.every((option) => !option.showText),
-    [options],
-  );
+  const allIconsOnly = options.every((option) => !option.showText);
 
-  const renderOptions = useMemo(() => {
-    return options.map((option, index) => {
-      const textLines = option.numberOfLines ?? 3;
+  const renderOptions = options.map((option, index) => {
+    const textLines = option.numberOfLines ?? 3;
 
-      return (
-        <ToggleGroupItem
-          key={option.value}
-          value={option.value}
-          isFirst={index === 0}
-          isLast={index === options.length - 1}
-          disabled={disabled}
-          className={cn(allIconsOnly ? "flex-1" : "h-auto flex-1 self-stretch")}
+    return (
+      <ToggleGroupItem
+        key={option.value}
+        value={option.value}
+        isFirst={index === 0}
+        isLast={index === options.length - 1}
+        disabled={disabled}
+        className={cn(allIconsOnly ? "flex-1" : "h-auto flex-1 self-stretch")}
+      >
+        <View
+          className={cn(
+            "items-center justify-center gap-1",
+            orientation === "horizontal" ? "flex-row px-3 py-1" : "py-2",
+            className,
+          )}
         >
-          <View
-            className={cn(
-              "items-center justify-center gap-1",
-              orientation === "horizontal" ? "flex-row px-3 py-1" : "py-2",
-              className,
-            )}
-          >
-            {option.icon && (
-              <ToggleGroupIcon as={option.icon} className={cn(iconClassName)} />
-            )}
-            {option.showText && (
-              <Text
-                className={cn(
-                  "text-center text-xs",
-                  orientation === "horizontal" && "text-sm",
-                  textClassName,
-                )}
-                numberOfLines={textLines}
-              >
-                {option.label}
-              </Text>
-            )}
-          </View>
-        </ToggleGroupItem>
-      );
-    });
-  }, [
-    allIconsOnly,
-    disabled,
-    options,
-    orientation,
-    className,
-    iconClassName,
-    textClassName,
-  ]);
+          {option.icon && (
+            <ToggleGroupIcon as={option.icon} className={cn(iconClassName)} />
+          )}
+          {option.showText && (
+            <Text
+              className={cn(
+                "text-center text-xs",
+                orientation === "horizontal" && "text-sm",
+                textClassName,
+              )}
+              numberOfLines={textLines}
+            >
+              {option.label}
+            </Text>
+          )}
+        </View>
+      </ToggleGroupItem>
+    );
+  });
 
   return (
     <FormField

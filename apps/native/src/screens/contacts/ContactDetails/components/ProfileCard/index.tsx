@@ -1,43 +1,40 @@
-import React, { FC, useMemo, useCallback } from "react";
-import { Linking } from "react-native";
-import { getPluralWord } from "@/utils/plural";
 import { ProfileCardView } from "@/screens/contacts/ContactDetails/components/ProfileCard/ProfileCardView";
 import { CONTACTS } from "@/screens/test-store";
+import { getPluralWord } from "@/utils/plural";
+import React, { FC } from "react";
+import { Linking } from "react-native";
 
 interface ProfileCardProps {
   id: string;
 }
 
 export const ProfileCard: FC<ProfileCardProps> = ({ id }) => {
-  const contact = useMemo(() => CONTACTS.find((c) => c.id === id), [id]);
+  const contact = CONTACTS.find((c) => c.id === id);
 
-  const initials = useMemo(
-    () =>
-      contact?.name
-        .split(" ")
-        .map((n) => n[0])
-        .join("")
-        .toUpperCase() ?? "",
-    [contact?.name],
-  );
+  const initials =
+    contact?.name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase() ?? "";
 
-  const experienceText = useMemo(() => {
+  const getExperienceText = () => {
     if (!contact) return "";
     const { experienceYears } = contact;
     return experienceYears === 0
       ? "Нет опыта"
       : `${experienceYears} ${getPluralWord(experienceYears, ["год", "года", "лет"])} опыта`;
-  }, [contact]);
+  };
 
-  const handleCall = useCallback(() => {
+  const handleCall = () => {
     if (contact?.phone) Linking.openURL(`tel:${contact.phone}`);
-  }, [contact?.phone]);
+  };
 
   return contact ? (
     <ProfileCardView
       contact={contact}
       initials={initials}
-      experienceText={experienceText}
+      experienceText={getExperienceText()}
       onCall={handleCall}
     />
   ) : null;

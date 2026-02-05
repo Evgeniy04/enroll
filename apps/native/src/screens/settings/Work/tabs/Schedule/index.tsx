@@ -7,10 +7,6 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { useConfirm } from "@/hooks/useConfirm";
 import { useDialog } from "@/hooks/useDialog";
-import { WeekCalendar } from "@/screens/settings/Work/tabs/Schedule/components/WeekCalendar";
-import { templates } from "@/screens/test-store";
-import { FC, useMemo, useState } from "react";
-import { View } from "react-native";
 import { BookingLimitActions } from "@/screens/settings/Work/tabs/Schedule/components/actions/BookingLimitActions";
 import { FillingToolsActions } from "@/screens/settings/Work/tabs/Schedule/components/actions/FillingToolsActions";
 import { BookingLimitDialog } from "@/screens/settings/Work/tabs/Schedule/components/dialogs/BookingLimitDialog";
@@ -23,6 +19,10 @@ import {
   ShiftsValue,
   WeeksValue,
 } from "@/screens/settings/Work/tabs/Schedule/components/types/filling-tools";
+import { WeekCalendar } from "@/screens/settings/Work/tabs/Schedule/components/WeekCalendar";
+import { templates } from "@/screens/test-store";
+import { FC, useState } from "react";
+import { View } from "react-native";
 
 export const Schedule: FC = () => {
   const { confirm, ConfirmDialogElement } = useConfirm();
@@ -41,10 +41,10 @@ export const Schedule: FC = () => {
   console.log(weeksValue);
   console.log(shiftsValue);
 
-  const templateOptions = useMemo(
-    () => templates.map(({ name, id }) => ({ label: name, value: id })),
-    [],
-  );
+  const templateOptions = templates.map(({ name, id }) => ({
+    label: name,
+    value: id,
+  }));
 
   const handleOpenBookingLimitDialog = () => {
     openDialog(BookingLimitDialog, {
