@@ -19,7 +19,7 @@ export const WeekCalendar: FC<WeekCalendarProps> = ({
   const [currentWeekStart, setCurrentWeekStart] = useState(dayjs().weekday(0));
 
   const handlePrevWeek = () => {
-    setCurrentWeekStart((prev) => prev.add(-7, "day"));
+    setCurrentWeekStart((prev) => prev.subtract(7, "day"));
   };
 
   const handleNextWeek = () => {

@@ -69,9 +69,8 @@ export const WeekCalendarHeader: FC<WeekCalendarHeaderProps> = ({
             size="icon"
             variant="outline"
             className={cn(
-              showGoToCurrentWeekButton
-                ? "rounded-l-none border-l-0"
-                : "rounded-l-md border-l border-l-border",
+              showGoToCurrentWeekButton ? "rounded-l-none" : "rounded-l-md",
+              "border-l",
             )}
             onPress={onNextWeek}
           >

@@ -1,6 +1,6 @@
 import { KeyboardAvoidingScreen } from "@/components/layout/KeyboardAvoidingScreen";
 import { Button } from "@/components/ui/button";
-import { SettingsHeaderAction } from "@/components/ui/header";
+import { SettingsHeaderAction } from "@/components/ui/header/settings-header-action";
 import { Option } from "@/components/ui/select";
 import { Text } from "@/components/ui/text";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
@@ -14,7 +14,7 @@ export const Profile = () => {
   const router = useRouter();
   const [activityType, setActivityType] = useState<Option>(undefined);
 
-  const handleSettingsPress = () => {
+  const handlePressOpenWorkSettings = () => {
     router.push("/settings/Work");
   };
 
@@ -26,7 +26,9 @@ export const Profile = () => {
           headerTitleAlign: "center",
           headerLeft: () => <ThemeToggle enableIosSpecials />,
           headerRight: () => (
-            <SettingsHeaderAction onPress={handleSettingsPress} />
+            <SettingsHeaderAction
+              onPressOpenWorkSettings={handlePressOpenWorkSettings}
+            />
           ),
         }}
       />
