@@ -3,17 +3,18 @@ import { Card } from "@/components/ui/card";
 import { EventCalendar } from "@/components/ui/event-calendar";
 import { InfoCard } from "@/screens/contacts/ContactDetails/components/InfoCard";
 import { ProfileCard } from "@/screens/contacts/ContactDetails/components/ProfileCard";
+import { EVENTS } from "@/screens/test-store";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { BriefcaseBusiness, CarIcon, MapPin } from "lucide-react-native";
-import { EVENTS } from "@/screens/test-store";
+import { useState } from "react";
 
 type ContactDetailsParams = {
   id: string;
-  displayName: string;
 };
 
 export const ContactDetails = () => {
-  const { id, displayName } = useLocalSearchParams<ContactDetailsParams>();
+  const { id } = useLocalSearchParams<ContactDetailsParams>();
+  const [date, setDate] = useState<Date>(new Date());
 
   return (
     <>
@@ -22,12 +23,14 @@ export const ContactDetails = () => {
         <ProfileCard id={id} />
         <Card className="m-5 overflow-hidden">
           <EventCalendar
-            sceneHeight={500}
+            date={date}
+            onDateChange={setDate}
+            height={500}
             events={EVENTS}
-            showVerticalScrollIndicator
             onPressEvent={(e) => {
               console.log("Нажали на событие:", e);
             }}
+            showVerticalScrollIndicator
           />
         </Card>
         <InfoCard
