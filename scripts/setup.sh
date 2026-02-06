@@ -43,7 +43,11 @@ fi
 [[ -z "$IP" ]] && err "Не удалось получить IP-адрес. Проверьте подключение к сети."
 info "Используем IP: ${GREEN}$IP${NC}"
 
-# -- 2. Настройка apps/native/.env --
+# -- 2. Установка зависимостей и миграции --
+info "Установка зависимостей (pnpm install)..."
+pnpm install
+
+# -- 3. Настройка apps/native/.env --
 info "Настройка Native окружения..."
 SERVER_URL="http://$IP:3000"
 
@@ -55,10 +59,23 @@ else
   echo "EXPO_PUBLIC_SERVER_URL=$SERVER_URL" >> "$NATIVE_ENV"
 fi
 
-# -- 3. Настройка apps/server/.env --
+# -- 4. Настройка apps/server/.env --
 info "Настройка Server окружения..."
+
 if [[ ! -f "$SERVER_ENV" ]]; then
-  AUTH_SECRET=$(openssl rand -base64 32)
+  info "Генерация BETTER_AUTH_SECRET через @better-auth/cli..."
+
+  AUTH_SECRET=$(
+    pnpm dlx @better-auth/cli@latest secret \
+      | grep "^BETTER_AUTH_SECRET=" \
+      | cut -d'=' -f2
+  )
+
+  if [[ -z "$AUTH_SECRET" ]]; then
+    error "Не удалось сгенерировать BETTER_AUTH_SECRET"
+    exit 1
+  fi
+
   cat > "$SERVER_ENV" <<EOF
 BETTER_AUTH_SECRET=$AUTH_SECRET
 BETTER_AUTH_URL=http://localhost:3000
@@ -66,6 +83,7 @@ CORS_ORIGIN=http://localhost:3001
 
 DATABASE_URL=postgresql://postgres:password@localhost:5432/enroll
 EOF
+
 else
   # Проверка критических переменных в существующем файле
   for VAR in BETTER_AUTH_SECRET BETTER_AUTH_URL CORS_ORIGIN DATABASE_URL; do
@@ -73,10 +91,7 @@ else
   done
 fi
 
-# -- 4. Установка и миграции --
-info "Установка зависимостей (pnpm install)..."
-pnpm install
-
+# -- 5. Миграции --
 info "Подготовка базы данных..."
 
 # Запуск базы данных --
@@ -90,7 +105,7 @@ pnpm db:start || warn "Контейнеры уже запущены или пр�
 pnpm db:generate
 pnpm db:push
 
-# -- 5. Запуск --
+# -- 6. Запуск --
 echo -e "\n${GREEN}${BOLD}✅ Настройка завершена успешно!${NC}"
 info "Запускаю сервер разработки..."
 pnpm dev
