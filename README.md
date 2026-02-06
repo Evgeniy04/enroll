@@ -173,6 +173,7 @@ enroll/
 - `pnpm check-types`: Проверка типов TypeScript во всем проекте
 - `pnpm db:push`: Отправляет изменения схемы в базу данных
 - `pnpm db:studio`: Открытие панели БД (UI)
+- `bash scripts/generate-auth-prisma.sh`: Создает схему, необходимую для Better Auth
 
 ---
 
