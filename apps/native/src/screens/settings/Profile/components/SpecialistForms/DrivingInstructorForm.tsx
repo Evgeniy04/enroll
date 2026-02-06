@@ -56,7 +56,7 @@ export const DrivingInstructorForm = () => {
         multiline
       />
       <Button
-        onPress={() => router.push("/settings/AddVehicle")}
+        onPress={() => router.push("/settings/Vehicle")}
         variant="secondary"
       >
         <Icon as={Plus} className="text-foreground" />
