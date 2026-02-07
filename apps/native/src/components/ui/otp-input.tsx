@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { OTPInput, OTPInputRef, type SlotProps } from "input-otp-native";
-import React, { useEffect, useRef } from "react";
+import React, { RefObject, useEffect } from "react";
 import { Text, View } from "react-native";
 import Animated, {
   useAnimatedStyle,
@@ -11,20 +11,15 @@ import Animated, {
 } from "react-native-reanimated";
 
 interface AppleOTPInputProps {
-  onComplete: (code: string) => void;
+  onComplete?: (otp: string) => void;
+  ref: RefObject<OTPInputRef | null>;
 }
 
-export default function AppleOTPInput({ onComplete }: AppleOTPInputProps) {
-  const ref = useRef<OTPInputRef>(null);
-  const handleComplete = (code: string) => {
-    onComplete(code);
-    ref.current?.clear();
-  };
-
+export default function AppleOTPInput({ onComplete, ref }: AppleOTPInputProps) {
   return (
     <OTPInput
       ref={ref}
-      onComplete={handleComplete}
+      onComplete={onComplete}
       maxLength={6}
       render={({ slots }) => (
         <View className="my-4 flex-row items-center justify-center gap-2">
