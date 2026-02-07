@@ -8,7 +8,7 @@
       "default": "./src/index.ts"
     },
     "./*": {
-      "default": "./src/emails/*.ts"
+      "default": "./src/emails/*.tsx"
     }
   },
   "scripts": {

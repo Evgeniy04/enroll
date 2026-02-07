@@ -1,4 +1,4 @@
-export interface EmailTheme {
+interface EmailTheme {
   background: string;
   surface: string;
 
