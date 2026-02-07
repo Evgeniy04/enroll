@@ -1,5 +1,6 @@
 import { auth } from "@enroll/auth";
 import { env } from "@enroll/env/server";
+import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
@@ -22,8 +23,6 @@ app.on(["POST", "GET"], "/api/auth/*", (c) => auth.handler(c.req.raw));
 app.get("/", (c) => {
   return c.text("OK");
 });
-
-import { serve } from "@hono/node-server";
 
 serve(
   {
