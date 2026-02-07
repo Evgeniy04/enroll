@@ -8,13 +8,18 @@ import { FC } from "react";
 import { View } from "react-native";
 
 interface OtpInputStepProps {
+  email: string;
+  onChangeEmail: (email: string) => void;
   onBack: () => void;
-  onNext: (email: string) => void;
+  onNext: () => void;
 }
 
-export const OtpInputStep: FC<OtpInputStepProps> = ({ onBack, onNext }) => {
-  const handlePress = () => onNext("mail@example.com");
-
+export const OtpInputStep: FC<OtpInputStepProps> = ({
+  email,
+  onChangeEmail,
+  onBack,
+  onNext,
+}) => {
   return (
     <StepCard
       icon={Mail}
@@ -32,11 +37,20 @@ export const OtpInputStep: FC<OtpInputStepProps> = ({ onBack, onNext }) => {
       <View className="w-full gap-6">
         <TextField
           nativeID="email"
+          textContentType="emailAddress"
+          autoComplete="email"
+          type="email"
+          autoCapitalize="none"
+          returnKeyType="next"
+          submitBehavior="submit"
           label="Адрес электронной почты"
           placeholder="name@example.com"
+          value={email}
+          onChangeText={onChangeEmail}
+          onSubmitEditing={onNext}
           required
         />
-        <Button size="lg" onPress={handlePress}>
+        <Button size="lg" onPress={onNext}>
           <Text>Продолжить</Text>
           <Icon as={Sparkles} className="text-primary-foreground" />
         </Button>

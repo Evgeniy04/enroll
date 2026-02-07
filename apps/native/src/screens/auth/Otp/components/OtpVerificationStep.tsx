@@ -2,23 +2,24 @@ import { InfoCard } from "@/components/ui/info-card";
 import OtpInput from "@/components/ui/otp-input";
 import { Text } from "@/components/ui/text";
 import { StepCard } from "@/screens/auth/Otp/components/StepCard";
+import { OTPInputRef } from "input-otp-native";
 import { Lock, MessageCircle, Zap } from "lucide-react-native";
-import { FC } from "react";
+import { FC, RefObject } from "react";
 import { View } from "react-native";
 
 interface OtpVerificationStepProps {
   email: string;
   onBack: () => void;
+  onComplete?: (otp: string) => void;
+  ref: RefObject<OTPInputRef | null>;
 }
 
 export const OtpVerificationStep: FC<OtpVerificationStepProps> = ({
   email,
   onBack,
+  onComplete,
+  ref,
 }) => {
-  const handleComplete = (code: string) => {
-    console.log(code);
-  };
-
   return (
     <StepCard
       icon={Lock}
@@ -40,7 +41,7 @@ export const OtpVerificationStep: FC<OtpVerificationStepProps> = ({
         <Text className="text-center text-muted-foreground">
           Введите 6-значный код подтверждения
         </Text>
-        <OtpInput onComplete={handleComplete} />
+        <OtpInput onComplete={onComplete} ref={ref} />
       </View>
     </StepCard>
   );

@@ -59,6 +59,7 @@ export const Profile = () => {
           </Button>
         </View>
       </KeyboardAvoidingScreen>
+
       {ConfirmDialogElement}
     </>
   );
