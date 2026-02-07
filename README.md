@@ -100,6 +100,13 @@ BETTER_AUTH_URL=http://localhost:3000
 CORS_ORIGIN=http://localhost:3001
 
 DATABASE_URL=postgresql://postgres:password@localhost:5432/enroll
+
+SMTP_HOST=smtp.mailtrap.io
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER=your_smtp_user
+SMTP_PASSWORD=your_smtp_password
+SMTP_FROM=no-reply@yourapp.com
 ```
 
 ### 3. Установка зависимостей
