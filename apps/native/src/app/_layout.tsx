@@ -6,11 +6,10 @@ import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 import { ThemeProvider } from "@react-navigation/native";
 import { PortalHost } from "@rn-primitives/portal";
 import * as NavigationBar from "expo-navigation-bar";
-import { Stack } from "expo-router";
-import * as SplashScreen from "expo-splash-screen";
+import { SplashScreen, Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useColorScheme } from "nativewind";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Platform } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Toast from "react-native-toast-message";
@@ -21,39 +20,21 @@ export {
   ErrorBoundary,
 } from "expo-router";
 
-SplashScreen.setOptions({
-  duration: 500,
-  fade: true,
-});
-
 SplashScreen.preventAutoHideAsync();
 
 initializeApp();
 
-const Routes = () => {
-  const { data: session, isPending } = authClient.useSession();
-  const isAuthenticated = !!session;
-
-  useEffect(() => {
-    if (isPending) {
-      SplashScreen.hide();
-    }
-  }, [isPending]);
-
-  if (isPending) {
-    return <Loading />;
-  }
-
+const Routes = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
   return (
     <Stack>
-      {/* Экраны, которые показываются только когда пользователь НЕ авторизован. */}
-      <Stack.Protected guard={!isAuthenticated}>
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-      </Stack.Protected>
-
       {/* Экраны, которые показываются только когда пользователь авторизован. */}
       <Stack.Protected guard={isAuthenticated}>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      </Stack.Protected>
+
+      {/* Экраны, которые показываются только когда пользователь НЕ авторизован. */}
+      <Stack.Protected guard={!isAuthenticated}>
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
       </Stack.Protected>
 
       {/* Экраны вне защитных блоков доступны всем (например, страница "не найдено"). */}
@@ -63,11 +44,26 @@ const Routes = () => {
 
 const Layout = () => {
   const { colorScheme } = useColorScheme();
+  const { data: session, isPending } = authClient.useSession();
+  const [isInitialLoading, setIsInitialLoading] = useState(true);
 
-  if (Platform.OS === "android") {
-    NavigationBar.setButtonStyleAsync(
-      colorScheme === "dark" ? "light" : "dark",
-    );
+  useEffect(() => {
+    if (!isPending && isInitialLoading) {
+      setIsInitialLoading(false);
+      SplashScreen.hide();
+    }
+  }, [isPending, isInitialLoading]);
+
+  useEffect(() => {
+    if (Platform.OS === "android") {
+      NavigationBar.setButtonStyleAsync(
+        colorScheme === "dark" ? "light" : "dark",
+      );
+    }
+  }, [colorScheme]);
+
+  if (isInitialLoading) {
+    return <Loading />;
   }
 
   return (
@@ -76,7 +72,7 @@ const Layout = () => {
         <ActionSheetProvider>
           <>
             <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />
-            <Routes />
+            <Routes isAuthenticated={!!session} />
             <Toast config={toastConfig} position="bottom" />
             <PortalHost />
           </>
