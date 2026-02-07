@@ -1,4 +1,5 @@
 import { initializeApp, toastConfig } from "@/config";
+import { authClient } from "@/lib/auth-client";
 import { NAV_THEME } from "@/lib/theme";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 import { ThemeProvider } from "@react-navigation/native";
@@ -7,7 +8,6 @@ import * as NavigationBar from "expo-navigation-bar";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useColorScheme } from "nativewind";
-import { useState } from "react";
 import { Platform } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Toast from "react-native-toast-message";
@@ -21,22 +21,18 @@ export {
 initializeApp();
 
 const Routes = () => {
-  const [isLoaded] = useState(true);
-  const [isSignedIn] = useState(false);
-
-  if (!isLoaded) {
-    return null;
-  }
+  const { data: session } = authClient.useSession();
+  const isAuthenticated = !!session;
 
   return (
     <Stack>
       {/* Экраны, которые показываются только когда пользователь НЕ авторизован. */}
-      <Stack.Protected guard={!isSignedIn}>
+      <Stack.Protected guard={!isAuthenticated}>
         <Stack.Screen name="(auth)" options={{ headerShown: false }} />
       </Stack.Protected>
 
       {/* Экраны, которые показываются только когда пользователь авторизован. */}
-      <Stack.Protected guard={isSignedIn}>
+      <Stack.Protected guard={isAuthenticated}>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       </Stack.Protected>
 
