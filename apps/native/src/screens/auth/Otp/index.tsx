@@ -1,65 +1,56 @@
-import { authClient } from "@/lib/auth-client";
+import { authClient, getErrorMessage } from "@/lib/auth-client";
 import { OtpInputStep } from "@/screens/auth/Otp/components/OtpInputStep";
 import { OtpVerificationStep } from "@/screens/auth/Otp/components/OtpVerificationStep";
-import { parse, useLinkingURL } from "expo-linking";
 import { useRouter } from "expo-router";
 import { OTPInputRef } from "input-otp-native";
 import { AnimatePresence, MotiView } from "moti";
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useRef, useState } from "react";
+import Toast from "react-native-toast-message";
 
 export const Otp: FC = () => {
-  const url = useLinkingURL();
   const router = useRouter();
   const [step, setStep] = useState<"input" | "verification">("input");
   const [email, setEmail] = useState("");
 
   const otpVerificationRef = useRef<OTPInputRef>(null);
 
+  const handleAuthError = (errorCode?: string) => {
+    if (!errorCode) return;
+    const description = getErrorMessage(errorCode);
+    Toast.show({
+      type: "error",
+      props: {
+        title: "Возникла проблема",
+        description: description,
+      },
+    });
+  };
+
   const handleNext = async () => {
-    const { data, error } = await authClient.emailOtp.sendVerificationOtp({
+    const { error } = await authClient.emailOtp.sendVerificationOtp({
       email,
       type: "sign-in",
     });
-    console.log(data, error);
 
+    if (error) return handleAuthError(error.code);
     setStep("verification");
   };
 
-  const handleComplete = async (otp: string, externalEmail?: string) => {
-    if (url && parse(url).queryParams?.otp === otp) return;
-
-    const targetEmail = externalEmail || email;
-    const { data, error } = await authClient.signIn.emailOtp({
-      email: targetEmail,
+  const handleComplete = async (otp: string) => {
+    const { error } = await authClient.signIn.emailOtp({
+      email,
       otp,
     });
-    console.log(data, error);
 
-    otpVerificationRef.current?.clear();
-  };
-
-  useEffect(() => {
-    if (!url) return;
-
-    const { queryParams } = parse(url);
-
-    const externalEmail = queryParams?.email;
-    const externalOtp = queryParams?.otp;
-
-    if (typeof externalEmail === "string" && typeof externalOtp === "string") {
-      setEmail(externalEmail);
-      otpVerificationRef.current?.setValue(externalOtp);
-
-      authClient.signIn.emailOtp({
-        email: externalEmail,
-        otp: externalOtp,
-      });
+    if (error) {
+      handleAuthError(error.code);
+      otpVerificationRef.current?.clear();
     }
-  }, [url]);
+  };
 
   return (
     <AnimatePresence exitBeforeEnter>
-      {step === "input" && !url ? (
+      {step === "input" ? (
         <MotiView
           key="step1"
           className="flex-1"

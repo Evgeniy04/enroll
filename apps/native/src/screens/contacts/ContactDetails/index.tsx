@@ -1,8 +1,7 @@
 import { KeyboardAvoidingScreen } from "@/components/layout/KeyboardAvoidingScreen";
 import { Card } from "@/components/ui/card";
 import { EventCalendar } from "@/components/ui/event-calendar";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Text } from "@/components/ui/text";
+import { Loading } from "@/components/ui/loading";
 import { InfoCard } from "@/screens/contacts/ContactDetails/components/InfoCard";
 import { ProfileCard } from "@/screens/contacts/ContactDetails/components/ProfileCard";
 import { EVENTS } from "@/screens/test-store";
@@ -48,9 +47,7 @@ export const ContactDetails = () => {
               showVerticalScrollIndicator
             />
           ) : (
-            <Skeleton className="h-[500] w-full items-center justify-center">
-              <Text>Данные загружаются...</Text>
-            </Skeleton>
+            <Loading className="h-[500]" />
           )}
         </Card>
         <InfoCard

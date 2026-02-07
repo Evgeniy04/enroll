@@ -1,3 +1,4 @@
+import { Loading } from "@/components/ui/loading";
 import { initializeApp, toastConfig } from "@/config";
 import { authClient } from "@/lib/auth-client";
 import { NAV_THEME } from "@/lib/theme";
@@ -6,8 +7,10 @@ import { ThemeProvider } from "@react-navigation/native";
 import { PortalHost } from "@rn-primitives/portal";
 import * as NavigationBar from "expo-navigation-bar";
 import { Stack } from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useColorScheme } from "nativewind";
+import { useEffect } from "react";
 import { Platform } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Toast from "react-native-toast-message";
@@ -18,11 +21,28 @@ export {
   ErrorBoundary,
 } from "expo-router";
 
+SplashScreen.setOptions({
+  duration: 500,
+  fade: true,
+});
+
+SplashScreen.preventAutoHideAsync();
+
 initializeApp();
 
 const Routes = () => {
-  const { data: session } = authClient.useSession();
+  const { data: session, isPending } = authClient.useSession();
   const isAuthenticated = !!session;
+
+  useEffect(() => {
+    if (isPending) {
+      SplashScreen.hide();
+    }
+  }, [isPending]);
+
+  if (isPending) {
+    return <Loading />;
+  }
 
   return (
     <Stack>
