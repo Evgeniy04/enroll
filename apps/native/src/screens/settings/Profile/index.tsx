@@ -1,4 +1,3 @@
-import { KeyboardAvoidingScreen } from "@/components/layout/KeyboardAvoidingScreen";
 import { Button } from "@/components/ui/button";
 import { SettingsHeaderAction } from "@/components/ui/header/settings-header-action";
 import { Option } from "@/components/ui/select";
@@ -11,6 +10,7 @@ import { SpecialistProfileCard } from "@/screens/settings/Profile/components/Spe
 import { Stack, useRouter } from "expo-router";
 import { useState } from "react";
 import { View } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 
 export const Profile = () => {
   const router = useRouter();
@@ -45,7 +45,7 @@ export const Profile = () => {
           ),
         }}
       />
-      <KeyboardAvoidingScreen>
+      <KeyboardAwareScrollView className="flex-1">
         <PersonalInfoForm />
 
         <SpecialistProfileCard
@@ -58,7 +58,7 @@ export const Profile = () => {
             <Text>Сохранить изменения</Text>
           </Button>
         </View>
-      </KeyboardAvoidingScreen>
+      </KeyboardAwareScrollView>
 
       {ConfirmDialogElement}
     </>

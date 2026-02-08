@@ -1,4 +1,3 @@
-import { KeyboardAvoidingScreen } from "@/components/layout/KeyboardAvoidingScreen";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Text } from "@/components/ui/text";
 import { Schedule } from "@/screens/settings/Work/tabs/Schedule";
@@ -7,6 +6,7 @@ import { TemplateList } from "@/screens/settings/Work/tabs/Templates";
 import { Stack } from "expo-router";
 import { useState } from "react";
 import { View } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 
 export const Work = () => {
   const [value, setValue] = useState("services");
@@ -18,7 +18,7 @@ export const Work = () => {
           title: "Параметры работы",
         }}
       />
-      <KeyboardAvoidingScreen>
+      <KeyboardAwareScrollView className="flex-1">
         <View className="m-5">
           <Text variant="h3">Управление записью</Text>
           <Text>
@@ -51,7 +51,7 @@ export const Work = () => {
             <Schedule />
           </TabsContent>
         </Tabs>
-      </KeyboardAvoidingScreen>
+      </KeyboardAwareScrollView>
     </>
   );
 };

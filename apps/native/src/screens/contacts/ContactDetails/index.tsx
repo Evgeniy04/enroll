@@ -1,4 +1,3 @@
-import { KeyboardAvoidingScreen } from "@/components/layout/KeyboardAvoidingScreen";
 import { Card } from "@/components/ui/card";
 import { EventCalendar } from "@/components/ui/event-calendar";
 import { Loading } from "@/components/ui/loading";
@@ -8,6 +7,7 @@ import { EVENTS } from "@/screens/test-store";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { BriefcaseBusiness, CarIcon, MapPin } from "lucide-react-native";
 import { useEffect, useState } from "react";
+import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 
 type ContactDetailsParams = {
   id: string;
@@ -32,7 +32,7 @@ export const ContactDetails = () => {
   return (
     <>
       <Stack.Screen options={{ title: "Запись" }} />
-      <KeyboardAvoidingScreen>
+      <KeyboardAwareScrollView className="flex-1">
         <ProfileCard id={id} />
         <Card className="m-5 overflow-hidden p-0">
           {shouldRenderCalendar ? (
@@ -88,7 +88,7 @@ export const ContactDetails = () => {
             },
           ]}
         />
-      </KeyboardAvoidingScreen>
+      </KeyboardAwareScrollView>
     </>
   );
 };

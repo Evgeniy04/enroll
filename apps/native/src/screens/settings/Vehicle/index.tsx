@@ -1,4 +1,3 @@
-import { KeyboardAvoidingScreen } from "@/components/layout/KeyboardAvoidingScreen";
 import { AvatarPicker } from "@/components/ui/avatar-picker";
 import { Button } from "@/components/ui/button";
 import { DatePickerValue } from "@/components/ui/date-picker";
@@ -11,6 +10,7 @@ import { useContentInsets } from "@/hooks/useContentInsets";
 import { Stack } from "expo-router";
 import { useState } from "react";
 import { View } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
 
 const TRANSMISSION_TYPE_OPTIONS = [
   { label: "Механическая", value: "manual" },
@@ -28,7 +28,7 @@ export const Vehicle = () => {
   return (
     <>
       <Stack.Screen options={{ title: "Ваш автомобиль" }} />
-      <KeyboardAvoidingScreen>
+      <KeyboardAwareScrollView className="flex-1">
         <AvatarPicker image={image} setImage={setImage} />
 
         <View className="m-5 gap-6">
@@ -80,7 +80,7 @@ export const Vehicle = () => {
             <Text>Сохранить изменения</Text>
           </Button>
         </View>
-      </KeyboardAvoidingScreen>
+      </KeyboardAwareScrollView>
     </>
   );
 };
