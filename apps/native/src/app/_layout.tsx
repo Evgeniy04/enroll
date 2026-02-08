@@ -12,6 +12,7 @@ import { useColorScheme } from "nativewind";
 import { useEffect, useState } from "react";
 import { Platform } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { KeyboardProvider } from "react-native-keyboard-controller";
 import Toast from "react-native-toast-message";
 import "../../global.css";
 
@@ -67,18 +68,20 @@ const Layout = () => {
   }
 
   return (
-    <GestureHandlerRootView className="flex-1">
-      <ThemeProvider value={NAV_THEME[colorScheme ?? "light"]}>
-        <ActionSheetProvider>
-          <>
-            <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />
-            <Routes isAuthenticated={!!session} />
-            <Toast config={toastConfig} position="bottom" />
-            <PortalHost />
-          </>
-        </ActionSheetProvider>
-      </ThemeProvider>
-    </GestureHandlerRootView>
+    <KeyboardProvider>
+      <GestureHandlerRootView className="flex-1">
+        <ThemeProvider value={NAV_THEME[colorScheme ?? "light"]}>
+          <ActionSheetProvider>
+            <>
+              <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />
+              <Routes isAuthenticated={!!session} />
+              <Toast config={toastConfig} position="bottom" />
+              <PortalHost />
+            </>
+          </ActionSheetProvider>
+        </ThemeProvider>
+      </GestureHandlerRootView>
+    </KeyboardProvider>
   );
 };
 
