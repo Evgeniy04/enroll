@@ -37,7 +37,7 @@ export const Otp: FC = () => {
     });
   };
 
-  const handleNext = async () => {
+  const handleSendVerificationOtp = async () => {
     const { error } = await authClient.emailOtp.sendVerificationOtp({
       email,
       type: "sign-in",
@@ -77,12 +77,13 @@ export const Otp: FC = () => {
               email={email}
               onChangeEmail={setEmail}
               onBack={() => router.back()}
-              onNext={handleNext}
+              onNext={handleSendVerificationOtp}
             />
           ) : (
             <OtpVerificationStep
               ref={otpVerificationRef}
               email={email}
+              onResend={handleSendVerificationOtp}
               onComplete={handleComplete}
               onBack={() => setStep("input")}
             />

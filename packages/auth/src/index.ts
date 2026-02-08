@@ -59,4 +59,18 @@ export const auth = betterAuth({
       },
     }),
   ],
+
+  rateLimit: {
+    enabled: true,
+    customRules: {
+      "/email-otp/send-verification-otp": {
+        window: 60,
+        max: 1,
+      },
+      "/sign-in/email-otp": {
+        window: 60,
+        max: 5,
+      },
+    },
+  },
 });

@@ -11,18 +11,29 @@ import Animated, {
 } from "react-native-reanimated";
 
 interface AppleOTPInputProps {
+  ref?: RefObject<OTPInputRef | null>;
+  className?: string;
   onComplete?: (otp: string) => void;
-  ref: RefObject<OTPInputRef | null>;
 }
 
-export default function AppleOTPInput({ onComplete, ref }: AppleOTPInputProps) {
+export default function AppleOTPInput({
+  ref,
+  className,
+  onComplete,
+}: AppleOTPInputProps) {
   return (
     <OTPInput
       ref={ref}
+      // className="w-10"
       onComplete={onComplete}
       maxLength={6}
       render={({ slots }) => (
-        <View className="my-4 flex-row items-center justify-center gap-2">
+        <View
+          className={cn(
+            "flex-row items-center justify-center gap-2",
+            className,
+          )}
+        >
           {slots.map((slot, idx) => (
             <Slot key={idx} {...slot} />
           ))}
@@ -36,7 +47,7 @@ function Slot({ char, isActive, hasFakeCaret }: SlotProps) {
   return (
     <View
       className={cn(
-        "h-[50px] w-[50px] items-center justify-center rounded-lg border border-gray-200 bg-white",
+        "h-14 flex-1 items-center justify-center rounded-lg border border-gray-200 bg-white",
         {
           "border-2 border-black": isActive,
         },
