@@ -3,12 +3,19 @@ import { OtpInputStep } from "@/screens/auth/Otp/components/OtpInputStep";
 import { OtpVerificationStep } from "@/screens/auth/Otp/components/OtpVerificationStep";
 import { useRouter } from "expo-router";
 import { OTPInputRef } from "input-otp-native";
-import { AnimatePresence, MotiView } from "moti";
+import { AnimatePresence } from "moti";
 import { FC, useRef, useState } from "react";
+import {
+  KeyboardAwareScrollView,
+  KeyboardController,
+} from "react-native-keyboard-controller";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Toast from "react-native-toast-message";
+import { AnimatedStepCard } from "./components/AnimatedStepCard";
 
 export const Otp: FC = () => {
   const router = useRouter();
+  const insets = useSafeAreaInsets();
   const [step, setStep] = useState<"input" | "verification">("input");
   const [email, setEmail] = useState("");
 
@@ -16,6 +23,7 @@ export const Otp: FC = () => {
 
   const handleAuthError = (errorCode?: string) => {
     if (!errorCode) return;
+
     const description = getErrorMessage(errorCode);
     Toast.show({
       type: "error",
@@ -23,6 +31,9 @@ export const Otp: FC = () => {
         title: "Возникла проблема",
         description: description,
       },
+      bottomOffset: KeyboardController.isVisible()
+        ? KeyboardController.state().height
+        : insets.bottom,
     });
   };
 
@@ -49,43 +60,35 @@ export const Otp: FC = () => {
   };
 
   return (
-    <AnimatePresence exitBeforeEnter>
-      {step === "input" ? (
-        <MotiView
-          key="step1"
-          className="flex-1"
-          from={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.95 }}
-          transition={{ type: "timing", duration: 250 }}
-        >
-          <OtpInputStep
-            email={email}
-            onChangeEmail={setEmail}
-            onBack={() => router.back()}
-            onNext={handleNext}
-          />
-        </MotiView>
-      ) : (
-        <MotiView
-          key="step2"
-          className="flex-1"
-          from={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.95 }}
-          transition={{ type: "timing", duration: 250 }}
+    <KeyboardAwareScrollView
+      contentContainerClassName="grow"
+      keyboardShouldPersistTaps="handled"
+      showsVerticalScrollIndicator={false}
+    >
+      <AnimatePresence exitBeforeEnter>
+        <AnimatedStepCard
+          key={step}
           onDidAnimate={() => {
             otpVerificationRef.current?.focus();
           }}
         >
-          <OtpVerificationStep
-            email={email}
-            onBack={() => setStep("input")}
-            onComplete={handleComplete}
-            ref={otpVerificationRef}
-          />
-        </MotiView>
-      )}
-    </AnimatePresence>
+          {step === "input" ? (
+            <OtpInputStep
+              email={email}
+              onChangeEmail={setEmail}
+              onBack={() => router.back()}
+              onNext={handleNext}
+            />
+          ) : (
+            <OtpVerificationStep
+              ref={otpVerificationRef}
+              email={email}
+              onComplete={handleComplete}
+              onBack={() => setStep("input")}
+            />
+          )}
+        </AnimatedStepCard>
+      </AnimatePresence>
+    </KeyboardAwareScrollView>
   );
 };

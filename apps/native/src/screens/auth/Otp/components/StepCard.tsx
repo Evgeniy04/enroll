@@ -10,7 +10,6 @@ import { Text } from "@/components/ui/text";
 import { ChevronLeft, LucideIcon } from "lucide-react-native";
 import { FC } from "react";
 import { View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 interface StepCardProps {
   iconColor: GradientColor;
@@ -35,16 +34,9 @@ export const StepCard: FC<StepCardProps> = ({
   onBack,
   children,
 }) => {
-  const insets = useSafeAreaInsets();
-
   return (
-    <View
-      className="mx-5 flex-1 items-center justify-center gap-5"
-      style={{
-        marginTop: insets.top,
-        marginBottom: insets.bottom,
-      }}
-    >
+    <>
+      {InfoCardsContent}
       <Card className="w-full rounded-2xl border-info/50">
         <CardContent className="items-center gap-6">
           <Button variant="secondary" onPress={onBack} className="self-start">
@@ -81,7 +73,6 @@ export const StepCard: FC<StepCardProps> = ({
           {children}
         </CardContent>
       </Card>
-      {InfoCardsContent}
-    </View>
+    </>
   );
 };

@@ -22,16 +22,13 @@ export const Welcome = () => {
   return (
     <>
       <ScrollView
-        contentContainerStyle={{
-          flexGrow: 1,
-          paddingHorizontal: 20,
-        }}
+        contentContainerClassName="grow"
         showsVerticalScrollIndicator={false}
       >
         <View
-          className="flex-1 justify-center gap-10"
+          className="mx-5 flex-1 justify-center gap-10"
           style={{
-            marginTop: insets.top + 50,
+            marginTop: insets.top + 20,
             marginBottom: insets.bottom + 200,
           }}
         >
