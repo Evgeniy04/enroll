@@ -2,11 +2,12 @@ import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { InfoCard } from "@/components/ui/info-card";
 import OtpInput from "@/components/ui/otp-input";
+import { ResendButton } from "@/components/ui/ResendButton";
 import { Text } from "@/components/ui/text";
-import { useOtpTimer } from "@/hooks/useOtpTimer";
 import { StepCard } from "@/screens/auth/Otp/components/StepCard";
+import { getStringAsync } from "expo-clipboard";
 import { OTPInputRef } from "input-otp-native";
-import { Lock, MessageCircle, RotateCcw, Zap } from "lucide-react-native";
+import { ClipboardPaste, Lock, MessageCircle, Zap } from "lucide-react-native";
 import { FC, RefObject, useState } from "react";
 import { View } from "react-native";
 
@@ -27,8 +28,13 @@ export const OtpVerificationStep: FC<OtpVerificationStepProps> = ({
   onBack,
   ref,
 }) => {
-  const { countdown, canResend, reset } = useOtpTimer(RESEND_DELAY);
   const [isResending, setIsResending] = useState(false);
+
+  const handlePaste = async () => {
+    const text = await getStringAsync();
+    const digits = text.replace(/\D/g, "").slice(0, 6);
+    ref.current?.setValue(digits);
+  };
 
   const handleResend = async () => {
     if (isResending) return;
@@ -37,7 +43,6 @@ export const OtpVerificationStep: FC<OtpVerificationStepProps> = ({
 
     try {
       await onResend();
-      reset();
       ref.current?.clear();
     } finally {
       setIsResending(false);
@@ -68,20 +73,19 @@ export const OtpVerificationStep: FC<OtpVerificationStepProps> = ({
 
         <OtpInput ref={ref} onComplete={onComplete} />
 
-        <Button
-          variant="outline"
-          onPress={handleResend}
-          disabled={!canResend || isResending}
-        >
-          <Icon as={RotateCcw} />
-          <Text>
-            {canResend
-              ? isResending
-                ? "Отправка..."
-                : "Отправить код снова"
-              : `Отправить повторно через ${countdown}с`}
-          </Text>
+        <Button variant="secondary" size="lg" onPress={handlePaste}>
+          <Icon as={ClipboardPaste} />
+          <Text>Вставить скопированный код</Text>
         </Button>
+
+        <ResendButton
+          delay={RESEND_DELAY}
+          isProcessing={isResending}
+          processingText="Отправка..."
+          readyText="Отправить код снова"
+          countdownText={(seconds) => `Отправить повторно через ${seconds}с`}
+          onPress={handleResend}
+        />
       </View>
     </StepCard>
   );
