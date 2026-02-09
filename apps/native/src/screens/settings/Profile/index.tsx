@@ -3,7 +3,7 @@ import { SettingsHeaderAction } from "@/components/ui/header/settings-header-act
 import { Option } from "@/components/ui/select";
 import { Text } from "@/components/ui/text";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
-import { useConfirm } from "@/hooks/useConfirm";
+import { useConfirm } from "@/hooks/dialogs/useConfirm";
 import { authClient } from "@/lib/auth-client";
 import { PersonalInfoForm } from "@/screens/settings/Profile/components/PersonalInfoForm";
 import { SpecialistProfileCard } from "@/screens/settings/Profile/components/SpecialistProfileCard";

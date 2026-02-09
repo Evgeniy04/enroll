@@ -5,8 +5,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { useConfirm } from "@/hooks/useConfirm";
-import { useDialog } from "@/hooks/useDialog";
+import { useConfirm } from "@/hooks/dialogs/useConfirm";
+import { useDialog } from "@/hooks/dialogs/useDialog";
 import { BookingLimitActions } from "@/screens/settings/Work/tabs/Schedule/components/actions/BookingLimitActions";
 import { FillingToolsActions } from "@/screens/settings/Work/tabs/Schedule/components/actions/FillingToolsActions";
 import { BookingLimitDialog } from "@/screens/settings/Work/tabs/Schedule/components/dialogs/BookingLimitDialog";

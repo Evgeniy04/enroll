@@ -1,4 +1,4 @@
-import { useConfirm } from "@/hooks/useConfirm";
+import { useConfirm } from "@/hooks/dialogs/useConfirm";
 import { ContactCard } from "@/screens/contacts/ContactsList/components/ContactListItem/ContactCard";
 import { ContactContextMenu } from "@/screens/contacts/ContactsList/components/ContactListItem/ContactContextMenu";
 import { Contact } from "@/screens/test-store";

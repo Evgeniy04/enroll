@@ -8,7 +8,7 @@ import {
 import { EmptyState } from "@/components/ui/empty-state";
 import { Icon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
-import { useConfirm } from "@/hooks/useConfirm";
+import { useConfirm } from "@/hooks/dialogs/useConfirm";
 import { EntityCard } from "@/screens/settings/Work/tabs/components/EntityList/EntityCard";
 import {
   FormDialog,

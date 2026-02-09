@@ -1,4 +1,5 @@
 import { authClient, getErrorMessage } from "@/lib/auth-client";
+import { AnimatedStepCard } from "@/screens/auth/Otp/components/AnimatedStepCard";
 import { OtpInputStep } from "@/screens/auth/Otp/components/OtpInputStep";
 import { OtpVerificationStep } from "@/screens/auth/Otp/components/OtpVerificationStep";
 import { useRouter } from "expo-router";
@@ -11,7 +12,6 @@ import {
 } from "react-native-keyboard-controller";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Toast from "react-native-toast-message";
-import { AnimatedStepCard } from "./components/AnimatedStepCard";
 
 export const Otp: FC = () => {
   const router = useRouter();
