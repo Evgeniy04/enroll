@@ -3,10 +3,11 @@ import { Icon } from "@/components/ui/icon";
 import { InfoCard } from "@/components/ui/info-card";
 import OtpInput from "@/components/ui/otp-input";
 import { Text } from "@/components/ui/text";
+import { useOtpTimer } from "@/hooks/useOtpTimer";
 import { StepCard } from "@/screens/auth/Otp/components/StepCard";
 import { OTPInputRef } from "input-otp-native";
 import { Lock, MessageCircle, RotateCcw, Zap } from "lucide-react-native";
-import { FC, RefObject, useEffect, useState } from "react";
+import { FC, RefObject, useState } from "react";
 import { View } from "react-native";
 
 const RESEND_DELAY = 60;
@@ -26,28 +27,18 @@ export const OtpVerificationStep: FC<OtpVerificationStepProps> = ({
   onBack,
   ref,
 }) => {
-  const [countdown, setCountdown] = useState(RESEND_DELAY);
+  const { countdown, canResend, reset } = useOtpTimer(RESEND_DELAY);
   const [isResending, setIsResending] = useState(false);
 
-  useEffect(() => {
-    if (countdown <= 0) return;
-
-    const timer: number = setInterval(
-      () => setCountdown((prev) => prev - 1),
-      1000,
-    );
-
-    return () => clearInterval(timer);
-  }, [countdown]);
-
   const handleResend = async () => {
-    if (countdown > 0 || isResending) return;
+    if (isResending) return;
 
     setIsResending(true);
 
     try {
       await onResend();
-      setCountdown(RESEND_DELAY);
+      reset();
+      ref.current?.clear();
     } finally {
       setIsResending(false);
     }
@@ -77,20 +68,20 @@ export const OtpVerificationStep: FC<OtpVerificationStepProps> = ({
 
         <OtpInput ref={ref} onComplete={onComplete} />
 
-        {countdown > 0 ? (
-          <Text variant="muted" className="text-center text-muted-foreground">
-            Отправить повторно через <Text>{countdown}с</Text>
+        <Button
+          variant="outline"
+          onPress={handleResend}
+          disabled={!canResend || isResending}
+        >
+          <Icon as={RotateCcw} />
+          <Text>
+            {canResend
+              ? isResending
+                ? "Отправка..."
+                : "Отправить код снова"
+              : `Отправить повторно через ${countdown}с`}
           </Text>
-        ) : (
-          <Button
-            variant="outline"
-            onPress={handleResend}
-            disabled={isResending}
-          >
-            <Icon as={RotateCcw} />
-            <Text>{isResending ? "Отправка..." : "Отправить код снова"}</Text>
-          </Button>
-        )}
+        </Button>
       </View>
     </StepCard>
   );
