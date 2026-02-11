@@ -15,10 +15,10 @@ export type DatePickerValue = {
 };
 
 type DatePickerProps = {
-  currentValue?: DatePickerValue;
+  value?: DatePickerValue;
   contentInsets: ContentInsets;
   onClose?: () => void;
-  setCurrentValue?: (value: DatePickerValue) => void;
+  onChange?: (value: DatePickerValue) => void;
   minDate?: string;
   maxDate?: string;
   disabledDates?: string[];
@@ -33,9 +33,9 @@ type DatePickerProps = {
 };
 
 export const DatePicker: FC<DatePickerProps> = ({
-  currentValue = { start: dayjs() },
+  value = { start: dayjs() },
   contentInsets,
-  setCurrentValue,
+  onChange,
   minDate,
   maxDate,
   disabledDates,
@@ -47,7 +47,7 @@ export const DatePicker: FC<DatePickerProps> = ({
 }) => {
   const { colorScheme } = useColorScheme();
   const [displayDate, setDisplayDate] = useState(
-    currentValue.start.format("YYYY-MM-DD"),
+    value.start.format("YYYY-MM-DD"),
   );
   const [range, setRange] = useState<Range>({});
 
@@ -60,7 +60,7 @@ export const DatePicker: FC<DatePickerProps> = ({
     if (rangeSelection) {
       if (!range.start || (range.start && range.end)) {
         setRange({ start: selectedDate, end: undefined });
-        setCurrentValue?.({ start: selectedDate });
+        onChange?.({ start: selectedDate });
         return;
       }
 
@@ -72,11 +72,11 @@ export const DatePicker: FC<DatePickerProps> = ({
           : start;
         const finalRange: DatePickerValue = { start: newStart, end };
         setRange(finalRange);
-        setCurrentValue?.(finalRange);
+        onChange?.(finalRange);
         return;
       }
     } else {
-      setCurrentValue?.({ start: selectedDate });
+      onChange?.({ start: selectedDate });
     }
   };
 
@@ -130,20 +130,14 @@ export const DatePicker: FC<DatePickerProps> = ({
       return { ...result, ...rangeMarkedDates };
     }
 
-    const selectedDateString = currentValue.start.format("YYYY-MM-DD");
+    const selectedDateString = value.start.format("YYYY-MM-DD");
     result[selectedDateString] = {
       ...(result[selectedDateString] ?? {}),
       selected: true,
     };
 
     return result;
-  }, [
-    markedDates,
-    disabledDates,
-    rangeMarkedDates,
-    rangeSelection,
-    currentValue,
-  ]);
+  }, [markedDates, disabledDates, rangeMarkedDates, rangeSelection, value]);
 
   return (
     <Calendar

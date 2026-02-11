@@ -1,0 +1,109 @@
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Icon } from "@/components/ui/icon";
+import { Text } from "@/components/ui/text";
+import { cn } from "@/lib/utils";
+import { Minus, Plus } from "lucide-react-native";
+import React, { FC } from "react";
+import { View } from "react-native";
+
+const formatNumberValue = (
+  value: number,
+  formatValue?: (value: number) => string,
+  unit?: string,
+) => {
+  if (formatValue) return formatValue(value);
+  if (unit) return `${value} ${unit}`;
+  return value.toString();
+};
+
+export interface NumberPickerProps {
+  value?: number;
+  onChange?: (value: number) => void;
+  min?: number;
+  max?: number;
+  step?: number;
+  /** Максимум 3 пресета */
+  presets?: number[];
+  /** Единица измерения (шт, мин, %, и т.п.) */
+  unit?: string;
+  isValid?: boolean;
+  /** Кастомное форматирование значения */
+  formatValue?: (value: number) => string;
+  disabled?: boolean;
+}
+
+export const NumberPicker: FC<NumberPickerProps> = ({
+  value = 0,
+  onChange,
+  min = 0,
+  max = Number.MAX_SAFE_INTEGER,
+  step = 1,
+  presets = [],
+  unit,
+  isValid = true,
+  formatValue,
+  disabled = false,
+}) => {
+  const clamp = (v: number) => Math.min(max, Math.max(min, v));
+
+  const handleIncrementPress = () => onChange?.(clamp(value + step));
+  const handleDecrementPress = () => onChange?.(clamp(value - step));
+
+  return (
+    <View className={cn(disabled && "opacity-50")}>
+      <Card
+        className={cn(
+          "flex-row items-center justify-between px-1 py-1",
+          "bg-background dark:bg-input/30",
+          isValid ? "border-destructive" : "border-border",
+          "gap-2",
+        )}
+      >
+        <Button
+          variant="ghost"
+          className="size-8"
+          disabled={disabled || value <= min}
+          onPress={handleDecrementPress}
+        >
+          <Icon as={Minus} />
+        </Button>
+
+        <Text>{formatNumberValue(value, formatValue, unit)}</Text>
+
+        <Button
+          variant="ghost"
+          className="size-8"
+          disabled={disabled || value >= max}
+          onPress={handleIncrementPress}
+        >
+          <Icon as={Plus} />
+        </Button>
+      </Card>
+
+      {presets.length > 0 && (
+        <View className="mt-2 flex-row flex-wrap justify-center gap-2">
+          {presets.slice(0, 3).map((preset) => {
+            if (preset < min || preset > max) return null;
+
+            const active = preset === value;
+
+            return (
+              <Button
+                key={preset}
+                disabled={disabled}
+                variant={active ? "default" : "outline"}
+                className="flex-1"
+                onPress={() => onChange?.(clamp(preset))}
+              >
+                <Text variant="small">
+                  {formatNumberValue(preset, formatValue, unit)}
+                </Text>
+              </Button>
+            );
+          })}
+        </View>
+      )}
+    </View>
+  );
+};
