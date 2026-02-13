@@ -98,25 +98,13 @@ export function FieldError({
       ...new Map(errors.map((error) => [error?.message, error])).values(),
     ];
 
-    if (uniqueErrors?.length === 1) {
-      return uniqueErrors[0]?.message;
-    }
-
-    return (
-      <View className="gap-1">
-        {uniqueErrors.map(
-          (error, index) =>
-            error?.message && (
-              <Text
-                key={index}
-                className="text-sm text-destructive"
-                role="alert"
-              >
-                {error.message}
-              </Text>
-            ),
-        )}
-      </View>
+    return uniqueErrors.map(
+      (error, index) =>
+        error?.message && (
+          <Text key={index} className="text-sm text-destructive" role="alert">
+            {error.message}
+          </Text>
+        ),
     );
   }, [children, errors]);
 
@@ -125,7 +113,7 @@ export function FieldError({
   }
 
   return (
-    <View className={className} {...props}>
+    <View className={cn("gap-1", className)} {...props}>
       {content}
     </View>
   );

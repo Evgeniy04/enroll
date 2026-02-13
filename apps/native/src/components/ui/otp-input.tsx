@@ -24,7 +24,6 @@ export default function AppleOTPInput({
   return (
     <OTPInput
       ref={ref}
-      // className="w-10"
       onComplete={onComplete}
       maxLength={6}
       render={({ slots }) => (

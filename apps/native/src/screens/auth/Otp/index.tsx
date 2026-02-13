@@ -1,7 +1,11 @@
+import { Loading } from "@/components/ui/loading";
+import { useAppForm } from "@/hooks/forms/form";
 import { authClient, getErrorMessage } from "@/lib/auth-client";
-import { AnimatedStepCard } from "@/screens/auth/Otp/components/AnimatedStepCard";
-import { OtpInputStep } from "@/screens/auth/Otp/components/OtpInputStep";
-import { OtpVerificationStep } from "@/screens/auth/Otp/components/OtpVerificationStep";
+import { AnimatedBaseCard } from "@/screens/auth/Otp/components/AnimatedBaseCard";
+import { EmailForm } from "@/screens/auth/Otp/components/EmailForm";
+import { OtpForm } from "@/screens/auth/Otp/components/OtpForm";
+import { AuthStatus } from "@/screens/auth/Otp/Otp.types";
+import { createAuthSchema, formOpts } from "@/screens/auth/Otp/sharedForm";
 import { useRouter } from "expo-router";
 import { OTPInputRef } from "input-otp-native";
 import { AnimatePresence } from "moti";
@@ -10,54 +14,65 @@ import {
   KeyboardAwareScrollView,
   KeyboardController,
 } from "react-native-keyboard-controller";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { EdgeInsets, useSafeAreaInsets } from "react-native-safe-area-context";
 import Toast from "react-native-toast-message";
+
+const handleAuthError = (insets: EdgeInsets, errorCode?: string) => {
+  if (!errorCode) return;
+
+  Toast.show({
+    type: "error",
+    props: {
+      title: "Возникла проблема",
+      description: getErrorMessage(errorCode),
+    },
+    bottomOffset: KeyboardController.isVisible()
+      ? KeyboardController.state().height
+      : insets.bottom,
+  });
+};
 
 export const Otp: FC = () => {
   const router = useRouter();
   const insets = useSafeAreaInsets();
-  const [step, setStep] = useState<"input" | "verification">("input");
-  const [email, setEmail] = useState("");
+  const otpInputRef = useRef<OTPInputRef>(null);
+  const [status, setStatus] = useState<AuthStatus>("idle");
 
-  const otpVerificationRef = useRef<OTPInputRef>(null);
+  const form = useAppForm({
+    ...formOpts,
+    validators: {
+      onSubmit: createAuthSchema(status !== "idle"),
+    },
+    onSubmit: async ({ value: { email, otp }, meta: { intent } }) => {
+      if (intent === "requestOtp" || intent === "resendOtp") {
+        const { error } = await authClient.emailOtp.sendVerificationOtp({
+          email,
+          type: "sign-in",
+        });
 
-  const handleAuthError = (errorCode?: string) => {
-    if (!errorCode) return;
+        if (error) return handleAuthError(insets, error.code);
 
-    const description = getErrorMessage(errorCode);
-    Toast.show({
-      type: "error",
-      props: {
-        title: "Возникла проблема",
-        description: description,
-      },
-      bottomOffset: KeyboardController.isVisible()
-        ? KeyboardController.state().height
-        : insets.bottom,
-    });
-  };
+        setStatus("otpRequested");
+        return;
+      }
 
-  const handleSendVerificationOtp = async () => {
-    const { error } = await authClient.emailOtp.sendVerificationOtp({
-      email,
-      type: "sign-in",
-    });
+      if (intent === "verifyOtp") {
+        setStatus("verifying");
+        const { error } = await authClient.signIn.emailOtp({ email, otp });
 
-    if (error) return handleAuthError(error.code);
-    setStep("verification");
-  };
+        if (error) {
+          setStatus("otpRequested");
+          handleAuthError(insets, error.code);
+          otpInputRef.current?.clear();
+          return;
+        }
 
-  const handleComplete = async (otp: string) => {
-    const { error } = await authClient.signIn.emailOtp({
-      email,
-      otp,
-    });
+        setStatus("verified");
+      }
+    },
+  });
 
-    if (error) {
-      handleAuthError(error.code);
-      otpVerificationRef.current?.clear();
-    }
-  };
+  if (status === "verified") return <Loading />;
 
   return (
     <KeyboardAwareScrollView
@@ -66,29 +81,22 @@ export const Otp: FC = () => {
       showsVerticalScrollIndicator={false}
     >
       <AnimatePresence exitBeforeEnter>
-        <AnimatedStepCard
-          key={step}
+        <AnimatedBaseCard
+          key={status !== "idle" ? "enterOtp" : "enterEmail"}
           onDidAnimate={() => {
-            otpVerificationRef.current?.focus();
+            otpInputRef.current?.focus();
           }}
         >
-          {step === "input" ? (
-            <OtpInputStep
-              email={email}
-              onChangeEmail={setEmail}
-              onBack={() => router.back()}
-              onNext={handleSendVerificationOtp}
-            />
+          {status === "idle" ? (
+            <EmailForm form={form} onBack={() => router.back()} />
           ) : (
-            <OtpVerificationStep
-              ref={otpVerificationRef}
-              email={email}
-              onResend={handleSendVerificationOtp}
-              onComplete={handleComplete}
-              onBack={() => setStep("input")}
+            <OtpForm
+              form={form}
+              ref={otpInputRef}
+              onBack={() => setStatus("idle")}
             />
           )}
-        </AnimatedStepCard>
+        </AnimatedBaseCard>
       </AnimatePresence>
     </KeyboardAwareScrollView>
   );

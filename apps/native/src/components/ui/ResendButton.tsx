@@ -3,9 +3,9 @@ import { Icon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { useOtpTimer } from "@/hooks/useOtpTimer";
 import { LucideIcon, RotateCcw } from "lucide-react-native";
-import { FC } from "react";
+import { ComponentProps, FC } from "react";
 
-interface ResendButtonProps {
+interface ResendButtonProps extends ComponentProps<typeof Button> {
   /** Задержка перед повторным действием в секундах */
   delay: number;
   /** Флаг выполнения действия */
@@ -30,6 +30,8 @@ export const ResendButton: FC<ResendButtonProps> = ({
   countdownText = (seconds) => `Повтор через ${seconds}с`,
   onPress,
   icon = RotateCcw,
+  disabled,
+  ...props
 }) => {
   const { countdown, canResend, reset } = useOtpTimer(delay);
 
@@ -40,9 +42,10 @@ export const ResendButton: FC<ResendButtonProps> = ({
 
   return (
     <Button
+      {...props}
       variant="ghost"
       onPress={handlePress}
-      disabled={!canResend || isProcessing}
+      disabled={!canResend || isProcessing || disabled}
       className="flex-row items-center"
     >
       {icon && <Icon as={icon} />}

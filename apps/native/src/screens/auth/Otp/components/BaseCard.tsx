@@ -11,7 +11,7 @@ import { ChevronLeft, LucideIcon } from "lucide-react-native";
 import { FC } from "react";
 import { View } from "react-native";
 
-interface StepCardProps {
+interface BaseCardProps {
   iconColor: GradientColor;
   icon: LucideIcon;
   accentIcon: LucideIcon;
@@ -23,7 +23,7 @@ interface StepCardProps {
   children: React.ReactNode;
 }
 
-export const StepCard: FC<StepCardProps> = ({
+export const BaseCard: FC<BaseCardProps> = ({
   iconColor,
   icon,
   accentIcon,

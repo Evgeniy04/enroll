@@ -1,12 +1,12 @@
 import { MotiView } from "moti";
 import { FC } from "react";
 
-type AnimatedStepCardProps = {
+type AnimatedBaseCardProps = {
   children: React.ReactNode;
   onDidAnimate?: () => void;
 };
 
-export const AnimatedStepCard: FC<AnimatedStepCardProps> = ({
+export const AnimatedBaseCard: FC<AnimatedBaseCardProps> = ({
   children,
   onDidAnimate,
 }) => (
