@@ -34,9 +34,7 @@
   },
   "pnpm": {
     "onlyBuiltDependencies": [
-      "@prisma/engines",
       "esbuild",
-      "prisma",
       "sharp",
       "simple-git-hooks",
       "unrs-resolver"

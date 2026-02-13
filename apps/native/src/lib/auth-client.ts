@@ -22,7 +22,7 @@ type ErrorTypes = Record<
   { ru: string }
 >;
 
-export const errorCodes: ErrorTypes = {
+const errorCodes: ErrorTypes = {
   // --- Аккаунт и вход ---
   USER_NOT_FOUND: {
     ru: "Аккаунт не найден. Проверьте почту или создайте новый профиль",

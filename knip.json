@@ -9,15 +9,17 @@
     }
   },
   "ignoreDependencies": [
-    "@better-auth/expo",
+    "@react-email/preview-server",
+    "@types/react-dom",
+    "simple-git-hooks",
+    "expo-updates",
+    "react-dom",
     "@enroll/env",
     "better-auth",
     "dotenv",
     "expo-image",
     "expo-symbols",
-    "zod",
-    "@prisma/client",
-    "pg"
+    "zod"
   ],
   "ignoreIssues": {
     "apps/native/src/components/ui/**": ["exports", "types"]

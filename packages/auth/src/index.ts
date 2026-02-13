@@ -1,9 +1,10 @@
 import { expo } from "@better-auth/expo";
-import prisma from "@enroll/db";
+import { db } from "@enroll/db";
+import * as schema from "@enroll/db/schema/auth";
 import { env } from "@enroll/env/server";
 import { getOtpEmailHtml } from "@enroll/transactional";
 import { betterAuth } from "better-auth";
-import { prismaAdapter } from "better-auth/adapters/prisma";
+import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { emailOTP } from "better-auth/plugins";
 import nodemailer from "nodemailer";
 
@@ -16,10 +17,11 @@ const transporter = nodemailer.createTransport({
 });
 
 export const auth = betterAuth({
-  database: prismaAdapter(prisma, {
-    provider: "postgresql",
-  }),
+  database: drizzleAdapter(db, {
+    provider: "pg",
 
+    schema: schema,
+  }),
   trustedOrigins: [
     env.CORS_ORIGIN,
     "enroll://",

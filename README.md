@@ -23,9 +23,8 @@ pnpm setup
    - Пропишет `BETTER_AUTH_URL`, `CORS_ORIGIN` и `DATABASE_URL`
 4. Установит зависимости (`pnpm install`)
 5. Проверит и при необходимости поднимет Docker-контейнер с базой данных (`pnpm db:start`)
-6. Сгенерирует Prisma-клиент (`pnpm db:generate`)
-7. Применит схему базы данных (`pnpm db:push`)
-8. Запустит проект в dev-режиме (`pnpm dev`)
+6. Передаст схему и последующие изменения схемы непосредственно в базу данных, минуя генерацию SQL-файлов. (`pnpm db:push`)
+7. Запустит проект в dev-режиме (`pnpm dev`)
 
 ---
 
@@ -39,7 +38,7 @@ pnpm setup
 - **[Hono](https://hono.dev/)** — лёгкий и быстрый backend‑фреймворк
 - **[Node.js](https://nodejs.org/)** — среда выполнения
 - **[pnpm](https://pnpm.io/)** — менеджер пакетов
-- **[Prisma](https://www.prisma.io/)** — ORM с TypeScript‑first подходом
+- **[Drizzle](https://orm.drizzle.team/)** — ORM
 - **[PostgreSQL](https://www.postgresql.org/)** — база данных
 - **[Better‑Auth](https://www.better-auth.com/)** — аутентификация
 - **[Turborepo](https://turborepo.dev/)** — оптимизированная сборка монорепозитория
@@ -125,19 +124,13 @@ pnpm install
 pnpm db:start
 ```
 
-### 5. Генерация Prisma‑клиента
-
-```bash
-pnpm db:generate
-```
-
-### 6. Применение схемы БД
+### 5. Drizzle
 
 ```bash
 pnpm db:push
 ```
 
-### 7. Запуск проекта
+### 6. Запуск проекта
 
 ```bash
 pnpm dev
@@ -180,7 +173,7 @@ enroll/
 - `pnpm check-types`: Проверка типов TypeScript во всем проекте
 - `pnpm db:push`: Отправляет изменения схемы в базу данных
 - `pnpm db:studio`: Открытие панели БД (UI)
-- `bash scripts/generate-auth-prisma.sh`: Создает схему, необходимую для Better Auth
+- `bash scripts/generate-auth-drizzle.sh`: Создает схему, необходимую для Better Auth
 
 ---
 
@@ -198,4 +191,4 @@ enroll/
 
 - Проект рассчитан на использование pnpm
 - Перед запуском mobile‑приложения убедитесь, что IP в `EXPO_PUBLIC_SERVER_URL` актуален
-- Изменения схемы БД всегда сопровождайте `db:generate` и `db:push`
+- Изменения схемы БД всегда сопровождайте `db:push`

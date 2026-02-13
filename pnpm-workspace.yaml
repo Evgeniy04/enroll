@@ -15,8 +15,6 @@ catalog:
   zod: ^4.1.13
 
 onlyBuiltDependencies:
-  - "@prisma/engines"
   - esbuild
-  - prisma
   - simple-git-hooks
   - unrs-resolver
