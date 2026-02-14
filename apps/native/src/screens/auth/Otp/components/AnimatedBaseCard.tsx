@@ -1,17 +1,24 @@
 import { MotiView } from "moti";
 import { FC } from "react";
+import { EdgeInsets } from "react-native-safe-area-context";
 
 type AnimatedBaseCardProps = {
+  insets: EdgeInsets;
   children: React.ReactNode;
   onDidAnimate?: () => void;
 };
 
 export const AnimatedBaseCard: FC<AnimatedBaseCardProps> = ({
+  insets,
   children,
   onDidAnimate,
 }) => (
   <MotiView
     className="m-5 flex-1 items-center justify-center gap-5"
+    style={{
+      marginTop: insets.top + 20,
+      marginBottom: insets.bottom + 20,
+    }}
     from={{ opacity: 0, scale: 0.95 }}
     animate={{ opacity: 1, scale: 1 }}
     exit={{ opacity: 0, scale: 0.95 }}

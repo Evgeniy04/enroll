@@ -83,6 +83,7 @@ export const Otp: FC = () => {
       <AnimatePresence exitBeforeEnter>
         <AnimatedBaseCard
           key={status !== "idle" ? "enterOtp" : "enterEmail"}
+          insets={insets}
           onDidAnimate={() => {
             otpInputRef.current?.focus();
           }}
