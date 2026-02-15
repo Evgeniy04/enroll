@@ -1,7 +1,7 @@
 import { Label } from "@/components/ui/label";
 import { Text } from "@/components/ui/text";
 import { cn } from "@/lib/utils";
-import { ReactNode, useMemo } from "react";
+import { ComponentProps, ReactNode, useMemo } from "react";
 import { View, ViewProps } from "react-native";
 
 export interface BaseFieldProps {
@@ -50,7 +50,7 @@ export function FieldLabel({
   required,
   children,
   ...props
-}: React.ComponentProps<typeof Label> & { required?: boolean }) {
+}: ComponentProps<typeof Label> & { required?: boolean }) {
   return (
     <Label
       className={cn(props.disabled ? "opacity-50" : "", className)}
@@ -65,7 +65,7 @@ export function FieldLabel({
 export function FieldDescription({
   className,
   ...props
-}: React.ComponentProps<typeof Text>) {
+}: ComponentProps<typeof Text>) {
   return (
     <Text
       className={cn(

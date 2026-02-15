@@ -8,7 +8,7 @@ import {
 import { Icon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { ChevronLeft, LucideIcon } from "lucide-react-native";
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import { View } from "react-native";
 
 interface BaseCardProps {
@@ -18,9 +18,9 @@ interface BaseCardProps {
   accentColor: GradientColor;
   title: string;
   subtitle: string;
-  InfoCardsContent?: React.ReactNode;
+  InfoCardsContent?: ReactNode;
   onBack: () => void;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export const BaseCard: FC<BaseCardProps> = ({

@@ -8,11 +8,10 @@ import { useRouter } from "expo-router";
 import { CalendarCheck, Clock, PhoneOff, Play } from "lucide-react-native";
 import { View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export const Welcome = () => {
   const router = useRouter();
-  const insets = useSafeAreaInsets();
 
   const onPressContinue = () =>
     router.push({
@@ -25,13 +24,7 @@ export const Welcome = () => {
         contentContainerClassName="grow"
         showsVerticalScrollIndicator={false}
       >
-        <View
-          className="mx-5 flex-1 justify-center gap-10"
-          style={{
-            marginTop: insets.top + 20,
-            marginBottom: insets.bottom + 200,
-          }}
-        >
+        <SafeAreaView className="m-5 mb-52 flex-1 justify-center gap-10">
           <View>
             <Text variant="h1" className="text-center">
               Запишитесь сейчас.
@@ -70,15 +63,10 @@ export const Welcome = () => {
               className="shadow-md"
             />
           </View>
-        </View>
+        </SafeAreaView>
       </ScrollView>
 
-      <View
-        className="absolute left-5 right-5 gap-5"
-        style={{
-          bottom: insets.bottom + 20,
-        }}
-      >
+      <SafeAreaView className="absolute bottom-5 left-5 right-5 gap-5">
         <Card className="rounded-2xl border-info/50 py-2">
           <CardContent className="flex-row items-center gap-4">
             <View className="flex-row items-center">
@@ -114,7 +102,7 @@ export const Welcome = () => {
           <Icon as={Play} className="text-primary-foreground" />
           <Text>Начать</Text>
         </Button>
-      </View>
+      </SafeAreaView>
     </>
   );
 };

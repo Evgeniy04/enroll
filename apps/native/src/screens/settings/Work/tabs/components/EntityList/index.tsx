@@ -15,7 +15,7 @@ import {
   FormProps,
 } from "@/screens/settings/Work/tabs/components/FormDialog";
 import { Plus } from "lucide-react-native";
-import { FC, useState } from "react";
+import { FC, ReactNode, useState } from "react";
 import { View } from "react-native";
 
 type ActiveState<T> =
@@ -33,7 +33,7 @@ interface EntityListProps<T> extends Omit<FormProps<T>, "initialData"> {
     title: string;
     descriptionItems?: { label: string; value: string }[];
   };
-  renderDetails?: (entity: T) => React.ReactNode;
+  renderDetails?: (entity: T) => ReactNode;
   deleteConfirmTitle: string;
 }
 

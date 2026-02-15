@@ -10,7 +10,7 @@ import { Separator } from "@/components/ui/separator";
 import { Text } from "@/components/ui/text";
 import { cn } from "@/lib/utils";
 import { Pencil, Trash } from "lucide-react-native";
-import { FC, Fragment } from "react";
+import { FC, Fragment, ReactNode } from "react";
 import { GestureResponderEvent, Pressable, View } from "react-native";
 
 interface EntityCardProps {
@@ -21,7 +21,7 @@ interface EntityCardProps {
   onDelete: (id: string) => void;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
-  children?: React.ReactNode;
+  children?: ReactNode;
 }
 
 export const EntityCard: FC<EntityCardProps> = ({

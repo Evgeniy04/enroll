@@ -8,7 +8,7 @@ import {
   Section,
   Text,
 } from "@react-email/components";
-import React from "react";
+import React, { type FC } from "react";
 import { emailTheme } from "../constants/theme";
 import {
   container,
@@ -23,7 +23,7 @@ interface OtpEmailProps {
   otp: string;
 }
 
-const OtpEmail: React.FC<OtpEmailProps> = ({ otp }) => {
+const OtpEmail: FC<OtpEmailProps> = ({ otp }) => {
   const styles = {
     body: {
       margin: 0,
