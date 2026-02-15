@@ -1,25 +1,13 @@
+import { AvatarPickerField } from "@/components/form/avatar-picker-field";
+import { DatePickerField } from "@/components/form/date-picker-field";
+import { InputField } from "@/components/form/input-field";
+import { NumberPickerField } from "@/components/form/number-picker-field";
+import { SelectField } from "@/components/form/select-field";
+import { TextareaField } from "@/components/form/textarea-field";
+import { TimePickerField } from "@/components/form/time-picker-field";
+import { ToggleGroupField } from "@/components/form/toggle-group-field";
 import { fieldContext, formContext } from "@/hooks/forms/formContext";
 import { createFormHook } from "@tanstack/react-form";
-import { lazy } from "react";
-
-const InputField = lazy(() => import("@/components/form/input-field"));
-const TextareaField = lazy(() => import("@/components/form/textarea-field"));
-const SelectField = lazy(() => import("@/components/form/select-field"));
-const NumberPickerField = lazy(
-  () => import("@/components/form/number-picker-field"),
-);
-const AvatarPickerField = lazy(
-  () => import("@/components/form/avatar-picker-field"),
-);
-const DatePickerField = lazy(
-  () => import("@/components/form/date-picker-field"),
-);
-const TimePickerField = lazy(
-  () => import("@/components/form/time-picker-field"),
-);
-const ToggleGroupField = lazy(
-  () => import("@/components/form/toggle-group-field"),
-);
 
 export const { useAppForm, withForm, withFieldGroup } = createFormHook({
   fieldComponents: {

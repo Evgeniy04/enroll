@@ -12,7 +12,7 @@ interface TextareaFieldProps
   type?: "text" | "email" | "password" | "number" | "tel" | "url";
 }
 
-const TextareaField: FC<TextareaFieldProps> = ({
+export const TextareaField: FC<TextareaFieldProps> = ({
   label,
   description,
   required = false,
@@ -49,5 +49,3 @@ const TextareaField: FC<TextareaFieldProps> = ({
     </FormField>
   );
 };
-
-export default TextareaField;

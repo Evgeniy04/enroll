@@ -12,7 +12,7 @@ interface InputFieldProps
   type?: "text" | "email" | "password" | "number" | "tel" | "url";
 }
 
-const InputField: FC<InputFieldProps> = ({
+export const InputField: FC<InputFieldProps> = ({
   label,
   description,
   required = false,
@@ -45,5 +45,3 @@ const InputField: FC<InputFieldProps> = ({
     </FormField>
   );
 };
-
-export default InputField;

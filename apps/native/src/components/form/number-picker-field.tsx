@@ -16,7 +16,7 @@ interface NumberPickerFieldProps extends BaseFieldProps, NumberPickerProps {
   formatValue?: (value: number) => string;
 }
 
-const NumberPickerField: FC<NumberPickerFieldProps> = ({
+export const NumberPickerField: FC<NumberPickerFieldProps> = ({
   label,
   description,
   required = false,
@@ -43,5 +43,3 @@ const NumberPickerField: FC<NumberPickerFieldProps> = ({
     </FormField>
   );
 };
-
-export default NumberPickerField;

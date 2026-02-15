@@ -17,7 +17,7 @@ interface DatePickerFieldProps
   side?: "top" | "bottom";
 }
 
-const InputField: FC<DatePickerFieldProps> = ({
+export const DatePickerField: FC<DatePickerFieldProps> = ({
   label,
   description,
   required = false,
@@ -79,5 +79,3 @@ const InputField: FC<DatePickerFieldProps> = ({
     </FormField>
   );
 };
-
-export default InputField;

@@ -9,11 +9,15 @@ import { withForm } from "@/hooks/forms/form";
 import { BaseCard } from "@/screens/auth/Otp/components/BaseCard";
 import { formOpts } from "@/screens/auth/Otp/sharedForm";
 import { useStore } from "@tanstack/react-form";
-import { getStringAsync } from "expo-clipboard";
+import {
+  addClipboardListener,
+  ContentType,
+  getStringAsync,
+} from "expo-clipboard";
 import { OTPInputRef } from "input-otp-native";
 import { ClipboardPaste, Lock, MessageCircle, Zap } from "lucide-react-native";
-import { RefObject, useState } from "react";
-import { View } from "react-native";
+import { RefObject, useCallback, useEffect, useRef, useState } from "react";
+import { AppState, View } from "react-native";
 
 const RESEND_DELAY = 60;
 
@@ -26,14 +30,40 @@ export const OtpForm = withForm({
   ...formOpts,
   props: {} as OtpFormProps,
   render: function Render({ form, ref, onBack }) {
+    const appState = useRef(AppState.currentState);
     const [isResending, setIsResending] = useState(false);
     const email = useStore(form.store, (state) => state.values.email);
 
-    const handlePaste = async () => {
+    const handlePaste = useCallback(async () => {
       const text = await getStringAsync();
       const digits = text.replace(/\D/g, "").slice(0, 6);
       ref.current?.setValue(digits);
-    };
+    }, [ref]);
+
+    useEffect(() => {
+      const subscription = addClipboardListener(({ contentTypes }) => {
+        if (contentTypes.includes(ContentType.PLAIN_TEXT)) {
+          handlePaste();
+        }
+      });
+
+      const appStateListener = AppState.addEventListener(
+        "change",
+        (nextAppState) => {
+          if (
+            appState.current.match(/inactive|background/) &&
+            nextAppState === "active"
+          )
+            handlePaste();
+          appState.current = nextAppState;
+        },
+      );
+
+      return () => {
+        subscription.remove();
+        appStateListener.remove();
+      };
+    }, [handlePaste]);
 
     const handleResend = async () => {
       if (isResending) return;

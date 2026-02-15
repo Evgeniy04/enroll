@@ -68,20 +68,18 @@ const Layout = () => {
   }
 
   return (
-    <KeyboardProvider>
-      <GestureHandlerRootView className="flex-1">
-        <ThemeProvider value={NAV_THEME[colorScheme ?? "light"]}>
-          <ActionSheetProvider>
-            <>
-              <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />
-              <Routes isAuthenticated={!!session} />
-              <Toast config={toastConfig} position="bottom" />
-              <PortalHost />
-            </>
-          </ActionSheetProvider>
-        </ThemeProvider>
-      </GestureHandlerRootView>
-    </KeyboardProvider>
+    <GestureHandlerRootView className="flex-1">
+      <ThemeProvider value={NAV_THEME[colorScheme ?? "light"]}>
+        <ActionSheetProvider>
+          <KeyboardProvider>
+            <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />
+            <Routes isAuthenticated={!!session} />
+            <Toast config={toastConfig} position="bottom" />
+            <PortalHost />
+          </KeyboardProvider>
+        </ActionSheetProvider>
+      </ThemeProvider>
+    </GestureHandlerRootView>
   );
 };
 

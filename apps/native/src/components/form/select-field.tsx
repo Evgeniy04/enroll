@@ -24,7 +24,7 @@ interface SelectFieldProps extends BaseFieldProps {
   contentInsets: ContentInsets;
 }
 
-const SelectField: FC<SelectFieldProps> = ({
+export const SelectField: FC<SelectFieldProps> = ({
   label,
   description,
   required = false,
@@ -74,5 +74,3 @@ const SelectField: FC<SelectFieldProps> = ({
     </FormField>
   );
 };
-
-export default SelectField;

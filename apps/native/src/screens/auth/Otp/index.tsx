@@ -1,19 +1,15 @@
 import { Loading } from "@/components/ui/loading";
 import { useAppForm } from "@/hooks/forms/form";
 import { authClient, getErrorMessage } from "@/lib/auth-client";
-import { AnimatedBaseCard } from "@/screens/auth/Otp/components/AnimatedBaseCard";
+import { AnimatedPager } from "@/screens/auth/Otp/components/AnimatedPager";
 import { EmailForm } from "@/screens/auth/Otp/components/EmailForm";
 import { OtpForm } from "@/screens/auth/Otp/components/OtpForm";
 import { AuthStatus } from "@/screens/auth/Otp/Otp.types";
 import { createAuthSchema, formOpts } from "@/screens/auth/Otp/sharedForm";
 import { useRouter } from "expo-router";
 import { OTPInputRef } from "input-otp-native";
-import { AnimatePresence } from "moti";
 import { FC, useRef, useState } from "react";
-import {
-  KeyboardAwareScrollView,
-  KeyboardController,
-} from "react-native-keyboard-controller";
+import { KeyboardController } from "react-native-keyboard-controller";
 import { EdgeInsets, useSafeAreaInsets } from "react-native-safe-area-context";
 import Toast from "react-native-toast-message";
 
@@ -52,6 +48,9 @@ export const Otp: FC = () => {
 
         if (error) return handleAuthError(insets, error.code);
 
+        await KeyboardController.dismiss({
+          animated: false,
+        });
         setStatus("otpRequested");
         return;
       }
@@ -75,30 +74,9 @@ export const Otp: FC = () => {
   if (status === "verified") return <Loading />;
 
   return (
-    <KeyboardAwareScrollView
-      contentContainerClassName="grow"
-      keyboardShouldPersistTaps="handled"
-      showsVerticalScrollIndicator={false}
-    >
-      <AnimatePresence exitBeforeEnter>
-        <AnimatedBaseCard
-          key={status !== "idle" ? "enterOtp" : "enterEmail"}
-          insets={insets}
-          onDidAnimate={() => {
-            otpInputRef.current?.focus();
-          }}
-        >
-          {status === "idle" ? (
-            <EmailForm form={form} onBack={() => router.back()} />
-          ) : (
-            <OtpForm
-              form={form}
-              ref={otpInputRef}
-              onBack={() => setStatus("idle")}
-            />
-          )}
-        </AnimatedBaseCard>
-      </AnimatePresence>
-    </KeyboardAwareScrollView>
+    <AnimatedPager index={+(status !== "idle")}>
+      <EmailForm form={form} onBack={() => router.back()} />
+      <OtpForm form={form} ref={otpInputRef} onBack={() => setStatus("idle")} />
+    </AnimatedPager>
   );
 };

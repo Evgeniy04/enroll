@@ -26,7 +26,7 @@ interface TimePickerFieldProps
   formatOptions?: FormatTimeOptions;
 }
 
-const TimePickerField: FC<TimePickerFieldProps> = ({
+export const TimePickerField: FC<TimePickerFieldProps> = ({
   label,
   description,
   required = false,
@@ -94,5 +94,3 @@ const TimePickerField: FC<TimePickerFieldProps> = ({
     </FormField>
   );
 };
-
-export default TimePickerField;
