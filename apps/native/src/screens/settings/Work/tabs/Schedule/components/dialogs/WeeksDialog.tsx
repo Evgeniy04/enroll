@@ -1,18 +1,14 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { Checkbox } from "@/components/ui/checkbox";
 import { DatePickerValue } from "@/components/ui/date-picker";
 import { Option } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
-import { Text } from "@/components/ui/text";
 import { ToggleGroupField } from "@/components/ui/toggle-group-field";
 import { useContentInsets } from "@/hooks/useContentInsets";
-import { EndDatePicker } from "@/screens/settings/Work/tabs/Schedule/components/fields/EndDatePicker";
+import { BaseDialog } from "@/screens/settings/Work/tabs/Schedule/components/dialogs/BaseDialog";
+import { RangeDatePicker } from "@/screens/settings/Work/tabs/Schedule/components/fields/RangeDatePicker";
 import { TemplateSelect } from "@/screens/settings/Work/tabs/Schedule/components/fields/TempleteSelect";
 import { WeeksValue } from "@/screens/settings/Work/tabs/Schedule/components/types/filling-tools";
-import { BaseDialog } from "@/screens/settings/Work/tabs/Schedule/components/dialogs/BaseDialog";
 import dayjs from "dayjs";
 import { FC, useState } from "react";
-import { Pressable, View } from "react-native";
 
 const baseWeekday = dayjs().weekday(0);
 const weekdayOptions = Array.from({ length: 7 }, (_, i) => {
@@ -49,21 +45,19 @@ interface WeeksDialogProps {
 
 export const WeeksDialog: FC<WeeksDialogProps> = ({ onConfirm, templates }) => {
   const contentInsets = useContentInsets();
-  const [limitByEndDate, setLimitByEndDate] = useState(false);
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
-  const [endDate, setEndDate] = useState<DatePickerValue | undefined>();
+  const [range, setRange] = useState<DatePickerValue>();
   const [template, setTemplate] = useState<Option>();
 
-  const disabled = !selectedDays.length || !template;
-
-  const toggleLimitByEndDate = () => setLimitByEndDate((prev) => !prev);
+  const disabled = !range?.start || !range?.end || !template;
 
   const handleConfirm = () => {
-    if (!selectedDays.length || !template) return;
+    if (!range?.start || !range?.end || !template) return;
 
     onConfirm({
       selectedDays,
-      endDate: endDate?.start,
+      startDate: range.start,
+      endDate: range.end,
       template: template.value,
     });
   };
@@ -89,34 +83,11 @@ export const WeeksDialog: FC<WeeksDialogProps> = ({ onConfirm, templates }) => {
 
       <Separator />
 
-      <Card className="p-2">
-        <Pressable onPress={toggleLimitByEndDate}>
-          <CardContent className="flex-row gap-3 p-2">
-            <Checkbox
-              checked={limitByEndDate}
-              onCheckedChange={setLimitByEndDate}
-            />
-            <View className="flex-1">
-              <Text className="text-sm font-medium leading-none">
-                Ограничить конечной датой
-              </Text>
-              <Text className="text-sm text-muted-foreground">
-                Без ограничения — применится на год вперёд.
-              </Text>
-            </View>
-          </CardContent>
-        </Pressable>
-      </Card>
-
-      {limitByEndDate && (
-        <EndDatePicker
-          helperText="Шаблон применится на все выбранные дни недели до этой даты."
-          value={endDate}
-          onChange={setEndDate}
-          contentInsets={contentInsets}
-        />
-      )}
-
+      <RangeDatePicker
+        value={range}
+        onChange={setRange}
+        contentInsets={contentInsets}
+      />
       <TemplateSelect
         value={template}
         options={templates}

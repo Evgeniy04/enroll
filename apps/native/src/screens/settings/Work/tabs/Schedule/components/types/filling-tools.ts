@@ -8,6 +8,7 @@ export interface PeriodsValue {
 
 export interface WeeksValue {
   selectedDays: string[];
+  startDate: Dayjs;
   endDate?: Dayjs;
   template: string;
 }
