@@ -16,6 +16,7 @@ export const user = pgTable("user", {
   displayUsername: text("display_username"),
   firstName: text("first_name"),
   lastName: text("last_name"),
+  about: text("about"),
 });
 
 export const session = pgTable(

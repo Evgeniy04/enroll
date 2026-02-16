@@ -40,12 +40,9 @@ export const auth = betterAuth({
   }),
   user: {
     additionalFields: {
-      firstName: {
-        type: "string",
-      },
-      lastName: {
-        type: "string",
-      },
+      firstName: { type: "string" },
+      lastName: { type: "string" },
+      about: { type: "string" },
     },
   },
   trustedOrigins: [
