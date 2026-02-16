@@ -7,22 +7,7 @@ import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { emailOTP, username } from "better-auth/plugins";
 import nodemailer from "nodemailer";
-
-const FORBIDDEN_USERNAMES = [
-  "admin",
-  "administrator",
-  "support",
-  "help",
-  "root",
-  "system",
-  "moderator",
-  "official",
-  "owner",
-  "auth",
-  "api",
-  "dev",
-  "test",
-];
+import { updateUserSchema } from "./schemas";
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -40,9 +25,24 @@ export const auth = betterAuth({
   }),
   user: {
     additionalFields: {
-      firstName: { type: "string" },
-      lastName: { type: "string" },
-      about: { type: "string" },
+      firstName: {
+        type: "string",
+        validator: {
+          input: updateUserSchema.shape.firstName,
+        },
+      },
+      lastName: {
+        type: "string",
+        validator: {
+          input: updateUserSchema.shape.lastName,
+        },
+      },
+      about: {
+        type: "string",
+        validator: {
+          input: updateUserSchema.shape.about,
+        },
+      },
     },
   },
   trustedOrigins: [
@@ -61,16 +61,8 @@ export const auth = betterAuth({
   plugins: [
     expo(),
     username({
-      usernameValidator: (username) => {
-        const lowerUsername = username.toLowerCase();
-        return (
-          !FORBIDDEN_USERNAMES.includes(lowerUsername) &&
-          /^[a-z0-9_-]+$/.test(lowerUsername)
-        );
-      },
-      displayUsernameValidator: (displayUsername) => {
-        return /^[a-zA-Z0-9_-]+$/.test(displayUsername);
-      },
+      usernameValidator: (username) =>
+        updateUserSchema.shape.username.safeParse(username).success,
     }),
     emailOTP({
       async sendVerificationOTP({ email, otp, type }) {

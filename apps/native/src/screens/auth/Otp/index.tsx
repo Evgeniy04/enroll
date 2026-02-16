@@ -5,7 +5,7 @@ import { AnimatedPager } from "@/screens/auth/Otp/components/AnimatedPager";
 import { EmailForm } from "@/screens/auth/Otp/components/EmailForm";
 import { OtpForm } from "@/screens/auth/Otp/components/OtpForm";
 import { AuthStatus } from "@/screens/auth/Otp/Otp.types";
-import { createAuthSchema, formOpts } from "@/screens/auth/Otp/sharedForm";
+import { formOpts } from "@/screens/auth/Otp/sharedForm";
 import { useRouter } from "expo-router";
 import { OTPInputRef } from "input-otp-native";
 import { FC, useRef, useState } from "react";
@@ -36,9 +36,6 @@ export const Otp: FC = () => {
 
   const form = useAppForm({
     ...formOpts,
-    validators: {
-      onSubmit: createAuthSchema(status !== "idle"),
-    },
     onSubmit: async ({ value: { email, otp }, meta: { intent } }) => {
       if (intent === "requestOtp" || intent === "resendOtp") {
         const { error } = await authClient.emailOtp.sendVerificationOtp({

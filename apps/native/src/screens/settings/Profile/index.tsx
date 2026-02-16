@@ -4,9 +4,11 @@ import { Option } from "@/components/ui/select";
 import { Text } from "@/components/ui/text";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { useConfirm } from "@/hooks/dialogs/useConfirm";
+import { useAppForm } from "@/hooks/forms/form";
 import { authClient } from "@/lib/auth-client";
 import { PersonalInfoForm } from "@/screens/settings/Profile/components/PersonalInfoForm";
 import { SpecialistProfileCard } from "@/screens/settings/Profile/components/SpecialistProfileCard";
+import { formOpts } from "@/screens/settings/Profile/sharedForm";
 import { Stack, useRouter } from "expo-router";
 import { useState } from "react";
 import { View } from "react-native";
@@ -16,6 +18,10 @@ export const Profile = () => {
   const router = useRouter();
   const [activityType, setActivityType] = useState<Option>(undefined);
   const { confirm, ConfirmDialogElement } = useConfirm();
+
+  const form = useAppForm({
+    ...formOpts,
+  });
 
   const handlePressOpenWorkSettings = () => {
     router.push("/settings/Work");
@@ -46,7 +52,7 @@ export const Profile = () => {
         }}
       />
       <KeyboardAwareScrollView className="flex-1">
-        <PersonalInfoForm />
+        <PersonalInfoForm form={form} />
 
         <SpecialistProfileCard
           value={activityType}

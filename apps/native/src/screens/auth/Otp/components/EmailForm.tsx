@@ -44,6 +44,7 @@ export const EmailForm = withForm({
                 onSubmitEditing={() =>
                   form.handleSubmit({ intent: "requestOtp" })
                 }
+                maxLength={257}
                 required
               />
             )}
