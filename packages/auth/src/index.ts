@@ -5,8 +5,24 @@ import { env } from "@enroll/env/server";
 import { getOtpEmailHtml } from "@enroll/transactional";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { emailOTP } from "better-auth/plugins";
+import { emailOTP, username } from "better-auth/plugins";
 import nodemailer from "nodemailer";
+
+const FORBIDDEN_USERNAMES = [
+  "admin",
+  "administrator",
+  "support",
+  "help",
+  "root",
+  "system",
+  "moderator",
+  "official",
+  "owner",
+  "auth",
+  "api",
+  "dev",
+  "test",
+];
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -22,6 +38,16 @@ export const auth = betterAuth({
 
     schema: schema,
   }),
+  user: {
+    additionalFields: {
+      firstName: {
+        type: "string",
+      },
+      lastName: {
+        type: "string",
+      },
+    },
+  },
   trustedOrigins: [
     env.CORS_ORIGIN,
     "enroll://",
@@ -34,8 +60,21 @@ export const auth = betterAuth({
       httpOnly: true,
     },
   },
+  disablePaths: ["/is-username-available"],
   plugins: [
     expo(),
+    username({
+      usernameValidator: (username) => {
+        const lowerUsername = username.toLowerCase();
+        return (
+          !FORBIDDEN_USERNAMES.includes(lowerUsername) &&
+          /^[a-z0-9_-]+$/.test(lowerUsername)
+        );
+      },
+      displayUsernameValidator: (displayUsername) => {
+        return /^[a-zA-Z0-9_-]+$/.test(displayUsername);
+      },
+    }),
     emailOTP({
       async sendVerificationOTP({ email, otp, type }) {
         if (type === "sign-in") {

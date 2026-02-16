@@ -12,6 +12,10 @@ export const user = pgTable("user", {
     .defaultNow()
     .$onUpdate(() => /* @__PURE__ */ new Date())
     .notNull(),
+  username: text("username").unique(),
+  displayUsername: text("display_username"),
+  firstName: text("first_name"),
+  lastName: text("last_name"),
 });
 
 export const session = pgTable(

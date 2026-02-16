@@ -1,6 +1,11 @@
 import { expoClient } from "@better-auth/expo/client";
+import { auth } from "@enroll/auth";
 import { env } from "@enroll/env/native";
-import { emailOTPClient } from "better-auth/client/plugins";
+import {
+  emailOTPClient,
+  inferAdditionalFields,
+  usernameClient,
+} from "better-auth/client/plugins";
 import { createAuthClient } from "better-auth/react";
 import Constants from "expo-constants";
 import * as SecureStore from "expo-secure-store";
@@ -13,7 +18,9 @@ export const authClient = createAuthClient({
       storagePrefix: Constants.expoConfig?.scheme as string,
       storage: SecureStore,
     }),
+    usernameClient(),
     emailOTPClient(),
+    inferAdditionalFields<typeof auth>(),
   ],
 });
 
@@ -33,6 +40,9 @@ const errorCodes: ErrorTypes = {
   INVALID_EMAIL_OR_PASSWORD: {
     ru: "Неверная почта или пароль. Попробуйте ввести данные ещё раз",
   },
+  INVALID_USERNAME_OR_PASSWORD: {
+    ru: "Неверное имя пользователя или пароль. Проверьте правильность ввода",
+  },
   CREDENTIAL_ACCOUNT_NOT_FOUND: {
     ru: "Аккаунт с такими данными не найден. Возможно, стоит зарегистрироваться?",
   },
@@ -41,6 +51,23 @@ const errorCodes: ErrorTypes = {
   },
   USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL: {
     ru: "Эта почта уже занята. Используйте другой адрес или войдите в существующий профиль",
+  },
+
+  // --- Имя пользователя (Validation) ---
+  USERNAME_IS_ALREADY_TAKEN: {
+    ru: "Это имя пользователя уже занято. Пожалуйста, попробуйте другое",
+  },
+  USERNAME_TOO_SHORT: {
+    ru: "Имя пользователя слишком короткое. Придумайте вариант подлиннее",
+  },
+  USERNAME_TOO_LONG: {
+    ru: "Имя пользователя слишком длинное. Попробуйте его сократить",
+  },
+  INVALID_USERNAME: {
+    ru: "Это имя пользователя содержит недопустимые символы",
+  },
+  INVALID_DISPLAY_USERNAME: {
+    ru: "Отображаемое имя заполнено некорректно",
   },
 
   // --- Безопасность и сессии ---
@@ -138,6 +165,9 @@ const errorCodes: ErrorTypes = {
   },
   FAILED_TO_CREATE_VERIFICATION: {
     ru: "Не удалось создать запрос на проверку. Попробуйте снова",
+  },
+  UNEXPECTED_ERROR: {
+    ru: "Произошла неожиданная ошибка. Пожалуйста, попробуйте позже",
   },
 
   // --- URL и источники (внутренние ошибки) ---
