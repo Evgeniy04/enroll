@@ -19,8 +19,8 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Toast from "react-native-toast-message";
 
 interface AvatarPickerProps {
-  image?: string;
-  setImage: (value?: string) => void;
+  image: string;
+  setImage: (value: string) => void;
 }
 
 export const AvatarPicker: FC<AvatarPickerProps> = ({ image, setImage }) => {
@@ -35,11 +35,11 @@ export const AvatarPicker: FC<AvatarPickerProps> = ({ image, setImage }) => {
         options: [
           "Сделать фото",
           "Выбрать из галереи",
-          image ? "Удалить фото" : undefined,
+          image.length ? "Удалить фото" : undefined,
           "Отмена",
         ].filter(Boolean) as string[],
-        cancelButtonIndex: image ? 3 : 2,
-        destructiveButtonIndex: image ? 2 : undefined,
+        cancelButtonIndex: image.length ? 3 : 2,
+        destructiveButtonIndex: image.length ? 2 : undefined,
         textStyle: { color: colors.text },
         containerStyle: {
           backgroundColor: colors.card,
@@ -49,7 +49,7 @@ export const AvatarPicker: FC<AvatarPickerProps> = ({ image, setImage }) => {
       (index) => {
         if (index === 0) pickImage("camera");
         if (index === 1) pickImage("gallery");
-        if (image && index === 2) setImage(undefined);
+        if (image.length && index === 2) setImage("");
       },
     );
   };
@@ -92,7 +92,7 @@ export const AvatarPicker: FC<AvatarPickerProps> = ({ image, setImage }) => {
   return (
     <View className="relative m-5 self-center">
       <Avatar className="size-32" alt="Фото профиля">
-        <AvatarImage source={{ uri: image }} />
+        <AvatarImage source={{ uri: image.length ? image : undefined }} />
         <AvatarFallback>
           <Text>Фото профиля</Text>
         </AvatarFallback>
