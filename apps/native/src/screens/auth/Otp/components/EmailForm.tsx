@@ -31,7 +31,7 @@ export const EmailForm = withForm({
 
         <View className="w-full gap-6">
           <form.AppField name="email">
-            {({ state, handleChange, InputField }) => (
+            {({ InputField }) => (
               <InputField
                 label="Адрес электронной почты"
                 placeholder="name@example.com"
@@ -41,8 +41,6 @@ export const EmailForm = withForm({
                 autoCapitalize="none"
                 returnKeyType="next"
                 submitBehavior="submit"
-                value={state.value}
-                onChangeText={handleChange}
                 onSubmitEditing={() =>
                   form.handleSubmit({ intent: "requestOtp" })
                 }
