@@ -42,7 +42,7 @@ export const Welcome = () => {
           <View className="w-full gap-4">
             <InfoCard
               icon={Clock}
-              title="Быстро и спокойно"
+              title="Быстро"
               description="Вся запись занимает меньше минуты"
               className="shadow-md"
             />
