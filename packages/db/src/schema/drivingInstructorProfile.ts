@@ -8,7 +8,6 @@ export const drivingInstructorProfile = pgTable("driving_instructor_profile", {
     .references(() => specialist.id, { onDelete: "cascade" }),
   address: text(),
   addressNote: text("address_note"),
-  about: text(),
   drivingExperienceStart: date("driving_experience_start"),
   workExperienceStart: date("work_experience_start"),
   ...timestamps,

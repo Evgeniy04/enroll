@@ -1,9 +1,7 @@
 import { DrivingInstructorForm } from "@/screens/settings/Profile/components/SpecialistForms/DrivingInstructorForm";
 import { OtherSpecialistForm } from "@/screens/settings/Profile/components/SpecialistForms/OtherSpecialistForm";
 
-import { ComponentType } from "react";
-
-const SPECIALIST_FORMS_MAP: Record<string, ComponentType> = {
+const SPECIALIST_FORMS_MAP = {
   driving_instructor: DrivingInstructorForm,
 };
 

@@ -1,67 +1,50 @@
-import { Button } from "@/components/ui/button";
-import { DatePickerValue } from "@/components/ui/date-picker";
-import { DatePickerField } from "@/components/ui/date-picker-field";
-import { Icon } from "@/components/ui/icon";
-import { Text } from "@/components/ui/text";
-import { TextField } from "@/components/ui/text-field";
+import { useAppForm } from "@/hooks/forms/form";
 import { useContentInsets } from "@/hooks/useContentInsets";
-import { router } from "expo-router";
-import { Plus } from "lucide-react-native";
-import { useState } from "react";
 
 export const DrivingInstructorForm = () => {
   const contentInsets = useContentInsets();
-  const [workStartDate, setWorkStartDate] = useState<DatePickerValue>();
-  const [drivingStartDate, setDrivingStartDate] = useState<DatePickerValue>();
+  const form = useAppForm({});
 
   return (
     <>
-      <DatePickerField
-        nativeID="work-start-date"
-        label="Дата начала работы"
-        helperText="Дата, с&nbsp;которой вы&nbsp;начали работать в&nbsp;профессии"
-        currentValue={workStartDate}
-        setCurrentValue={setWorkStartDate}
-        contentInsets={contentInsets}
-        required
-      />
-      <DatePickerField
-        nativeID="driving-start-date"
-        label="Дата начала водительского стажа"
-        helperText="Дата, с&nbsp;которой вы&nbsp;начали водить транспорт"
-        currentValue={drivingStartDate}
-        setCurrentValue={setDrivingStartDate}
-        contentInsets={contentInsets}
-        required
-      />
-      <TextField
-        nativeID="license_categories"
-        label="Категории водительских прав"
-        placeholder="Введите категории"
-        helperText="Перечислите категории через запятую без пробелов (A,B,C)"
-        required
-      />
-      <TextField
-        nativeID="service_address"
-        label="Адрес оказания услуги"
-        placeholder="Введите адрес"
-        autoComplete="street-address"
-        required
-      />
-      <TextField
-        nativeID="service_address_details"
-        label="Дополнительная информация по&nbsp;месту оказания услуги"
-        placeholder="Введите доп. информацию"
-        helperText="Например: место встречи у&nbsp;метро, машина с&nbsp;белыми полосами"
-        multiline
-      />
-      <Button
-        onPress={() => router.push("/settings/Vehicle")}
-        variant="secondary"
-      >
-        <Icon as={Plus} className="text-foreground" />
-        <Text>Добавить транспорт</Text>
-      </Button>
+      <form.AppField name="address">
+        {({ InputField }) => (
+          <InputField
+            label="Где проходят занятия?"
+            placeholder="Город, район или адрес"
+            autoComplete="street-address"
+            maxLength={257}
+          />
+        )}
+      </form.AppField>
+      <form.AppField name="addressNote">
+        {({ TextareaField }) => (
+          <TextareaField
+            label="Как вас найти?"
+            placeholder="Встреча у выхода №1 из метро или на парковке ТЦ"
+            description="Укажите ориентиры, чтобы ученик не потерялся"
+            maxLength={501}
+          />
+        )}
+      </form.AppField>
+      <form.AppField name="drivingExperienceStart">
+        {({ DatePickerField }) => (
+          <DatePickerField
+            label="Водительский стаж с..."
+            description="Когда вы получили своё первое водительское удостоверение?"
+            contentInsets={contentInsets}
+          />
+        )}
+      </form.AppField>
+      <form.AppField name="workExperienceStart">
+        {({ DatePickerField }) => (
+          <DatePickerField
+            label="Опыт инструктора с..."
+            description="Когда вы провели своё первое занятие?"
+            contentInsets={contentInsets}
+          />
+        )}
+      </form.AppField>
     </>
   );
 };

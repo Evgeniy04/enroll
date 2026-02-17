@@ -12,7 +12,7 @@ import { getSpecialistForm } from "@/screens/settings/Profile/components/Special
 import { FC } from "react";
 
 const ACTIVITY_OPTIONS = [
-  { label: "Мастер производственного обучения", value: "driving_instructor" },
+  { label: "Инструктор по вождению", value: "driving_instructor" },
   { label: "Другое", value: "other" },
 ];
 
@@ -43,9 +43,12 @@ export const SpecialistProfileCard: FC<SelectValueProps> = ({
           contentInsets={contentInsets}
         />
 
-        <Separator />
-
-        {SpecialistForm && <SpecialistForm />}
+        {SpecialistForm && (
+          <>
+            <Separator />
+            <SpecialistForm />
+          </>
+        )}
       </CardContent>
     </Card>
   );
