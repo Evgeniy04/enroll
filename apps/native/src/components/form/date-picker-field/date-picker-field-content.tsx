@@ -1,4 +1,4 @@
-import { DatePickerFieldContactProps } from "@/components/form/date-picker-field/date-picker-field.types";
+import { DatePickerFieldContentProps } from "@/components/form/date-picker-field/date-picker-field.types";
 import { Button } from "@/components/ui/button";
 import { DatePicker, DatePickerValue } from "@/components/ui/date-picker";
 import { Icon } from "@/components/ui/icon";
@@ -10,7 +10,7 @@ import { View } from "react-native";
 
 const todayDate = new Date();
 
-export const DatePickerContent: FC<DatePickerFieldContactProps> = ({
+export const DatePickerFieldContent: FC<DatePickerFieldContentProps> = ({
   description,
   value,
   onChange,
@@ -27,7 +27,7 @@ export const DatePickerContent: FC<DatePickerFieldContactProps> = ({
   const handleClose = () => onOpenChange?.(false);
 
   const handleChange = (date: DatePickerValue) => {
-    onChange(date);
+    onChange?.(date);
 
     if (!rangeSelection) {
       handleClose();

@@ -1,5 +1,5 @@
-import { DatePickerContent } from "@/components/form/date-picker-field/date-picker-field-content";
-import { DatePickerFieldContactProps } from "@/components/form/date-picker-field/date-picker-field.types";
+import { DatePickerFieldContent } from "@/components/form/date-picker-field/date-picker-field-content";
+import { DatePickerFieldContentProps } from "@/components/form/date-picker-field/date-picker-field.types";
 import { Button } from "@/components/ui/button";
 import { BaseFieldProps, FormField } from "@/components/ui/field";
 import {
@@ -12,7 +12,7 @@ import { useFieldContext } from "@/hooks/forms/formContext";
 import { FC, useMemo } from "react";
 
 interface DatePickerFieldProps
-  extends BaseFieldProps, DatePickerFieldContactProps {
+  extends BaseFieldProps, DatePickerFieldContentProps {
   placeholder?: string;
   side?: "top" | "bottom";
 }
@@ -32,7 +32,7 @@ export const DatePickerField: FC<DatePickerFieldProps> = ({
   contentInsets,
   rangeSelection,
 }) => {
-  const field = useFieldContext<DatePickerFieldContactProps["value"]>();
+  const field = useFieldContext<DatePickerFieldContentProps["value"]>();
 
   const defaultPlaceholder = useMemo(() => {
     if (!field.state.value) return title;
@@ -62,7 +62,7 @@ export const DatePickerField: FC<DatePickerFieldProps> = ({
         </PopoverTrigger>
 
         <PopoverContent className="w-full" insets={contentInsets} side={side}>
-          <DatePickerContent
+          <DatePickerFieldContent
             value={field.state.value}
             onChange={field.handleChange}
             title={title}
