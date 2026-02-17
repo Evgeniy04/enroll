@@ -1,7 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
-import { Text } from "@/components/ui/text";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { useTheme } from "@react-navigation/native";
@@ -12,7 +11,7 @@ import {
   requestCameraPermissionsAsync,
   requestMediaLibraryPermissionsAsync,
 } from "expo-image-picker";
-import { Pencil } from "lucide-react-native";
+import { Pencil, User } from "lucide-react-native";
 import { FC } from "react";
 import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -94,12 +93,17 @@ export const AvatarPicker: FC<AvatarPickerProps> = ({ image, setImage }) => {
       <Avatar className="size-32" alt="Фото профиля">
         <AvatarImage source={{ uri: image.length ? image : undefined }} />
         <AvatarFallback>
-          <Text>Фото профиля</Text>
+          <Icon
+            as={User}
+            size={64}
+            strokeWidth={1}
+            className="text-muted-foreground"
+          />
         </AvatarFallback>
       </Avatar>
       <Button
         onPress={openActionSheet}
-        variant="outline"
+        variant="secondary"
         size="icon"
         className="
           absolute
@@ -107,7 +111,9 @@ export const AvatarPicker: FC<AvatarPickerProps> = ({ image, setImage }) => {
           right-1
           size-7
           rounded-full
-          shadow-md
+          border
+          border-neutral-200
+          dark:border-neutral-700
         "
       >
         <Icon as={Pencil} />
