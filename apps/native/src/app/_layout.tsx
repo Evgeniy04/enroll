@@ -2,7 +2,6 @@ import { Loading } from "@/components/ui/loading";
 import { initializeApp, toastConfig } from "@/config";
 import { authClient } from "@/lib/auth-client";
 import { NAV_THEME } from "@/lib/theme";
-import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 import { ThemeProvider } from "@react-navigation/native";
 import { PortalHost } from "@rn-primitives/portal";
 import * as NavigationBar from "expo-navigation-bar";
@@ -70,14 +69,12 @@ const Layout = () => {
   return (
     <GestureHandlerRootView className="flex-1">
       <ThemeProvider value={NAV_THEME[colorScheme ?? "light"]}>
-        <ActionSheetProvider>
-          <KeyboardProvider>
-            <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />
-            <Routes isAuthenticated={!!session} />
-            <Toast config={toastConfig} position="bottom" />
-            <PortalHost />
-          </KeyboardProvider>
-        </ActionSheetProvider>
+        <KeyboardProvider>
+          <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />
+          <Routes isAuthenticated={!!session} />
+          <Toast config={toastConfig} position="bottom" />
+          <PortalHost />
+        </KeyboardProvider>
       </ThemeProvider>
     </GestureHandlerRootView>
   );

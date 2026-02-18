@@ -1,7 +1,8 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { SheetOption } from "@/components/ui/avatar-picker/SheetOption";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
-import { useActionSheet } from "@expo/react-native-action-sheet";
+import { TrueSheet } from "@lodev09/react-native-true-sheet";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { useTheme } from "@react-navigation/native";
 import {
@@ -11,10 +12,9 @@ import {
   requestCameraPermissionsAsync,
   requestMediaLibraryPermissionsAsync,
 } from "expo-image-picker";
-import { Pencil, User } from "lucide-react-native";
-import { FC } from "react";
-import { View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Camera, Image, Pencil, Trash2, User } from "lucide-react-native";
+import { FC, useRef } from "react";
+import { Platform, View } from "react-native";
 import Toast from "react-native-toast-message";
 
 interface AvatarPickerProps {
@@ -23,34 +23,20 @@ interface AvatarPickerProps {
 }
 
 export const AvatarPicker: FC<AvatarPickerProps> = ({ image, setImage }) => {
-  const bottomTabBarHeight = useBottomTabBarHeight();
-  const { bottom: bottomSafeAreaInsets } = useSafeAreaInsets();
   const { colors } = useTheme();
-  const { showActionSheetWithOptions } = useActionSheet();
+  const bottomTabBarHeight = useBottomTabBarHeight();
+  const sheet = useRef<TrueSheet>(null);
 
-  const openActionSheet = () => {
-    showActionSheetWithOptions(
-      {
-        options: [
-          "Сделать фото",
-          "Выбрать из галереи",
-          image.length ? "Удалить фото" : undefined,
-          "Отмена",
-        ].filter(Boolean) as string[],
-        cancelButtonIndex: image.length ? 3 : 2,
-        destructiveButtonIndex: image.length ? 2 : undefined,
-        textStyle: { color: colors.text },
-        containerStyle: {
-          backgroundColor: colors.card,
-          marginBottom: bottomSafeAreaInsets,
-        },
-      },
-      (index) => {
-        if (index === 0) pickImage("camera");
-        if (index === 1) pickImage("gallery");
-        if (image.length && index === 2) setImage("");
-      },
-    );
+  const present = async () => await sheet.current?.present();
+  const dismiss = async () => await sheet.current?.dismiss();
+
+  const handleAction = (variant: "camera" | "gallery" | "delete") => {
+    dismiss();
+    if (variant === "delete") {
+      setImage("");
+    } else {
+      pickImage(variant);
+    }
   };
 
   const pickImage = async (variant: "gallery" | "camera") => {
@@ -101,23 +87,49 @@ export const AvatarPicker: FC<AvatarPickerProps> = ({ image, setImage }) => {
           />
         </AvatarFallback>
       </Avatar>
+
       <Button
-        onPress={openActionSheet}
+        onPress={present}
         variant="secondary"
         size="icon"
-        className="
-          absolute
-          bottom-1
-          right-1
-          size-7
-          rounded-full
-          border
-          border-neutral-200
-          dark:border-neutral-700
-        "
+        className="absolute bottom-1 right-1 size-7 rounded-full border border-neutral-200 dark:border-neutral-700"
       >
         <Icon as={Pencil} />
       </Button>
+
+      <TrueSheet
+        ref={sheet}
+        detents={["auto"]}
+        backgroundColor={colors.border}
+        style={{
+          padding: 20,
+          paddingTop: Platform.select({ ios: 15, android: 36 }),
+          gap: 8,
+        }}
+      >
+        <SheetOption
+          label="Сделать фото"
+          icon={Camera}
+          onPress={() => handleAction("camera")}
+        />
+
+        <SheetOption
+          label="Выбрать из галереи"
+          icon={Image}
+          onPress={() => handleAction("gallery")}
+        />
+
+        {image.length > 0 && (
+          <SheetOption
+            label="Удалить фото"
+            icon={Trash2}
+            isDestructive
+            onPress={() => handleAction("delete")}
+          />
+        )}
+
+        <SheetOption label="Закрыть меню" isDestructive onPress={dismiss} />
+      </TrueSheet>
     </View>
   );
 };
