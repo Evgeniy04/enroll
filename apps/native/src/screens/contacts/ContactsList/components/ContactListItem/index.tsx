@@ -21,7 +21,7 @@ export const ContactListItem: FC<ContactListItemProps> = ({
 
   const handlePress = () => {
     router.push({
-      pathname: "/contacts/ContactDetails",
+      pathname: "/ProfileDetails",
       params: { id: contact.id, displayName: contact.name },
     });
   };

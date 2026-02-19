@@ -25,7 +25,7 @@ const TabLayout = () => {
         }}
       />
       <Tabs.Screen
-        name="contacts"
+        name="(contacts)"
         options={{
           title: "Контакты",
           tabBarIcon: ({ color }) => (
@@ -34,7 +34,7 @@ const TabLayout = () => {
         }}
       />
       <Tabs.Screen
-        name="settings"
+        name="(settings)"
         options={{
           title: "Настройки",
           tabBarIcon: ({ color }) => (
