@@ -1,14 +1,14 @@
 import { useConfirm } from "@/hooks/dialogs/useConfirm";
 import { ContactCard } from "@/screens/contacts/ContactsList/components/ContactListItem/ContactCard";
 import { ContactContextMenu } from "@/screens/contacts/ContactsList/components/ContactListItem/ContactContextMenu";
-import { Contact } from "@/screens/test-store";
+import { User } from "@/screens/test-store";
 import * as Haptics from "expo-haptics";
 import * as Linking from "expo-linking";
 import { useRouter } from "expo-router";
 import { FC } from "react";
 
 interface ContactListItemProps {
-  item: Contact;
+  item: User;
   onDelete: (id: string) => void;
 }
 
@@ -22,12 +22,12 @@ export const ContactListItem: FC<ContactListItemProps> = ({
   const handlePress = () => {
     router.push({
       pathname: "/ProfileDetails",
-      params: { id: contact.id, displayName: contact.name },
+      params: { id: contact.id },
     });
   };
 
   const handleCallPress = () => {
-    Linking.openURL(`tel:${contact.phone}`);
+    Linking.openURL(`tel:${contact.phoneNumber}`);
   };
 
   const handleLongPress = () => {

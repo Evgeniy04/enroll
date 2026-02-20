@@ -15,7 +15,7 @@ import { TextField } from "@/components/ui/text-field";
 import { useWindowDimensions } from "@/hooks/useWindowDimensions";
 import { ContactListItem } from "@/screens/contacts/ContactsList/components/ContactListItem";
 import { ContactSearch } from "@/screens/contacts/ContactsList/components/ContactSearch";
-import { Contact, CONTACTS } from "@/screens/test-store";
+import { User, USERS } from "@/screens/test-store";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { useHeaderHeight } from "@react-navigation/elements";
 import { Stack } from "expo-router";
@@ -29,13 +29,13 @@ export const ContactsList = () => {
 
   const sceneHeight = screenHeight - tabBarHeight - headerHeight;
 
-  const hasContacts = CONTACTS.length > 0;
+  const hasContacts = USERS.length > 0;
 
   const handleDelete = (id: string) => {
     console.log("Удалить контакт:", id);
   };
 
-  const renderItem = ({ item }: ListRenderItemInfo<Contact>) => (
+  const renderItem = ({ item }: ListRenderItemInfo<User>) => (
     <ContactListItem item={item} onDelete={handleDelete} />
   );
 
@@ -43,7 +43,7 @@ export const ContactsList = () => {
     <>
       <Stack.Screen options={{ title: "Контакты" }} />
       <FlatList
-        data={CONTACTS}
+        data={USERS}
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
         ListHeaderComponent={hasContacts ? <ContactSearch /> : null}

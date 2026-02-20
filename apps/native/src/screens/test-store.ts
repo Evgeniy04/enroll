@@ -1,122 +1,130 @@
 import { Service } from "./settings/Work/tabs/Services/Services.types";
 import { Template } from "./settings/Work/tabs/Templates/Templates.types";
 
-export interface Contact {
+export interface User {
   id: string;
-  name: string;
-  phone?: string;
-  avatar?: string;
-  activity: string;
-  experienceYears: number;
-  address: string;
+  image?: string | null | undefined;
+  username?: string | null | undefined;
+  phoneNumber?: string | null | undefined;
+  firstName: string;
+  lastName: string;
+  about: string;
 }
 
-export const CONTACTS: Contact[] = [
+export const USERS: User[] = [
   {
     id: "1",
-    name: "Иван Кузнецов",
-    phone: "+7 (901) 234-56-01",
-    avatar: "https://avatars.githubusercontent.com/u/1?v=4",
-    activity: "Персональный тренер",
-    experienceYears: 1,
-    address: "г. Москва, ул. Тверская, д. 10",
+    image: "https://avatars.githubusercontent.com/u/1?v=4",
+    username: "ivan.kuznetsov",
+    phoneNumber: "+79160000001",
+    firstName: "Иван",
+    lastName: "Кузнецов",
+    about: "Персональный тренер, опыт 1 год, г. Москва, ул. Тверская, д. 10",
   },
   {
     id: "2",
-    name: "Анна Морозова",
-    phone: "+7 (902) 345-67-02",
-    avatar: "https://avatars.githubusercontent.com/u/2?v=4",
-    activity: "Мастер по маникюру",
-    experienceYears: 4,
-    address: "г. Санкт-Петербург, Невский проспект, д. 120",
+    image: "https://avatars.githubusercontent.com/u/2?v=4",
+    username: "anna.morozova",
+    phoneNumber: "+79210000002",
+    firstName: "Анна",
+    lastName: "Морозова",
+    about:
+      "Мастер по маникюру, опыт 4 года, г. Санкт-Петербург, Невский проспект, д. 120",
   },
   {
     id: "3",
-    name: "Алексей Смирнов",
-    phone: "+7 (903) 456-78-03",
-    avatar: "https://avatars.githubusercontent.com/u/3?v=4",
-    activity: "Массажист",
-    experienceYears: 9,
-    address: "г. Казань, ул. Баумана, д. 7",
+    image: "https://avatars.githubusercontent.com/u/3?v=4",
+    username: "aleksey.smirnov",
+    phoneNumber: "+78430000003",
+    firstName: "Алексей",
+    lastName: "Смирнов",
+    about: "Массажист, опыт 9 лет, г. Казань, ул. Баумана, д. 7",
   },
   {
     id: "4",
-    name: "Ольга Васильева",
-    phone: "+7 (904) 567-89-04",
-    avatar: "https://avatars.githubusercontent.com/u/4?v=4",
-    activity: "Косметолог",
-    experienceYears: 7,
-    address: "г. Екатеринбург, ул. Ленина, д. 25",
+    image: "https://avatars.githubusercontent.com/u/4?v=4",
+    username: "olga.vasileva",
+    phoneNumber: "+73430000004",
+    firstName: "Ольга",
+    lastName: "Васильева",
+    about: "Косметолог, опыт 7 лет, г. Екатеринбург, ул. Ленина, д. 25",
   },
   {
     id: "5",
-    name: "Дмитрий Орлов",
-    phone: "+7 (905) 678-90-05",
-    avatar: "https://avatars.githubusercontent.com/u/5?v=4",
-    activity: "Автоинструктор",
-    experienceYears: 0,
-    address: "г. Новосибирск, Красный проспект, д. 88",
+    image: "https://avatars.githubusercontent.com/u/5?v=4",
+    username: "dmitry.orlov",
+    phoneNumber: "+73830000005",
+    firstName: "Дмитрий",
+    lastName: "Орлов",
+    about:
+      "Автоинструктор, опыт 0 лет, г. Новосибирск, Красный проспект, д. 88",
   },
   {
     id: "6",
-    name: "Екатерина Павлова",
-    phone: "+7 (906) 789-01-06",
-    avatar: "https://avatars.githubusercontent.com/u/6?v=4",
-    activity: "Парикмахер-стилист",
-    experienceYears: 5,
-    address: "г. Самара, ул. Молодогвардейская, д. 15",
+    image: "https://avatars.githubusercontent.com/u/6?v=4",
+    username: "ekaterina.pavlova",
+    phoneNumber: "+78460000006",
+    firstName: "Екатерина",
+    lastName: "Павлова",
+    about:
+      "Парикмахер-стилист, опыт 5 лет, г. Самара, ул. Молодогвардейская, д. 15",
   },
   {
     id: "7",
-    name: "Сергей Волков",
-    phone: "+7 (907) 890-12-07",
-    avatar: "https://avatars.githubusercontent.com/u/7?v=4",
-    activity: "Электрик",
-    experienceYears: 11,
-    address: "г. Ростов-на-Дону, пр. Ворошиловский, д. 42",
+    image: "https://avatars.githubusercontent.com/u/7?v=4",
+    username: "sergey.volkov",
+    phoneNumber: "+78630000007",
+    firstName: "Сергей",
+    lastName: "Волков",
+    about: "Электрик, опыт 11 лет, г. Ростов-на-Дону, пр. Ворошиловский, д. 42",
   },
   {
     id: "8",
-    name: "Мария Фёдорова",
-    phone: "+7 (908) 901-23-08",
-    avatar: "https://avatars.githubusercontent.com/u/8?v=4",
-    activity: "Визажист",
-    experienceYears: 6,
-    address: "г. Краснодар, ул. Северная, д. 55",
+    image: "https://avatars.githubusercontent.com/u/8?v=4",
+    username: "maria.fedorova",
+    phoneNumber: "+78610000008",
+    firstName: "Мария",
+    lastName: "Фёдорова",
+    about: "Визажист, опыт 6 лет, г. Краснодар, ул. Северная, д. 55",
   },
   {
     id: "9",
-    name: "Николай Соколов",
-    phone: "+7 (909) 012-34-09",
-    avatar: "https://avatars.githubusercontent.com/u/9?v=4",
-    activity: "Фотограф",
-    experienceYears: 4,
-    address: "г. Томск, пр. Ленина, д. 36",
+    image: "https://avatars.githubusercontent.com/u/9?v=4",
+    username: "nikolay.sokolov",
+    phoneNumber: "+73820000009",
+    firstName: "Николай",
+    lastName: "Соколов",
+    about: "Фотограф, опыт 4 года, г. Томск, пр. Ленина, д. 36",
   },
   {
     id: "10",
-    name: "Татьяна Белова",
-    phone: "+7 (910) 123-45-10",
-    activity: "Репетитор по математике",
-    experienceYears: 13,
-    address: "г. Москва, ул. Большая Ордынка, д. 18",
+    image: null,
+    username: "tatyana.belova",
+    phoneNumber: "+79160000010",
+    firstName: "Татьяна",
+    lastName: "Белова",
+    about:
+      "Репетитор по математике, опыт 13 лет, г. Москва, ул. Большая Ордынка, д. 18",
   },
   {
     id: "11",
-    name: "Андрей Михайлов",
-    phone: "+7 (911) 234-56-11",
-    avatar: "https://avatars.githubusercontent.com/u/11?v=4",
-    activity: "Мастер по ремонту бытовой техники",
-    experienceYears: 15,
-    address: "г. Пермь, Комсомольский проспект, д. 64",
+    image: "https://avatars.githubusercontent.com/u/11?v=4",
+    username: "andrey.mikhailov",
+    phoneNumber: "+73420000011",
+    firstName: "Андрей",
+    lastName: "Михайлов",
+    about:
+      "Мастер по ремонту бытовой техники, опыт 15 лет, г. Пермь, Комсомольский проспект, д. 64",
   },
   {
     id: "12",
-    name: "Наталья Крылова",
-    phone: "+7 (912) 345-67-12",
-    activity: "Клининговый специалист",
-    experienceYears: 5,
-    address: "г. Воронеж, ул. Плехановская, д. 9",
+    image: null,
+    username: "natalya.krylova",
+    phoneNumber: "+74730000012",
+    firstName: "Наталья",
+    lastName: "Крылова",
+    about:
+      "Клининговый специалист, опыт 5 лет, г. Воронеж, ул. Плехановская, д. 9",
   },
 ];
 
