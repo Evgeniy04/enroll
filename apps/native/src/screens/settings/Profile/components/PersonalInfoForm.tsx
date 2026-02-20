@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { useAppForm } from "@/hooks/forms/form";
-import { updateUserSchema } from "@enroll/auth/schemas";
+import { updateUserSchema } from "@enroll/shared";
 import { Check } from "lucide-react-native";
 
 export const PersonalInfoForm = () => {

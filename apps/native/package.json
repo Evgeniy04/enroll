@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@better-auth/expo": "catalog:",
+    "@enroll/shared": "workspace:*",
     "@enroll/auth": "workspace:*",
     "@enroll/env": "workspace:*",
     "@expo/vector-icons": "^15.0.3",

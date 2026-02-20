@@ -2,12 +2,12 @@ import { expo } from "@better-auth/expo";
 import { db } from "@enroll/db";
 import * as schema from "@enroll/db/schema/auth";
 import { env } from "@enroll/env/server";
+import { updateUserSchema } from "@enroll/shared";
 import { getOtpEmailHtml } from "@enroll/transactional";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { emailOTP, username } from "better-auth/plugins";
 import nodemailer from "nodemailer";
-import { updateUserSchema } from "./schemas";
 
 const transporter = nodemailer.createTransport({
   service: "gmail",

@@ -1,5 +1,5 @@
 import * as z from "zod";
-import { FORBIDDEN_USERNAMES, USERNAME_REGEX } from "./constants";
+import { reservedUsernames, usernamePattern } from "./constants";
 
 export const createUserSchema = z.object({
   email: z
@@ -33,8 +33,8 @@ export const updateUserSchema = z.object({
     .min(3, "Минимум 3 символа.")
     .max(30, "Максимум 30 символов.")
     .toLowerCase()
-    .regex(USERNAME_REGEX, "Только латинские буквы, цифры, знаки «-» и «_».")
-    .refine((val) => !FORBIDDEN_USERNAMES.includes(val), "Это имя занято.")
+    .regex(usernamePattern, "Только латинские буквы, цифры, знаки «-» и «_».")
+    .refine((val) => !reservedUsernames.includes(val), "Это имя занято.")
     .or(z.literal("")),
 
   about: z

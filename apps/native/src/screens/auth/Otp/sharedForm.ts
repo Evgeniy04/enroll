@@ -1,5 +1,5 @@
 import { FormMeta } from "@/screens/auth/Otp/Otp.types";
-import { createUserSchema } from "@enroll/auth/schemas";
+import { createUserSchema } from "@enroll/shared";
 import { formOptions } from "@tanstack/react-form";
 
 const defaultMeta: FormMeta = {

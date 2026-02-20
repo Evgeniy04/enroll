@@ -1,4 +1,4 @@
-export const FORBIDDEN_USERNAMES = [
+export const reservedUsernames = [
   "admin",
   "administrator",
   "support",
@@ -14,4 +14,4 @@ export const FORBIDDEN_USERNAMES = [
   "test",
 ];
 
-export const USERNAME_REGEX = /^[a-zA-Z0-9_-]+$/;
+export const usernamePattern = /^[a-zA-Z0-9_-]+$/;

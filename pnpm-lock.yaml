@@ -81,6 +81,9 @@ importers:
       '@enroll/env':
         specifier: workspace:*
         version: link:../../packages/env
+      '@enroll/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
       '@expo/vector-icons':
         specifier: ^15.0.3
         version: 15.0.3(expo-font@14.0.11(expo@54.0.33)(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0)
@@ -249,9 +252,6 @@ importers:
       react-native-reanimated:
         specifier: 4.1.5
         version: 4.1.5(@babel/core@7.29.0)(react-native-worklets@0.5.1(@babel/core@7.29.0)(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0)
-      react-native-reorderable-list:
-        specifier: ^0.18.0
-        version: 0.18.0(react-native-gesture-handler@2.28.0(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0))(react-native-reanimated@4.1.5(@babel/core@7.29.0)(react-native-worklets@0.5.1(@babel/core@7.29.0)(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0)
       react-native-safe-area-context:
         specifier: ~5.6.0
         version: 5.6.2(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0)
@@ -325,6 +325,9 @@ importers:
       '@enroll/env':
         specifier: workspace:*
         version: link:../../packages/env
+      '@enroll/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
       '@hono/node-server':
         specifier: ^1.14.4
         version: 1.19.9(hono@4.11.7)
@@ -368,6 +371,9 @@ importers:
       '@enroll/env':
         specifier: workspace:*
         version: link:../env
+      '@enroll/shared':
+        specifier: workspace:*
+        version: link:../shared
       better-auth:
         specifier: 'catalog:'
         version: 1.4.18(@prisma/client@7.3.0(prisma@7.3.0(@types/react@19.2.7)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.9.3))(typescript@5.9.3))(drizzle-kit@0.31.9)(drizzle-orm@0.45.1(@electric-sql/pglite@0.3.15)(@prisma/client@7.3.0(prisma@7.3.0(@types/react@19.2.7)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.9.3))(typescript@5.9.3))(@types/pg@8.16.0)(kysely@0.28.11)(mysql2@3.15.3)(pg@8.18.0)(postgres@3.4.7)(prisma@7.3.0(@types/react@19.2.7)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.9.3)))(mysql2@3.15.3)(next@16.0.11(@babel/core@7.29.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(pg@8.18.0)(prisma@7.3.0(@types/react@19.2.7)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(typescript@5.9.3))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(solid-js@1.9.11)
@@ -435,6 +441,22 @@ importers:
       dotenv:
         specifier: 'catalog:'
         version: 17.2.3
+      zod:
+        specifier: 'catalog:'
+        version: 4.3.6
+    devDependencies:
+      '@enroll/config':
+        specifier: workspace:*
+        version: link:../config
+      '@types/node':
+        specifier: ^22.13.14
+        version: 22.19.7
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.3
+
+  packages/shared:
+    dependencies:
       zod:
         specifier: 'catalog:'
         version: 4.3.6
@@ -6817,15 +6839,6 @@ packages:
       react: '*'
       react-native: '*'
       react-native-worklets: '>=0.5.0'
-
-  react-native-reorderable-list@0.18.0:
-    resolution: {integrity: sha512-zjN7UvKGxSOnIXrB+9W4WE7e2D/fP61U2EaAk5JUSIjj6pw8W9cYRQ6E6TQV6BaztJ4bDTPRV2LUiOS3WAj6jA==}
-    engines: {node: '>= 18.0.0'}
-    peerDependencies:
-      react: '*'
-      react-native: '*'
-      react-native-gesture-handler: '>=2.12.0'
-      react-native-reanimated: '>=3.12.0'
 
   react-native-safe-area-context@5.6.2:
     resolution: {integrity: sha512-4XGqMNj5qjUTYywJqpdWZ9IG8jgkS3h06sfVjfw5yZQZfWnRFXczi0GnYyFyCc2EBps/qFmoCH8fez//WumdVg==}
@@ -15320,13 +15333,6 @@ snapshots:
       react-native-worklets: 0.5.1(@babel/core@7.29.0)(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.2.7)(react@19.1.0))(react@19.1.0)
       semver: 7.7.2
     optional: true
-
-  react-native-reorderable-list@0.18.0(react-native-gesture-handler@2.28.0(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0))(react-native-reanimated@4.1.5(@babel/core@7.29.0)(react-native-worklets@0.5.1(@babel/core@7.29.0)(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0):
-    dependencies:
-      react: 19.1.0
-      react-native: 0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0)
-      react-native-gesture-handler: 2.28.0(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0)
-      react-native-reanimated: 4.1.5(@babel/core@7.29.0)(react-native-worklets@0.5.1(@babel/core@7.29.0)(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0))(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0)
 
   react-native-safe-area-context@5.6.2(react-native@0.81.5(@babel/core@7.29.0)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0):
     dependencies:

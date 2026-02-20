@@ -1,0 +1,22 @@
+{
+  "name": "@enroll/shared",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "dependencies": {
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@enroll/config": "workspace:*",
+    "@types/node": "^22.13.14",
+    "typescript": "catalog:"
+  }
+}

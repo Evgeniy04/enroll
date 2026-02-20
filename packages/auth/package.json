@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@better-auth/expo": "catalog:",
+    "@enroll/shared": "workspace:*",
     "@enroll/db": "workspace:*",
     "@enroll/env": "workspace:*",
     "better-auth": "catalog:",

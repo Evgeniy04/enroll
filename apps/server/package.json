@@ -10,6 +10,7 @@
     "start": "node dist/index.mjs"
   },
   "dependencies": {
+    "@enroll/shared": "workspace:*",
     "@enroll/auth": "workspace:*",
     "@enroll/db": "workspace:*",
     "@enroll/env": "workspace:*",
