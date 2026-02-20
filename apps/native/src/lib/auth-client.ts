@@ -4,6 +4,7 @@ import { env } from "@enroll/env/native";
 import {
   emailOTPClient,
   inferAdditionalFields,
+  phoneNumberClient,
   usernameClient,
 } from "better-auth/client/plugins";
 import { createAuthClient } from "better-auth/react";
@@ -20,6 +21,7 @@ export const authClient = createAuthClient({
     }),
     usernameClient(),
     emailOTPClient(),
+    phoneNumberClient(),
     inferAdditionalFields<typeof auth>(),
   ],
 });
@@ -51,6 +53,32 @@ const errorCodes: ErrorTypes = {
   },
   USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL: {
     ru: "Эта почта уже занята. Используйте другой адрес или войдите в существующий профиль",
+  },
+
+  // --- Телефон и OTP-верификация ---
+  INVALID_PHONE_NUMBER: {
+    ru: "Неверный формат номера. Проверьте, все ли цифры введены правильно",
+  },
+  PHONE_NUMBER_EXIST: {
+    ru: "Этот номер уже привязан к другому аккаунту. Попробуйте войти через него",
+  },
+  PHONE_NUMBER_NOT_EXIST: {
+    ru: "Аккаунт с таким номером не найден. Проверьте ввод или зарегистрируйтесь",
+  },
+  INVALID_PHONE_NUMBER_OR_PASSWORD: {
+    ru: "Неверный номер телефона или пароль. Попробуйте ввести данные еще раз",
+  },
+  OTP_NOT_FOUND: {
+    ru: "Код подтверждения не найден. Пожалуйста, запросите его повторно",
+  },
+  PHONE_NUMBER_NOT_VERIFIED: {
+    ru: "Номер телефона не подтвержден. Пожалуйста, завершите проверку",
+  },
+  PHONE_NUMBER_CANNOT_BE_UPDATED: {
+    ru: "Изменить номер телефона в этом профиле нельзя по соображениям безопасности",
+  },
+  SEND_OTP_NOT_IMPLEMENTED: {
+    ru: "Отправка SMS временно недоступна. Мы уже работаем над этим",
   },
 
   // --- Имя пользователя (Validation) ---

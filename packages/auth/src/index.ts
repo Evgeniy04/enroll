@@ -6,7 +6,7 @@ import { updateUserSchema } from "@enroll/shared";
 import { getOtpEmailHtml } from "@enroll/transactional";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { emailOTP, username } from "better-auth/plugins";
+import { emailOTP, phoneNumber, username } from "better-auth/plugins";
 import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
@@ -86,6 +86,12 @@ export const auth = betterAuth({
             },
           );
         }
+      },
+    }),
+    phoneNumber({
+      sendOTP: ({ phoneNumber, code }) => {
+        console.log(phoneNumber, code);
+        // Implement sending OTP code via SMS
       },
     }),
   ],
