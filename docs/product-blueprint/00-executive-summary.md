@@ -36,7 +36,7 @@
 ## Технологии и архитектура
 
 **[Решение]** Модульный монолит на **TypeScript + React**:
-- фреймворк **TanStack Start**, запасной вариант — React Router 8 framework mode;
+- фреймворк **Next.js 16** (App Router; Server Components для публичных страниц, TanStack Query в кабинете);
 - **PostgreSQL** и Drizzle;
 - **Better Auth** с email OTP — сохраняем работающее решение из прототипа;
 - Zod-контракты и REST `/api/v1` для внешних клиентов;

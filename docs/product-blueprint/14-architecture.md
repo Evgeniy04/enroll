@@ -14,7 +14,7 @@ flowchart LR
   Spec([Специалист<br/>браузер]) -->|HTTPS| Web
   subgraph RF[Облако в РФ]
     CDN[CDN / L7 балансировщик<br/>TLS, WAF-правила]
-    Web[web: TanStack Start<br/>SSR + Hono /api/v1 + Better Auth]
+    Web[web: Next.js 16<br/>RSC/SSR + Hono /api/v1 + Better Auth]
     Worker[worker: pg-boss<br/>письма, напоминания, очистка]
     PG[(PostgreSQL<br/>managed)]
     S3[(Object Storage<br/>аватары)]
@@ -36,7 +36,7 @@ flowchart LR
 
 ```
 apps/
-  web/            TanStack Start: маршруты (публичные, /app, /me), SSR-загрузчики, catch-all server route → Hono
+  web/            Next.js App Router: публичные страницы (RSC), /app и /me (клиентские экраны + TanStack Query), app/api/v1/[[...route]] → Hono
   worker/         Запуск pg-boss, обработчики задач
 packages/
   domain/         Чистый TS без I/O: движок шаблонов и окон, правила заполнения, машина состояний записи, политики
