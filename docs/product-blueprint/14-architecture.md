@@ -14,7 +14,7 @@ flowchart LR
   Spec([Специалист<br/>браузер]) -->|HTTPS| Web
   subgraph RF[Облако в РФ]
     CDN[CDN / L7 балансировщик<br/>TLS, WAF-правила]
-    Web[web: Next.js 16<br/>RSC/SSR + Hono /api/v1 + Better Auth]
+    Web[web: Next.js 16<br/>RSC/SSR + oRPC /api/rpc, /api/v1 + auth]
     Worker[worker: pg-boss<br/>письма, напоминания, очистка]
     PG[(PostgreSQL<br/>managed)]
     S3[(Object Storage<br/>аватары)]
@@ -36,13 +36,13 @@ flowchart LR
 
 ```
 apps/
-  web/            Next.js App Router: публичные страницы (RSC), /app и /me (клиентские экраны + TanStack Query), app/api/v1/[[...route]] → Hono
+  web/            Next.js App Router: публичные страницы (RSC), /app и /me (клиентские экраны + TanStack Query), app/api/[rpc|v1]/[[...rest]] → обработчики oRPC
   worker/         Запуск pg-boss, обработчики задач
 packages/
   domain/         Чистый TS без I/O: движок шаблонов и окон, правила заполнения, машина состояний записи, политики
   contracts/      Zod-схемы запросов и ответов, коды ошибок, генерация OpenAPI
   db/             Drizzle-схема, SQL-миграции, репозитории
-  api/            Hono-приложение /api/v1: маршруты → application-сервисы (use cases) → db
+  api/            Роутер oRPC: процедуры (схема → контекст и сессия → проверка доступа → use case) и middleware (лимиты, логирование, ошибки)
   auth/           Конфигурация Better Auth (web)
   email/          Шаблоны React Email (из прототипа transactional)
   ui/             Дизайн-система: токены, компоненты на React Aria
@@ -126,7 +126,7 @@ sequenceDiagram
 ## 5. Обработка ошибок
 
 - **Формат:** `application/problem+json` (RFC 9457) с полями `type`, `title`, `status`, `code` (машиночитаемый), `detail`, `requestId`, `errors[]` (поля) — [16](16-api-specification.md) §3.
-- **Доменные ошибки** — типизированные результаты (`Result<T, DomainError>`), маппятся в HTTP на границе Hono.
+- **Доменные ошибки** — типизированные результаты (`Result<T, DomainError>`), маппятся в ошибки oRPC (`ORPCError` с кодом из `contracts`) на границе процедур; OpenAPI-обработчик отдаёт их как problem+json.
 - **Неожиданные ошибки:** 500 с `requestId`, полная информация только в логах (без ПД).
 - **Клиент:** TanStack Query — повтор только для идемпотентных GET (2 раза), мутации без автоповтора; ошибки маппятся на UX-каталог ([08](08-ux-specification.md) §7).
 - **Error boundary** на уровне маршрутов с кнопкой «Повторить».

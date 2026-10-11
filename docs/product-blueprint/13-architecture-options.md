@@ -4,6 +4,39 @@
 
 **Ограничения владельца:** основная библиотека — **React**, язык — **TypeScript**.
 
+## 0. Итоговый технологический стек (согласован с владельцем 11.10.2026)
+
+Статусы: ✅ согласовано владельцем · ⏳ рекомендация, ожидает решения владельца · ⚪ значение blueprint, отдельно не обсуждалось.
+
+| Слой | Выбор | Статус | Решение |
+|---|---|---|---|
+| Язык | TypeScript (strict) | ✅ | ограничение владельца |
+| Рантайм | Node.js 26 (Active LTS с 28.10.2026), образ `node:26-slim` | ✅ | D-33 |
+| Фреймворк | Next.js 16, App Router, `output: "standalone"`; единственный веб-процесс | ✅ | D-08 |
+| API | oRPC в одном Route Handler: RPC для собственного фронтенда, REST + OpenAPI 3.1 для публичной части | ✅ | D-09 |
+| Аутентификация | Свой модуль по руководству Lucia (код из письма, сессии в БД, лимиты); запасной — Better Auth | ⏳ | D-13 |
+| Компоненты UI | React Aria Components + собственный слой стилей `packages/ui`; альтернатива — shadcn/ui (Base UI) + React Aria для дат | ⏳ | D-17 |
+| Стили | Tailwind CSS v4, токены «Впору» | ⚪ | 09 |
+| Данные в кабинете | TanStack Query (интеграция oRPC) | ⚪ | D-31 |
+| Состояние в URL | nuqs + Zod | ⚪ | D-31 |
+| Формы | TanStack Form + Zod | ⚪ | §6 |
+| Контракты и валидация | Zod (`packages/contracts`) | ⚪ | §6 |
+| Даты и тексты | `@internationalized/date`, `Intl`, ICU MessageFormat | ⚪ | §6 |
+| БД | PostgreSQL 17 (Yandex Managed Service for PostgreSQL) | ⚪ | D-10 |
+| ORM и миграции | Drizzle, только SQL-миграции | ⚪ | D-11 |
+| Фоновые задачи | pg-boss, отдельный процесс `apps/worker` (Node, без Next.js) | ⚪ | D-15 |
+| Письма | React Email + Yandex Cloud Postbox (запасной — Unisender Go) | ⚪ | 19 §5 |
+| Файлы | Yandex Object Storage + sharp | ⚪ | 14 §7 |
+| Монорепозиторий | pnpm + Turborepo | ⚪ | §8 |
+| Линтер и формат | ESLint (flat: next, react-hooks, jsx-a11y, typescript-eslint, правила границ пакетов) + Prettier; knip | ✅ | D-34 |
+| Тесты | Vitest + fast-check, Testcontainers, Playwright + axe, k6 | ⚪ | 18 |
+| Безопасность в CI | gitleaks, OSV-Scanner, Renovate, OWASP ZAP | ⚪ | 17 |
+| CI/CD | GitHub Actions → Yandex Container Registry (запасной — GitLab CE) | ⚪ | 19 §4 |
+| Хостинг | Yandex Cloud: Serverless Containers, Managed PostgreSQL, Object Storage, Postbox, Lockbox, Cloud Logging и Monitoring | ✅ | D-16 |
+| Наблюдаемость | pino, OpenTelemetry, GlitchTip (self-hosted в РФ) | ⚪ | D-25 |
+| Аналитика | Собственные события без ПД (или self-hosted Umami) | ⚪ | 14 §9 |
+| Стартовый каркас | Better-T-Stack (`--frontend next --backend self --api orpc --auth none --database postgres --orm drizzle --addons turborepo`), затем доводка под blueprint; комбинацию флагов проверить на spike | ⚪ | 20, этап 4 |
+
 ## 1. Архитектурные требования (выведены из [04](04-requirements.md), [06](06-user-flows.md), [17](17-security-and-compliance.md))
 
 | ID | Требование | Откуда |
@@ -39,7 +72,7 @@
 | Календарь `/app/calendar?view=&date=` (кэш между неделями, фоновое обновление) | Загрузчики + TanStack Query — одна модель данных | Клиентский компонент + TanStack Query (см. D-31) | Start, небольшое преимущество |
 | Расписание «кистью» (массовые мелкие изменения, «Вернуть») | Мутации Query с откатом | То же на клиенте (TanStack Query) | Равно при D-31 |
 | Граница сервер/клиент | Нет директив | `"use client"` — дисциплина, но и выигрыш в JS на публичных страницах | Зависит от экрана |
-| REST `/api/v1` для бота и виджета | Hono в server route | Hono в Route Handler | Равно |
+| API для кабинета, бота и виджета | oRPC или Hono в server route | oRPC или Hono в Route Handler | Равно |
 | Better Auth | Официальная интеграция | Официальная, более обкатанная | Next.js, немного |
 | Хостинг в РФ (контейнер) | Nitro, обычный Node-контейнер | `output: "standalone"`; при нескольких инстансах кэш страниц требует своего cache handler — в MVP не используем ISR (D-32) | Start, немного |
 | Инструменты | Vite, общий конфиг с Vitest | Turbopack, отдельная настройка Vitest | Start, немного |
@@ -76,18 +109,22 @@
 
 ## 3. Организация серверной части и API
 
+Потребители API: собственный кабинет (основной объём), Server Components (на сервере, без HTTP), Telegram-бот (в том же монорепозитории — вызывает use cases напрямую), будущие виджет и мобильное приложение (нужен публичный HTTP-контракт только для записи клиента).
+
 | Вариант | Плюсы | Минусы |
 |---|---|---|
-| **A. REST `/api/v1` на Hono, смонтированный в Route Handler Next.js `app/api/v1/[[...route]]/route.ts`** (один процесс) | Стабильный внешний контракт (бот, виджет, мобильное приложение), опыт команды с Hono, middleware (rate limit, CORS, логирование), OpenAPI-генерация из Zod | Два слоя маршрутизации |
-| B. Server Actions | Минимум кода | Нет публичного контракта; привязка к фреймворку |
-| C. tRPC | Типобезопасность | Не REST-контракт для внешних клиентов; ещё одна абстракция |
-| D. GraphQL | Гибкие выборки | Избыточен для предметной области |
+| **A. oRPC в Route Handler Next.js** | Процедуры описываются один раз схемами Zod; RPC-клиент с типами и готовыми `queryOptions`/`mutationOptions` для TanStack Query; та же процедура публикуется как REST с OpenAPI 3.1; серверный клиент для Server Components с тем же контекстом | Моложе tRPC; лимиты частоты — собственный middleware |
+| B. Hono + `@hono/zod-openapi` | Зрелый HTTP-фреймворк, богатые middleware, опыт команды | Типизация в браузере через клиент Hono (тяжело для TypeScript на больших API) или генерацию; больше ручной работы для TanStack Query |
+| C. tRPC v11 | Самый зрелый RPC для Next.js, глубокая интеграция с TanStack Query | OpenAPI только через сторонний адаптер |
+| D. Server Actions | Минимум кода | Нет публичного контракта, только POST, второй путь изменения данных в обход общих проверок |
 | E. Отдельный API-сервис | Независимое масштабирование | Два деплоя, CORS (AR-09) |
 
-**[Решение D-09] Вариант A.**
-- Браузер ходит в `/api/v1` через TanStack Query.
-- Server Components вызывают доменные сервисы (application-слой) напрямую, без HTTP, с теми же проверками доступа.
-- Better Auth монтируется на `/api/auth/*`, как в прототипе.
+**[Решение D-09, обновлено 11.10.2026] Вариант A — oRPC.**
+- Один роутер процедур в `packages/api`; подключается в Next.js двумя обработчиками из одного файла маршрута: RPC (`/api/rpc/*`) для собственного фронтенда и OpenAPI (`/api/v1/*`) для публичной части.
+- OpenAPI-документ публикуется только для публичных процедур (`/api/v1/public/*`, документ [16](16-api-specification.md) §4); процедуры кабинета — внутренний контракт.
+- Server Components вызывают процедуры серверным клиентом oRPC (без HTTP) — с теми же проверками доступа.
+- Server Actions для доменных операций не используются.
+- Запасной вариант — tRPC + отдельные Route Handlers для публичной части; use cases от транспорта не зависят.
 
 ## 4. Хранилище данных
 
@@ -153,7 +190,7 @@ ORM:
 | Нагрузка | k6 |
 | Безопасность | OWASP ZAP baseline, `pnpm audit`, OSV-Scanner, Renovate, gitleaks |
 | Монорепозиторий | pnpm + Turborepo (сохраняется) |
-| Линт и формат | Biome или ESLint + Prettier (выбор при старте); `knip` (сохраняется) |
+| Линт и формат | **ESLint** (flat config: `eslint-config-next`, react-hooks, jsx-a11y, typescript-eslint, правила границ пакетов) + **Prettier**; `knip` (сохраняется). Biome отклонён: официальные правила Next.js и полный набор проверок доступности есть только в экосистеме ESLint (D-34) |
 | CI/CD | GitHub Actions (код уже на GitHub) → образ в реестр облака → деплой. Запасной — GitLab CI (self-hosted в РФ) при ограничениях доступа |
 
 ## 9. Хостинг и инфраструктура
@@ -170,7 +207,7 @@ ORM:
 | Стоимость MVP | Средняя | Средняя | **Низкая** | Средняя |
 | Переносимость | Контейнер и PG — да | Да | Да | Да |
 
-**[Решение D-16] Yandex Cloud** — для MVP:
+**[Решение D-16, подтверждено владельцем 11.10.2026] Yandex Cloud** — для MVP:
 - больше управляемых сервисов при минимальной эксплуатации (контейнеры, PG, почта, секреты, логи);
 - запасной вариант — Selectel (сертификация, независимость);
 - бюджетный вариант для пилота — Timeweb Cloud VM с Docker Compose.

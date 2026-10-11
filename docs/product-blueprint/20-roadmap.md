@@ -40,7 +40,7 @@
   - каркас репозитория по [14](14-architecture.md) §2 (новый репозиторий или ветка, прототип архивируется);
   - финальные Zod-контракты;
   - SQL-миграции схемы;
-  - spike: Next.js 16 (standalone) + Hono + Better Auth + Drizzle на Yandex Cloud (сквозной «hello booking»);
+  - spike: Next.js 16 (standalone) + oRPC + модуль аутентификации + Drizzle на Yandex Cloud (сквозной «hello booking»);
   - выбор почтового провайдера;
   - юридические документы (черновики).
 - **Критерии завершения:** spike развёрнут на staging; TS-AVL и TI-BKG-1 проходят на прототипе движка; версии фреймворков подтверждены.
