@@ -39,8 +39,8 @@
 - **Node.js 26**, фреймворк **Next.js 16** (App Router; Server Components для публичных страниц, TanStack Query в кабинете) — единственный веб-процесс;
 - API на **oRPC**: типизированные вызовы для своего фронтенда, REST + OpenAPI для публичной части;
 - **PostgreSQL** и Drizzle; фоновая очередь pg-boss в отдельном процессе;
-- аутентификация по коду из письма — собственный модуль (рекомендация) или Better Auth, **ожидает решения владельца**;
-- компоненты — React Aria Components + Tailwind v4 (рекомендация, **ожидает подтверждения**);
+- аутентификация по коду из письма — **Better Auth** (фиксированная версия);
+- компоненты — **React Aria Components** + Tailwind v4;
 - ESLint + Prettier; хостинг — **Yandex Cloud**.
 
 Обоснование и сравнение — в [13](13-architecture-options.md), схема — в [14](14-architecture.md).
