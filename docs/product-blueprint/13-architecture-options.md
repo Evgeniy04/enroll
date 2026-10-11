@@ -16,24 +16,24 @@
 | API | oRPC в одном Route Handler: RPC для собственного фронтенда, REST + OpenAPI 3.1 для публичной части | ✅ | D-09 |
 | Аутентификация | Better Auth (последняя стабильная 1.x, фиксированная версия): email OTP, сессии в БД, лимиты с хранением в БД; запасной — собственный модуль по руководству Lucia | ✅ | D-13 |
 | Компоненты UI | React Aria Components + собственный слой стилей `packages/ui` | ✅ | D-17 |
-| Стили | Tailwind CSS v4, токены «Впору» | ⚪ | 09 |
+| Стили | Tailwind CSS v4, токены «Аккурат» | ⚪ | 09 |
 | Данные в кабинете | TanStack Query (интеграция oRPC) | ⚪ | D-31 |
 | Состояние в URL | nuqs + Zod | ⚪ | D-31 |
 | Формы | TanStack Form + Zod | ⚪ | §6 |
 | Контракты и валидация | Zod (`packages/contracts`) | ⚪ | §6 |
 | Даты и тексты | `@internationalized/date`, `Intl`, ICU MessageFormat | ⚪ | §6 |
-| БД | PostgreSQL 17 (Yandex Managed Service for PostgreSQL) | ⚪ | D-10 |
+| БД | PostgreSQL 17 (managed у любого провайдера или собственный кластер) | ⚪ | D-10 |
 | ORM и миграции | Drizzle, только SQL-миграции | ⚪ | D-11 |
 | Фоновые задачи | pg-boss, отдельный процесс `apps/worker` (Node, без Next.js) | ⚪ | D-15 |
-| Письма | React Email + Yandex Cloud Postbox (запасной — Unisender Go) | ⚪ | 19 §5 |
-| Файлы | Yandex Object Storage + sharp | ⚪ | 14 §7 |
+| Письма | React Email + любой российский SMTP-провайдер (основной и резервный) | ⚪ | 19 §5 |
+| Файлы | S3-совместимое хранилище + sharp | ⚪ | 14 §7 |
 | Монорепозиторий | pnpm + Turborepo | ⚪ | §8 |
 | Линтер и формат | ESLint (flat: next, react-hooks, jsx-a11y, typescript-eslint, правила границ пакетов) + Prettier; knip | ✅ | D-34 |
 | Тесты | Vitest + fast-check, Testcontainers, Playwright + axe, k6 | ⚪ | 18 |
 | Безопасность в CI | gitleaks, OSV-Scanner, Renovate, OWASP ZAP | ⚪ | 17 |
-| CI/CD | GitHub Actions → Yandex Container Registry (запасной — GitLab CE) | ⚪ | 19 §4 |
-| Хостинг | Yandex Cloud: Serverless Containers, Managed PostgreSQL, Object Storage, Postbox, Lockbox, Cloud Logging и Monitoring | ✅ | D-16 |
-| Наблюдаемость | pino, OpenTelemetry, GlitchTip (self-hosted в РФ) | ⚪ | D-25 |
+| CI/CD | GitHub Actions → OCI-реестр → Kamal 2 (запасной CI — GitLab CE/Gitea) | ⚪ | 19 §4 |
+| Хостинг | **Без привязки к провайдеру:** контейнеры на VM (Kamal 2), стандартный PostgreSQL, S3, SMTP, SOPS-секреты, self-hosted мониторинг; стартовый провайдер — Selectel, бэкапы — у второго провайдера | ✅ | D-16 |
+| Наблюдаемость | pino, OpenTelemetry → VictoriaMetrics + VictoriaLogs + Grafana, GlitchTip (всё self-hosted в РФ) | ⚪ | D-25 |
 | Аналитика | Собственные события без ПД (или self-hosted Umami) | ⚪ | 14 §9 |
 | Стартовый каркас | Better-T-Stack (`--frontend next --backend self --api orpc --auth better-auth --database postgres --orm drizzle --addons turborepo`), затем доводка под blueprint; комбинацию флагов проверить на spike | ⚪ | 20, этап 4 |
 
@@ -197,21 +197,8 @@ ORM:
 
 ## 9. Хостинг и инфраструктура
 
-Подробно — [19](19-infrastructure.md). Зарубежные PaaS (Vercel, Netlify, Fly.io, Render) **исключены** для ПД граждан РФ (ч. 5 ст. 18 152-ФЗ).
+Подробно — [19](19-infrastructure.md) §5. Зарубежные PaaS (Vercel, Netlify, Fly.io, Render) **исключены** для ПД граждан РФ (ч. 5 ст. 18 152-ФЗ).
 
-| Критерий | Yandex Cloud | Selectel | Timeweb Cloud | VK Cloud |
-|---|---|---|---|---|
-| Managed PostgreSQL | ✅ | ✅ | ✅ | ✅ |
-| Контейнеры без управления серверами | ✅ Serverless Containers | ⚠️ Managed Kubernetes или VM | ⚠️ Apps или VM | ⚠️ |
-| Почта (транзакционная) | ✅ Postbox | ❌ сторонний | ❌ сторонний | ❌ |
-| Секреты | ✅ Lockbox | ⚠️ | ⚠️ | ✅ |
-| 152-ФЗ (заявлено провайдером) | ✅ | ✅ (до УЗ-1) | ✅ | ✅ |
-| Стоимость MVP | Средняя | Средняя | **Низкая** | Средняя |
-| Переносимость | Контейнер и PG — да | Да | Да | Да |
+**[Решение D-16, пересмотрено 11.10.2026 по решению владельца] Без привязки к провайдеру.** Только открытые стандарты: OCI-контейнеры на Linux-VM (деплой Kamal 2), PostgreSQL, S3-совместимый API, SMTP, секреты SOPS + age, self-hosted мониторинг (VictoriaMetrics, VictoriaLogs, Grafana, GlitchTip). Проприетарные сервисы облаков (serverless-контейнеры, облачные почта и секреты) не используются. Стартовый провайдер — Selectel (аттестация по 152-ФЗ, managed PostgreSQL и S3); бэкапы — у второго провайдера; переезд — без изменения кода.
 
-**[Решение D-16, подтверждено владельцем 11.10.2026] Yandex Cloud** — для MVP:
-- больше управляемых сервисов при минимальной эксплуатации (контейнеры, PG, почта, секреты, логи);
-- запасной вариант — Selectel (сертификация, независимость);
-- бюджетный вариант для пилота — Timeweb Cloud VM с Docker Compose.
-
-Архитектура не использует проприетарные API, кроме S3-совместимых хранилища и почты.
+Отклонённый вариант — Yandex Cloud с Serverless Containers, Postbox и Lockbox: меньше эксплуатации, но привязка к проприетарным сервисам.

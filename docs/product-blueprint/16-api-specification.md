@@ -43,7 +43,7 @@
 
 ```json
 {
-  "type": "https://vporu.ru/errors/slot_taken",
+  "type": "https://akkurat.ru/errors/slot_taken",
   "title": "Это время уже занято",
   "status": 409,
   "code": "slot_taken",
